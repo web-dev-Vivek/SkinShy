@@ -43,7 +43,7 @@ function About() {
                   <span className="text-custom-white text-sm">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-lust font-bold text-custom-charcoal mb-1">Data-Driven</h4>
+                  <h4 className="font-archivo font-bold text-custom-charcoal mb-1">Data-Driven</h4>
                   <p className="text-custom-dark-gray">Every recommendation backed by advanced analytics</p>
                 </div>
               </div>
@@ -53,7 +53,7 @@ function About() {
                   <span className="text-custom-white text-sm">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-lust font-bold text-custom-charcoal mb-1">Expert Curated</h4>
+                  <h4 className="font-archivo font-bold text-custom-charcoal mb-1">Expert Curated</h4>
                   <p className="text-custom-dark-gray">Verified by dermatologists and beauty experts</p>
                 </div>
               </div>
@@ -63,7 +63,7 @@ function About() {
                   <span className="text-custom-white text-sm">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-lust font-bold text-custom-charcoal mb-1">Community Driven</h4>
+                  <h4 className="font-archivo font-bold text-custom-charcoal mb-1">Community Driven</h4>
                   <p className="text-custom-dark-gray">Insights from thousands of real skin profiles</p>
                 </div>
               </div>
@@ -83,7 +83,7 @@ function About() {
                {/* Large Card */}
                <div className="glass-premium col-span-2 rounded-3xl p-8 md:p-10">
                  <div className="flex items-center justify-between mb-4">
-                   <h4 className="font-lust font-bold text-2xl text-custom-charcoal">Premium Match</h4>
+                   <h4 className="font-playfair font-bold text-2xl text-custom-charcoal">Premium Match</h4>
                    <span className="text-3xl">🎯</span>
                  </div>
                  <p className="text-custom-dark-gray">AI finds your perfect product match</p>

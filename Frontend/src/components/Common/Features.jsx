@@ -102,7 +102,7 @@ function Features() {
                 {/* Content */}
                 <div className="space-y-3">
                   <div className="flex items-start justify-between">
-                    <h3 className="text-xl md:text-2xl font-lust font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
+                    <h3 className="text-xl md:text-2xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
                       {feature.title}
                     </h3>
                     <span className="text-xs font-semibold text-custom-dark-gray bg-custom-light-gray px-3 py-1 rounded-full group-hover:bg-custom-charcoal group-hover:text-custom-white transition-colors duration-300">
@@ -131,7 +131,7 @@ function Features() {
 
          {/* CTA Section */}
          <div className="glass-dark mt-20 md:mt-32 p-12 md:p-16 rounded-3xl text-custom-white text-center animate-slide-up delay-3">
-           <h3 className="text-3xl md:text-4xl font-lust font-bold mb-4">
+            <h3 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
              Ready to Transform Your Skincare?
            </h3>
            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">

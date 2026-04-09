@@ -108,7 +108,7 @@ function Showcase() {
                 <div className="flex-grow space-y-3">
                   <div>
                     <p className="text-xs text-custom-dark-gray mb-1">{item.category}</p>
-                    <h3 className="text-xl md:text-2xl font-lust font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
+                    <h3 className="text-xl md:text-2xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
                       {item.name}
                     </h3>
                   </div>

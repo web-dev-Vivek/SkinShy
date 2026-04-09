@@ -7,8 +7,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'lust': ['Lust', 'serif'],
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'playfair': ['Playfair Display', 'serif'],
+        'archivo': ['Archivo Black', 'sans-serif'],
+        'lato': ['Lato', 'sans-serif'],
+        'sans': ['Lato', 'system-ui', 'sans-serif'],
       },
       colors: {
         'custom': {

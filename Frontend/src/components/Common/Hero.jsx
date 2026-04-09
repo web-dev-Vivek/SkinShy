@@ -7,6 +7,12 @@ function Hero() {
 
   return (
     <section className="relative w-full min-h-screen pt-24 pb-12 overflow-hidden bg-custom-white">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
+        style={{ backgroundImage: 'url(/Hero.jpeg)' }}
+      ></div>
+
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-custom-light-gray/40 to-transparent opacity-50"></div>
@@ -27,12 +33,12 @@ function Hero() {
                 </span>
               </div>
               
-              {/* Large Lust Font Headline */}
-              <h1 className="font-lust text-7xl md:text-8xl lg:text-9xl leading-none tracking-tight text-custom-charcoal font-light">
+              {/* Large Playfair Display Headline */}
+              <h1 className="font-playfair text-7xl md:text-8xl lg:text-9xl leading-none tracking-tight text-custom-charcoal font-light">
                 Skincare
               </h1>
               
-              <h2 className="font-lust text-6xl md:text-7xl lg:text-8xl leading-tight tracking-tight text-custom-charcoal font-light">
+              <h2 className="font-playfair text-6xl md:text-7xl lg:text-8xl leading-tight tracking-tight text-custom-charcoal font-light">
                 Reimagined<span className="text-5xl md:text-6xl lg:text-7xl">®</span>
               </h2>
 
@@ -58,7 +64,7 @@ function Hero() {
 
             {/* Material Info Card - Bottom Left */}
             <div className="glass-effect p-8 md:p-10 max-w-sm rounded-3xl mt-auto">
-              <h4 className="font-lust font-bold text-xl md:text-2xl text-custom-charcoal mb-3">
+              <h4 className="font-playfair font-bold text-xl md:text-2xl text-custom-charcoal mb-3">
                 We use best ingredients!
               </h4>
               <p className="text-sm text-custom-dark-gray leading-relaxed">
@@ -94,7 +100,7 @@ function Hero() {
             <div className="glass-premium rounded-3xl p-10 md:p-12 space-y-6">
               <div className="space-y-2">
                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase font-medium">Featured</p>
-                <h3 className="font-lust text-3xl md:text-4xl text-custom-charcoal font-light">
+               <h3 className="font-playfair text-3xl md:text-4xl text-custom-charcoal font-light">
                   Unique design & ergonomics
                 </h3>
                 <p className="text-sm text-custom-dark-gray pt-2">
@@ -128,7 +134,7 @@ function Hero() {
               </div>
               
               <div className="space-y-2">
-                <p className="font-lust text-lg md:text-xl text-custom-charcoal font-light">
+                <p className="font-playfair text-lg md:text-xl text-custom-charcoal font-light">
                   WE CAN COMBINE<br/>NATURE & HOME<br/>COMFORT
                 </p>
                 <button className="text-xs font-semibold text-custom-charcoal uppercase tracking-wider hover:text-custom-black transition-colors pt-2">

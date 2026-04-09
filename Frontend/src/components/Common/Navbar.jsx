@@ -27,7 +27,7 @@ function Navbar() {
             onClick={() => handleNavigation('/')}
             className="cursor-pointer group"
           >
-            <h1 className="text-2xl md:text-3xl font-lust font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
+            <h1 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
               Skinshy
             </h1>
             <div className="h-0.5 w-0 group-hover:w-full bg-custom-charcoal transition-all duration-300"></div>

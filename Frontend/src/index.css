@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lust:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,11 +16,11 @@
 
   body {
     @apply bg-custom-white text-custom-charcoal leading-relaxed;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Lato', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-lust font-semibold tracking-tight;
+    @apply font-playfair font-semibold tracking-tight;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
@@ -91,7 +92,7 @@
   }
 
   .heading-gradient {
-    @apply font-lust font-bold tracking-tighter;
+    @apply font-playfair font-bold tracking-tighter;
   }
 
   .section-spacing {
