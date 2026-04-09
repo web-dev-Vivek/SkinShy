@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Lust:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Global Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-custom-white text-custom-charcoal leading-relaxed;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-lust font-semibold tracking-tight;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl lg:text-5xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+  h5 { @apply text-lg md:text-xl; }
+  h6 { @apply text-base md:text-lg; }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  button {
+    @apply transition-all duration-300 focus:outline-none;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-custom-off-white;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-custom-dark-gray rounded-full hover:bg-custom-charcoal;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-custom-charcoal text-custom-white;
+  }
+}
+
+/* Utility Components */
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-xl bg-white/40 border border-white/50 rounded-3xl;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl bg-custom-charcoal/40 border border-custom-dark-gray/50 rounded-3xl;
+  }
+
+  .glass-premium {
+    @apply backdrop-blur-2xl bg-white/50 border border-white/60 rounded-3xl shadow-2xl;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg bg-white/35 border border-white/40 rounded-2xl p-6 sm:p-8 hover:bg-white/45 transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply px-8 py-3 bg-custom-charcoal text-custom-white font-semibold rounded-xl hover:bg-custom-black transition-all duration-300 hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 bg-custom-off-white text-custom-charcoal font-semibold rounded-xl border border-custom-charcoal hover:bg-custom-charcoal hover:text-custom-white transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 border-2 border-custom-charcoal text-custom-charcoal font-semibold rounded-xl hover:bg-custom-charcoal hover:text-custom-white transition-all duration-300;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .heading-gradient {
+    @apply font-lust font-bold tracking-tighter;
+  }
+
+  .section-spacing {
+    @apply py-16 sm:py-20 md:py-24 lg:py-32;
+  }
+
+  .card-modern {
+    @apply rounded-2xl border border-custom-light-gray bg-white hover:border-custom-dark-gray transition-all duration-300 hover:shadow-xl;
+  }
+
+  .text-fade {
+    @apply text-custom-medium-gray;
+  }
+
+  .text-muted {
+    @apply text-custom-dark-gray;
+  }
+}
+
+/* Animations */
+@layer utilities {
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+  .delay-6 { animation-delay: 0.6s; }
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+  h1 { @apply text-2xl; }
+  h2 { @apply text-xl; }
+  h3 { @apply text-lg; }
+}
