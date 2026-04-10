@@ -13,11 +13,10 @@ function Hero() {
         style={{ backgroundImage: 'url(/Hero.jpeg)' }}
       ></div>
 
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-custom-light-gray/40 to-transparent opacity-50"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"></div>
-      </div>
+       {/* Background Elements */}
+       <div className="absolute inset-0 -z-10">
+         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"></div>
+       </div>
 
       <div className="container-custom h-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start min-h-[90vh] py-12 md:py-20">
@@ -51,10 +50,10 @@ function Hero() {
             {/* CTA Button - Minimal Design */}
             <div className="flex items-center gap-6">
               <button
-                onClick={() => navigate('/signup')}
+                onClick={() => navigate('/onboarding')}
                 className="px-10 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-full hover:bg-custom-black transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider"
               >
-                Start
+                Get Started
               </button>
               <div className="flex items-center gap-3">
                 <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
@@ -62,8 +61,8 @@ function Hero() {
               </div>
             </div>
 
-            {/* Material Info Card - Bottom Left */}
-            <div className="glass-effect p-8 md:p-10 max-w-sm rounded-3xl mt-auto">
+             {/* Material Info Card - Bottom Left */}
+             <div className="bg-custom-white border border-custom-light-gray p-8 md:p-10 max-w-sm rounded-3xl mt-auto">
               <h4 className="font-playfair font-bold text-xl md:text-2xl text-custom-charcoal mb-3">
                 We use best ingredients!
               </h4>
@@ -76,8 +75,8 @@ function Hero() {
           {/* Right Content - Interactive Section */}
           <div className="hidden lg:flex flex-col gap-8 animate-slide-up delay-2 pt-8">
             
-            {/* Tab Navigation - Design Elements */}
-            <div className="glass-effect inline-flex gap-4 p-1.5 rounded-full w-fit">
+             {/* Tab Navigation - Design Elements */}
+             <div className="inline-flex gap-4 p-1.5 rounded-full w-fit bg-custom-off-white border border-custom-light-gray">
               {['Interior', 'Design'].map((tab) => (
                 <button
                   key={tab}
@@ -96,8 +95,8 @@ function Hero() {
               </div>
             </div>
 
-            {/* Premium Feature Card */}
-            <div className="glass-premium rounded-3xl p-10 md:p-12 space-y-6">
+             {/* Premium Feature Card */}
+             <div className="bg-custom-white border border-custom-light-gray rounded-3xl p-10 md:p-12 space-y-6">
               <div className="space-y-2">
                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase font-medium">Featured</p>
                <h3 className="font-playfair text-3xl md:text-4xl text-custom-charcoal font-light">
@@ -108,18 +107,17 @@ function Hero() {
                 </p>
               </div>
 
-              {/* Product showcase with button */}
-              <div className="relative h-48 md:h-56 rounded-2xl bg-gradient-to-br from-custom-light-gray to-custom-gray overflow-hidden group">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-custom-charcoal/80 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 cursor-pointer">
-                    <span className="text-custom-white text-2xl ml-1">▶</span>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-custom-charcoal/20 to-transparent"></div>
-              </div>
+               {/* Product showcase with button */}
+               <div className="relative h-48 md:h-56 rounded-2xl bg-custom-light-gray overflow-hidden group">
+                 <div className="absolute inset-0 flex items-center justify-center">
+                   <div className="w-16 h-16 rounded-full bg-custom-charcoal flex items-center justify-center group-hover:scale-110 transition-transform duration-300 cursor-pointer">
+                     <span className="text-custom-white text-2xl ml-1">▶</span>
+                   </div>
+                 </div>
+               </div>
 
-              {/* Product Label Badge */}
-              <div className="absolute -bottom-6 right-6 glass-effect px-6 py-4 rounded-2xl shadow-xl">
+               {/* Product Label Badge */}
+               <div className="absolute -bottom-6 right-6 bg-custom-white border border-custom-light-gray px-6 py-4 rounded-2xl shadow-xl">
                 <p className="text-sm font-semibold text-custom-charcoal uppercase tracking-wider">
                   Boddtour
                 </p>

@@ -40,6 +40,30 @@ module.exports = {
           },
         },
       },
+      keyframes: {
+        slideInFromLeft: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideOutToLeft: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        slideInFromRight: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideOutToRight: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
+      animation: {
+        slideInFromLeft: 'slideInFromLeft 0.4s ease-out',
+        slideOutToLeft: 'slideOutToLeft 0.4s ease-in',
+        slideInFromRight: 'slideInFromRight 0.4s ease-out',
+        slideOutToRight: 'slideOutToRight 0.4s ease-in',
+      },
     },
   },
   plugins: [],

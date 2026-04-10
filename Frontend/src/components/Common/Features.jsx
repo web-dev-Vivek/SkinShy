@@ -88,16 +88,16 @@ function Features() {
               onMouseEnter={() => setHoveredCard(feature.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              <div className="glass-card group h-full cursor-pointer">
+              <div className="bg-custom-white border border-custom-light-gray rounded-2xl p-8 group h-full cursor-pointer">
                  
-                 {/* Icon Container */}
-                 <div className="mb-6">
-                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/50 group-hover:bg-custom-charcoal transition-colors duration-300 backdrop-blur-sm">
-                     <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">
-                       {feature.icon}
-                     </span>
-                   </div>
-                 </div>
+                  {/* Icon Container */}
+                  <div className="mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-custom-light-gray group-hover:bg-custom-charcoal transition-colors duration-300">
+                      <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">
+                        {feature.icon}
+                      </span>
+                    </div>
+                  </div>
 
                 {/* Content */}
                 <div className="space-y-3">
@@ -130,11 +130,11 @@ function Features() {
         </div>
 
          {/* CTA Section */}
-         <div className="glass-dark mt-20 md:mt-32 p-12 md:p-16 rounded-3xl text-custom-white text-center animate-slide-up delay-3">
+         <div className="bg-custom-charcoal mt-20 md:mt-32 p-12 md:p-16 rounded-3xl text-custom-white text-center animate-slide-up delay-3">
             <h3 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
              Ready to Transform Your Skincare?
            </h3>
-           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-custom-white/90 mb-8 max-w-2xl mx-auto">
              Join thousands of users discovering products perfectly matched to their skin.
            </p>
            <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">

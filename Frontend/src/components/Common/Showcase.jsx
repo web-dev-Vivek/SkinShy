@@ -73,16 +73,16 @@ function Showcase() {
         </div>
 
         {/* Tabs */}
-         <div className="glass-effect inline-flex justify-center gap-4 mb-12 animate-slide-up delay-1 mx-auto block">
+         <div className="inline-flex justify-center gap-4 mb-12 animate-slide-up delay-1 mx-auto block">
            {['skincare', 'trending'].map((tab) => (
              <button
                key={tab}
                onClick={() => setActiveTab(tab)}
-               className={`px-6 md:px-8 py-3 rounded-xl font-semibold transition-all duration-300 capitalize ${
-                 activeTab === tab
-                   ? 'bg-custom-charcoal text-custom-white'
-                   : 'bg-white/40 text-custom-charcoal border border-white/50 hover:bg-white/60'
-               }`}
+                className={`px-6 md:px-8 py-3 rounded-xl font-semibold transition-all duration-300 capitalize ${
+                  activeTab === tab
+                    ? 'bg-custom-charcoal text-custom-white'
+                    : 'bg-custom-off-white text-custom-charcoal border border-custom-light-gray hover:bg-custom-light-gray hover:border-custom-dark-gray'
+                }`}
              >
                {tab === 'skincare' ? 'Best Sellers' : 'Trending'}
              </button>
@@ -99,10 +99,10 @@ function Showcase() {
             >
               <div className="glass-card group h-full flex flex-col">
                  
-                 {/* Product Image Placeholder */}
-                 <div className="w-full h-48 rounded-xl bg-gradient-to-br from-white/30 to-white/10 mb-6 flex items-center justify-center group-hover:shadow-lg transition-shadow duration-300 backdrop-blur-sm">
-                   <span className="text-5xl">✨</span>
-                 </div>
+                  {/* Product Image Placeholder */}
+                  <div className="w-full h-48 rounded-xl bg-custom-light-gray mb-6 flex items-center justify-center group-hover:shadow-lg transition-shadow duration-300">
+                    <span className="text-5xl">✨</span>
+                  </div>
 
                 {/* Product Info */}
                 <div className="flex-grow space-y-3">
