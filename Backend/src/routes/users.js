@@ -224,21 +224,17 @@ router.put('/preferences', authenticate, async (req, res) => {
  * POST /users/complete-onboarding - Complete onboarding process
  * Body: { skinType, highSensitivity, knownAllergies, productChangeRate }
  * Protected: YES
+ * Note: skinType and productChangeRate are required; others are optional
  */
 router.post('/complete-onboarding', authenticate, async (req, res) => {
   try {
     const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
 
-    // Validate all fields are provided
-    if (
-      !skinType ||
-      typeof highSensitivity !== 'boolean' ||
-      !Array.isArray(knownAllergies) ||
-      !productChangeRate
-    ) {
+    // Validate required fields (skinType and productChangeRate)
+    if (!skinType || !productChangeRate) {
       return res.status(400).json({
         success: false,
-        error: 'All onboarding fields are required'
+        error: 'Skin type and product change rate are required'
       });
     }
 
@@ -252,8 +248,12 @@ router.post('/complete-onboarding', authenticate, async (req, res) => {
     }
 
     user.profile.skinType = skinType;
-    user.profile.highSensitivity = highSensitivity;
-    user.profile.knownAllergies = knownAllergies;
+    if (typeof highSensitivity === 'boolean') {
+      user.profile.highSensitivity = highSensitivity;
+    }
+    if (Array.isArray(knownAllergies)) {
+      user.profile.knownAllergies = knownAllergies;
+    }
     user.profile.productChangeRate = productChangeRate;
     user.profile.onboardingCompleted = true;
 
