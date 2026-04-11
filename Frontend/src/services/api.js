@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getAuth } from '@clerk/clerk-react';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -10,14 +9,19 @@ export const api = axios.create({
   }
 });
 
+// Store setToken function to be called from App
+let clerkGetToken = null;
+
+export const setClerkTokenGetter = (getTokenFn) => {
+  clerkGetToken = getTokenFn;
+};
+
 // Add request interceptor to attach Clerk token
 api.interceptors.request.use(
   async (config) => {
     try {
-      // Get the Clerk session and token
-      const { getToken } = getAuth();
-      if (getToken) {
-        const token = await getToken();
+      if (clerkGetToken) {
+        const token = await clerkGetToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -41,10 +45,9 @@ api.interceptors.response.use(
   (error) => {
     console.error(`[API] ✗ ${error.response?.status || 'Network'} Error:`, error.response?.data?.error || error.message);
     
-    // Handle 401 Unauthorized - redirect to login
+    // Handle 401 Unauthorized
     if (error.response?.status === 401) {
       localStorage.removeItem('clerk_user');
-      // Window reload will trigger Clerk to handle auth state
     }
     
     return Promise.reject(error);

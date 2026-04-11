@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ClerkProvider } from '@clerk/clerk-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 import { OnboardingProvider } from './context/OnboardingContext';
 import { UserProvider } from './context/UserContext';
+import { setClerkTokenGetter } from './services/api';
 import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import ProductPage from './pages/ProductPage';
@@ -47,9 +49,21 @@ function AppRoutes() {
   );
 }
 
+// Component to initialize token getter
+function TokenInitializer() {
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    setClerkTokenGetter(getToken);
+  }, [getToken]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <ClerkProvider publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY}>
+      <TokenInitializer />
       <UserProvider>
         <OnboardingProvider>
           <Router>
