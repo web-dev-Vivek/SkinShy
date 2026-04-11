@@ -18,10 +18,23 @@ const loadProductsFromJSON = async () => {
       return;
     }
 
-    // Check if products already exist
-    const count = await Product.countDocuments();
-    if (count > 0) {
-      console.log(`✓ Products already in database (${count} products)`);
+    // Check if products already exist (with timeout)
+    try {
+      const countPromise = Product.countDocuments();
+      const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve(null), 5000));
+      const count = await Promise.race([countPromise, timeoutPromise]);
+      
+      if (count === null) {
+        console.warn('⚠️  Product count check timed out (MongoDB not responding)');
+        return;
+      }
+      
+      if (count > 0) {
+        console.log(`✓ Products already in database (${count} products)`);
+        return;
+      }
+    } catch (err) {
+      console.warn('⚠️  Could not check product count:', err.message);
       return;
     }
 
