@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import { getProductByName } from '../services/productsJSON';
 import { getSafetyScoreByProductId } from '../services/safety';
-import PageHeader from '../components/PageHeader';
 
 export default function ProductPage() {
   const { productName } = useParams();
@@ -57,11 +56,10 @@ export default function ProductPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-custom-white">
-        <PageHeader />
-        <div className="flex justify-center items-center py-12 min-h-[70vh]">
+   if (loading) {
+     return (
+       <div className="min-h-screen bg-custom-white mt-20">
+         <div className="flex justify-center items-center py-12 min-h-[70vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
             <p className="text-custom-dark-gray">Loading product...</p>
@@ -71,11 +69,10 @@ export default function ProductPage() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-custom-white">
-        <PageHeader />
-        <div className="bg-custom-off-white border-b border-custom-light-gray/20 sticky z-10">
+   if (error) {
+     return (
+       <div className="min-h-screen bg-custom-white">
+         <div className="sticky z-10">
           <div className="max-w-7xl mx-auto px-4 py-4">
             <button
               onClick={() => navigate('/search')}
@@ -133,11 +130,10 @@ export default function ProductPage() {
     ? product.ingredients.split(',').map(ing => ing.trim())
     : [];
 
-  return (
-    <div className="min-h-screen bg-custom-white">
-      {/* Header */}
-      <PageHeader />
-      <div className="bg-custom-off-white border-b border-custom-light-gray/20 sticky z-10">
+   return (
+     <div className="min-h-screen bg-custom-white mt-20">
+       {/* Header */}
+       <div className="bg-custom-off-white border-b border-custom-light-gray/20 sticky z-10">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <button
             onClick={() => navigate('/search')}

@@ -7,7 +7,7 @@ import About from '../components/Common/About';
 
 function LandingPage() {
   return (
-    <div className="landing-page">
+    <div className="landing-page mt-20">
       <Navbar />
       <Hero />
       <Features />

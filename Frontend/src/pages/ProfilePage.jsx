@@ -59,7 +59,7 @@ export default function ProfilePage() {
    }
 
    return (
-     <div className="min-h-screen bg-custom-white">
+     <div className="min-h-screen bg-custom-white mt-20">
        {/* Header */}
        <div className="bg-custom-charcoal text-custom-white py-8 px-4">
          <div className="max-w-4xl mx-auto flex justify-between items-center">

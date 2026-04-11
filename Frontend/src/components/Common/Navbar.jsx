@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 
 function Navbar() {
   const navigate = useNavigate();
+  const { isSignedIn, signOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const scrollToSection = (sectionId) => {
@@ -57,12 +59,31 @@ function Navbar() {
 
            {/* Right Side Buttons */}
            <div className="hidden md:flex items-center gap-4">
-             <button
-               onClick={() => handleNavigation('/search')}
-               className="btn-outline"
-             >
-               Browse Products
-             </button>
+             {!isSignedIn ? (
+               <>
+                 <button
+                   onClick={() => handleNavigation('/signup')}
+                   className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
+                 >
+                   Sign Up
+                 </button>
+               </>
+             ) : (
+               <>
+                 <button
+                   onClick={() => handleNavigation('/search')}
+                   className="btn-outline"
+                 >
+                   Browse Products
+                 </button>
+                 <button
+                   onClick={() => signOut(() => navigate('/'))}
+                   className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
+                 >
+                   Sign Out
+                 </button>
+               </>
+             )}
            </div>
 
           {/* Mobile Menu Toggle */}
@@ -91,20 +112,37 @@ function Navbar() {
             >
               Showcase
             </button>
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2"
-            >
-              About
-            </button>
-              <div className="flex flex-col gap-3 pt-4 border-t border-custom-light-gray">
-                 <button
-                   onClick={() => handleNavigation('/search')}
-                   className="btn-outline w-full"
-                 >
-                   Browse Products
-                 </button>
-               </div>
+              <button
+                onClick={() => scrollToSection('about')}
+                className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2"
+              >
+                About
+              </button>
+                <div className="flex flex-col gap-3 pt-4 border-t border-custom-light-gray">
+                   {!isSignedIn ? (
+                     <button
+                       onClick={() => handleNavigation('/signup')}
+                       className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
+                     >
+                       Sign Up
+                     </button>
+                   ) : (
+                     <>
+                       <button
+                         onClick={() => handleNavigation('/search')}
+                         className="btn-outline w-full"
+                       >
+                         Browse Products
+                       </button>
+                       <button
+                         onClick={() => signOut(() => navigate('/'))}
+                         className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
+                       >
+                         Sign Out
+                       </button>
+                     </>
+                   )}
+                </div>
           </div>
         </div>
       </div>

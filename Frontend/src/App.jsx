@@ -5,6 +5,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { OnboardingProvider } from './context/OnboardingContext';
 import { UserProvider } from './context/UserContext';
 import { setClerkTokenGetter } from './services/api';
+import Navbar from './components/Common/Navbar';
 import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import ProductPage from './pages/ProductPage';
@@ -14,42 +15,7 @@ import SignupPage from './pages/SignupPage';
 import OnboardingPage from './pages/OnboardingPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
-function AppRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/onboarding" element={<OnboardingPage />} />
-      <Route
-        path="/search"
-        element={
-          <ProtectedRoute>
-            <SearchPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/search/:productName"
-        element={
-          <ProtectedRoute>
-            <ProductPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
-  );
-}
-
-// Component to initialize token getter
+// Component to initialize token getter - must be inside Router
 function TokenInitializer() {
   const { getToken } = useAuth();
 
@@ -60,10 +26,55 @@ function TokenInitializer() {
   return null;
 }
 
+function AppRoutes() {
+  return (
+    <>
+      <TokenInitializer />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route
+          path="/onboarding"
+          element={
+            <ProtectedRoute>
+              <OnboardingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <SearchPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search/:productName"
+          element={
+            <ProtectedRoute>
+              <ProductPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
 export default function App() {
   return (
     <ClerkProvider publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY}>
-      <TokenInitializer />
       <UserProvider>
         <OnboardingProvider>
           <Router>

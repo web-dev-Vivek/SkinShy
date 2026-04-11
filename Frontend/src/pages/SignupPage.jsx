@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SignUp } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@clerk/clerk-react';
 
 export default function SignupPage() {
   const navigate = useNavigate();
-  const { isSignedIn } = useAuth();
-
-  // If already signed in, redirect to onboarding
-  useEffect(() => {
-    if (isSignedIn) {
-      navigate('/onboarding', { replace: true });
-    }
-  }, [isSignedIn, navigate]);
 
   return (
-    <div className="min-h-screen bg-custom-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-custom-white flex items-center justify-center px-4 mt-20">
       <div className="w-full max-w-md">
         {/* Back Button */}
         <button
