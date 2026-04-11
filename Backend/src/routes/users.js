@@ -1,21 +1,96 @@
 const express = require('express');
 const User = require('../models/User');
+const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
-// GET USER PROFILE
-router.get('/profile/:userId', async (req, res) => {
+/**
+ * POST /users - Create or get user (called during signup)
+ * Body: { clerkId, email, name }
+ * Protected: YES
+ */
+router.post('/', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
-    
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+    const { clerkId, email, name } = req.body;
+
+    // Verify that the clerkId matches the authenticated user
+    if (clerkId !== req.userId) {
+      return res.status(403).json({
+        success: false,
+        error: 'Cannot create user for another account'
+      });
     }
-    
+
+    // Check if user already exists
+    let user = await User.findOne({ clerkId });
+
+    if (user) {
+      return res.json({
+        success: true,
+        message: 'User already exists',
+        user: {
+          id: user._id,
+          clerkId: user.clerkId,
+          email: user.email,
+          name: user.name,
+          profile: user.profile
+        }
+      });
+    }
+
+    // Create new user
+    user = new User({
+      clerkId,
+      email,
+      name: name || email.split('@')[0] // Use email prefix as fallback name
+    });
+
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      message: 'User created successfully',
+      user: {
+        id: user._id,
+        clerkId: user.clerkId,
+        email: user.email,
+        name: user.name,
+        profile: user.profile
+      }
+    });
+  } catch (error) {
+    // Handle duplicate email error
+    if (error.code === 11000 && error.keyPattern.email) {
+      return res.status(409).json({
+        success: false,
+        error: 'Email already in use'
+      });
+    }
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * GET /users/profile - Get current user profile
+ * Protected: YES
+ * Uses Clerk ID from token
+ */
+router.get('/profile', authenticate, async (req, res) => {
+  try {
+    const user = await User.findOne({ clerkId: req.userId });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+
     res.json({
       success: true,
       user: {
         id: user._id,
+        clerkId: user.clerkId,
         email: user.email,
         name: user.name,
         profileImage: user.profileImage,
@@ -28,21 +103,34 @@ router.get('/profile/:userId', async (req, res) => {
   }
 });
 
-// UPDATE USER PROFILE
-router.put('/profile/:userId', async (req, res) => {
+/**
+ * PUT /users/profile - Update current user profile
+ * Body: { name, email }
+ * Protected: YES
+ */
+router.put('/profile', authenticate, async (req, res) => {
   try {
     const { name, email } = req.body;
-    const user = await User.findById(req.params.userId);
+    const user = await User.findOne({ clerkId: req.userId });
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
     }
 
     if (name) user.name = name;
     if (email) {
-      const existingEmail = await User.findOne({ email, _id: { $ne: req.params.userId } });
+      const existingEmail = await User.findOne({
+        email,
+        clerkId: { $ne: req.userId }
+      });
       if (existingEmail) {
-        return res.status(409).json({ error: 'Email already in use' });
+        return res.status(409).json({
+          success: false,
+          error: 'Email already in use'
+        });
       }
       user.email = email;
     }
@@ -54,6 +142,7 @@ router.put('/profile/:userId', async (req, res) => {
       message: 'Profile updated',
       user: {
         id: user._id,
+        clerkId: user.clerkId,
         email: user.email,
         name: user.name
       }
@@ -63,15 +152,21 @@ router.put('/profile/:userId', async (req, res) => {
   }
 });
 
-// GET USER PREFERENCES (SKIN DETAILS)
-router.get('/preferences/:userId', async (req, res) => {
+/**
+ * GET /users/preferences - Get current user skin preferences
+ * Protected: YES
+ */
+router.get('/preferences', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
-    
+    const user = await User.findOne({ clerkId: req.userId });
+
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
     }
-    
+
     res.json({
       success: true,
       preferences: user.profile
@@ -81,14 +176,21 @@ router.get('/preferences/:userId', async (req, res) => {
   }
 });
 
-// UPDATE USER PREFERENCES (ONBOARDING)
-router.put('/preferences/:userId', async (req, res) => {
+/**
+ * PUT /users/preferences - Update current user preferences
+ * Body: { skinType, highSensitivity, knownAllergies, productChangeRate }
+ * Protected: YES
+ */
+router.put('/preferences', authenticate, async (req, res) => {
   try {
     const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
-    const user = await User.findById(req.params.userId);
+    const user = await User.findOne({ clerkId: req.userId });
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
     }
 
     if (skinType) user.profile.skinType = skinType;
@@ -97,7 +199,12 @@ router.put('/preferences/:userId', async (req, res) => {
     if (productChangeRate) user.profile.productChangeRate = productChangeRate;
 
     // Mark onboarding as completed if all required fields are set
-    if (skinType && typeof highSensitivity === 'boolean' && knownAllergies && productChangeRate) {
+    if (
+      user.profile.skinType &&
+      typeof user.profile.highSensitivity === 'boolean' &&
+      user.profile.knownAllergies &&
+      user.profile.productChangeRate
+    ) {
       user.profile.onboardingCompleted = true;
     }
 
@@ -113,20 +220,35 @@ router.put('/preferences/:userId', async (req, res) => {
   }
 });
 
-// COMPLETE ONBOARDING
-router.post('/complete-onboarding/:userId', async (req, res) => {
+/**
+ * POST /users/complete-onboarding - Complete onboarding process
+ * Body: { skinType, highSensitivity, knownAllergies, productChangeRate }
+ * Protected: YES
+ */
+router.post('/complete-onboarding', authenticate, async (req, res) => {
   try {
     const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
 
     // Validate all fields are provided
-    if (!skinType || typeof highSensitivity !== 'boolean' || !Array.isArray(knownAllergies) || !productChangeRate) {
-      return res.status(400).json({ error: 'All onboarding fields are required' });
+    if (
+      !skinType ||
+      typeof highSensitivity !== 'boolean' ||
+      !Array.isArray(knownAllergies) ||
+      !productChangeRate
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: 'All onboarding fields are required'
+      });
     }
 
-    const user = await User.findById(req.params.userId);
+    const user = await User.findOne({ clerkId: req.userId });
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
     }
 
     user.profile.skinType = skinType;
