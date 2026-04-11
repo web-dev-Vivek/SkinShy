@@ -6,7 +6,6 @@ const connectDB = require('./config/database');
 const { loadProductsFromJSON } = require('./utils/dataLoader');
 
 // Import routes
-const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const safetyRoutes = require('./routes/safety');
@@ -51,7 +50,6 @@ connectDB();
 loadProductsFromJSON();
 
 // Routes
-app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/safety', safetyRoutes);

@@ -1,13 +1,12 @@
 const express = require('express');
 const User = require('../models/User');
-const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
 // GET USER PROFILE
-router.get('/profile', authenticate, async (req, res) => {
+router.get('/profile/:userId', async (req, res) => {
   try {
-    const user = await User.findOne({ clerkId: req.userId });
+    const user = await User.findById(req.params.userId);
     
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -17,7 +16,6 @@ router.get('/profile', authenticate, async (req, res) => {
       success: true,
       user: {
         id: user._id,
-        clerkId: user.clerkId,
         email: user.email,
         name: user.name,
         profileImage: user.profileImage,
@@ -31,10 +29,10 @@ router.get('/profile', authenticate, async (req, res) => {
 });
 
 // UPDATE USER PROFILE
-router.put('/profile', authenticate, async (req, res) => {
+router.put('/profile/:userId', async (req, res) => {
   try {
     const { name, email } = req.body;
-    const user = await User.findOne({ clerkId: req.userId });
+    const user = await User.findById(req.params.userId);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -42,7 +40,7 @@ router.put('/profile', authenticate, async (req, res) => {
 
     if (name) user.name = name;
     if (email) {
-      const existingEmail = await User.findOne({ email, clerkId: { $ne: req.userId } });
+      const existingEmail = await User.findOne({ email, _id: { $ne: req.params.userId } });
       if (existingEmail) {
         return res.status(409).json({ error: 'Email already in use' });
       }
@@ -56,7 +54,6 @@ router.put('/profile', authenticate, async (req, res) => {
       message: 'Profile updated',
       user: {
         id: user._id,
-        clerkId: user.clerkId,
         email: user.email,
         name: user.name
       }
@@ -67,9 +64,9 @@ router.put('/profile', authenticate, async (req, res) => {
 });
 
 // GET USER PREFERENCES (SKIN DETAILS)
-router.get('/preferences', authenticate, async (req, res) => {
+router.get('/preferences/:userId', async (req, res) => {
   try {
-    const user = await User.findOne({ clerkId: req.userId });
+    const user = await User.findById(req.params.userId);
     
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -85,10 +82,10 @@ router.get('/preferences', authenticate, async (req, res) => {
 });
 
 // UPDATE USER PREFERENCES (ONBOARDING)
-router.put('/preferences', authenticate, async (req, res) => {
+router.put('/preferences/:userId', async (req, res) => {
   try {
     const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
-    const user = await User.findOne({ clerkId: req.userId });
+    const user = await User.findById(req.params.userId);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -117,7 +114,7 @@ router.put('/preferences', authenticate, async (req, res) => {
 });
 
 // COMPLETE ONBOARDING
-router.post('/complete-onboarding', authenticate, async (req, res) => {
+router.post('/complete-onboarding/:userId', async (req, res) => {
   try {
     const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
 
@@ -126,7 +123,7 @@ router.post('/complete-onboarding', authenticate, async (req, res) => {
       return res.status(400).json({ error: 'All onboarding fields are required' });
     }
 
-    const user = await User.findOne({ clerkId: req.userId });
+    const user = await User.findById(req.params.userId);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });

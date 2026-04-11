@@ -1,10 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SignUpButton, useAuth } from '@clerk/clerk-react';
 
 function About() {
   const navigate = useNavigate();
-  const { isSignedIn, isLoaded } = useAuth();
 
   return (
     <section id="about" className="section-spacing relative w-full bg-custom-white">
@@ -123,22 +121,12 @@ function About() {
            <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
              Stop wasting money on products that don't work. Start your personalized skincare journey today.
            </p>
-             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               {isLoaded && !isSignedIn && (
-                 <SignUpButton 
-                   mode="modal"
-                   afterSignUpUrl="/onboarding"
-                 >
-                   <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300">
-                     Get Started Free
-                   </button>
-                 </SignUpButton>
-               )}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => navigate('/login')}
-                className="px-8 py-4 border-2 border-custom-white text-custom-white font-semibold rounded-xl hover:bg-white hover:text-custom-charcoal transition-all duration-300"
+                onClick={() => navigate('/search')}
+                className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300"
               >
-                Sign In
+                Get Started Free
               </button>
             </div>
          </div>
