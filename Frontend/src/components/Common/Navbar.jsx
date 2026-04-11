@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SignUpButton, useAuth } from '@clerk/clerk-react';
 
 function Navbar() {
   const navigate = useNavigate();
+  const { isSignedIn, isLoaded } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const scrollToSection = (sectionId) => {
@@ -57,18 +59,26 @@ function Navbar() {
 
            {/* Right Side Buttons */}
            <div className="hidden md:flex items-center gap-4">
-             <button
-               onClick={() => handleNavigation('/login')}
-               className="btn-outline"
-             >
-               Login
-             </button>
-             <button
-               onClick={() => handleNavigation('/onboarding')}
-               className="btn-primary"
-             >
-               Get Started
-             </button>
+             {isLoaded && (
+               <>
+                 <button
+                   onClick={() => handleNavigation('/login')}
+                   className="btn-outline"
+                 >
+                   Login
+                 </button>
+                 {!isSignedIn && (
+                   <SignUpButton 
+                     mode="modal"
+                     afterSignUpUrl="/onboarding"
+                   >
+                     <button className="btn-primary">
+                       Get Started
+                     </button>
+                   </SignUpButton>
+                 )}
+               </>
+             )}
            </div>
 
           {/* Mobile Menu Toggle */}
@@ -103,20 +113,28 @@ function Navbar() {
             >
               About
             </button>
-             <div className="flex flex-col gap-3 pt-4 border-t border-custom-light-gray">
-               <button
-                 onClick={() => handleNavigation('/login')}
-                 className="btn-outline w-full"
-               >
-                 Login
-               </button>
-               <button
-                 onClick={() => handleNavigation('/onboarding')}
-                 className="btn-primary w-full"
-               >
-                 Get Started
-               </button>
-             </div>
+              <div className="flex flex-col gap-3 pt-4 border-t border-custom-light-gray">
+                 {isLoaded && (
+                   <>
+                     <button
+                       onClick={() => handleNavigation('/login')}
+                       className="btn-outline w-full"
+                     >
+                       Login
+                     </button>
+                     {!isSignedIn && (
+                       <SignUpButton 
+                         mode="modal"
+                         afterSignUpUrl="/onboarding"
+                       >
+                         <button className="btn-primary w-full">
+                           Get Started
+                         </button>
+                       </SignUpButton>
+                     )}
+                   </>
+                 )}
+               </div>
           </div>
         </div>
       </div>

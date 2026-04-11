@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth, useUser, SignIn } from '@clerk/clerk-react';
-import { syncUserWithBackend } from '../services/clerk';
 import { getUserPreferences } from '../services/users';
 
 export default function LoginPage() {
@@ -24,13 +23,9 @@ export default function LoginPage() {
     setError(null);
     
     try {
-      // Sync user with backend
-      await syncUserWithBackend(
-        user.id,
-        user.primaryEmailAddress?.emailAddress,
-        user.fullName,
-        user.imageUrl
-      );
+      // Wait a bit for UserSyncComponent to sync user
+      // (it syncs automatically when user loads in Clerk)
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Check if onboarding is completed
       const preferences = await getUserPreferences();

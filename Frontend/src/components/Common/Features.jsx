@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { SignUpButton, useAuth } from '@clerk/clerk-react';
 
 function Features() {
+  const { isSignedIn, isLoaded } = useAuth();
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const features = [
@@ -133,13 +135,20 @@ function Features() {
          <div className="bg-custom-charcoal mt-20 md:mt-32 p-12 md:p-16 rounded-3xl text-custom-white text-center animate-slide-up delay-3">
             <h3 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
              Ready to Transform Your Skincare?
-           </h3>
-            <p className="text-lg text-custom-white/90 mb-8 max-w-2xl mx-auto">
-             Join thousands of users discovering products perfectly matched to their skin.
-           </p>
-           <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">
-             Start Free Trial
-           </button>
+            </h3>
+             <p className="text-lg text-custom-white/90 mb-8 max-w-2xl mx-auto">
+              Join thousands of users discovering products perfectly matched to their skin.
+            </p>
+            {isLoaded && !isSignedIn && (
+              <SignUpButton 
+                mode="modal"
+                afterSignUpUrl="/onboarding"
+              >
+                <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">
+                  Start Free Trial
+                </button>
+              </SignUpButton>
+            )}
          </div>
       </div>
     </section>

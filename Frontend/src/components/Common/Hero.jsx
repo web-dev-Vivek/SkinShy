@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SignUpButton, useAuth } from '@clerk/clerk-react';
 
 function Hero() {
   const navigate = useNavigate();
+  const { isSignedIn, isLoaded } = useAuth();
   const [activeTab, setActiveTab] = useState('interior');
 
   return (
@@ -48,18 +50,22 @@ function Hero() {
             </div>
 
             {/* CTA Button - Minimal Design */}
-            <div className="flex items-center gap-6">
-              <button
-                onClick={() => navigate('/onboarding')}
-                className="px-10 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-full hover:bg-custom-black transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider"
-              >
-                Get Started
-              </button>
-              <div className="flex items-center gap-3">
-                <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
-                <p className="text-xs text-custom-dark-gray tracking-widest uppercase">Explore</p>
-              </div>
-            </div>
+             <div className="flex items-center gap-6">
+               {isLoaded && !isSignedIn && (
+                 <SignUpButton 
+                   mode="modal"
+                   afterSignUpUrl="/onboarding"
+                 >
+                   <button className="px-10 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-full hover:bg-custom-black transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider">
+                     Get Started
+                   </button>
+                 </SignUpButton>
+               )}
+               <div className="flex items-center gap-3">
+                 <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
+                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase">Explore</p>
+               </div>
+             </div>
 
              {/* Material Info Card - Bottom Left */}
              <div className="bg-custom-white border border-custom-light-gray p-8 md:p-10 max-w-sm rounded-3xl mt-auto">

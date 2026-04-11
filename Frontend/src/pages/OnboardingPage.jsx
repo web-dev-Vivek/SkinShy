@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
+import { completeOnboarding } from '../services/userApi';
 import InfoTooltip from '../components/InfoTooltip';
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
+  const { isSignedIn } = useAuth();
   const { updateOnboardingData } = useOnboarding();
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   
   const [formData, setFormData] = useState({
     skinType: '',
-    highSensitivity: false,
+    highSensitivity: null,
     knownAllergies: [],
     productChangeRate: ''
   });
@@ -19,6 +24,49 @@ export default function OnboardingPage() {
   const handleCloseOverlay = () => {
     setIsOpen(false);
     navigate('/');
+  };
+
+  // Validation function
+  const isStepValid = () => {
+    switch(step) {
+      case 1:
+        return formData.skinType !== '';
+      case 2:
+        return formData.highSensitivity !== null;
+      case 3:
+        // Allergies are optional
+        return true;
+      case 4:
+        return formData.productChangeRate !== '';
+      case 5:
+        return true;
+      default:
+        return false;
+    }
+  };
+
+  const saveOnboardingData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      console.log('[Onboarding] Saving data:', formData);
+
+      const data = await completeOnboarding({
+        skinType: formData.skinType,
+        highSensitivity: formData.highSensitivity,
+        knownAllergies: formData.knownAllergies,
+        productChangeRate: formData.productChangeRate
+      });
+
+      console.log('[Onboarding] ✓ Data saved successfully');
+      updateOnboardingData(formData);
+      navigate('/onboarding-complete');
+    } catch (err) {
+      console.error('[Onboarding] ✗ Error saving data:', err);
+      setError(err.error || err.message || 'Failed to save your preferences. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const allergyOptions = [
@@ -83,12 +131,19 @@ export default function OnboardingPage() {
   };
 
    const handleNext = async () => {
+     // Validate current step
+     if (!isStepValid()) {
+       setError(`Please answer this question to continue${step === 3 ? ' (or skip if no allergies)' : ''}`);
+       return;
+     }
+
+     setError(null);
+
      if (step < 5) {
        setStep(step + 1);
      } else {
-       // Save data to context and redirect to signup
-       updateOnboardingData(formData);
-       navigate('/signup');
+       // Step 5: Save all data to MongoDB
+       await saveOnboardingData();
      }
    };
 
@@ -99,9 +154,20 @@ export default function OnboardingPage() {
   const progressPercentage = (step / 5) * 100;
 
    return (
-      <div className="min-h-screen bg-custom-white flex items-center justify-center p-4 py-8 relative overflow-hidden">
-        {/* Full-screen overlay - click to close */}
-        {isOpen && (
+       <div className="min-h-screen bg-custom-white flex items-center justify-center p-4 py-8 relative overflow-hidden">
+         {/* Back Button - Top Left Corner */}
+         <button
+           onClick={() => navigate('/')}
+           className="absolute top-6 left-6 z-20 p-2 hover:bg-custom-off-white rounded-lg transition-colors"
+           title="Back to home"
+         >
+           <svg className="w-6 h-6 text-custom-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+           </svg>
+         </button>
+
+         {/* Full-screen overlay - click to close */}
+         {isOpen && (
           <div 
             className="fixed inset-0 bg-black/30 z-0 cursor-pointer"
             onClick={handleCloseOverlay}
@@ -303,22 +369,45 @@ export default function OnboardingPage() {
            </div>
          )}
 
-         {/* Buttons */}
-         <div className="flex gap-4 mt-8">
-           <button
-             onClick={handleBack}
-             disabled={step === 1}
-              className="flex-1 py-3 px-4 rounded-xl font-semibold bg-custom-off-white border border-custom-light-gray text-custom-charcoal hover:bg-custom-light-gray hover:border-custom-dark-gray disabled:bg-custom-light-gray/30 disabled:text-custom-dark-gray/30 disabled:cursor-not-allowed transition-all duration-300"
-           >
-             Back
-           </button>
-            <button
-              onClick={handleNext}
-              className="flex-1 py-3 px-4 rounded-xl font-semibold text-custom-white bg-custom-charcoal hover:bg-custom-black transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              {step === 5 ? 'Complete' : 'Next'}
-           </button>
-         </div>
+          {/* Buttons */}
+          <div className="flex flex-col gap-4 mt-8">
+            {error && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex justify-between items-start">
+                <div>
+                  <p className="text-red-700 font-medium">{error}</p>
+                </div>
+                <button
+                  onClick={() => setError(null)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+            <div className="flex gap-4">
+              <button
+                onClick={handleBack}
+                disabled={step === 1}
+                className="flex-1 py-3 px-4 rounded-xl font-semibold bg-custom-off-white border border-custom-light-gray text-custom-charcoal hover:bg-custom-light-gray hover:border-custom-dark-gray disabled:bg-custom-light-gray/30 disabled:text-custom-dark-gray/30 disabled:cursor-not-allowed transition-all duration-300"
+              >
+                Back
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={loading}
+                className="flex-1 py-3 px-4 rounded-xl font-semibold text-custom-white bg-custom-charcoal hover:bg-custom-black disabled:bg-custom-dark-gray/50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+                    Saving...
+                  </>
+                ) : (
+                  step === 5 ? 'Complete & Apply' : 'Next'
+                )}
+              </button>
+            </div>
+          </div>
       </div>
     </div>
   );
