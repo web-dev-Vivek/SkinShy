@@ -205,98 +205,98 @@ export default function OnboardingPage() {
   const isFirstQuestion = currentQuestion === 0;
   const questionValue = formData[currentQ.id];
 
-  return (
-    <div className="min-h-screen bg-custom-white px-4 py-8 mt-20">
-      <div className="max-w-2xl mx-auto">
-        {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-2">
-            <h1 className="text-3xl font-bold font-playfair text-custom-charcoal">
-              Complete Your Profile
-            </h1>
-            <span className="text-sm font-semibold text-custom-dark-gray">
-              {currentQuestion + 1} / {QUESTIONS.length}
-            </span>
-          </div>
-          <div className="w-full bg-custom-light-gray/20 rounded-full h-2">
-            <div
-              className="bg-custom-charcoal h-2 rounded-full transition-all duration-300"
-              style={{ width: `${((currentQuestion + 1) / QUESTIONS.length) * 100}%` }}
-            ></div>
-          </div>
-        </div>
+   return (
+     <div className="min-h-screen bg-custom-white px-3 sm:px-4 py-6 sm:py-8 mt-20">
+       <div className="max-w-2xl mx-auto">
+         {/* Progress Bar */}
+         <div className="mb-6 sm:mb-8">
+           <div className="flex justify-between items-center mb-2">
+             <h1 className="text-2xl sm:text-3xl font-bold font-playfair text-custom-charcoal">
+               Complete Your Profile
+             </h1>
+             <span className="text-xs sm:text-sm font-semibold text-custom-dark-gray">
+               {currentQuestion + 1} / {QUESTIONS.length}
+             </span>
+           </div>
+           <div className="w-full bg-custom-light-gray/20 rounded-full h-2">
+             <div
+               className="bg-custom-charcoal h-2 rounded-full transition-all duration-300"
+               style={{ width: `${((currentQuestion + 1) / QUESTIONS.length) * 100}%` }}
+             ></div>
+           </div>
+         </div>
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
-            {error}
-          </div>
-        )}
+         {error && (
+           <div className="bg-red-50 border border-red-200 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded mb-4 sm:mb-6 text-xs sm:text-sm">
+             {error}
+           </div>
+         )}
 
-        {/* Question Container */}
-        <div className="bg-custom-off-white border border-custom-light-gray/20 rounded-2xl p-8 mb-8">
-          <h2 className="text-2xl font-bold text-custom-charcoal mb-6">
-            {currentQ.title}
-          </h2>
+         {/* Question Container */}
+         <div className="bg-custom-off-white border border-custom-light-gray/20 rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+           <h2 className="text-xl sm:text-2xl font-bold text-custom-charcoal mb-4 sm:mb-6">
+             {currentQ.title}
+           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* SKIN TYPE - Select */}
-            {currentQ.type === 'select' && currentQ.id === 'skinType' && (
-              <select
-                value={questionValue}
-                onChange={(e) => handleSkinTypeChange(e.target.value)}
-                className="w-full px-4 py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-lg"
-              >
-                <option value="">Select your skin type</option>
-                {currentQ.options.map(opt => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
-              </select>
-            )}
+           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+             {/* SKIN TYPE - Select */}
+             {currentQ.type === 'select' && currentQ.id === 'skinType' && (
+               <select
+                 value={questionValue}
+                 onChange={(e) => handleSkinTypeChange(e.target.value)}
+                 className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-sm sm:text-base"
+               >
+                 <option value="">Select your skin type</option>
+                 {currentQ.options.map(opt => (
+                   <option key={opt.value} value={opt.value}>{opt.label}</option>
+                 ))}
+               </select>
+             )}
 
-            {/* PRODUCT CHANGE RATE - Select */}
-            {currentQ.type === 'select' && currentQ.id === 'productChangeRate' && (
-              <select
-                value={questionValue}
-                onChange={(e) => handleProductChangeRateChange(e.target.value)}
-                className="w-full px-4 py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-lg"
-              >
-                <option value="">Select frequency</option>
-                {currentQ.options.map(opt => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
-              </select>
-            )}
+             {/* PRODUCT CHANGE RATE - Select */}
+             {currentQ.type === 'select' && currentQ.id === 'productChangeRate' && (
+               <select
+                 value={questionValue}
+                 onChange={(e) => handleProductChangeRateChange(e.target.value)}
+                 className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-sm sm:text-base"
+               >
+                 <option value="">Select frequency</option>
+                 {currentQ.options.map(opt => (
+                   <option key={opt.value} value={opt.value}>{opt.label}</option>
+                 ))}
+               </select>
+             )}
 
-            {/* HIGH SENSITIVITY - Checkbox */}
-            {currentQ.type === 'checkbox' && (
-              <div className="flex items-center p-4 border border-custom-light-gray/30 rounded-lg hover:bg-custom-white transition">
-                <input
-                  type="checkbox"
-                  id="sensitivity"
-                  checked={questionValue}
-                  onChange={(e) => handleSensitivityChange(e.target.checked)}
-                  className="w-6 h-6 text-custom-charcoal rounded cursor-pointer"
-                />
-                <label htmlFor="sensitivity" className="ml-4 text-lg text-custom-charcoal font-medium cursor-pointer">
-                  Yes, I have high skin sensitivity
-                </label>
-              </div>
-            )}
+             {/* HIGH SENSITIVITY - Checkbox */}
+             {currentQ.type === 'checkbox' && (
+               <div className="flex items-center p-3 sm:p-4 border border-custom-light-gray/30 rounded-lg hover:bg-custom-white transition gap-3 sm:gap-4">
+                 <input
+                   type="checkbox"
+                   id="sensitivity"
+                   checked={questionValue}
+                   onChange={(e) => handleSensitivityChange(e.target.checked)}
+                   className="w-5 sm:w-6 h-5 sm:h-6 text-custom-charcoal rounded cursor-pointer flex-shrink-0"
+                 />
+                 <label htmlFor="sensitivity" className="text-sm sm:text-lg text-custom-charcoal font-medium cursor-pointer">
+                   Yes, I have high skin sensitivity
+                 </label>
+               </div>
+             )}
 
-            {/* ALLERGIES - Multi-select */}
-            {currentQ.type === 'multicheck' && (
-              <div className="grid grid-cols-2 gap-3">
-                {currentQ.options.map(allergy => (
-                  <label key={allergy.value} className="flex items-center p-3 border border-custom-light-gray/30 rounded-lg hover:bg-custom-white transition cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.knownAllergies.includes(allergy.value)}
-                      onChange={() => handleAllergyToggle(allergy.value)}
-                      className="w-5 h-5 text-custom-charcoal rounded cursor-pointer"
-                    />
-                    <span className="ml-3 text-custom-dark-gray font-medium capitalize">
-                      {allergy.label}
-                    </span>
+             {/* ALLERGIES - Multi-select */}
+             {currentQ.type === 'multicheck' && (
+               <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                 {currentQ.options.map(allergy => (
+                   <label key={allergy.value} className="flex items-center p-2 sm:p-3 border border-custom-light-gray/30 rounded-lg hover:bg-custom-white transition cursor-pointer gap-2">
+                     <input
+                       type="checkbox"
+                       checked={formData.knownAllergies.includes(allergy.value)}
+                       onChange={() => handleAllergyToggle(allergy.value)}
+                       className="w-4 sm:w-5 h-4 sm:h-5 text-custom-charcoal rounded cursor-pointer flex-shrink-0"
+                     />
+                     <span className="text-xs sm:text-sm text-custom-dark-gray font-medium capitalize break-words">
+                       {allergy.label}
+                     </span>
                   </label>
                 ))}
               </div>
@@ -304,46 +304,46 @@ export default function OnboardingPage() {
           </form>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex gap-4 justify-between">
-          <button
-            onClick={goToPreviousQuestion}
-            disabled={isFirstQuestion}
-            className="px-6 py-3 border border-custom-charcoal text-custom-charcoal rounded-lg font-semibold hover:bg-custom-light-gray/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            ← Back
-          </button>
+         {/* Navigation Buttons */}
+         <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-between">
+           <button
+             onClick={goToPreviousQuestion}
+             disabled={isFirstQuestion}
+             className="px-4 sm:px-6 py-2 sm:py-3 border border-custom-charcoal text-custom-charcoal rounded-lg font-semibold hover:bg-custom-light-gray/10 transition disabled:opacity-30 disabled:cursor-not-allowed text-sm sm:text-base order-2 sm:order-1"
+           >
+             ← Back
+           </button>
 
-          <div className="flex gap-3">
-            {/* Skip Button (always available) */}
-            <button
-              onClick={handleSkip}
-              disabled={isLastQuestion || loading}
-              className="px-6 py-3 border border-custom-light-gray text-custom-dark-gray rounded-lg font-semibold hover:border-custom-charcoal hover:text-custom-charcoal transition disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Skip
-            </button>
+           <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 order-1 sm:order-2">
+             {/* Skip Button (always available) */}
+             <button
+               onClick={handleSkip}
+               disabled={isLastQuestion || loading}
+               className="px-4 sm:px-6 py-2 sm:py-3 border border-custom-light-gray text-custom-dark-gray rounded-lg font-semibold hover:border-custom-charcoal hover:text-custom-charcoal transition disabled:opacity-30 disabled:cursor-not-allowed text-sm sm:text-base"
+             >
+               Skip
+             </button>
 
-            {/* Next or Complete Button */}
-            {!isLastQuestion ? (
-              <button
-                onClick={goToNextQuestion}
-                className="px-6 py-3 bg-custom-charcoal text-custom-white rounded-lg font-semibold hover:bg-custom-black transition"
-              >
-                Next →
-              </button>
-            ) : (
-              <button
-                type="submit"
-                onClick={handleSubmit}
-                disabled={loading}
-                className="px-6 py-3 bg-green-600 text-custom-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50"
-              >
-                {loading ? 'Saving...' : 'Complete Profile'}
-              </button>
-            )}
-          </div>
-        </div>
+             {/* Next or Complete Button */}
+             {!isLastQuestion ? (
+               <button
+                 onClick={goToNextQuestion}
+                 className="px-4 sm:px-6 py-2 sm:py-3 bg-custom-charcoal text-custom-white rounded-lg font-semibold hover:bg-custom-black transition text-sm sm:text-base"
+               >
+                 Next →
+               </button>
+             ) : (
+               <button
+                 type="submit"
+                 onClick={handleSubmit}
+                 disabled={loading}
+                 className="px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-custom-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 text-sm sm:text-base"
+               >
+                 {loading ? 'Saving...' : 'Complete Profile'}
+               </button>
+             )}
+           </div>
+         </div>
       </div>
     </div>
   );
