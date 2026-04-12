@@ -24,7 +24,7 @@ function ProfileDropdown() {
   });
 
   const skinTypeOptions = ['dry', 'oily', 'combination', 'sensitive', 'normal'];
-  const productChangeRateOptions = ['frequent', 'moderate', 'rare'];
+  const productChangeRateOptions = ['rarely', 'occasionally', 'frequently', 'very_frequently'];
   const allergyOptions = [
     'Parabens',
     'Sulfates',
@@ -111,6 +111,13 @@ function ProfileDropdown() {
     if (typeof value === 'boolean') return value ? 'Yes' : 'No';
     if (Array.isArray(value)) {
       return value.length > 0 ? value.join(', ') : 'None';
+    }
+    // Handle enum values with underscores (e.g., 'very_frequently' -> 'Very Frequently')
+    if (typeof value === 'string') {
+      return value
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ') || 'Not set';
     }
     return value?.charAt(0).toUpperCase() + value?.slice(1) || 'Not set';
   };
@@ -316,16 +323,19 @@ function ProfileDropdown() {
 
                     <div>
                       <label className="block text-xs font-semibold text-custom-charcoal mb-2">Product Change Rate</label>
-                      <select
-                        value={editFormData.productChangeRate}
-                        onChange={(e) => setEditFormData(prev => ({ ...prev, productChangeRate: e.target.value }))}
-                        className="w-full px-3 py-2 border border-custom-light-gray rounded-lg text-sm focus:outline-none focus:border-custom-charcoal"
-                      >
-                        <option value="">Select rate</option>
-                        {productChangeRateOptions.map(rate => (
-                          <option key={rate} value={rate}>{rate.charAt(0).toUpperCase() + rate.slice(1)}</option>
-                        ))}
-                      </select>
+                       <select
+                         value={editFormData.productChangeRate}
+                         onChange={(e) => setEditFormData(prev => ({ ...prev, productChangeRate: e.target.value }))}
+                         className="w-full px-3 py-2 border border-custom-light-gray rounded-lg text-sm focus:outline-none focus:border-custom-charcoal"
+                       >
+                         <option value="">Select rate</option>
+                         {productChangeRateOptions.map(rate => {
+                           const displayRate = rate.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                           return (
+                             <option key={rate} value={rate}>{displayRate}</option>
+                           );
+                         })}
+                       </select>
                     </div>
 
                     <div className="flex gap-2 mt-4">

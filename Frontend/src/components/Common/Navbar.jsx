@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
+import ProfileDropdown from './ProfileDropdown';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -76,12 +77,7 @@ function Navbar() {
                   >
                     Browse Products
                   </button>
-                  <button
-                    onClick={() => signOut(() => navigate('/'))}
-                    className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
-                  >
-                    Sign Out
-                  </button>
+                  <ProfileDropdown />
                 </>
               )}
             </div>
@@ -134,12 +130,9 @@ function Navbar() {
                         >
                           Browse Products
                         </button>
-                        <button
-                          onClick={() => signOut(() => navigate('/'))}
-                          className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
-                        >
-                          Sign Out
-                        </button>
+                        <div className="border-t border-custom-light-gray pt-3">
+                          <ProfileDropdown />
+                        </div>
                       </>
                     )}
                  </div>
