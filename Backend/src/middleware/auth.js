@@ -31,15 +31,17 @@ const authenticate = async (req, res, next) => {
 
       next();
     } catch (verifyError) {
+      console.error('Token verification failed:', verifyError.message);
       return res.status(401).json({
         success: false,
         error: 'Invalid or expired token'
       });
     }
   } catch (error) {
+    console.error('Authentication error:', error.message);
     return res.status(500).json({
       success: false,
-      error: 'Authentication failed'
+      error: 'Authentication failed: ' + error.message
     });
   }
 };

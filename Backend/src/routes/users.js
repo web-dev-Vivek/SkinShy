@@ -4,52 +4,37 @@ const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
+// Wrapper to handle async/await errors in route handlers
+const asyncHandler = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
 /**
  * POST /users - Create or get user (called during signup)
  * Body: { clerkId, email, name }
  * Protected: YES
  */
-router.post('/', authenticate, async (req, res) => {
-  try {
-    const { clerkId, email, name } = req.body;
+router.post('/', authenticate, asyncHandler(async (req, res) => {
+  console.log('📝 POST /users - Request received');
+  const { clerkId, email, name } = req.body;
 
-    // Verify that the clerkId matches the authenticated user
-    if (clerkId !== req.userId) {
-      return res.status(403).json({
-        success: false,
-        error: 'Cannot create user for another account'
-      });
-    }
-
-    // Check if user already exists
-    let user = await User.findOne({ clerkId });
-
-    if (user) {
-      return res.json({
-        success: true,
-        message: 'User already exists',
-        user: {
-          id: user._id,
-          clerkId: user.clerkId,
-          email: user.email,
-          name: user.name,
-          profile: user.profile
-        }
-      });
-    }
-
-    // Create new user
-    user = new User({
-      clerkId,
-      email,
-      name: name || email.split('@')[0] // Use email prefix as fallback name
+  // Verify that the clerkId matches the authenticated user
+  if (clerkId !== req.userId) {
+    return res.status(403).json({
+      success: false,
+      error: 'Cannot create user for another account'
     });
+  }
 
-    await user.save();
+  // Check if user already exists
+  console.log('🔍 Checking if user exists with clerkId:', clerkId);
+  let user = await User.findOne({ clerkId });
 
-    res.status(201).json({
+  if (user) {
+    console.log('✅ User already exists');
+    return res.json({
       success: true,
-      message: 'User created successfully',
+      message: 'User already exists',
       user: {
         id: user._id,
         clerkId: user.clerkId,
@@ -58,167 +43,166 @@ router.post('/', authenticate, async (req, res) => {
         profile: user.profile
       }
     });
-  } catch (error) {
-    // Handle duplicate email error
-    if (error.code === 11000 && error.keyPattern.email) {
-      return res.status(409).json({
-        success: false,
-        error: 'Email already in use'
-      });
-    }
-    res.status(500).json({ error: error.message });
   }
-});
+
+  // Create new user
+  console.log('➕ Creating new user with email:', email);
+  user = new User({
+    clerkId,
+    email,
+    name: name || email.split('@')[0] // Use email prefix as fallback name
+  });
+
+  console.log('💾 Saving user to MongoDB...');
+  await user.save();
+  console.log('✅ User saved successfully');
+
+  res.status(201).json({
+    success: true,
+    message: 'User created successfully',
+    user: {
+      id: user._id,
+      clerkId: user.clerkId,
+      email: user.email,
+      name: user.name,
+      profile: user.profile
+    }
+  });
+}));
 
 /**
  * GET /users/profile - Get current user profile
  * Protected: YES
  * Uses Clerk ID from token
  */
-router.get('/profile', authenticate, async (req, res) => {
-  try {
-    const user = await User.findOne({ clerkId: req.userId });
+router.get('/profile', authenticate, asyncHandler(async (req, res) => {
+  const user = await User.findOne({ clerkId: req.userId });
 
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'User not found'
-      });
-    }
-
-    res.json({
-      success: true,
-      user: {
-        id: user._id,
-        clerkId: user.clerkId,
-        email: user.email,
-        name: user.name,
-        profileImage: user.profileImage,
-        profile: user.profile,
-        createdAt: user.createdAt
-      }
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: 'User not found'
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-});
+
+  res.json({
+    success: true,
+    user: {
+      id: user._id,
+      clerkId: user.clerkId,
+      email: user.email,
+      name: user.name,
+      profileImage: user.profileImage,
+      profile: user.profile,
+      createdAt: user.createdAt
+    }
+  });
+}));
 
 /**
  * PUT /users/profile - Update current user profile
  * Body: { name, email }
  * Protected: YES
  */
-router.put('/profile', authenticate, async (req, res) => {
-  try {
-    const { name, email } = req.body;
-    const user = await User.findOne({ clerkId: req.userId });
+router.put('/profile', authenticate, asyncHandler(async (req, res) => {
+  const { name, email } = req.body;
+  const user = await User.findOne({ clerkId: req.userId });
 
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'User not found'
-      });
-    }
-
-    if (name) user.name = name;
-    if (email) {
-      const existingEmail = await User.findOne({
-        email,
-        clerkId: { $ne: req.userId }
-      });
-      if (existingEmail) {
-        return res.status(409).json({
-          success: false,
-          error: 'Email already in use'
-        });
-      }
-      user.email = email;
-    }
-
-    await user.save();
-
-    res.json({
-      success: true,
-      message: 'Profile updated',
-      user: {
-        id: user._id,
-        clerkId: user.clerkId,
-        email: user.email,
-        name: user.name
-      }
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: 'User not found'
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-});
+
+  if (name) user.name = name;
+  if (email) {
+    const existingEmail = await User.findOne({
+      email,
+      clerkId: { $ne: req.userId }
+    });
+    if (existingEmail) {
+      return res.status(409).json({
+        success: false,
+        error: 'Email already in use'
+      });
+    }
+    user.email = email;
+  }
+
+  await user.save();
+
+  res.json({
+    success: true,
+    message: 'Profile updated',
+    user: {
+      id: user._id,
+      clerkId: user.clerkId,
+      email: user.email,
+      name: user.name
+    }
+  });
+}));
 
 /**
  * GET /users/preferences - Get current user skin preferences
  * Protected: YES
  */
-router.get('/preferences', authenticate, async (req, res) => {
-  try {
-    const user = await User.findOne({ clerkId: req.userId });
+router.get('/preferences', authenticate, asyncHandler(async (req, res) => {
+  const user = await User.findOne({ clerkId: req.userId });
 
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'User not found'
-      });
-    }
-
-    res.json({
-      success: true,
-      preferences: user.profile
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: 'User not found'
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-});
+
+  res.json({
+    success: true,
+    preferences: user.profile
+  });
+}));
 
 /**
  * PUT /users/preferences - Update current user preferences
  * Body: { skinType, highSensitivity, knownAllergies, productChangeRate }
  * Protected: YES
  */
-router.put('/preferences', authenticate, async (req, res) => {
-  try {
-    const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
-    const user = await User.findOne({ clerkId: req.userId });
+router.put('/preferences', authenticate, asyncHandler(async (req, res) => {
+  const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
+  const user = await User.findOne({ clerkId: req.userId });
 
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'User not found'
-      });
-    }
-
-    if (skinType) user.profile.skinType = skinType;
-    if (typeof highSensitivity === 'boolean') user.profile.highSensitivity = highSensitivity;
-    if (Array.isArray(knownAllergies)) user.profile.knownAllergies = knownAllergies;
-    if (productChangeRate) user.profile.productChangeRate = productChangeRate;
-
-    // Mark onboarding as completed if all required fields are set
-    if (
-      user.profile.skinType &&
-      typeof user.profile.highSensitivity === 'boolean' &&
-      user.profile.knownAllergies &&
-      user.profile.productChangeRate
-    ) {
-      user.profile.onboardingCompleted = true;
-    }
-
-    await user.save();
-
-    res.json({
-      success: true,
-      message: 'Preferences updated',
-      preferences: user.profile
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: 'User not found'
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-});
+
+  if (skinType) user.profile.skinType = skinType;
+  if (typeof highSensitivity === 'boolean') user.profile.highSensitivity = highSensitivity;
+  if (Array.isArray(knownAllergies)) user.profile.knownAllergies = knownAllergies;
+  if (productChangeRate) user.profile.productChangeRate = productChangeRate;
+
+  // Mark onboarding as completed if all required fields are set
+  if (
+    user.profile.skinType &&
+    typeof user.profile.highSensitivity === 'boolean' &&
+    user.profile.knownAllergies &&
+    user.profile.productChangeRate
+  ) {
+    user.profile.onboardingCompleted = true;
+  }
+
+  await user.save();
+
+  res.json({
+    success: true,
+    message: 'Preferences updated',
+    preferences: user.profile
+  });
+}));
 
 /**
  * POST /users/complete-onboarding - Complete onboarding process
@@ -226,47 +210,43 @@ router.put('/preferences', authenticate, async (req, res) => {
  * Protected: YES
  * Note: skinType and productChangeRate are required; others are optional
  */
-router.post('/complete-onboarding', authenticate, async (req, res) => {
-  try {
-    const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
+router.post('/complete-onboarding', authenticate, asyncHandler(async (req, res) => {
+  const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
 
-    // Validate required fields (skinType and productChangeRate)
-    if (!skinType || !productChangeRate) {
-      return res.status(400).json({
-        success: false,
-        error: 'Skin type and product change rate are required'
-      });
-    }
-
-    const user = await User.findOne({ clerkId: req.userId });
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'User not found'
-      });
-    }
-
-    user.profile.skinType = skinType;
-    if (typeof highSensitivity === 'boolean') {
-      user.profile.highSensitivity = highSensitivity;
-    }
-    if (Array.isArray(knownAllergies)) {
-      user.profile.knownAllergies = knownAllergies;
-    }
-    user.profile.productChangeRate = productChangeRate;
-    user.profile.onboardingCompleted = true;
-
-    await user.save();
-
-    res.json({
-      success: true,
-      message: 'Onboarding completed',
-      preferences: user.profile
+  // Validate required fields (skinType and productChangeRate)
+  if (!skinType || !productChangeRate) {
+    return res.status(400).json({
+      success: false,
+      error: 'Skin type and product change rate are required'
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-});
+
+  const user = await User.findOne({ clerkId: req.userId });
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      error: 'User not found'
+    });
+  }
+
+  user.profile.skinType = skinType;
+  if (typeof highSensitivity === 'boolean') {
+    user.profile.highSensitivity = highSensitivity;
+  }
+  if (Array.isArray(knownAllergies)) {
+    user.profile.knownAllergies = knownAllergies;
+  }
+  user.profile.productChangeRate = productChangeRate;
+  user.profile.onboardingCompleted = true;
+
+  await user.save();
+
+  res.json({
+    success: true,
+    message: 'Onboarding completed',
+    preferences: user.profile
+  });
+}));
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
+import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 
 export default function SearchPage() {
   const navigate = useNavigate();
@@ -45,7 +46,9 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-custom-white px-4 py-8 mt-20">
+    <>
+      <OnboardingWarningBanner />
+      <div className="min-h-screen bg-custom-white px-4 py-8 mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -114,7 +117,8 @@ export default function SearchPage() {
             ))}
           </div>
         )}
+       </div>
       </div>
-    </div>
+    </>
   );
 }

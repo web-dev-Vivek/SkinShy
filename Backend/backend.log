@@ -1,5 +1,8 @@
-◇ injected env (5) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+
+> backend@1.0.0 start
+> node src/server.js
+
+◇ injected env (5) from .env // tip: ⌘ override existing { override: true }
 ✅ Skinshy Backend running on port 5000
-⚠️  Product count check timed out (MongoDB not responding)
-✗ MongoDB Connection Error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
-⚠️  Continuing without MongoDB connection. Some features may not work.
+✓ MongoDB Connected: ac-6jqh2f3-shard-00-02.djohg3l.mongodb.net
+✓ Products already in database (700 products)

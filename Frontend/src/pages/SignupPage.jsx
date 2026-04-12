@@ -3,6 +3,8 @@ import { SignUp } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
+import { api } from '../services/api';
+import { getUserName, getUserEmail } from '../services/auth';
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -16,8 +18,22 @@ export default function SignupPage() {
     if (isLoaded && user) {
       // Only call setSignupComplete if we haven't already
       if (complete_signup === null) {
-        console.log('User detected in SignupPage, calling setSignupComplete');
-        setSignupComplete(); // Set complete_signup = 0
+        console.log('User detected in SignupPage, creating user in MongoDB and calling setSignupComplete');
+        
+        // Create user in MongoDB immediately after Clerk signup
+        api.post('/users', {
+          clerkId: user.id,
+          email: getUserEmail(user),
+          name: getUserName(user)
+        }).then(() => {
+          console.log('User created in MongoDB successfully');
+          setSignupComplete(); // Set complete_signup = 0
+        }).catch((err) => {
+          console.error('Error creating user in MongoDB:', err);
+          // Still mark signup as complete even if user creation fails
+          // The error will be caught again during onboarding
+          setSignupComplete();
+        });
       }
     }
   }, [isLoaded, user, complete_signup, setSignupComplete]);

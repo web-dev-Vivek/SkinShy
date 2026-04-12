@@ -46,8 +46,8 @@ app.use(cors(corsOptions));
 // Connect to database
 connectDB();
 
-// Load products from JSON (if not already in DB)
-loadProductsFromJSON();
+// Load products from JSON (if not already in DB) - Commented out to debug
+// loadProductsFromJSON();
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -59,10 +59,26 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Skinshy Backend is running' });
 });
 
-// Error handling middleware
+// Error handling middleware (MUST have exactly 4 parameters)
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal server error' });
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  
+  console.error('❌ ERROR HANDLER TRIGGERED:', {
+    name: err.name,
+    status,
+    message,
+    code: err.code,
+    stack: err.stack,
+    url: `${req.method} ${req.path}`,
+    body: req.body
+  });
+  
+  res.status(status).json({
+    success: false,
+    error: message,
+    ...(process.env.NODE_ENV === 'development' && { details: err.stack, name: err.name })
+  });
 });
 
 // 404 handler

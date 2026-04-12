@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
+import { useUser, useAuth } from '@clerk/clerk-react';
 import { api } from '../services/api';
 import { getUserName, getUserEmail } from '../services/auth';
 import { useOnboarding } from '../context/OnboardingContext';
@@ -63,6 +63,7 @@ const QUESTIONS = [
 export default function OnboardingPage() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const { getToken } = useAuth();
   const { complete_signup, complete_onboarding, setOnboardingComplete } = useOnboarding();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -132,58 +133,72 @@ export default function OnboardingPage() {
   };
 
    const handleSubmit = async (e) => {
-     e.preventDefault();
-     setError('');
+       e.preventDefault();
+       setError('');
 
-     // Validate required fields
-     const skinTypeQuestion = QUESTIONS.find(q => q.id === 'skinType');
-     const productChangeRateQuestion = QUESTIONS.find(q => q.id === 'productChangeRate');
+       // Validate required fields
+       const skinTypeQuestion = QUESTIONS.find(q => q.id === 'skinType');
+       const productChangeRateQuestion = QUESTIONS.find(q => q.id === 'productChangeRate');
 
-     if (skinTypeQuestion.required && !formData.skinType) {
-       setError('Please select your skin type');
-       return;
-     }
-
-     if (productChangeRateQuestion.required && !formData.productChangeRate) {
-       setError('Please select how often you change products');
-       return;
-     }
-
-     setLoading(true);
-
-     try {
-       // Create user in MongoDB first if needed
-       try {
-         await api.post('/users', {
-           clerkId: user.id,
-           email: getUserEmail(user),
-           name: getUserName(user)
-         });
-       } catch (err) {
-         // User might already exist, continue
-         console.log('User creation/fetch:', err.response?.status);
+       if (skinTypeQuestion.required && !formData.skinType) {
+         setError('Please select your skin type');
+         return;
        }
 
-       // Complete onboarding - note: highSensitivity and knownAllergies are optional
-       await api.post('/users/complete-onboarding', {
-         skinType: formData.skinType,
-         highSensitivity: formData.highSensitivity,
-         knownAllergies: formData.knownAllergies || [],
-         productChangeRate: formData.productChangeRate
-       });
+       if (productChangeRateQuestion.required && !formData.productChangeRate) {
+         setError('Please select how often you change products');
+         return;
+       }
 
-       // Set onboarding complete flag to 1 - prevents redirect loop
-       setOnboardingComplete();
+       setLoading(true);
 
-       // Redirect to search
-       navigate('/search', { replace: true });
-     } catch (err) {
-       console.error('Onboarding error:', err);
-       setError(err.response?.data?.error || 'Failed to complete onboarding');
-     } finally {
-       setLoading(false);
-     }
-   };
+       try {
+         // Get Clerk token to verify authentication
+         const token = await getToken();
+         if (!token) {
+           throw new Error('No authentication token available. Please refresh and try again.');
+         }
+
+         console.log('✅ Authenticated with Clerk token');
+
+         // Create user in MongoDB first if needed
+         try {
+           await api.post('/users', {
+             clerkId: user.id,
+             email: getUserEmail(user),
+             name: getUserName(user)
+           });
+           console.log('✅ User created in MongoDB');
+         } catch (err) {
+           // Only ignore 409 (conflict - user already exists)
+           if (err.response?.status !== 409) {
+             console.error('User creation failed:', err);
+             throw new Error(`Failed to create user: ${err.response?.data?.error || err.message}`);
+           }
+           console.log('✅ User already exists in MongoDB');
+         }
+
+         // Complete onboarding - note: highSensitivity and knownAllergies are optional
+         await api.post('/users/complete-onboarding', {
+           skinType: formData.skinType,
+           highSensitivity: formData.highSensitivity,
+           knownAllergies: formData.knownAllergies || [],
+           productChangeRate: formData.productChangeRate
+         });
+         console.log('✅ Onboarding completed successfully');
+
+         // Set onboarding complete flag to 1 - prevents redirect loop
+         setOnboardingComplete();
+
+         // Redirect to search
+         navigate('/search', { replace: true });
+       } catch (err) {
+         console.error('Onboarding error:', err);
+         setError(err.response?.data?.error || err.message || 'Failed to complete onboarding');
+       } finally {
+         setLoading(false);
+       }
+     };
 
   const currentQ = QUESTIONS[currentQuestion];
   const isLastQuestion = currentQuestion === QUESTIONS.length - 1;

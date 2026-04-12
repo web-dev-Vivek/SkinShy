@@ -57,34 +57,34 @@ function Navbar() {
             </button>
           </div>
 
-           {/* Right Side Buttons */}
-           <div className="hidden md:flex items-center gap-4">
-             {!isSignedIn ? (
-               <>
-                 <button
-                   onClick={() => handleNavigation('/signup')}
-                   className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
-                 >
-                   Sign Up
-                 </button>
-               </>
-             ) : (
-               <>
-                 <button
-                   onClick={() => handleNavigation('/search')}
-                   className="btn-outline"
-                 >
-                   Browse Products
-                 </button>
-                 <button
-                   onClick={() => signOut(() => navigate('/'))}
-                   className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
-                 >
-                   Sign Out
-                 </button>
-               </>
-             )}
-           </div>
+            {/* Right Side Buttons */}
+            <div className="hidden md:flex items-center gap-4">
+              {!isSignedIn ? (
+                <>
+                  <button
+                    onClick={() => handleNavigation('/signup')}
+                    className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
+                  >
+                    Sign Up
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => handleNavigation('/search')}
+                    className="btn-outline"
+                  >
+                    Browse Products
+                  </button>
+                  <button
+                    onClick={() => signOut(() => navigate('/'))}
+                    className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              )}
+            </div>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -118,31 +118,31 @@ function Navbar() {
               >
                 About
               </button>
-                <div className="flex flex-col gap-3 pt-4 border-t border-custom-light-gray">
-                   {!isSignedIn ? (
-                     <button
-                       onClick={() => handleNavigation('/signup')}
-                       className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
-                     >
-                       Sign Up
-                     </button>
-                   ) : (
-                     <>
-                       <button
-                         onClick={() => handleNavigation('/search')}
-                         className="btn-outline w-full"
-                       >
-                         Browse Products
-                       </button>
-                       <button
-                         onClick={() => signOut(() => navigate('/'))}
-                         className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
-                       >
-                         Sign Out
-                       </button>
-                     </>
-                   )}
-                </div>
+                 <div className="flex flex-col gap-3 pt-4 border-t border-custom-light-gray">
+                    {!isSignedIn ? (
+                      <button
+                        onClick={() => handleNavigation('/signup')}
+                        className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
+                      >
+                        Sign Up
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => handleNavigation('/search')}
+                          className="btn-outline w-full"
+                        >
+                          Browse Products
+                        </button>
+                        <button
+                          onClick={() => signOut(() => navigate('/'))}
+                          className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full"
+                        >
+                          Sign Out
+                        </button>
+                      </>
+                    )}
+                 </div>
           </div>
         </div>
       </div>

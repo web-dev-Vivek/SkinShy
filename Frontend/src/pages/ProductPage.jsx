@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
+import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import { getProductByName } from '../services/productsJSON';
 import { getSafetyScoreByProductId } from '../services/safety';
 
@@ -58,20 +59,25 @@ export default function ProductPage() {
 
    if (loading) {
      return (
-       <div className="min-h-screen bg-custom-white mt-20">
+       <>
+         <OnboardingWarningBanner />
+         <div className="min-h-screen bg-custom-white mt-20">
          <div className="flex justify-center items-center py-12 min-h-[70vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-            <p className="text-custom-dark-gray">Loading product...</p>
+           <p className="text-custom-dark-gray">Loading product...</p>
           </div>
-        </div>
-      </div>
-    );
-  }
+         </div>
+       </div>
+       </>
+     );
+   }
 
-   if (error) {
-     return (
-       <div className="min-h-screen bg-custom-white">
+    if (error) {
+      return (
+        <>
+          <OnboardingWarningBanner />
+          <div className="min-h-screen bg-custom-white">
          <div className="sticky z-10">
           <div className="max-w-7xl mx-auto px-4 py-4">
             <button
@@ -105,25 +111,29 @@ export default function ProductPage() {
               >
                 Back to Search
               </button>
+             </div>
             </div>
-          </div>
+         </div>
         </div>
-      </div>
-    );
-  }
+        </>
+      );
+    }
 
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-custom-white flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 text-lg">Product not found</p>
-          <button onClick={() => navigate('/search')} className="mt-4 text-custom-charcoal hover:text-custom-black">
-            Back to Search
-          </button>
-        </div>
-      </div>
-    );
-  }
+   if (!product) {
+     return (
+       <>
+         <OnboardingWarningBanner />
+         <div className="min-h-screen bg-custom-white flex items-center justify-center">
+           <div className="text-center">
+             <p className="text-red-600 text-lg">Product not found</p>
+             <button onClick={() => navigate('/search')} className="mt-4 text-custom-charcoal hover:text-custom-black">
+               Back to Search
+             </button>
+           </div>
+         </div>
+       </>
+     );
+   }
 
   // Parse ingredients string into array
   const ingredientsList = product.ingredients
@@ -131,7 +141,9 @@ export default function ProductPage() {
     : [];
 
    return (
-     <div className="min-h-screen bg-custom-white mt-20">
+     <>
+       <OnboardingWarningBanner />
+       <div className="min-h-screen bg-custom-white mt-20">
        {/* Header */}
        <div className="bg-custom-off-white border-b border-custom-light-gray/20 sticky z-10">
         <div className="max-w-7xl mx-auto px-4 py-4">
@@ -343,6 +355,7 @@ export default function ProductPage() {
           background-color: rgba(0, 0, 0, 0.3);
         }
       `}</style>
-    </div>
-  );
-}
+     </div>
+     </>
+   );
+ }
