@@ -95,7 +95,7 @@ function Navbar() {
 
         {/* Mobile Menu */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
-          <div className="bg-custom-white flex flex-col gap-3 py-4 border-t border-custom-light-gray -mx-4 px-4">
+          <div className="bg-custom-white flex flex-col gap-3 py-4 border-t border-custom-light-gray">
             <button
               onClick={() => scrollToSection('features')}
               className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
@@ -130,9 +130,9 @@ function Navbar() {
                         >
                           Browse Products
                         </button>
-                        <div className="border-t border-custom-light-gray pt-2 -mx-4 px-4">
-                          <ProfileDropdown isMobile={true} />
-                        </div>
+                         <div className="border-t border-custom-light-gray pt-2">
+                           <ProfileDropdown isMobile={true} />
+                         </div>
                       </>
                     )}
                  </div>

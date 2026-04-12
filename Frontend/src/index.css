@@ -15,7 +15,7 @@
   }
 
   body {
-    @apply bg-custom-white text-custom-charcoal leading-relaxed;
+    @apply bg-custom-white text-custom-charcoal leading-relaxed overflow-x-hidden;
     font-family: 'Lato', system-ui, sans-serif;
   }
 

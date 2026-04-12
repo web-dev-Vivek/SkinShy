@@ -159,7 +159,7 @@ function ProfileDropdown({ isMobile = false }) {
       {/* Dropdown Menu */}
       {isOpen && (
         <div 
-          className={`absolute right-0 mt-2 bg-custom-white rounded-xl shadow-xl border border-custom-light-gray z-50 overflow-hidden ${
+          className={`absolute right-0 mt-2 bg-custom-white rounded-xl shadow-xl border border-custom-light-gray z-50 overflow-hidden overflow-x-hidden ${
             isMobile 
               ? 'w-full max-w-xs sm:w-80 sm:max-w-sm' 
               : 'w-full max-w-xs sm:w-80 md:w-96'
