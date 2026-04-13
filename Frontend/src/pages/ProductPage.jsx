@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
-import { getProductByName } from '../services/productsJSON';
-import { getSafetyScoreByProductId } from '../services/safety';
+import SafetyBar from '../components/SafetyBar';
+import { getProductById } from '../services/products';
 
 export default function ProductPage() {
-  const { productName } = useParams();
+  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const { isSignedIn, isLoaded } = useAuth();
   const [product, setProduct] = useState(null);
@@ -17,14 +18,14 @@ export default function ProductPage() {
   useEffect(() => {
     loadProductData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productName, isLoaded, isSignedIn]);
+  }, [id, isLoaded, isSignedIn]);
 
   const loadProductData = async () => {
     setLoading(true);
     setError(null);
     try {
-      // Load product from JSON
-      const productData = await getProductByName(productName);
+      // Load product from backend API (which includes safety score for authenticated users)
+      const productData = await getProductById(id);
       
       if (!productData) {
         setError('Product not found');
@@ -35,23 +36,22 @@ export default function ProductPage() {
       
       setProduct(productData);
       
-      // Try to load safety score if user is signed in and Clerk is loaded
-      if (isSignedIn && isLoaded) {
-        try {
-          // Note: Safety score API may not work with JSON-based products
-          // You can remove this if not needed
-          const scoreData = await getSafetyScoreByProductId(productData.product_name);
-          setSafetyScore(scoreData.safetyScore);
-        } catch (err) {
-          console.warn('Failed to load safety score (non-blocking):', err);
-          setSafetyScore(null);
-        }
+      // Safety score is included in the response if user is authenticated
+      if (productData.safetyScore) {
+        setSafetyScore(productData.safetyScore);
       } else {
         setSafetyScore(null);
       }
     } catch (err) {
       console.error('Failed to load product:', err);
-      setError(err.message || 'Failed to load product. Please try again.');
+      // Extract error message from axios error or use default
+      let errorMessage = 'Failed to load product. Please try again.';
+      if (err.response?.data?.error) {
+        errorMessage = err.response.data.error;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -135,10 +135,14 @@ export default function ProductPage() {
      );
    }
 
-  // Parse ingredients string into array
-  const ingredientsList = product.ingredients
-    ? product.ingredients.split(',').map(ing => ing.trim())
-    : [];
+   // Parse ingredients string or array into array
+   const ingredientsList = product.ingredients
+     ? Array.isArray(product.ingredients)
+       ? product.ingredients.map(ing => 
+           typeof ing === 'string' ? ing : ing.name || JSON.stringify(ing)
+         )
+       : product.ingredients.split(',').map(ing => ing.trim())
+     : [];
 
    return (
      <>
@@ -161,18 +165,18 @@ export default function ProductPage() {
           
           {/* LEFT COLUMN: Product Image & Info */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Product Image */}
-            <div className="aspect-square bg-custom-light-gray/10 border-2 border-dashed border-custom-light-gray/30 rounded-2xl flex items-center justify-center overflow-hidden">
-              {product.product_url ? (
-                <img
-                  src={product.product_url}
-                  alt={product.product_name}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-              ) : (
+             {/* Product Image */}
+             <div className="aspect-square bg-custom-light-gray/10 border-2 border-dashed border-custom-light-gray/30 rounded-2xl flex items-center justify-center overflow-hidden">
+               {product.productUrl ? (
+                 <img
+                   src={product.productUrl}
+                   alt={product.productName}
+                   className="w-full h-full object-cover"
+                   onError={(e) => {
+                     e.target.style.display = 'none';
+                   }}
+                 />
+               ) : (
                 <div className="text-center text-custom-dark-gray">
                   <svg className="w-16 h-16 mx-auto opacity-30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -182,28 +186,28 @@ export default function ProductPage() {
               )}
             </div>
 
-            {/* Product Name & Price */}
-            <div className="border-t pt-6 space-y-3">
-              <h1 className="text-2xl lg:text-3xl font-bold text-custom-charcoal font-playfair break-words">{product.product_name}</h1>
-              
-              {product.product_type && (
-                <p className="text-custom-dark-gray text-sm lg:text-base">{product.product_type}</p>
-              )}
+             {/* Product Name & Price */}
+             <div className="border-t pt-6 space-y-3">
+               <h1 className="text-2xl lg:text-3xl font-bold text-custom-charcoal font-playfair break-words">{product.productName}</h1>
+               
+               {product.productType && (
+                 <p className="text-custom-dark-gray text-sm lg:text-base">{product.productType}</p>
+               )}
 
-              {product.price && (
-                <p className="text-2xl lg:text-3xl font-bold text-custom-charcoal">{product.price}</p>
-              )}
+               {product.price && (
+                 <p className="text-2xl lg:text-3xl font-bold text-custom-charcoal">{product.price}</p>
+               )}
 
-              {product.product_url && (
-                <a
-                  href={product.product_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-custom-charcoal hover:bg-custom-black text-custom-white font-semibold py-2 px-4 rounded-lg transition w-full text-center mt-4"
-                >
-                  View on Store →
-                </a>
-              )}
+               {product.productUrl && (
+                 <a
+                   href={product.productUrl}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="inline-block bg-custom-charcoal hover:bg-custom-black text-custom-white font-semibold py-2 px-4 rounded-lg transition w-full text-center mt-4"
+                 >
+                   View on Store →
+                 </a>
+               )}
             </div>
           </div>
 
@@ -234,75 +238,6 @@ export default function ProductPage() {
               </div>
             )}
             
-            {/* Safety & Risk Percentage */}
-            {safetyScore && (
-              <div className="bg-custom-off-white border border-custom-light-gray/20 rounded-2xl p-6 lg:p-8">
-                <h2 className="text-lg lg:text-xl font-bold text-custom-charcoal mb-6">Safety Overview</h2>
-                
-                {/* Safety Score Circle */}
-                <div className="flex flex-col items-center mb-8 pb-8 border-b border-custom-light-gray/20">
-                  <div className="w-28 h-28 rounded-full border-4 border-custom-charcoal flex items-center justify-center bg-custom-light-gray/5">
-                    <div className="text-center">
-                      <span className="text-4xl lg:text-5xl font-bold text-custom-charcoal">{safetyScore.score}</span>
-                      <p className="text-xs text-custom-dark-gray mt-1">/ 100</p>
-                    </div>
-                  </div>
-                  <p className="text-center text-lg font-semibold text-custom-charcoal mt-4">
-                    {safetyScore.recommendation}
-                  </p>
-                </div>
-
-                {/* Safe vs Risk Percentage */}
-                <div className="space-y-4">
-                  <p className="text-sm font-semibold text-custom-dark-gray">Breakdown</p>
-                  <div className="space-y-3">
-                    {/* Safe Percentage */}
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium text-custom-charcoal">Safe</span>
-                        <span className="text-sm font-bold text-green-600">{safetyScore.score}%</span>
-                      </div>
-                      <div className="w-full bg-custom-light-gray/20 rounded-full h-3 overflow-hidden">
-                        <div
-                          className="bg-green-500 h-full rounded-full transition-all duration-500"
-                          style={{ width: `${safetyScore.score}%` }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* Risk Percentage */}
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium text-custom-charcoal">Risk</span>
-                        <span className="text-sm font-bold text-red-600">{100 - safetyScore.score}%</span>
-                      </div>
-                      <div className="w-full bg-custom-light-gray/20 rounded-full h-3 overflow-hidden">
-                        <div
-                          className="bg-red-500 h-full rounded-full transition-all duration-500"
-                          style={{ width: `${100 - safetyScore.score}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Warnings */}
-                {safetyScore.warnings && safetyScore.warnings.length > 0 && (
-                  <div className="mt-6 pt-6 border-t border-custom-light-gray/20">
-                    <p className="text-sm font-semibold text-custom-charcoal mb-3">⚠️ Warnings</p>
-                    <ul className="space-y-2">
-                      {safetyScore.warnings.map((warning, idx) => (
-                        <li key={idx} className="text-sm text-custom-dark-gray flex gap-2">
-                          <span className="flex-shrink-0 text-yellow-600">•</span>
-                          <span>{warning}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Ingredients Section */}
             {ingredientsList.length > 0 && (
               <div className="bg-custom-off-white border border-custom-light-gray/20 rounded-2xl p-6 lg:p-8">
@@ -334,6 +269,11 @@ export default function ProductPage() {
                   ))}
                 </div>
               </div>
+            )}
+
+            {/* Safety & Risk Percentage - Below Ingredients */}
+            {safetyScore && (
+              <SafetyBar safetyScore={safetyScore} />
             )}
           </div>
         </div>

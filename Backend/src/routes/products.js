@@ -1,5 +1,9 @@
 const express = require('express');
 const Product = require('../models/Product');
+const User = require('../models/User');
+const { calculateSafetyScore } = require('../utils/safetyCalculator');
+const { authenticate } = require('../middleware/auth');
+const { verifyToken } = require('@clerk/backend');
 
 const router = express.Router();
 
@@ -33,7 +37,7 @@ router.get('/', asyncHandler(async (req, res) => {
   const products = await Product.find(query)
     .skip(skip)
     .limit(limitNum)
-    .select('productName productType price');
+    .select('_id productName productType price');
 
   const total = await Product.countDocuments(query);
 
@@ -63,7 +67,7 @@ router.get('/search', asyncHandler(async (req, res) => {
   )
     .sort({ score: { $meta: 'textScore' } })
     .limit(parseInt(limit))
-    .select('productName productType price');
+    .select('_id productName productType price');
 
   res.json({
     success: true,
@@ -72,17 +76,52 @@ router.get('/search', asyncHandler(async (req, res) => {
   });
 }));
 
-// GET PRODUCT BY ID
+// GET PRODUCT BY ID (with optional safety score for authenticated users)
 router.get('/:id', asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  let product;
+  
+  try {
+    product = await Product.findById(req.params.id);
+  } catch (err) {
+    return res.status(404).json({ error: 'Product not found' });
+  }
 
   if (!product) {
     return res.status(404).json({ error: 'Product not found' });
   }
 
+  // Try to calculate safety score if user is authenticated
+  let safetyScore = null;
+  
+  if (req.headers.authorization) {
+    try {
+      // Extract token from Authorization header
+      const authHeader = req.headers.authorization;
+      if (authHeader.startsWith('Bearer ')) {
+        const token = authHeader.slice(7); // Remove "Bearer " prefix
+        
+        // Verify token with Clerk
+        const decoded = await verifyToken(token, {
+          secretKey: process.env.CLERK_SECRET_KEY
+        });
+        
+        const userId = decoded.sub; // Clerk user ID
+        const user = await User.findOne({ clerkId: userId });
+        
+        if (user && user.profile && user.profile.onboardingCompleted) {
+          safetyScore = calculateSafetyScore(product, user.profile);
+        }
+      }
+    } catch (err) {
+      // Silently fail - safety score is optional
+      console.warn('Failed to calculate safety score:', err.message);
+    }
+  }
+
   res.json({
     success: true,
-    data: product
+    data: product,
+    ...(safetyScore && { safetyScore })
   });
 }));
 

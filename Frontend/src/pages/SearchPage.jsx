@@ -41,9 +41,9 @@ export default function SearchPage() {
     }
   }, [searchQuery, products]);
 
-  const handleProductClick = (productName) => {
-    navigate(`/search/${encodeURIComponent(productName)}`);
-  };
+   const handleProductClick = (productId, productName) => {
+     navigate(`/search/${productId}`, { state: { productName } });
+   };
 
   return (
     <>
@@ -98,12 +98,12 @@ export default function SearchPage() {
         {/* Products Grid */}
         {!loading && filteredProducts.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map(product => (
-              <div
-                key={product._id}
-                onClick={() => handleProductClick(product.productName)}
-                className="border border-custom-light-gray/20 rounded-lg p-4 hover:shadow-lg hover:border-custom-charcoal/30 transition cursor-pointer hover:scale-105 transform"
-              >
+             {filteredProducts.map(product => (
+               <div
+                 key={product._id}
+                 onClick={() => handleProductClick(product._id, product.productName)}
+                 className="border border-custom-light-gray/20 rounded-lg p-4 hover:shadow-lg hover:border-custom-charcoal/30 transition cursor-pointer hover:scale-105 transform"
+               >
                 <h3 className="font-semibold text-custom-charcoal mb-2 line-clamp-2 hover:text-custom-black">
                   {product.productName}
                 </h3>

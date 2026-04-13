@@ -52,7 +52,7 @@ function AppRoutes() {
           }
         />
         <Route
-          path="/search/:productName"
+          path="/search/:id"
           element={
             <ProtectedRoute>
               <ProductPage />
