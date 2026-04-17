@@ -38,24 +38,22 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection('features')}
-              className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => scrollToSection('showcase')}
-              className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
-            >
-              Showcase
-            </button>
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
-            >
-              About
-            </button>
+            {isSignedIn && (
+              <>
+                <button
+                  onClick={() => handleNavigation('/search')}
+                  className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
+                >
+                  Browse
+                </button>
+                <button
+                  onClick={() => handleNavigation('/ingredient-glossary')}
+                  className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
+                >
+                  Compare
+                </button>
+              </>
+            )}
           </div>
 
             {/* Right Side Buttons - Desktop */}
@@ -70,15 +68,7 @@ function Navbar() {
                   </button>
                 </>
               ) : (
-                <>
-                  <button
-                    onClick={() => handleNavigation('/search')}
-                    className="px-3 sm:px-4 py-2 border-2 border-custom-charcoal text-custom-charcoal rounded-lg hover:bg-custom-charcoal hover:text-custom-white transition font-medium text-sm"
-                  >
-                    Browse
-                  </button>
-                  <ProfileDropdown />
-                </>
+                <ProfileDropdown />
               )}
             </div>
 
@@ -96,46 +86,38 @@ function Navbar() {
         {/* Mobile Menu */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
           <div className="bg-custom-white flex flex-col gap-3 py-4 border-t border-custom-light-gray">
-            <button
-              onClick={() => scrollToSection('features')}
-              className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => scrollToSection('showcase')}
-              className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
-            >
-              Showcase
-            </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
-              >
-                About
-              </button>
-                 <div className="flex flex-col gap-2 pt-3 border-t border-custom-light-gray">
-                    {!isSignedIn ? (
-                      <button
-                        onClick={() => handleNavigation('/signup')}
-                        className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full text-sm"
-                      >
-                        Sign Up
-                      </button>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => handleNavigation('/search')}
-                          className="px-4 py-2 border-2 border-custom-charcoal text-custom-charcoal rounded-lg hover:bg-custom-charcoal hover:text-custom-white transition font-medium w-full text-sm"
-                        >
-                          Browse Products
-                        </button>
-                         <div className="border-t border-custom-light-gray pt-2">
-                           <ProfileDropdown isMobile={true} />
-                         </div>
-                      </>
-                    )}
-                 </div>
+            {isSignedIn && (
+              <>
+                <button
+                  onClick={() => handleNavigation('/search')}
+                  className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
+                >
+                  Browse
+                </button>
+                <button
+                  onClick={() => handleNavigation('/ingredient-glossary')}
+                  className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
+                >
+                  Compare
+                </button>
+              </>
+            )}
+            <div className="flex flex-col gap-2 pt-3 border-t border-custom-light-gray">
+              {!isSignedIn ? (
+                <button
+                  onClick={() => handleNavigation('/signup')}
+                  className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full text-sm"
+                >
+                  Sign Up
+                </button>
+              ) : (
+                <>
+                  <div className="border-t border-custom-light-gray pt-2">
+                    <ProfileDropdown isMobile={true} />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

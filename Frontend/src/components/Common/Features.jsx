@@ -6,44 +6,44 @@ function Features() {
   const features = [
     {
       id: 1,
-      icon: '🔍',
-      title: 'Intelligent Search',
-      description: 'Advanced algorithm finds products perfectly matched to your skin profile and concerns.',
-      highlight: 'AI-Powered'
+      icon: '🔐',
+      title: 'Safety Score',
+      description: 'Get personalized safety ratings for every product based on your skin type, allergies, and sensitivities.',
+      highlight: 'Core Feature'
     },
     {
       id: 2,
-      icon: '⭐',
-      title: 'Smart Recommendations',
-      description: 'Personalized suggestions based on your skin type, climate, and lifestyle preferences.',
-      highlight: 'Personal'
+      icon: '🔍',
+      title: 'Browse & Search',
+      description: 'Easily search and browse through 700+ skincare products with detailed information and ratings.',
+      highlight: 'Curated'
     },
     {
       id: 3,
-      icon: '🛡️',
-      title: 'Ingredient Analysis',
-      description: 'Deep dive into every ingredient with allergen warnings and effectiveness ratings.',
-      highlight: 'Detailed'
+      icon: '📚',
+      title: 'Ingredient Glossary',
+      description: 'Learn about every ingredient with benefits, warnings, reactivity scores, and skin type compatibility.',
+      highlight: 'Educational'
     },
     {
       id: 4,
-      icon: '📊',
-      title: 'Progress Tracking',
-      description: 'Visual journey of your skin transformation with before-after comparisons.',
-      highlight: 'Visual'
+      icon: '🎯',
+      title: 'Smart Matching',
+      description: 'Products matched to your unique skin profile with personalized compatibility analysis.',
+      highlight: 'Personalized'
     },
     {
       id: 5,
-      icon: '💬',
-      title: 'Community Insights',
-      description: 'Real reviews from users with similar skin types and concerns as you.',
-      highlight: 'Trusted'
+      icon: '⚠️',
+      title: 'Allergen Protection',
+      description: 'Comprehensive allergen detection and warnings to keep your skin safe from triggers.',
+      highlight: 'Safe'
     },
     {
       id: 6,
-      icon: '🎯',
-      title: 'Budget Friendly',
-      description: 'Find luxury products at every price point without compromising quality.',
+      icon: '💡',
+      title: 'Detailed Insights',
+      description: 'In-depth analysis of product formulations, ingredient interactions, and effectiveness for you.',
       highlight: 'Smart'
     }
   ];
@@ -70,7 +70,7 @@ function Features() {
           </h2>
           
           <p className="text-lg md:text-xl text-custom-dark-gray leading-relaxed">
-            Discover the features that make skincare shopping a personalized, intelligent experience unlike anything else.
+            Discover the powerful features that make skincare selection personalized, safe, and informed.
           </p>
         </div>
 
