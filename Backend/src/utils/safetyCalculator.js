@@ -3,6 +3,8 @@
  * Calculates product safety based on user profile and ingredient data
  */
 
+const topIngredientCategories = require('./topIngredientCategories.json');
+
 const calculateSafetyScore = (product, userProfile) => {
   let penalties = 0;
   let bonuses = 0;
@@ -97,18 +99,42 @@ const calculateSafetyScore = (product, userProfile) => {
     }
   });
 
-  // STAGE 3: Skin Type Compatibility
+  // STAGE 3: Skin Type Compatibility (Only penalize harmful ingredients in positions 1-2)
   if (userProfile.skinType && userProfile.skinType !== 'normal') {
     product.ingredients.forEach(ingredient => {
       if (ingredient.categoryType === 'B') {
+        // Skip water - it's universal and not harmful
+        if (ingredient.name.includes('Water') || ingredient.name.includes('Aqua') || ingredient.name.includes('Eau')) {
+          return;
+        }
+
+        // For positions 1-2: Only penalize if ingredient is in HARMFUL category
+        if (ingredient.position <= 2) {
+          const ingredientCategory = topIngredientCategories.find(
+            ing => ing.name.toLowerCase() === ingredient.name.toLowerCase()
+          );
+          
+          if (ingredientCategory && ingredientCategory.category === 'HARMFUL') {
+            const penalty = 10; // Penalize harmful ingredients in top 2
+            penalties += penalty;
+            breakdown.skinTypeMismatch.push({
+              ingredient: ingredient.name,
+              class: ingredient.ingredientClass,
+              position: ingredient.position,
+              penalty,
+              reason: 'Harmful ingredient in top position'
+            });
+          }
+          return; // Skip further checks for positions 1-2
+        }
+
+        // For positions 3+: Apply standard skin type compatibility check
         const unsuitable = !ingredientsSuitableFor[userProfile.skinType].includes(ingredient.ingredientClass) &&
                           ingredientsSuitableFor[userProfile.skinType][0] !== 'all';
 
         if (unsuitable) {
           let penalty = 0;
-          if (ingredient.position <= 2) {
-            penalty = 12;
-          } else if (ingredient.position <= 5) {
+          if (ingredient.position <= 5) {
             penalty = 6;
           } else if (ingredient.position <= 15) {
             penalty = 2;

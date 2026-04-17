@@ -5,7 +5,7 @@ function About() {
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="section-spacing relative w-full bg-custom-white">
+    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c]">
       
       {/* Decorative Elements */}
       <div className="absolute inset-0 -z-10">
@@ -24,7 +24,7 @@ function About() {
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
                 <span className="text-xs md:text-sm font-medium text-custom-dark-gray tracking-widest uppercase">
-                  About Skinshy
+                  About Skinshy 
                 </span>
               </div>
               

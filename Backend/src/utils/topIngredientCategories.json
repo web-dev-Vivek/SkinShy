@@ -1,0 +1,5582 @@
+[
+  {
+    "name": "(Aqua) Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "1",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "100% Dead Sea Salt.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "100% Pure Squalane Oil.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "2-Hexanediol. Caprylic/Capric Glycerides. Caprylyl Glycol. Carbomer. Disodium Edta. Fragrance (Parfum). Phenyl Trimethicone. Ribes Rubrum (Currant) Fruit Extract (Ribes Rubrum Fruit Extract). Rubus Idaeus (Raspberry) Fruit Extract (Rubus Idaeus Fruit Extract). Sodium Benzoate. Tocopheryl Glucoside. Tropolone. Vaccinium Myrtillus Fruit Extract.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "preservative"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "2-Hexanediol. Dimethicone. Isocetyl Stearoyl Stearate. Triethylhexanoin. Caprylic/Capric Triglyceride. Betaine. Methyl Gluceth-20. Polyglyceryl-10 Myristate. Acrylates/C10-30 Alkyl Acrylate Crosspolymer. Bht. Bis-Peg-18 Methyl Ether Dimethyl Silane. C12-20 Alkyl Glucoside. C14-22 Alcohols. Carbomer. Citric Acid. Cucurbita Pepo (Pumpkin) Seed Oil (Cucurbita Pepo Seed Oil). Fragrance (Parfum). Phytosterols. Potassium Hydroxide. Sodium Citrate. Sodium Dextran Sulfate. Sodium Hyaluronate. Squalane. Tocopheryl Glucoside. Water (Aqua).",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "3-O-Ethyl Ascorbic Acid",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "ALUMINA",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "AQUA (WATER)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "AQUA / WATER",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "AQUA / WATER / EAU",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "AQUA/WATER",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "AQUA/WATER/EAU",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Activated Charcoal",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Activated Charcoal Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Alcohol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Alcohol Denat",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Alcohol Denat.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Alcohol Denat. (SD Alcohol 40-B)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Allantoin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "soothing"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Allium Cepa (Onion) Bulb Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aloe (Aloe Barbadensis)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Babedensis Lead Juice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aloe Barbadensis (Aloe Vera) Leaf Gel",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis (Aloe Vera) Leaf Juice",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf (Aloe Vera) Juice",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf Extract",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf Juice",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf Juice (Aloe Vera Juice)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf Juice Powder",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf Juice+",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Barbadensis Leaf Water",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe Vera Leaf Juice (Aloe Barbadensis Leaf Juice)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe barbadensis extract",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aloe barbadensis extract (Aloe Vera)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "botanical",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Ammonium Lactate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ammonium Lauryl Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Anthemis Nobilis (Chamomile) Flower Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Apis Mellifica (Honey) Extract",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "humectant"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Aqua",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Distilled Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Hungarian Thermal Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Mineral Spring Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Purified Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Water / Eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Water/ Eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (Water/Eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (purified water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (spring water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua (water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua / Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua / Water / Eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua / water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua(Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua(Water/Eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua. Paraffinum Liquidum. Stearic Acid. Glyceryl Stearate. Triethanolamine. Cera Alba. Cetyl Palmitate. Butyrospermum Parkii. Steareth-10. Polyacrylamide C13-14 Isoparaffin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua/ Water/ Eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua/Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua/Water (purified water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua/Water/Eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua/water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Aqua/water/eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Argan Shells",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ascorbic Acid",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Ascorbic Acid (Vitamin C 15%)",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Ascorbic Acid (Vitamin C)",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Ascorbyl Glucoside",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ascorbyl Glucoside (Vitamin C)",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua). Butyrospermum Parkii (Shea) Butter (Butyrospermum Parkii Butter). Glycerin. Octyldodecanol. Mineral Oil (Paraffinum Liquidum). Cetearyl Alcohol. Dimethicone. Isododecane. Methyl Gluceth-20. Pentylene Glycol. Water (Aqua). Silica. Cetyl Esters. Cetearyl Glucoside. Glyceryl Stearate. Peg-100 Stearate. Benzoic Acid. Caprylic/Capric Triglyceride. Ethylhexylglycerin. Fragrance (Parfum). Hydrogenated Starch Hydrolysate. Polyacrylate-13. Polyisobutene. Polysorbate 20. Ribes Rubrum (Currant) Fruit Extract (Ribes Rubrum Fruit Extract). Rubus Idaeus (Raspberry) Fruit Extract (Rubus Idaeus Fruit Extract). Sodium Benzoate. Sodium Hydroxide. Sorbitan Isostearate. Tocopherol. Tocopheryl Glucoside. Vaccinium Myrtillus Fruit Extract. Xanthan Gum.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua). Fragrance (Parfum). Peg-7 Glyceryl Cocoate. Phenoxyethanol. Sorbitol. Stearalkonium Hectorite. Trisodium Edta. Water (Aqua).",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "preservative"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua). Glycerin. Pentylene Glycol. 1",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua). Mineral Oil (Paraffinum Liquidum). Caprylic/Capric Triglyceride. Water (Aqua). Carthamus Tinctorius (Safflower) Seed Oil (Carthamus Tinctorius Seed Oil). Palmitic Acid. Stearic Acid. Hydrogenated Palm/Palm Kernel Oil Peg-6 Esters. Triethanolamine. Glyceryl Stearate. Microcrystalline Wax (Cera Microcristallina). Peg-100 Stearate. Propylene Glycol. 1",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua). Mineral Oil (Paraffinum Liquidum). Propylene Glycol. Peg-6 Stearate. Peg-32 Stearate. Butylparaben. Carbomer. Fragrance (Parfum). Phenoxyethanol. Propylene Glycol Stearate Se. Sodium Hyaluronate. Stearic Acid. Triethanolamine. Trisodium Edta.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Avene Thermal Spring Water (Avene Aqua). Water (Aqua). Sodium Lauroyl Methyl Isethionate. Zinc Coceth Sulfate. Polysorbate 20. Sodium Cocoamphoacetate. Ceteareth-60 Myristyl Glycol. Peg-40 Hydrogenated Castor Oil. Citric Acid. Disodium Edta. Fragrance (Parfum). Glyceryl Laurate. Green 5 (Ci 61570). Sodium Benzoate. Sodium Hydroxide. Yellow 5 (Ci 19140). Zinc Gluconate.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Azadirachta Indica (Neem) Leaf Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Beeswax",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Beeswax (Cera Alba)",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Beeswax (cera Alba)",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Bentonite",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Betaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Betula Alba (Birch) Juice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Bifdia Ferment Lysate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Bifida Ferment Lysate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Bis-Diglyceryl Polyacyladipate-2",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Bis-PEG-18 Methyl Ether Dimethyl Silane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Bis-Peg-18 Methyl Ether Dimethyl Silane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Bitter Orange(Citrus Auratium Amara) Flower Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Butane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Butyl Acetate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Butylene Glycol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Butyrospermum Parkii (Shea Butter)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Butyrospermum Parkii (Shea) Butter",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Butyrospermum Parkii Butter / Shea Butter",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "C12-13 Pareth -3",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "C12-13 Pareth-3",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "C12-15 Alkyl Benzoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "C13-15 Alkane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "C15-19 Alkane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "COCO-BETAINE",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "CORN STARCH MODIFIED",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caffeine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Camellia Kissi Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Camellia Oleifera Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Camellia Sinensis (Green Tea) Leaf Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cananga Odorata (Ylang Ylang) Flower Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cananga Odorata (ylang Ylang) Flower Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cannabis Sativa (Hemp) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cannabis Sativa Oil (Hemp Oil)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cannabis Sativa Seed Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Canola Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Capric/Carprylic Triglyceride",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caprylic/ Capric Triglyceride",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caprylic/Capric Triglyceride",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caprylic/Capric Triglycerides & Glycerine & Aqua & Sucrose Laurate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caprylic/CapricTriglyceride",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caprylic/capric Triglyceride",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Caprylyl Methicone",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Carica Papaya (Papaya) Fruit Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Carthamus Tinctorius (Safflower) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cellulose",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Centaurea Cyanus Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Centella Asiatica (Gotu Kola) Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cera Alba",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cera Alba (Beeswax",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Cera Alba (Beeswax)",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Cera Alba / Beeswax",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Cera Alba/Beeswax",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Ceramide NP",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "barrier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Certified Organic Rosehip Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cetearyl Alcohol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cetearyl Ethylhexanoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cetyl Alcohol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cetyl Esters",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cetyl Ethylhexanoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Charcoal Powder",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cire d'abeille)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citric Acid",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citronella",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrullus Lanatus (Watermelon) Fruit Extract",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrus Aurantium Amara (Bitter Orange) Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrus Aurantium Amara (Bitter Orange) Leaf/Twig Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrus Aurantium Amara (Bitter Orange) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrus Aurantium Dulcis (Orange) Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrus Aurantium Dulcis Fruit Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Citrus Limon (Lemon) Juice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocamidopropyl Belaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocamidopropyl Betaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocamidopropyl Hydroxysultaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocamidopropyl betaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coco-Caprylate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coco-Caprylate (Coconut Derived)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coco-Caprylate/Caprate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coco-Glucoside",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocoglycerides",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocomidopropyl Betaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coconut Alkanes",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos Nucifera (Coconut) Fruit Juice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos Nucifera (Coconut) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos Nucifera (Coconut) Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos Nucifera (Coconut) Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos Nucifera (coconut) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos Nucifera Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cocos nucifera (coconut) oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coffea Arabica (Coffee) Seed Powder",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Coffea Robusta Seed Powder (Coffee)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Colloidal Oatmeal",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "grain",
+    "classes": [
+      "soothing"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Coryllus Avellana Seed Oil/Hazelnut Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Corylus Avellana (Hazel) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Corylus Avellana Seed Oil / Hazelnut Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Corylus Avellana Seed Oil/Hazelnut Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Corylus avellana (Hazel) seed oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Crocus Sativus (Saffron) Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cucumis Sativus (Cucumber) Fruit Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cucurbita Pepo (Pumpkin)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Curcuma Longa (Turmeric) Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Curcuma Longa (Turmeric) Root Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cyclohexasiloxane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cyclomethicone",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Cyclopentasiloxane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "DIETHYLENE GLYCOL DIETHYLHEXANOATE",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dead Sea Salt (Maris Sal)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Decyl Glucoside",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dicaprylyl Carbonate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Diglycerin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dihydroxyacetone",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Diisostearyl Polyglyceryl-3 Dimer Dilinoleate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dimethicone",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "silicone"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dimethicone Crosspolymer",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "silicone"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dimethyl Ether",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dimethyl Sulfone (MSM)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dipropylene Glycol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Disiloxane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Disodium Cocoamphodiacetate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Disodium EDTA",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "chelating"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Disodium Laureth Sulfosuccinate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Disodium Lauryl Sulfosuccinate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Dodecane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Elettaria Cardamomum (Cardamom) Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Erythritol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethanol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethyl Acetate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethyl Oleate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethylene/Acrylic Acid Copolymer",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethylhexyl Hydroxystearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethylhexyl Methoxycinnamate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethylhexyl Palmitate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethylhexyl Salicylate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ethylhexyl palmitate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Eucalyptus Globulus (Eucalyptus) Leaf Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Extracts of Lime",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Flavour",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Fragrance (Parfum)",
+    "avg_reactivity": 4,
+    "is_allergen": true,
+    "allergen_group": "fragrance",
+    "classes": [
+      "fragrance"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Frankincense Essential Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Fuller's Earth (Multani Mitti)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "GLYCERIN",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Galactoarabinan",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Galactomyces Ferment Filtrate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Geraniol",
+    "avg_reactivity": 4,
+    "is_allergen": true,
+    "allergen_group": "fragrance",
+    "classes": [
+      "fragrance"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Geranium",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Gluconolactone",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glucose",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycereth-7",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycerin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycerin (From Coconut)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycerin (Source Coconut Oil)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycerin (Vegetable)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycerin Hamamelis Virginiana (Witch Hazel)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycerine",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glyceryl Stearate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glyceryl Stearate Citrate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glyceryl Stearate SE",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycine Soja (Soya) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycine Soja (Soybean) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Glycolic Acid",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "exfoliant"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Grapefruit Essential Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "HEXYLANE",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "HEXYLENE GLYCOL",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hamamelis Virginiana (Witch Hazel) Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hamamelis Virginiana Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Harmonised Water (Aqua and Maris Sal)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Heilmoor Clay",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthus Annuus (Sunflower) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthus Annuus (Sunfower) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthus Annuus (sunflower) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthus Annuus Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthus Annuus Seed Oil / Sunflower Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthus Annuus(Sunflower) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Helianthusannuus (Sunflower) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Heptyl Undecylenate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hexylene Glycol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Himalayan Salt Crystals (Sodium Chloride)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Himalayan Salts",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Homosalate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hordeum Vulgare Stem Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hydrogenated Jojoba Oil",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hydrogenated Polydecene",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Hydrogenated Polyisobutene",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Inulin",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isoamyl Cocoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isocetyl Stearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isocetyl Stearoyl Stearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isodecyl Neopentanoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isododecane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isononyl",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isononyl Isononanoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isopropyl Myristate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isopropyl Palmitate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Isostearyl Palmitate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Juglans Regia (Walnut) Shell Powder",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Kaolin",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Kaolin (White Clay)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lactic Acid",
+    "avg_reactivity": 3,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "exfoliant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "LacticAcid",
+    "avg_reactivity": 3,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "exfoliant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lactobacillus/Punica Granatum Fruit Ferment Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lactococcus Ferment Lysate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lanolin",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "wool_wax",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Lanolin Cera",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "wool_wax",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Lanolin Cera (Wax)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "wool_wax",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Laureth 3",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Laureth-3",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Laureth-4",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Laureth-7. Propylene Glycol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lauryl Glucoside",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lavandula Angustifolia (Lavender) Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lavandula Angustifolia (Lavender) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Lavender Oil (Lavandula Augustifolia)",
+    "avg_reactivity": 5,
+    "is_allergen": true,
+    "allergen_group": "botanical_oil",
+    "classes": [
+      "essential_oil"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Leptospermum scoparium (Mel) Manuka Honey",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "humectant"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Limonene",
+    "avg_reactivity": 4,
+    "is_allergen": true,
+    "allergen_group": "fragrance",
+    "classes": [
+      "fragrance"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Lycium Barbarum Fruit Extract (Goji)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "MIPA-Laureth Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Macadamia Integrifolia Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Macadamia ternifolia seed oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Magnesium Chloride",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Magnesium Sulfate (Epsom Salt)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Magnesium Sulphate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Magnesium Sulphate.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Malic Acid",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maltitol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maltodextrin",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Malus Domestica (Apple) Cider Vinegar",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Malus Domestica (Apple) Fruit Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Marine Collagen",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maris Aqua (Dead Sea Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maris Aqua (Sea Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maris Sal (Dead Sea Salt)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maris Sal (Dead Sea Salt) Valeriana Officinalis (Valerian) Root Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maris Sal (Dead Sea Salt).",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Maris Sal/Sea Salt/Sel Marin",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Mel",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Mel (Honey)",
+    "avg_reactivity": 1,
+    "is_allergen": true,
+    "allergen_group": "bee_product",
+    "classes": [
+      "humectant"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Methyl Gluceth-10",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Methyl Gluceth-20",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Methylpropanediol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Metlclylpropanediol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Mineral Oil (Paraffin Liquidum)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Mineral Oil (Paraffinum Liquidum)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Mineral Oil\\Paraffinum Liquidum\\Huile Minerale",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Mineral Oil\\Paraffinum Liquidum\\Huile Minérale",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Montmorillonite",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Moringa Oleifera (Moringa) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Moringa Oleifera Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Myristic Acid",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Myrtus Communis (Myrtle) Leaf Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Nelumbo Nucifera Root Water (Lotus Water)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Neopentyl Glycol Diheptanoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Neroli",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Niacinamide",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Octocrylene",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Octyldodecanol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Octyldodecyl Neopentanoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Octyldodecyl Stearoyl Stearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Oenothera Biennis (Evening Primrose) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Olea Europaea (Olive) Fruit Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Olea Europaea (Olive) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Olea Europaea Fruit Oil / Olive Fruit Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Olea europaea (olive) fruit oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Oleic/Linoleic/Linolenic Polyglycerides",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Olive Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Olus Oil/Vegetable Oil/Huile Végétale",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Oregano",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Oryza Sativa (Rice) Bran Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Oryza Sativa (Rice) Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Oryza Sativa (Rice) Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "PEG-12 Methyl Glucose Dioleate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "PEG-20 Glyceryl Triisostearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "PEG-40 Sorbitan Peroleate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "PEG-7 Glyceryl Cocoate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "PEG-8",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "PEG/PPG/Polybutylene Glycol-8/5/3 Glycerin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Palmitoyl Pentapeptide-4",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pantethine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Panthenol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "soothing"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Paraffin",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Paraffinum Liquidum (Mineral Oil)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Paraffinum Liquidum / Mineral Oil",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Parfum",
+    "avg_reactivity": 4,
+    "is_allergen": true,
+    "allergen_group": "fragrance",
+    "classes": [
+      "fragrance"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Parfum (Fragrance)",
+    "avg_reactivity": 4,
+    "is_allergen": true,
+    "allergen_group": "fragrance",
+    "classes": [
+      "fragrance"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Peg-30 Lanolin",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "wool_wax",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Peg-32",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Peg-40 Hydrogenated Castor Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Peg-7 Caprylic/Capric Glycerides",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Peg-8",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Peg/Ppg/Polybutylene Glycol-8/5/3 Glycerin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pelargonium Graveolens (Geranium) Flower Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pelargonium Graveolens Leaf (Geranium) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pentylene Glycol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Perfluorohexane",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Persea Gratissima (Avocado Oil)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Persea Gratissima (Avocado) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Petrolatum",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Petrolatum (56.8%)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "occlusive"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Phenoxyethyl Caprylate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pinus Pinaster Bark Extract.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polybutene",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polyglyceryl-10 Laurate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polyglyceryl-4 Caprate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polyglyceryl-4 Oleate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polyglyceryl-6 Distearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polysorbate 20",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polysorbate 60",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polysorbate 85",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emulsifier"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Polyvinyl Alcohol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Potassium Myristate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Premna Mucronata",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Preservatives: Butylene Glycol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Propanediol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Propolis Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Propylene Glycol",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunis Amygdalus Dulcis (Sweet Almond) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Amygdalus Dulcis (Sweet Almond Oil)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "tree_nut",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Prunus Amygdalus Dulcis (Sweet Almond) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Amygdalus Dulcis (sweet Almond) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Amygdalus Dulcis Oil (Sweet Almond Oil)",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "tree_nut",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Prunus Amygdalus Dulcis Oil / Sweet Almond Oil",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "tree_nut",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Prunus Armeniaca (Apricot) Kernel Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Armeniaca Kernel Oil / Apricot Kernel Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Domestica Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Dulcis (Almond) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus Persica (Peach) Kernel Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Prunus amygdalus dulcis (Sweet almond) oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pumice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Pure Medical Grade Lanolin.",
+    "avg_reactivity": 2,
+    "is_allergen": true,
+    "allergen_group": "wool_wax",
+    "classes": [
+      "emollient"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Purified Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Purified Water (Aqua)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "ROSA DAMASCENA FLOWER WATER",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Retinol",
+    "avg_reactivity": 5,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "active"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Rhamnose",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ricinus Communis (Castor) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ricinus Communis (Castor) Seed Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Ricinus Communis (castor) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina (Rose Hip) Seed Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina (Rosehip) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina (Rosehip) Seed Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina Fruit Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina Fruit Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina Fruit Oil (Rosehip)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina Seed (Rosehip) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Canina Seed Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Centifolia Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena (Rosa) Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena (Rose) Flower Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena (Rose) Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena (Rose) Flower Water.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena (Rose) Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena Flower",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena Flower Water (Rose)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena Flower Water.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Damascena FlowerWater",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Eglantaria (Rosehip) Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosa Rubiginosa Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rose Essential Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosehip Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosemarinus Officinalis (Rosemary) Leaf Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosmarinus Officinalis (Rosemary) Leaf Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rosmarinus Officinalis (Rosemary) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rubus Chamaemorus (Cloudberry) Fruit Juice Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Rubus Idaeus (Raspberry) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "SD Alcohol 40-A (Alcohol Denat.)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Salicylic Acid",
+    "avg_reactivity": 4,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "exfoliant"
+    ],
+    "category": "HARMFUL"
+  },
+  {
+    "name": "Salix Alba (White Willow) Bark Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Salix Nigra (Willow) Bark Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Salvia Hispanica Seed Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sapindus Mukurossi Fruit Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Saponified Cocos Nucifera (Coconut) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Saponified Elaeis Guineensis (Palm) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sclerocarya Birrea Seed Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sesamum Indicum (Sesame) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sesamum Indicum (sesame) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sesamumindicum (Sesame) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Shea Butter Ethyl Esters",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sicilian Sea Salt.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Silica",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "absorbent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Silt (Dead Sea Mud)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Simmondsia Chinensis (Jojoba) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Simmondsia Chinensis (Jojoba) Seed Oil.",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Simmondsia Chinensis Seed Oil/Jojoba Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Simmondsia chinensis (Jojoba) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Snail Secretion Filtrate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Bicarbonate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium C14-16 Olefin Sulfonate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride (Himalayan Crystal) Salt",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride (Himalayan Pink Salt)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride (Himalayan Salt)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride (Salt)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride (Sea Salt)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Chloride.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Coceth Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Coco-Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Cocoamphoacetate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Cocoyl Hydrolyzed Soy Protein",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Cocoyl Isethionate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Hyaluronate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lactate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Laureth Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lauroamphoacetate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lauroyl Lactylate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lauroyl Methyl Isethionate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lauroyl Sarcosinate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lauryl Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Lauryl Sulfoacetate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Magnesium Silicate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "absorbent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Methyl Cocoyl Taurate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Myristoryl Glutamate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Palm Kernelate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Palmate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Polyacrylate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Silicate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "absorbent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Sulphate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sodium Trideceth Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Squalane",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Squalane (Olive) Extract",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Squalane.",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Stearic Acid",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sucrose",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Sucrose (Sugar)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Superoxide Dismutase",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Synthetic Wax",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "TIPA-Laureth Sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Theobroma Cacao Seed Butter",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Titanium Dioxide",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Titanium Dioxide (CI 77891)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Tocopheryl Acetate",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "antioxidant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Tomato Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Tridecyl Stearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Tridecyl Trimellitate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Triethanolamine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "buffers"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Triethylhexanoin",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Triticum Vulgare (Wheat Germ) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Triticum Vulgare (Wheat) Germ Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vetiveria Zizanoides (Vetivert) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitamin-C",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitis Vinifera (Grape) Fruit Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitis Vinifera (Grape) Juice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitis Vinifera (Grape) Seed Extract",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitis Vinifera (Grape) Seed Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitis Vinifera (grape) Fruit Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Vitis Vinifera (grape) Juice",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "WATER (AQUA)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Walnut Shell Powder",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water (Aqua)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water (Aqua/Eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water (aqua)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water (aqua/eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water / Aqua / Eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water(Aqua)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water(Aqua/Eau)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water/Aqua",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water/Aqua/Eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water\\Aqua\\Eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Water\\Aqua\\Eau; Lavandula Angustifolia (Lavender) Flower Water",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Zea Mays (Corn) Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Zea Mays (Corn) Starch",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Zea Mays Oil/Corn Oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Zeolite",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "Zinc Oxide",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "ci 77492",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "cocamidopropyl hydroxysultaine",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "decyl glucoside",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "glycerin",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "homosalate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "isocetyl stearate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "isopropyl palmitate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "olea europaea (olive) fruit oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "propanediol",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "humectant"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "prunus armeniaca kernel oil (apricot kernel oil)",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "simmondsia chinensis (jojoba) seed oil",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "sodium laureth sulfate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "sodium lauroyl sarcosinate",
+    "avg_reactivity": 2,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "unknown"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "water (aqua)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "water\\aqua\\eau",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "solvent"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "water\\aqua\\eau; methyl trimethicone; butylene glycol; peg-100 stearate; dimethicone; cetyl ricinoleate; silica; olea europaea (olive) fruit oil; glycerin; behenyl alcohol; cucumis sativus (cucumber) fruit extract; panax ginseng (ginseng) root extract; castanea sativa (chestnut) seed extract; camellia sinensis (green tea) leaf extract; cordyceps sinensis extract; magnolia officinalis bark extract; pyrus malus (apple) fruit extract; scutellaria baicalensis root extract; pantethine; panthenol; caprylic/capric triglyceride; butyrospermum parkii (shea butter); caffeine; coleus barbatus extract; yeast extract\\faex\\extrait de levure; folic acid; hydrogenated lecithin; jojoba wax peg-120 esters; biotin; tribehenin; myristyl alcohol; palmitoyl tetrapeptide-7; trehalose; sodium hyaluronate; ascorbyl tocopheryl maleate; hesperidin methyl chalcone; sodium sulfite; sodium metabisulfite; steareth-20; dipeptide-2; ethylhexylglycerin; carbomer; tromethamine; sorbic acid; chlorphenesin; phenoxyethanol; mica; titanium dioxide (ci 77891); iron oxides (ci 77491",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "emollient"
+    ],
+    "category": "SAFE"
+  },
+  {
+    "name": "zinc oxide (nano)",
+    "avg_reactivity": 1,
+    "is_allergen": false,
+    "allergen_group": null,
+    "classes": [
+      "uv_filter"
+    ],
+    "category": "SAFE"
+  }
+]

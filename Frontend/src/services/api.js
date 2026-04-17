@@ -24,7 +24,12 @@ api.interceptors.request.use(
         const token = await clerkGetToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
+          console.log(`[API] Token attached to ${config.method.toUpperCase()} ${config.url}`);
+        } else {
+          console.warn(`[API] No token available for ${config.method.toUpperCase()} ${config.url}`);
         }
+      } else {
+        console.warn(`[API] clerkGetToken not initialized for ${config.method.toUpperCase()} ${config.url}`);
       }
     } catch (error) {
       console.error('Failed to get Clerk token:', error);

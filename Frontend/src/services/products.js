@@ -16,7 +16,10 @@ export const searchProducts = async (query, limit = 20) => {
 
 export const getProductById = async (id) => {
   const response = await api.get(`/products/${id}`);
-  return response.data.data;
+  return response.data.data ? {
+    ...response.data.data,
+    safetyScore: response.data.safetyScore
+  } : null;
 };
 
 export const getProductTypes = async () => {

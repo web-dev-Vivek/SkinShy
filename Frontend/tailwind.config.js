@@ -64,7 +64,31 @@ module.exports = {
         slideInFromRight: 'slideInFromRight 0.4s ease-out',
         slideOutToRight: 'slideOutToRight 0.4s ease-in',
       },
+      backdropBlur: {
+        'xs': '2px',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addComponents }) {
+      addComponents({
+        '.glass': {
+          'background': 'rgba(255, 255, 255, 0.10)',
+          'backdrop-filter': 'blur(10px)',
+          '-webkit-backdrop-filter': 'blur(10px)',
+          'border': '1px solid rgba(255, 255, 255, 0.2)',
+          'border-radius': '1.5rem',
+          'overflow': 'hidden',
+        },
+        '.glass-hover': {
+          '@apply transition-all duration-300': {},
+          '&:hover': {
+            'background': 'rgba(255, 255, 255, 0.15)',
+            'border-color': 'rgba(255, 255, 255, 0.3)',
+            'box-shadow': '0 8px 32px 0 rgba(51, 51, 51, 0.1)',
+          },
+        },
+      });
+    },
+  ],
 }

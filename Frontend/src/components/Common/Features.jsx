@@ -49,13 +49,9 @@ function Features() {
   ];
 
   return (
-    <section id="features" className="section-spacing relative w-full bg-custom-white">
+    <section id="features" className="section-spacing relative w-full bg-gradient-to-b from-[#E9D4BC] to-white">
       
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-40 right-10 w-72 h-72 rounded-full bg-custom-light-gray opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-custom-gray opacity-15 blur-3xl"></div>
-      </div>
+      
 
       <div className="container-custom">
         
@@ -88,11 +84,11 @@ function Features() {
               onMouseEnter={() => setHoveredCard(feature.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              <div className="bg-custom-white border border-custom-light-gray rounded-2xl p-8 group h-full cursor-pointer">
+              <div className="glass glass-hover rounded-3xl p-8 group h-full cursor-pointer border border-white/20 shadow-lg hover:shadow-2xl relative">
                  
                   {/* Icon Container */}
                   <div className="mb-6">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-custom-light-gray group-hover:bg-custom-charcoal transition-colors duration-300">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md group-hover:bg-white/25 transition-all duration-300 border border-white/20 shadow-md">
                       <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">
                         {feature.icon}
                       </span>
@@ -101,11 +97,11 @@ function Features() {
 
                 {/* Content */}
                 <div className="space-y-3">
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between gap-3">
                     <h3 className="text-xl md:text-2xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
                       {feature.title}
                     </h3>
-                    <span className="text-xs font-semibold text-custom-dark-gray bg-custom-light-gray px-3 py-1 rounded-full group-hover:bg-custom-charcoal group-hover:text-custom-white transition-colors duration-300">
+                    <span className="text-xs font-semibold text-custom-charcoal bg-white/30 backdrop-blur-md px-3 py-1 rounded-full group-hover:bg-white/40 transition-all duration-300 border border-white/20 whitespace-nowrap">
                       {feature.highlight}
                     </span>
                   </div>
@@ -123,7 +119,7 @@ function Features() {
                 </div>
 
                 {/* Hover Line */}
-                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-custom-charcoal to-custom-dark-gray group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-custom-charcoal/40 to-custom-dark-gray/40 group-hover:w-full transition-all duration-300 rounded-b-3xl"></div>
               </div>
             </div>
           ))}
