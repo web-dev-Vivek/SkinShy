@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 // Connect to database
-connectDB();
+connectDB().catch(err => console.error('Failed to connect to database:', err));
 
 // Load products from JSON (if not already in DB) - Commented out to debug
 // loadProductsFromJSON();
@@ -90,6 +90,15 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`✅ Skinshy Backend running on port ${PORT}`);
+});
+
+// Handle uncaught errors
+process.on('uncaughtException', (error) => {
+  console.error('💥 Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('💥 Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
 module.exports = app;
