@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
+import ProductGridSkeleton from '../components/Skeletons/ProductGridSkeleton';
+import ProductCardSkeleton from '../components/Skeletons/ProductCardSkeleton';
 
 const PRODUCTS_PER_PAGE = 100;
 
@@ -20,7 +22,17 @@ export default function SearchPage() {
   // Initial load - fetch first batch of products
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/products?skip=0&limit=${PRODUCTS_PER_PAGE}`)
+    setCurrentPage(0);
+    setProducts([]);
+    setFilteredProducts([]);
+    setHasMoreProducts(true);
+    
+    let url = `http://localhost:5000/api/products?skip=0&limit=${PRODUCTS_PER_PAGE}`;
+    if (searchQuery.trim()) {
+      url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+    }
+    
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         setProducts(data.data || []);
@@ -34,7 +46,7 @@ export default function SearchPage() {
         console.error('Error fetching products:', err);
         setLoading(false);
       });
-  }, []);
+  }, [searchQuery]);
 
   // Load more products when user scrolls to bottom
   const loadMoreProducts = useCallback(() => {
@@ -43,7 +55,12 @@ export default function SearchPage() {
     setLoadingMore(true);
     const skip = currentPage * PRODUCTS_PER_PAGE;
     
-    fetch(`http://localhost:5000/api/products?skip=${skip}&limit=${PRODUCTS_PER_PAGE}`)
+    let url = `http://localhost:5000/api/products?skip=${skip}&limit=${PRODUCTS_PER_PAGE}`;
+    if (searchQuery.trim()) {
+      url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+    }
+    
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         const newProducts = data.data || [];
@@ -57,7 +74,7 @@ export default function SearchPage() {
         console.error('Error fetching more products:', err);
         setLoadingMore(false);
       });
-  }, [currentPage, loadingMore, hasMoreProducts]);
+  }, [currentPage, loadingMore, hasMoreProducts, searchQuery]);
 
    // Intersection Observer for infinite scroll
    useEffect(() => {
@@ -81,20 +98,6 @@ export default function SearchPage() {
        }
      };
    }, [loadMoreProducts, loadingMore, hasMoreProducts]);
-
-  // Filter products based on search query
-  useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredProducts(products);
-    } else {
-      const query = searchQuery.toLowerCase();
-      const filtered = products.filter(product =>
-        product.productName.toLowerCase().includes(query) ||
-        product.productType.toLowerCase().includes(query)
-      );
-      setFilteredProducts(filtered);
-    }
-  }, [searchQuery, products]);
 
   const handleProductClick = (productId, productName) => {
     navigate(`/search/${productId}`, { state: { productName } });
@@ -133,12 +136,7 @@ export default function SearchPage() {
 
         {/* Loading State */}
         {loading && (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-              <p className="text-custom-dark-gray">Loading products...</p>
-            </div>
-          </div>
+          <ProductGridSkeleton count={12} />
         )}
 
         {/* No Results */}
@@ -175,11 +173,10 @@ export default function SearchPage() {
 
             {/* Loading More Indicator */}
             {loadingMore && (
-              <div className="flex items-center justify-center py-12">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-                  <p className="text-custom-dark-gray">Loading more products...</p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {Array.from({ length: 4 }).map((_, idx) => (
+                  <ProductCardSkeleton key={idx} />
+                ))}
               </div>
             )}
 

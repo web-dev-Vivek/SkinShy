@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import SafetyBar from '../components/SafetyBar';
+import ProductDetailSkeleton from '../components/Skeletons/ProductDetailSkeleton';
 import { getProductById } from '../services/products';
 
 export default function ProductPage() {
@@ -57,21 +58,18 @@ export default function ProductPage() {
     }
   };
 
-   if (loading) {
-     return (
-       <>
-         <OnboardingWarningBanner />
-         <div className="min-h-screen bg-custom-white mt-20">
-         <div className="flex justify-center items-center py-12 min-h-[70vh]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-           <p className="text-custom-dark-gray">Loading product...</p>
+    if (loading) {
+      return (
+        <>
+          <OnboardingWarningBanner />
+          <div className="min-h-screen bg-custom-white mt-20">
+            <div className="max-w-7xl mx-auto px-4 py-12">
+              <ProductDetailSkeleton />
+            </div>
           </div>
-         </div>
-       </div>
-       </>
-     );
-   }
+        </>
+      );
+    }
 
     if (error) {
       return (

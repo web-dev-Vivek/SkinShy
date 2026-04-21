@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser, UserButton } from '@clerk/clerk-react';
+import ProfileSkeleton from '../components/Skeletons/ProfileSkeleton';
 import { getUserProfile, getUserPreferences, updateUserProfile } from '../services/users';
 
 export default function ProfilePage() {
@@ -49,12 +50,7 @@ export default function ProfilePage() {
 
    if (loading) {
      return (
-       <div className="min-h-screen bg-custom-white flex items-center justify-center">
-         <div className="text-center">
-           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-           <p className="text-custom-dark-gray">Loading profile...</p>
-         </div>
-       </div>
+       <ProfileSkeleton />
      );
    }
 
