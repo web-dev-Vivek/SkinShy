@@ -6,6 +6,7 @@ import { getUserName, getUserEmail } from '../services/auth';
 import { useOnboarding } from '../context/OnboardingContext';
 
 const ALLERGIES = [
+  'none',
   'fragrances',
   'essential_oils',
   'alcohol',
@@ -22,6 +23,7 @@ const QUESTIONS = [
     title: 'What is your skin type?',
     type: 'select',
     required: true,
+    info: 'Understanding your skin type helps us recommend products that work best for your specific needs.',
     options: [
       { value: 'oily', label: 'Oily' },
       { value: 'dry', label: 'Dry' },
@@ -34,16 +36,18 @@ const QUESTIONS = [
     id: 'highSensitivity',
     title: 'Do you have high skin sensitivity?',
     type: 'checkbox',
-    required: false
+    required: false,
+    info: 'High sensitivity means your skin reacts easily to irritants. Mark this if you experience redness, itching, or burning.'
   },
   {
     id: 'knownAllergies',
     title: 'Do you have any known allergies?',
     type: 'multicheck',
     required: false,
+    info: 'Select any ingredients you know trigger reactions on your skin to help us filter out unsafe products.',
     options: ALLERGIES.map(a => ({
       value: a,
-      label: a.replace('_', ' ')
+      label: a.replace('_', ' ').charAt(0).toUpperCase() + a.replace('_', ' ').slice(1)
     }))
   },
   {
@@ -51,6 +55,7 @@ const QUESTIONS = [
     title: 'How often do you change products?',
     type: 'select',
     required: true,
+    info: 'Frequent product changes can irritate sensitive skin, while occasional changes allow your skin to adapt.',
     options: [
       { value: 'rarely', label: 'Rarely' },
       { value: 'occasionally', label: 'Occasionally' },
@@ -77,6 +82,8 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [completedQuestions, setCompletedQuestions] = useState(new Set());
+  const [showInfo, setShowInfo] = useState(false);
+  const [onboardingComplete, setOnboardingCompleteState] = useState(false);
 
   // Redirect if onboarding already complete to prevent loop
   useEffect(() => {
@@ -126,13 +133,9 @@ export default function OnboardingPage() {
       setCurrentQuestion(currentQuestion - 1);
       setError('');
     }
-  };
+   };
 
-  const handleSkip = () => {
-    goToNextQuestion();
-  };
-
-   const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
        e.preventDefault();
        setError('');
 
@@ -178,27 +181,32 @@ export default function OnboardingPage() {
            console.log('✅ User already exists in MongoDB');
          }
 
-         // Complete onboarding - note: highSensitivity and knownAllergies are optional
-         await api.post('/users/complete-onboarding', {
-           skinType: formData.skinType,
-           highSensitivity: formData.highSensitivity,
-           knownAllergies: formData.knownAllergies || [],
-           productChangeRate: formData.productChangeRate
-         });
-         console.log('✅ Onboarding completed successfully');
+          // Complete onboarding - note: highSensitivity and knownAllergies are optional
+          await api.post('/users/complete-onboarding', {
+            skinType: formData.skinType,
+            highSensitivity: formData.highSensitivity,
+            knownAllergies: formData.knownAllergies || [],
+            productChangeRate: formData.productChangeRate
+          });
+          console.log('✅ Onboarding completed successfully');
 
-         // Set onboarding complete flag to 1 - prevents redirect loop
-         setOnboardingComplete();
+          // Set onboarding complete flag to 1 - prevents redirect loop
+          setOnboardingComplete();
+          
+          // Show completion page instead of immediate redirect
+          setOnboardingCompleteState(true);
 
-         // Redirect to search
-         navigate('/search', { replace: true });
-       } catch (err) {
-         console.error('Onboarding error:', err);
-         setError(err.response?.data?.error || err.message || 'Failed to complete onboarding');
-       } finally {
-         setLoading(false);
-       }
-     };
+          // Redirect to search after a delay (5 seconds)
+          setTimeout(() => {
+            navigate('/search', { replace: true });
+          }, 5000);
+        } catch (err) {
+          console.error('Onboarding error:', err);
+          setError(err.response?.data?.error || err.message || 'Failed to complete onboarding');
+        } finally {
+          setLoading(false);
+        }
+      };
 
   const currentQ = QUESTIONS[currentQuestion];
   const isLastQuestion = currentQuestion === QUESTIONS.length - 1;
@@ -206,145 +214,260 @@ export default function OnboardingPage() {
   const questionValue = formData[currentQ.id];
 
    return (
-     <div className="min-h-screen bg-custom-white px-3 sm:px-4 py-6 sm:py-8 mt-20">
-       <div className="max-w-2xl mx-auto">
-         {/* Progress Bar */}
-         <div className="mb-6 sm:mb-8">
-           <div className="flex justify-between items-center mb-2">
-             <h1 className="text-2xl sm:text-3xl font-bold font-playfair text-custom-charcoal">
-               Complete Your Profile
-             </h1>
-             <span className="text-xs sm:text-sm font-semibold text-custom-dark-gray">
-               {currentQuestion + 1} / {QUESTIONS.length}
-             </span>
-           </div>
-           <div className="w-full bg-custom-light-gray/20 rounded-full h-2">
-             <div
-               className="bg-custom-charcoal h-2 rounded-full transition-all duration-300"
-               style={{ width: `${((currentQuestion + 1) / QUESTIONS.length) * 100}%` }}
-             ></div>
-           </div>
-         </div>
+      <>
+        {/* Completion Page */}
+        {onboardingComplete && (
+          <div className="fixed inset-0 bg-gradient-to-br from-custom-charcoal via-custom-charcoal to-custom-dark-gray flex items-center justify-center min-h-screen z-50 overflow-hidden">
+            {/* Animated background blurs */}
+            <div className="absolute top-10 left-10 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-1/2 right-10 w-48 h-48 bg-indigo-500/15 rounded-full blur-3xl animate-pulse delay-500"></div>
 
-         {error && (
-           <div className="bg-red-50 border border-red-200 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded mb-4 sm:mb-6 text-xs sm:text-sm">
-             {error}
-           </div>
-         )}
-
-         {/* Question Container */}
-         <div className="bg-custom-off-white border border-custom-light-gray/20 rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
-           <h2 className="text-xl sm:text-2xl font-bold text-custom-charcoal mb-4 sm:mb-6">
-             {currentQ.title}
-           </h2>
-
-           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-             {/* SKIN TYPE - Select */}
-             {currentQ.type === 'select' && currentQ.id === 'skinType' && (
-               <select
-                 value={questionValue}
-                 onChange={(e) => handleSkinTypeChange(e.target.value)}
-                 className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-sm sm:text-base"
-               >
-                 <option value="">Select your skin type</option>
-                 {currentQ.options.map(opt => (
-                   <option key={opt.value} value={opt.value}>{opt.label}</option>
-                 ))}
-               </select>
-             )}
-
-             {/* PRODUCT CHANGE RATE - Select */}
-             {currentQ.type === 'select' && currentQ.id === 'productChangeRate' && (
-               <select
-                 value={questionValue}
-                 onChange={(e) => handleProductChangeRateChange(e.target.value)}
-                 className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-sm sm:text-base"
-               >
-                 <option value="">Select frequency</option>
-                 {currentQ.options.map(opt => (
-                   <option key={opt.value} value={opt.value}>{opt.label}</option>
-                 ))}
-               </select>
-             )}
-
-             {/* HIGH SENSITIVITY - Checkbox */}
-             {currentQ.type === 'checkbox' && (
-               <div className="flex items-center p-3 sm:p-4 border border-custom-light-gray/30 rounded-lg hover:bg-custom-white transition gap-3 sm:gap-4">
-                 <input
-                   type="checkbox"
-                   id="sensitivity"
-                   checked={questionValue}
-                   onChange={(e) => handleSensitivityChange(e.target.checked)}
-                   className="w-5 sm:w-6 h-5 sm:h-6 text-custom-charcoal rounded cursor-pointer flex-shrink-0"
-                 />
-                 <label htmlFor="sensitivity" className="text-sm sm:text-lg text-custom-charcoal font-medium cursor-pointer">
-                   Yes, I have high skin sensitivity
-                 </label>
-               </div>
-             )}
-
-             {/* ALLERGIES - Multi-select */}
-             {currentQ.type === 'multicheck' && (
-               <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                 {currentQ.options.map(allergy => (
-                   <label key={allergy.value} className="flex items-center p-2 sm:p-3 border border-custom-light-gray/30 rounded-lg hover:bg-custom-white transition cursor-pointer gap-2">
-                     <input
-                       type="checkbox"
-                       checked={formData.knownAllergies.includes(allergy.value)}
-                       onChange={() => handleAllergyToggle(allergy.value)}
-                       className="w-4 sm:w-5 h-4 sm:h-5 text-custom-charcoal rounded cursor-pointer flex-shrink-0"
-                     />
-                     <span className="text-xs sm:text-sm text-custom-dark-gray font-medium capitalize break-words">
-                       {allergy.label}
-                     </span>
-                  </label>
-                ))}
+            {/* Content */}
+            <div className="relative z-10 text-center max-w-md mx-auto px-6">
+              {/* Icon */}
+              <div className="mb-8 flex justify-center">
+                <svg className="w-20 h-20 text-white animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5.951-1.429 5.951 1.429a1 1 0 001.169-1.409l-7-14z" />
+                </svg>
               </div>
-            )}
-          </form>
-        </div>
 
-         {/* Navigation Buttons */}
-         <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-between">
-           <button
-             onClick={goToPreviousQuestion}
-             disabled={isFirstQuestion}
-             className="px-4 sm:px-6 py-2 sm:py-3 border border-custom-charcoal text-custom-charcoal rounded-lg font-semibold hover:bg-custom-light-gray/10 transition disabled:opacity-30 disabled:cursor-not-allowed text-sm sm:text-base order-2 sm:order-1"
-           >
-             ← Back
-           </button>
+              {/* Heading */}
+              <h1 className="text-5xl font-playfair font-bold text-white mb-4">
+                Thank you!
+              </h1>
 
-           <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 order-1 sm:order-2">
-             {/* Skip Button (always available) */}
-             <button
-               onClick={handleSkip}
-               disabled={isLastQuestion || loading}
-               className="px-4 sm:px-6 py-2 sm:py-3 border border-custom-light-gray text-custom-dark-gray rounded-lg font-semibold hover:border-custom-charcoal hover:text-custom-charcoal transition disabled:opacity-30 disabled:cursor-not-allowed text-sm sm:text-base"
-             >
-               Skip
-             </button>
+              {/* Message */}
+              <p className="text-gray-300 font-lato text-base leading-relaxed mb-8">
+                We appreciate your interest and we promise to be in contact in less than <span className="font-semibold text-white">48 hours</span> so we can have a chat about how we can help you grow with Skinshy.
+              </p>
 
-             {/* Next or Complete Button */}
-             {!isLastQuestion ? (
-               <button
-                 onClick={goToNextQuestion}
-                 className="px-4 sm:px-6 py-2 sm:py-3 bg-custom-charcoal text-custom-white rounded-lg font-semibold hover:bg-custom-black transition text-sm sm:text-base"
-               >
-                 Next →
-               </button>
-             ) : (
-               <button
-                 type="submit"
-                 onClick={handleSubmit}
-                 disabled={loading}
-                 className="px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-custom-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 text-sm sm:text-base"
-               >
-                 {loading ? 'Saving...' : 'Complete Profile'}
-               </button>
-             )}
-           </div>
-         </div>
-      </div>
-    </div>
-  );
+              {/* Button */}
+              <button
+                onClick={() => navigate('/search')}
+                className="px-8 py-3 bg-white text-custom-charcoal font-playfair font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 inline-block"
+              >
+                Back Home
+              </button>
+
+              {/* Branding */}
+              <div className="mt-16 pt-8 border-t border-white/20">
+                <p className="text-white font-playfair font-bold text-lg">Skinshy</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Main Onboarding Form */}
+        {!onboardingComplete && (
+          <div className="w-screen h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full">
+              <div className="flex flex-col lg:flex-row gap-0 h-full">
+                
+                 {/* LEFT SIDEBAR - Dark with branding */}
+                 <div className="w-full lg:w-2/5 bg-gradient-to-br from-custom-charcoal via-custom-charcoal to-custom-dark-gray text-white p-8 sm:p-12 flex flex-col justify-between">
+                   
+                   {/* Back Button */}
+                   <button
+                     onClick={() => navigate('/')}
+                     className="mb-6 text-white hover:text-gray-300 transition-colors flex items-center gap-2 text-sm font-lato"
+                   >
+                     ← Back
+                   </button>
+
+                   {/* Top Section */}
+                   <div>
+                     {/* Logo/Branding */}
+                     <h1 className="text-3xl font-playfair font-bold mb-8">Skinshy</h1>
+                    
+                    {/* Main Headline */}
+                    <div className="mb-8">
+                      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-4 leading-tight">
+                        Complete Your Profile
+                      </h2>
+                      <p className="text-gray-300 font-lato text-sm sm:text-base leading-relaxed">
+                        Let us know about your skin to get personalized product recommendations that work best for you.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Bottom Section - Help */}
+                  <div className="space-y-4">
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">?</span>
+                      </div>
+                      <p className="text-gray-100 font-lato text-xs sm:text-sm leading-relaxed">
+                        {QUESTIONS[currentQuestion].info}
+                      </p>
+                    </div>
+                    
+                    <div className="text-xs sm:text-sm text-gray-400 space-y-1">
+                      <p>Already have an account? <a href="/login" className="text-white hover:underline font-semibold">Sign In</a></p>
+                      <p>Need help? <a href="mailto:help@skinshy.com" className="text-white hover:underline font-semibold">Contact us</a></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* RIGHT CONTENT - White with form */}
+                <div className="w-full lg:w-3/5 bg-white p-8 sm:p-12 flex flex-col justify-between overflow-y-auto">
+                  
+                  {/* Progress Indicator */}
+                  <div className="flex items-center justify-end gap-2 mb-10">
+                    {QUESTIONS.map((_, idx) => (
+                      <React.Fragment key={idx}>
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold font-playfair transition-all ${
+                            idx < currentQuestion
+                              ? 'bg-custom-charcoal text-white'
+                              : idx === currentQuestion
+                              ? 'bg-custom-charcoal text-white ring-2 ring-custom-charcoal ring-offset-2'
+                              : 'bg-gray-200 text-gray-500'
+                          }`}
+                        >
+                          {idx < currentQuestion ? '✓' : idx + 1}
+                        </div>
+                        {idx < QUESTIONS.length - 1 && (
+                          <div
+                            className={`w-6 h-0.5 transition-all ${
+                              idx < currentQuestion ? 'bg-custom-charcoal' : 'bg-gray-300'
+                            }`}
+                          ></div>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+
+                  {/* Current Question Title */}
+                  <h3 className="text-2xl sm:text-3xl font-playfair font-bold text-custom-charcoal mb-8">
+                    {QUESTIONS[currentQuestion].title}
+                  </h3>
+
+                  {/* Error message */}
+                  {error && (
+                    <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm font-lato">
+                      {error}
+                    </div>
+                  )}
+
+                  {/* Form Content */}
+                  <form onSubmit={handleSubmit} className="space-y-4 flex-1">
+                    
+                    {/* SKIN TYPE */}
+                    {QUESTIONS[currentQuestion].type === 'select' && QUESTIONS[currentQuestion].id === 'skinType' && (
+                      <div className="space-y-3">
+                        {QUESTIONS[currentQuestion].options.map(opt => (
+                          <label key={opt.value} className="flex items-center p-3 sm:p-4 bg-gray-50 border-2 border-gray-200 hover:border-custom-charcoal/30 hover:bg-gray-100 rounded-lg cursor-pointer transition-all group">
+                            <input
+                              type="radio"
+                              name="skinType"
+                              value={opt.value}
+                              checked={questionValue === opt.value}
+                              onChange={(e) => handleSkinTypeChange(e.target.value)}
+                              className="w-5 h-5 rounded-full cursor-pointer accent-custom-charcoal"
+                            />
+                            <span className="ml-3 text-sm sm:text-base text-custom-charcoal font-lato font-medium">
+                              {opt.label}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* HIGH SENSITIVITY */}
+                    {QUESTIONS[currentQuestion].type === 'checkbox' && (
+                      <label className="flex items-center p-4 bg-gray-50 border-2 border-gray-200 hover:border-custom-charcoal/30 hover:bg-gray-100 rounded-lg cursor-pointer transition-all">
+                        <input
+                          type="checkbox"
+                          checked={questionValue}
+                          onChange={(e) => handleSensitivityChange(e.target.checked)}
+                          className="w-5 h-5 rounded border-2 cursor-pointer accent-custom-charcoal"
+                        />
+                        <span className="ml-3 text-base text-custom-charcoal font-lato font-medium">
+                          Yes, I have high skin sensitivity
+                        </span>
+                      </label>
+                    )}
+
+                    {/* ALLERGIES */}
+                    {QUESTIONS[currentQuestion].type === 'multicheck' && (
+                      <div 
+                        className={`grid grid-cols-1 sm:grid-cols-2 gap-3 ${
+                          QUESTIONS[currentQuestion].options.length > 6 
+                            ? 'max-h-72 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100' 
+                            : ''
+                        }`}
+                      >
+                        {QUESTIONS[currentQuestion].options.map(allergy => (
+                          <label key={allergy.value} className="flex items-center p-3 bg-gray-50 border-2 border-gray-200 hover:border-custom-charcoal/30 hover:bg-gray-100 rounded-lg cursor-pointer transition-all">
+                            <input
+                              type="checkbox"
+                              checked={formData.knownAllergies.includes(allergy.value)}
+                              onChange={() => handleAllergyToggle(allergy.value)}
+                              className="w-5 h-5 rounded border-2 cursor-pointer accent-custom-charcoal"
+                            />
+                            <span className="ml-3 text-sm text-custom-charcoal font-lato font-medium capitalize">
+                              {allergy.label}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* PRODUCT CHANGE RATE */}
+                    {QUESTIONS[currentQuestion].type === 'select' && QUESTIONS[currentQuestion].id === 'productChangeRate' && (
+                      <div className="space-y-3">
+                        {QUESTIONS[currentQuestion].options.map(opt => (
+                          <label key={opt.value} className="flex items-center p-3 sm:p-4 bg-gray-50 border-2 border-gray-200 hover:border-custom-charcoal/30 hover:bg-gray-100 rounded-lg cursor-pointer transition-all group">
+                            <input
+                              type="radio"
+                              name="productChangeRate"
+                              value={opt.value}
+                              checked={questionValue === opt.value}
+                              onChange={(e) => handleProductChangeRateChange(e.target.value)}
+                              className="w-5 h-5 rounded-full cursor-pointer accent-custom-charcoal"
+                            />
+                            <span className="ml-3 text-sm sm:text-base text-custom-charcoal font-lato font-medium">
+                              {opt.label}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </form>
+
+                  {/* Navigation Buttons */}
+                  <div className="flex gap-3 pt-8 border-t border-gray-200 mt-8">
+                    <button
+                      onClick={goToPreviousQuestion}
+                      disabled={isFirstQuestion}
+                      className="flex-1 px-4 py-3 border-2 border-gray-300 text-custom-charcoal hover:border-custom-charcoal hover:bg-gray-50 rounded-lg font-semibold font-playfair transition-all disabled:opacity-30 disabled:cursor-not-allowed text-sm sm:text-base"
+                    >
+                      Back
+                    </button>
+                    <button
+                      onClick={isLastQuestion ? handleSubmit : goToNextQuestion}
+                      disabled={loading}
+                      className="flex-1 px-4 py-3 bg-gradient-to-r from-custom-charcoal to-custom-dark-gray hover:from-custom-black hover:to-custom-charcoal text-white rounded-lg font-semibold font-playfair transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                    >
+                      {loading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          {isLastQuestion ? 'Saving...' : 'Next Step'}
+                        </span>
+                      ) : (
+                        isLastQuestion ? 'Complete Profile' : 'Next Step'
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
 }

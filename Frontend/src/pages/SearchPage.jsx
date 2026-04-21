@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
+
+const PRODUCTS_PER_PAGE = 100;
 
 export default function SearchPage() {
   const navigate = useNavigate();
@@ -10,15 +12,22 @@ export default function SearchPage() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [hasMoreProducts, setHasMoreProducts] = useState(true);
+  const observerTarget = useRef(null);
 
+  // Initial load - fetch first batch of products
   useEffect(() => {
-    // Fetch all products from backend
     setLoading(true);
-    fetch('http://localhost:5000/api/products?limit=100')
+    fetch(`http://localhost:5000/api/products?skip=0&limit=${PRODUCTS_PER_PAGE}`)
       .then(res => res.json())
       .then(data => {
-        setProducts(data.data);
-        setFilteredProducts(data.data);
+        setProducts(data.data || []);
+        setFilteredProducts(data.data || []);
+        // Check if there are more products available
+        setHasMoreProducts(data.data?.length === PRODUCTS_PER_PAGE);
+        setCurrentPage(1);
         setLoading(false);
       })
       .catch(err => {
@@ -26,6 +35,52 @@ export default function SearchPage() {
         setLoading(false);
       });
   }, []);
+
+  // Load more products when user scrolls to bottom
+  const loadMoreProducts = useCallback(() => {
+    if (loadingMore || !hasMoreProducts) return;
+
+    setLoadingMore(true);
+    const skip = currentPage * PRODUCTS_PER_PAGE;
+    
+    fetch(`http://localhost:5000/api/products?skip=${skip}&limit=${PRODUCTS_PER_PAGE}`)
+      .then(res => res.json())
+      .then(data => {
+        const newProducts = data.data || [];
+        setProducts(prev => [...prev, ...newProducts]);
+        // Check if there are more products available
+        setHasMoreProducts(newProducts.length === PRODUCTS_PER_PAGE);
+        setCurrentPage(prev => prev + 1);
+        setLoadingMore(false);
+      })
+      .catch(err => {
+        console.error('Error fetching more products:', err);
+        setLoadingMore(false);
+      });
+  }, [currentPage, loadingMore, hasMoreProducts]);
+
+   // Intersection Observer for infinite scroll
+   useEffect(() => {
+     const observer = new IntersectionObserver(
+       entries => {
+         if (entries[0].isIntersecting && !loadingMore && hasMoreProducts) {
+           loadMoreProducts();
+         }
+       },
+       { threshold: 0.1 }
+     );
+
+     const target = observerTarget.current;
+     if (target) {
+       observer.observe(target);
+     }
+
+     return () => {
+       if (target) {
+         observer.unobserve(target);
+       }
+     };
+   }, [loadMoreProducts, loadingMore, hasMoreProducts]);
 
   // Filter products based on search query
   useEffect(() => {
@@ -41,9 +96,9 @@ export default function SearchPage() {
     }
   }, [searchQuery, products]);
 
-   const handleProductClick = (productId, productName) => {
-     navigate(`/search/${productId}`, { state: { productName } });
-   };
+  const handleProductClick = (productId, productName) => {
+    navigate(`/search/${productId}`, { state: { productName } });
+  };
 
   return (
     <>
@@ -97,25 +152,47 @@ export default function SearchPage() {
 
         {/* Products Grid */}
         {!loading && filteredProducts.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-             {filteredProducts.map(product => (
-               <div
-                 key={product._id}
-                 onClick={() => handleProductClick(product._id, product.productName)}
-                 className="border border-custom-light-gray/20 rounded-lg p-4 hover:shadow-lg hover:border-custom-charcoal/30 transition cursor-pointer hover:scale-105 transform"
-               >
-                <h3 className="font-semibold text-custom-charcoal mb-2 line-clamp-2 hover:text-custom-black">
-                  {product.productName}
-                </h3>
-                <p className="text-sm text-custom-dark-gray mb-2">
-                  {product.productType}
-                </p>
-                <p className="text-lg font-bold text-custom-charcoal">
-                  {product.price}
-                </p>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+               {filteredProducts.map(product => (
+                 <div
+                   key={product._id}
+                   onClick={() => handleProductClick(product._id, product.productName)}
+                   className="border border-custom-light-gray/20 rounded-lg p-4 hover:shadow-lg hover:border-custom-charcoal/30 transition cursor-pointer hover:scale-105 transform"
+                 >
+                  <h3 className="font-semibold text-custom-charcoal mb-2 line-clamp-2 hover:text-custom-black">
+                    {product.productName}
+                  </h3>
+                  <p className="text-sm text-custom-dark-gray mb-2">
+                    {product.productType}
+                  </p>
+                  <p className="text-lg font-bold text-custom-charcoal">
+                    {product.price}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Loading More Indicator */}
+            {loadingMore && (
+              <div className="flex items-center justify-center py-12">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
+                  <p className="text-custom-dark-gray">Loading more products...</p>
+                </div>
               </div>
-            ))}
-          </div>
+            )}
+
+            {/* Observer target for infinite scroll */}
+            <div ref={observerTarget} className="py-8" />
+
+            {/* No More Products Message */}
+            {!hasMoreProducts && filteredProducts.length > 0 && (
+              <div className="text-center py-8">
+                <p className="text-custom-dark-gray">You've reached the end of available products</p>
+              </div>
+            )}
+          </>
         )}
        </div>
       </div>

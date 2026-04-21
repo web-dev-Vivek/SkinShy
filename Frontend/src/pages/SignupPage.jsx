@@ -56,7 +56,7 @@ export default function SignupPage() {
   }, [isLoaded, user, complete_signup, complete_onboarding, navigate]);
 
   return (
-    <div className="min-h-screen bg-custom-white flex items-center justify-center px-4 mt-20">
+    <div className="min-h-screen bg-custom-white flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Back Button */}
         <button

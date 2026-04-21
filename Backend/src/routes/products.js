@@ -14,7 +14,7 @@ const asyncHandler = (fn) => (req, res, next) => {
 
 // GET ALL PRODUCTS (with pagination and search)
 router.get('/', asyncHandler(async (req, res) => {
-  const { search, type, page = 1, limit = 20 } = req.query;
+  const { search, type, page, skip, limit = 20 } = req.query;
   let query = {};
 
   // Search by name or type
@@ -30,12 +30,21 @@ router.get('/', asyncHandler(async (req, res) => {
     query.productType = type;
   }
 
-  const pageNum = parseInt(page);
+  // Support both page-based and offset-based pagination
+  let skipAmount = 0;
   const limitNum = parseInt(limit);
-  const skip = (pageNum - 1) * limitNum;
+
+  if (skip !== undefined) {
+    // Offset-based pagination (skip parameter)
+    skipAmount = parseInt(skip);
+  } else if (page !== undefined) {
+    // Page-based pagination (page parameter)
+    const pageNum = parseInt(page);
+    skipAmount = (pageNum - 1) * limitNum;
+  }
 
   const products = await Product.find(query)
-    .skip(skip)
+    .skip(skipAmount)
     .limit(limitNum)
     .select('_id productName productType price');
 
@@ -46,9 +55,9 @@ router.get('/', asyncHandler(async (req, res) => {
     data: products,
     pagination: {
       total,
-      page: pageNum,
-      pages: Math.ceil(total / limitNum),
-      limit: limitNum
+      skip: skipAmount,
+      limit: limitNum,
+      pages: Math.ceil(total / limitNum)
     }
   });
 }));

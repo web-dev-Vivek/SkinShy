@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ClerkProvider } from '@clerk/clerk-react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import { OnboardingProvider } from './context/OnboardingContext';
 import { UserProvider } from './context/UserContext';
@@ -28,10 +28,15 @@ function TokenInitializer() {
 }
 
 function AppRoutes() {
+  const location = useLocation();
+  // Hide navbar on auth and full-screen pages
+  const hideNavbarOnRoutes = ['/onboarding', '/login', '/signup'];
+  const shouldShowNavbar = !hideNavbarOnRoutes.includes(location.pathname);
+
   return (
     <>
       <TokenInitializer />
-      <Navbar />
+      {shouldShowNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
