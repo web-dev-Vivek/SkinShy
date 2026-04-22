@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
+import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import { getProductById } from '../services/products';
 import { api } from '../services/api';
 
 export default function ProductComparePage() {
   const { isSignedIn, isLoaded } = useAuth();
+  const { complete_onboarding } = useOnboarding();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -232,30 +234,30 @@ export default function ProductComparePage() {
                               <span className="text-custom-dark-gray">Price:</span>
                               <span className="font-bold text-custom-charcoal">{product.price}</span>
                             </div>
-                            {details?.safetyScore && (
-                              <div className="flex justify-between items-center text-sm">
-                                <span className="text-custom-dark-gray">Safety Score:</span>
-                                <div className="flex items-center gap-2">
-                                  <div className="w-24 bg-gray-200 rounded-full h-2">
-                                    <div
-                                      className={`h-2 rounded-full transition-all ${
-                                        details.safetyScore.score >= 75
-                                          ? 'bg-green-500'
-                                          : details.safetyScore.score >= 50
-                                          ? 'bg-yellow-500'
-                                          : 'bg-red-500'
-                                      }`}
-                                      style={{
-                                        width: `${details.safetyScore.score}%`
-                                      }}
-                                    ></div>
-                                  </div>
-                                  <span className="font-bold text-custom-charcoal">
-                                    {Math.round(details.safetyScore.score)}%
-                                  </span>
-                                </div>
-                              </div>
-                            )}
+                             {details?.safetyScore && complete_onboarding === 1 && (
+                               <div className="flex justify-between items-center text-sm">
+                                 <span className="text-custom-dark-gray">Safety Score:</span>
+                                 <div className="flex items-center gap-2">
+                                   <div className="w-24 bg-gray-200 rounded-full h-2">
+                                     <div
+                                       className={`h-2 rounded-full transition-all ${
+                                         details.safetyScore.score >= 75
+                                           ? 'bg-green-500'
+                                           : details.safetyScore.score >= 50
+                                           ? 'bg-yellow-500'
+                                           : 'bg-red-500'
+                                       }`}
+                                       style={{
+                                         width: `${details.safetyScore.score}%`
+                                       }}
+                                     ></div>
+                                   </div>
+                                   <span className="font-bold text-custom-charcoal">
+                                     {Math.round(details.safetyScore.score)}%
+                                   </span>
+                                 </div>
+                               </div>
+                             )}
                           </div>
 
                           {/* Ingredients */}

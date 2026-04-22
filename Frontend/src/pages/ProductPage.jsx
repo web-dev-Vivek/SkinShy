@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
+import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import SafetyBar from '../components/SafetyBar';
 import ProductDetailSkeleton from '../components/Skeletons/ProductDetailSkeleton';
@@ -11,6 +12,7 @@ export default function ProductPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isSignedIn, isLoaded } = useAuth();
+  const { complete_onboarding } = useOnboarding();
   const [product, setProduct] = useState(null);
   const [safetyScore, setSafetyScore] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +21,7 @@ export default function ProductPage() {
   useEffect(() => {
     loadProductData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, isLoaded, isSignedIn]);
+  }, [id, isLoaded, isSignedIn, complete_onboarding]);
 
   const loadProductData = async () => {
     setLoading(true);
@@ -37,8 +39,8 @@ export default function ProductPage() {
       
       setProduct(productData);
       
-      // Safety score is included in the response if user is authenticated
-      if (productData.safetyScore) {
+      // Only show safety score if user is signed in AND onboarding is completed
+      if (isSignedIn && complete_onboarding === 1 && productData.safetyScore) {
         setSafetyScore(productData.safetyScore);
       } else {
         setSafetyScore(null);
