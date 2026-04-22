@@ -42,24 +42,44 @@ const calculateSafetyScore = (product, userProfile) => {
   };
 
   // STAGE 1: Category A Analysis (if user has high sensitivity)
+  // Position-aware penalties: higher position = lower penalty
   if (userProfile.highSensitivity) {
     product.ingredients.forEach(ingredient => {
       if (ingredient.categoryType === 'A') {
         let penalty = 0;
+        
+        // Position-based penalties for Category A (High Sensitivity Triggers)
         if (ingredient.reactivityScore >= 4) {
-          penalty = 25;
+          if (ingredient.position <= 5) {
+            penalty = 25; // High concentration - very dangerous
+          } else if (ingredient.position <= 15) {
+            penalty = 15; // Moderate concentration
+          } else if (ingredient.position <= 30) {
+            penalty = 8;  // Low concentration
+          } else {
+            penalty = 3;  // Trace amount
+          }
         } else if (ingredient.reactivityScore === 3) {
-          penalty = 15;
+          if (ingredient.position <= 5) {
+            penalty = 15;
+          } else if (ingredient.position <= 15) {
+            penalty = 10;
+          } else if (ingredient.position <= 30) {
+            penalty = 5;
+          } else {
+            penalty = 2;
+          }
         }
         
         if (penalty > 0) {
           penalties += penalty;
           breakdown.categoryA.push({
             ingredient: ingredient.name,
+            position: ingredient.position,
             reactivity: ingredient.reactivityScore,
             penalty
           });
-          warnings.push(`⚠️ Highly reactive ingredient "${ingredient.name}" detected`);
+          warnings.push(`Highly reactive ingredient "${ingredient.name}" at position ${ingredient.position}`);
         }
       }
     });
