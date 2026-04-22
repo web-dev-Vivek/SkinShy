@@ -4,6 +4,7 @@ import { useUser, useAuth } from '@clerk/clerk-react';
 import { api } from '../services/api';
 import { getUserName, getUserEmail } from '../services/auth';
 import { useOnboarding } from '../context/OnboardingContext';
+import OnboardingInstructionsPanel from '../components/Onboarding/OnboardingInstructionsPanel';
 
 const ALLERGIES = [
   'none',
@@ -291,22 +292,18 @@ export default function OnboardingPage() {
                     </div>
                   </div>
 
-                  {/* Bottom Section - Help */}
-                  <div className="space-y-4">
-                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-bold text-sm">?</span>
-                      </div>
-                      <p className="text-gray-100 font-lato text-xs sm:text-sm leading-relaxed">
-                        {QUESTIONS[currentQuestion].info}
-                      </p>
-                    </div>
-                    
-                    <div className="text-xs sm:text-sm text-gray-400 space-y-1">
-                      <p>Already have an account? <a href="/login" className="text-white hover:underline font-semibold">Sign In</a></p>
-                      <p>Need help? <a href="mailto:help@skinshy.com" className="text-white hover:underline font-semibold">Contact us</a></p>
-                    </div>
-                  </div>
+                   {/* Bottom Section - Dynamic Instructions */}
+                   <div className="space-y-4">
+                     {/* Instructions Panel */}
+                     <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-white/5">
+                       <OnboardingInstructionsPanel questionId={QUESTIONS[currentQuestion].id} />
+                     </div>
+                     
+                     <div className="text-xs sm:text-sm text-gray-400 space-y-1">
+                       <p>Already have an account? <a href="/login" className="text-white hover:underline font-semibold">Sign In</a></p>
+                       <p>Need help? <a href="mailto:help@skinshy.com" className="text-white hover:underline font-semibold">Contact us</a></p>
+                     </div>
+                   </div>
                 </div>
 
                 {/* RIGHT CONTENT - White with form */}
