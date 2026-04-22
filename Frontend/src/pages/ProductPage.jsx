@@ -4,6 +4,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import SafetyBar from '../components/SafetyBar';
+import SafetyScoreSkeleton from '../components/Skeletons/SafetyScoreSkeleton';
 import ProductDetailSkeleton from '../components/Skeletons/ProductDetailSkeleton';
 import { getProductById } from '../services/products';
 
@@ -272,8 +273,12 @@ export default function ProductPage() {
             )}
 
             {/* Safety & Risk Percentage - Below Ingredients */}
-            {safetyScore && (
-              <SafetyBar safetyScore={safetyScore} />
+            {isSignedIn && (
+              safetyScore ? (
+                <SafetyBar safetyScore={safetyScore} />
+              ) : (
+                <SafetyScoreSkeleton />
+              )
             )}
           </div>
         </div>

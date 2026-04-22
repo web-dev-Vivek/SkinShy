@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
+import SafetyScoreComparisonSkeleton from '../components/Skeletons/SafetyScoreComparisonSkeleton';
 import { getProductById } from '../services/products';
 import { api } from '../services/api';
 
@@ -257,6 +258,9 @@ export default function ProductComparePage() {
                                    </span>
                                  </div>
                                </div>
+                             )}
+                             {!complete_onboarding && details && (
+                               <SafetyScoreComparisonSkeleton />
                              )}
                           </div>
 
