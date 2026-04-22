@@ -18,18 +18,13 @@ export default function OnboardingInstructionsPanel({ questionId }) {
         </p>
         {Object.entries(instruction.indicators).map(([skinType, info]) => (
           <div key={skinType} className="bg-white/5 border border-white/10 rounded-lg p-3 text-left">
-            <div className="flex items-start gap-2 mb-1">
-              <span className="text-lg">{info.emoji}</span>
-              <div className="flex-1">
-                <p className="text-xs font-lato text-gray-200 capitalize font-semibold">{skinType}</p>
-                <p className="text-xs font-lato text-gray-300 leading-relaxed mt-1">
-                  {info.description}
-                </p>
-                <p className="text-xs font-lato text-gray-400 italic mt-2 text-left">
-                  💡 {info.test}
-                </p>
-              </div>
-            </div>
+            <p className="text-xs font-lato text-gray-200 capitalize font-semibold mb-1">{skinType}</p>
+            <p className="text-xs font-lato text-gray-300 leading-relaxed mb-2">
+              {info.description}
+            </p>
+            <p className="text-xs font-lato text-gray-400 italic">
+              {info.test}
+            </p>
           </div>
         ))}
       </div>
@@ -45,15 +40,15 @@ export default function OnboardingInstructionsPanel({ questionId }) {
           Common sensitivity signs:
         </p>
         {instruction.signs.map((sign, idx) => (
-          <div key={idx} className="flex items-center gap-2 text-xs font-lato text-gray-200">
-            <span className="text-gray-400">•</span>
+          <div key={idx} className="flex items-start gap-2 text-xs font-lato text-gray-200">
+            <span className="text-gray-400 mt-1">-</span>
             <span>{sign}</span>
           </div>
         ))}
         {instruction.note && (
           <div className="mt-4 pt-3 border-t border-white/10">
             <p className="text-xs font-lato text-gray-300 italic">
-              💡 {instruction.note}
+              {instruction.note}
             </p>
           </div>
         )}
@@ -75,14 +70,14 @@ export default function OnboardingInstructionsPanel({ questionId }) {
               {info.description}
             </p>
             <p className="text-xs font-lato text-gray-400 text-left">
-              📦 Found in: {info.commonProducts}
+              Found in: {info.commonProducts}
             </p>
           </div>
         ))}
         {instruction.note && (
           <div className="mt-3 pt-3 border-t border-white/10">
             <p className="text-xs font-lato text-gray-300 italic">
-              💡 {instruction.note}
+              {instruction.note}
             </p>
           </div>
         )}
@@ -100,31 +95,26 @@ export default function OnboardingInstructionsPanel({ questionId }) {
         </p>
         {Object.entries(instruction.habits).map(([habit, info]) => (
           <div key={habit} className="bg-white/5 border border-white/10 rounded-lg p-3 text-left">
-            <div className="flex items-start gap-2">
-              <span className="text-xl">{info.emoji}</span>
-              <div className="flex-1">
-                <p className="text-xs font-lato text-gray-200 font-semibold capitalize mb-1">
-                  {habit.replace('_', ' ')}
-                </p>
-                <p className="text-xs font-lato text-gray-300 leading-relaxed mb-1.5">
-                  {info.description}
-                </p>
-                <div className="bg-white/5 rounded p-1.5">
-                  <p className="text-xs font-lato text-gray-300 mb-0.5">
-                    <span className="font-semibold text-gray-200">Impact:</span> {info.impact}
-                  </p>
-                  <p className="text-xs font-lato text-gray-300">
-                    <span className="font-semibold text-gray-200">Recommendation:</span> {info.recommendation}
-                  </p>
-                </div>
-              </div>
+            <p className="text-xs font-lato text-gray-200 font-semibold capitalize mb-1">
+              {habit.replace('_', ' ')}
+            </p>
+            <p className="text-xs font-lato text-gray-300 leading-relaxed mb-1.5">
+              {info.description}
+            </p>
+            <div className="bg-white/5 rounded p-1.5 space-y-1">
+              <p className="text-xs font-lato text-gray-300">
+                <span className="font-semibold text-gray-200">Impact:</span> {info.impact}
+              </p>
+              <p className="text-xs font-lato text-gray-300">
+                <span className="font-semibold text-gray-200">Recommendation:</span> {info.recommendation}
+              </p>
             </div>
           </div>
         ))}
         {instruction.tip && (
           <div className="mt-3 pt-3 border-t border-white/10">
             <p className="text-xs font-lato text-gray-300 italic">
-              💡 {instruction.tip}
+              {instruction.tip}
             </p>
           </div>
         )}

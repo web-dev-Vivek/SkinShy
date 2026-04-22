@@ -6,7 +6,7 @@
 
 export const ONBOARDING_INSTRUCTIONS = {
   skinType: {
-    title: '🔍 Identify Your Skin Type',
+    title: 'Identify Your Skin Type',
     steps: [
       {
         number: 1,
@@ -23,27 +23,22 @@ export const ONBOARDING_INSTRUCTIONS = {
     ],
     indicators: {
       oily: {
-        emoji: '💧',
         description: 'Visible shine and oiliness across most of your face. Your skin may feel slick to touch. Pores appear larger and visible.',
         test: 'If you notice oil throughout your T-zone, cheeks, and forehead by hour 2, you likely have oily skin.'
       },
       dry: {
-        emoji: '🏜️',
         description: 'Feels tight, especially after cleansing. May have flaky patches or feel rough. Minimal shine across your face.',
         test: 'If you feel tightness and see no shine after 30 minutes, you likely have dry skin.'
       },
       combination: {
-        emoji: '⚖️',
         description: 'Oily in the T-zone (forehead, nose, chin) but normal or dry on the cheeks. Most common skin type.',
         test: 'If T-zone feels oily but cheeks feel normal or slightly dry, you have combination skin.'
       },
       normal: {
-        emoji: '✨',
         description: 'Balanced throughout your face. No excessive shine or tightness. Smooth texture with small pores.',
         test: 'If your skin feels comfortable without oily or dry patches, you have normal skin.'
       },
       sensitive: {
-        emoji: '❤️‍🩹',
         description: 'Prone to redness, irritation, or burning sensations. Reacts quickly to products or environmental changes. May be itchy.',
         test: 'If you frequently experience redness, burning, or reactions to products, you have sensitive skin.'
       }
@@ -51,7 +46,7 @@ export const ONBOARDING_INSTRUCTIONS = {
   },
 
   highSensitivity: {
-    title: '🎯 Assess Skin Sensitivity',
+    title: 'Assess Skin Sensitivity',
     steps: [
       {
         number: 1,
@@ -67,18 +62,18 @@ export const ONBOARDING_INSTRUCTIONS = {
       }
     ],
     signs: [
-      '🔴 Redness or visible flushing after applying products',
-      '🔥 Burning or stinging sensations',
-      '🤔 Itching or persistent discomfort',
-      '🌡️ Reactions to fragrance, alcohol, or certain ingredients',
-      '😣 Swelling or puffiness around sensitive areas',
-      '📌 Eczema, rosacea, or dermatitis history'
+      'Redness or visible flushing after applying products',
+      'Burning or stinging sensations',
+      'Itching or persistent discomfort',
+      'Reactions to fragrance, alcohol, or certain ingredients',
+      'Swelling or puffiness around sensitive areas',
+      'Eczema, rosacea, or dermatitis history'
     ],
     note: 'High sensitivity doesn\'t mean you can\'t use skincare. It just means we\'ll recommend gentler, hypoallergenic options for you.'
   },
 
   knownAllergies: {
-    title: '⚗️ Identify Ingredient Allergies',
+    title: 'Identify Ingredient Allergies',
     steps: [
       {
         number: 1,
@@ -131,7 +126,7 @@ export const ONBOARDING_INSTRUCTIONS = {
   },
 
   productChangeRate: {
-    title: '🔄 Understand Your Product Rotation',
+    title: 'Understand Your Product Rotation',
     steps: [
       {
         number: 1,
@@ -148,25 +143,21 @@ export const ONBOARDING_INSTRUCTIONS = {
     ],
     habits: {
       rarely: {
-        emoji: '🌱',
         description: 'You stick with the same products for 6+ months before changing.',
         impact: 'Your skin has time to fully adapt. Good for building skin barrier strength.',
         recommendation: 'You can handle trying new or active ingredients'
       },
       occasionally: {
-        emoji: '🔄',
         description: 'You try new products every 2-6 months or when current ones run out.',
         impact: 'Your skin adjusts well to gradual changes. Medium adaptation period.',
         recommendation: 'Introduce new ingredients slowly, one at a time'
       },
       frequently: {
-        emoji: '⚡',
         description: 'You try new products every few weeks or monthly.',
         impact: 'Your skin may not fully adjust, leading to sensitivity or irritation.',
         recommendation: 'We\'ll focus on gentle, well-tolerated products for stability'
       },
       very_frequently: {
-        emoji: '🎪',
         description: 'You change products weekly or constantly experiment.',
         impact: 'Your skin barrier may be compromised. Frequent changes = more irritation.',
         recommendation: 'We\'ll recommend a stable routine to help strengthen your skin'
