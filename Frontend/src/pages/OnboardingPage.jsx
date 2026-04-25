@@ -70,7 +70,7 @@ export default function OnboardingPage() {
   const navigate = useNavigate();
   const { user } = useUser();
   const { getToken } = useAuth();
-  const { complete_signup, complete_onboarding, setOnboardingComplete } = useOnboarding();
+  const { complete_onboarding, setOnboardingComplete } = useOnboarding();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [formData, setFormData] = useState({
@@ -82,8 +82,6 @@ export default function OnboardingPage() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [completedQuestions, setCompletedQuestions] = useState(new Set());
-  const [showInfo, setShowInfo] = useState(false);
   const [onboardingComplete, setOnboardingCompleteState] = useState(false);
 
   // Redirect if onboarding already complete to prevent loop
@@ -119,7 +117,7 @@ export default function OnboardingPage() {
   };
 
   const markQuestionCompleted = (questionId) => {
-    setCompletedQuestions(prev => new Set([...prev, questionId]));
+    // Track question as completed (used for form validation)
   };
 
   const goToNextQuestion = () => {

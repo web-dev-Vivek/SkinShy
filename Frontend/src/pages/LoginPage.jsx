@@ -20,6 +20,7 @@ export default function LoginPage() {
         setSignupComplete(); // Set complete_signup = 0
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, user, complete_signup, setSignupComplete]);
 
   // Separate effect to handle the redirect after signup is marked complete

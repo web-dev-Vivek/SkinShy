@@ -12,7 +12,6 @@ export default function SafetyBar({ safetyScore }) {
 
   const {
     score = 0,
-    riskLevel = 'unknown',
     recommendation = ''
   } = safetyScore;
 

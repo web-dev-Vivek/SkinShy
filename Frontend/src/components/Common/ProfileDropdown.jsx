@@ -38,6 +38,7 @@ function ProfileDropdown({ isMobile = false }) {
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

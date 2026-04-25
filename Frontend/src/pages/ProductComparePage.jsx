@@ -4,7 +4,6 @@ import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import SafetyScoreComparisonSkeleton from '../components/Skeletons/SafetyScoreComparisonSkeleton';
 import { getProductById } from '../services/products';
-import { api } from '../services/api';
 import { convertPrice } from '../utils/currencyConverter';
 import { useCurrency } from '../context/CurrencyContext';
 

@@ -5,16 +5,8 @@ import ProfileDropdown from './ProfileDropdown';
 
 function Navbar() {
   const navigate = useNavigate();
-  const { isSignedIn, signOut } = useAuth();
+  const { isSignedIn } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    }
-  };
 
   const handleNavigation = (path) => {
     navigate(path);

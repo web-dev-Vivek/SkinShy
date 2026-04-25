@@ -1,5 +1,3 @@
-import { useAuth } from '@clerk/clerk-react';
-
 /**
  * Frontend auth service for Clerk integration
  * Provides helper functions to interact with Clerk authentication
@@ -30,15 +28,9 @@ export const getToken = async (session) => {
  */
 export const verifyToken = async (token) => {
   if (!token) return false;
-
-  try {
-    // Token validity is checked by Clerk automatically
-    // If we got the token from Clerk, it's valid
-    return true;
-  } catch (error) {
-    console.error('Token verification failed:', error);
-    return false;
-  }
+  // Token validity is checked by Clerk automatically
+  // If we got the token from Clerk, it's valid
+  return true;
 };
 
 /**

@@ -12,7 +12,6 @@ import { useCurrency } from '../context/CurrencyContext';
 
 export default function ProductPage() {
   const { id } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
   const { isSignedIn, isLoaded } = useAuth();
   const { complete_onboarding } = useOnboarding();

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Features() {
-  const [hoveredCard, setHoveredCard] = useState(null);
 
   const features = [
     {
@@ -81,8 +80,6 @@ function Features() {
               key={feature.id}
               className="animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
-              onMouseEnter={() => setHoveredCard(feature.id)}
-              onMouseLeave={() => setHoveredCard(null)}
             >
               <div className="glass glass-hover rounded-3xl p-8 group h-full cursor-pointer border border-white/20 shadow-lg hover:shadow-2xl relative">
                  
