@@ -7,6 +7,8 @@ import SafetyBar from '../components/SafetyBar';
 import SafetyScoreSkeleton from '../components/Skeletons/SafetyScoreSkeleton';
 import ProductDetailSkeleton from '../components/Skeletons/ProductDetailSkeleton';
 import { getProductById } from '../services/products';
+import { convertPrice } from '../utils/currencyConverter';
+import { useCurrency } from '../context/CurrencyContext';
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -14,6 +16,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const { isSignedIn, isLoaded } = useAuth();
   const { complete_onboarding } = useOnboarding();
+  const { selectedCurrency } = useCurrency();
   const [product, setProduct] = useState(null);
   const [safetyScore, setSafetyScore] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -196,7 +199,7 @@ export default function ProductPage() {
                )}
 
                {product.price && (
-                 <p className="text-2xl lg:text-3xl font-bold text-custom-charcoal">{product.price}</p>
+                 <p className="text-2xl lg:text-3xl font-bold text-custom-charcoal">{convertPrice(product.price, selectedCurrency)}</p>
                )}
 
                {product.productUrl && (

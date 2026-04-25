@@ -4,12 +4,16 @@ import { useUser } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import ProductGridSkeleton from '../components/Skeletons/ProductGridSkeleton';
 import ProductCardSkeleton from '../components/Skeletons/ProductCardSkeleton';
+import CurrencySelector from '../components/Common/CurrencySelector';
+import { convertPrice } from '../utils/currencyConverter';
+import { useCurrency } from '../context/CurrencyContext';
 
 const PRODUCTS_PER_PAGE = 100;
 
 export default function SearchPage() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const { selectedCurrency } = useCurrency();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,8 +41,10 @@ export default function SearchPage() {
       .then(data => {
         setProducts(data.data || []);
         setFilteredProducts(data.data || []);
-        // Check if there are more products available
-        setHasMoreProducts(data.data?.length === PRODUCTS_PER_PAGE);
+        // Check if there are more products available by comparing with total count
+        const totalProducts = data.pagination?.total || 0;
+        const loadedProducts = (data.data || []).length;
+        setHasMoreProducts(loadedProducts + 0 < totalProducts);
         setCurrentPage(1);
         setLoading(false);
       })
@@ -64,9 +70,17 @@ export default function SearchPage() {
       .then(res => res.json())
       .then(data => {
         const newProducts = data.data || [];
-        setProducts(prev => [...prev, ...newProducts]);
-        // Check if there are more products available
-        setHasMoreProducts(newProducts.length === PRODUCTS_PER_PAGE);
+        setProducts(prev => {
+          const combined = [...prev, ...newProducts];
+          // Remove duplicates based on product ID
+          const uniqueProducts = Array.from(new Map(combined.map(p => [p._id, p])).values());
+          setFilteredProducts(uniqueProducts);
+          return uniqueProducts;
+        });
+        // Check if there are more products available by comparing with total count
+        const totalProducts = data.pagination?.total || 0;
+        const currentLoadedCount = products.length + newProducts.length;
+        setHasMoreProducts(currentLoadedCount < totalProducts);
         setCurrentPage(prev => prev + 1);
         setLoadingMore(false);
       })
@@ -74,7 +88,7 @@ export default function SearchPage() {
         console.error('Error fetching more products:', err);
         setLoadingMore(false);
       });
-  }, [currentPage, loadingMore, hasMoreProducts, searchQuery]);
+  }, [currentPage, loadingMore, hasMoreProducts, searchQuery, products.length]);
 
    // Intersection Observer for infinite scroll
    useEffect(() => {
@@ -108,26 +122,33 @@ export default function SearchPage() {
       <OnboardingWarningBanner />
       <div className="min-h-screen bg-custom-white px-4 py-8 mt-20">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold font-playfair text-custom-charcoal mb-2">
-            Welcome, {user?.firstName || 'User'}!
-          </h1>
-          <p className="text-custom-dark-gray">
-            Browse personalized skincare products for you
-          </p>
-        </div>
-
-        {/* Search Bar */}
-        <div className="mb-8">
-          <input
-            type="text"
-            placeholder="Search products by name or type..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-custom-charcoal placeholder-custom-dark-gray"
-          />
-        </div>
+       {/* Header */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <h1 className="text-4xl font-bold font-playfair text-custom-charcoal mb-2">
+                Welcome, {user?.firstName || 'User'}!
+              </h1>
+              <p className="text-custom-dark-gray">
+                Browse personalized skincare products for you
+              </p>
+            </div>
+            
+            {/* Search Bar and Currency Converter on same line */}
+            <div className="flex gap-2">
+              <div className="w-12/14">
+                <input
+                  type="text"
+                  placeholder="Search products by name or type..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-custom-charcoal placeholder-custom-dark-gray"
+                />
+              </div>
+              <div className="w-1/14 flex items-center">
+                <CurrencySelector />
+              </div>
+            </div>
+          </div>
 
         {/* Results Count */}
         <div className="mb-6 text-sm text-custom-dark-gray">
@@ -164,9 +185,9 @@ export default function SearchPage() {
                   <p className="text-sm text-custom-dark-gray mb-2">
                     {product.productType}
                   </p>
-                  <p className="text-lg font-bold text-custom-charcoal">
-                    {product.price}
-                  </p>
+                   <p className="text-lg font-bold text-custom-charcoal">
+                     {convertPrice(product.price, selectedCurrency)}
+                   </p>
                 </div>
               ))}
             </div>

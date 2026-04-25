@@ -110,23 +110,23 @@ function About() {
                  <p className="text-sm text-custom-dark-gray">Recommendations Daily</p>
                </div>
             </div>
-          </div>
+           </div>
         </div>
 
         {/* Final CTA */}
-         <div className="glass-dark mt-24 py-16 md:py-20 rounded-3xl text-custom-white text-center animate-slide-up delay-3">
-           <h3 className="heading-gradient text-white text-4xl md:text-5xl mb-6">
+         <div className="glass-dark mt-16 sm:mt-24 py-12 sm:py-16 md:py-20 px-4 sm:px-8 rounded-2xl sm:rounded-3xl text-custom-white text-center animate-slide-up delay-3">
+           <h3 className="heading-gradient text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-6 font-playfair font-bold leading-snug">
              Your Perfect Skincare Match Awaits
            </h3>
-           <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+           <p className="text-sm sm:text-base md:text-lg text-gray-200 mb-8 sm:mb-10 max-w-2xl mx-auto px-2 sm:px-0 leading-relaxed">
              Stop wasting money on products that don't work. Start your personalized skincare journey today.
            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2 sm:px-0">
               <button
                 onClick={() => navigate('/search')}
-                className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-custom-white text-custom-charcoal font-semibold text-sm sm:text-base rounded-xl hover:bg-gray-100 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                Get Started Free
+                🚀 Get Started Free
               </button>
             </div>
          </div>

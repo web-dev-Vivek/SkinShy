@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useAuth } from '@clerk/clerk-react';
 import { OnboardingProvider } from './context/OnboardingContext';
 import { UserProvider } from './context/UserContext';
+import { CurrencyProvider } from './context/CurrencyContext';
 import { setClerkTokenGetter } from './services/api';
 import Navbar from './components/Common/Navbar';
 import LandingPage from './pages/LandingPage';
@@ -91,9 +92,11 @@ export default function App() {
     <ClerkProvider publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY}>
       <UserProvider>
         <OnboardingProvider>
-          <Router>
-            <AppRoutes />
-          </Router>
+          <CurrencyProvider>
+            <Router>
+              <AppRoutes />
+            </Router>
+          </CurrencyProvider>
         </OnboardingProvider>
       </UserProvider>
     </ClerkProvider>

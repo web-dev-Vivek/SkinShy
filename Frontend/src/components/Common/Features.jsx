@@ -133,7 +133,7 @@ function Features() {
              <p className="text-lg text-custom-white/90 mb-8 max-w-2xl mx-auto">
               Join thousands of users discovering products perfectly matched to their skin.
             </p>
-            <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">
+             <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">
               Browse Products
             </button>
          </div>

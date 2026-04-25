@@ -5,10 +5,13 @@ import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanne
 import SafetyScoreComparisonSkeleton from '../components/Skeletons/SafetyScoreComparisonSkeleton';
 import { getProductById } from '../services/products';
 import { api } from '../services/api';
+import { convertPrice } from '../utils/currencyConverter';
+import { useCurrency } from '../context/CurrencyContext';
 
 export default function ProductComparePage() {
   const { isSignedIn, isLoaded } = useAuth();
   const { complete_onboarding } = useOnboarding();
+  const { selectedCurrency } = useCurrency();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -171,9 +174,9 @@ export default function ProductComparePage() {
                       <p className="text-xs text-custom-dark-gray mt-1">
                         {product.productType}
                       </p>
-                      <p className="text-sm font-bold text-custom-charcoal mt-1">
-                        {product.price}
-                      </p>
+                       <p className="text-sm font-bold text-custom-charcoal mt-1">
+                         {convertPrice(product.price, selectedCurrency)}
+                       </p>
                       {isProductSelected(product._id) && (
                         <div className="mt-2 text-xs bg-custom-charcoal text-white px-2 py-1 rounded w-fit">
                           ✓ Selected
@@ -231,10 +234,10 @@ export default function ProductComparePage() {
                         <div className="p-4 space-y-4">
                           {/* Price and Safety Score */}
                           <div className="space-y-2">
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-custom-dark-gray">Price:</span>
-                              <span className="font-bold text-custom-charcoal">{product.price}</span>
-                            </div>
+                             <div className="flex justify-between items-center text-sm">
+                               <span className="text-custom-dark-gray">Price:</span>
+                               <span className="font-bold text-custom-charcoal">{convertPrice(product.price, selectedCurrency)}</span>
+                             </div>
                              {details?.safetyScore && complete_onboarding === 1 && (
                                <div className="flex justify-between items-center text-sm">
                                  <span className="text-custom-dark-gray">Safety Score:</span>

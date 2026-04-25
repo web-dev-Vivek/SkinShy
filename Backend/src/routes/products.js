@@ -14,7 +14,7 @@ const asyncHandler = (fn) => (req, res, next) => {
 
 // GET ALL PRODUCTS (with pagination and search)
 router.get('/', asyncHandler(async (req, res) => {
-  const { search, type, page, skip, limit = 20 } = req.query;
+  const { search, type, page, skip, limit = 100 } = req.query;
   let query = {};
 
   // Search by name or type
@@ -64,7 +64,7 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // SEARCH PRODUCTS
 router.get('/search', asyncHandler(async (req, res) => {
-  const { q, limit = 20 } = req.query;
+  const { q, limit = 100 } = req.query;
 
   if (!q) {
     return res.status(400).json({ error: 'Search query is required' });
@@ -78,10 +78,17 @@ router.get('/search', asyncHandler(async (req, res) => {
     .limit(parseInt(limit))
     .select('_id productName productType price');
 
+  const total = await Product.countDocuments(
+    { $text: { $search: q } }
+  );
+
   res.json({
     success: true,
     data: products,
-    total: products.length
+    pagination: {
+      total,
+      limit: parseInt(limit)
+    }
   });
 }));
 

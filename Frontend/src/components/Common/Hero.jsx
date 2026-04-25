@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Hero() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('interior');
+  const [activeTab, setActiveTab] = useState('safety');
 
   return (
     <section className="relative w-full min-h-screen pt-24 pb-12 overflow-hidden bg-custom-white">
@@ -77,12 +77,12 @@ function Hero() {
             
              {/* Tab Navigation - Design Elements */}
              <div className="inline-flex gap-4 p-1.5 rounded-full w-fit bg-custom-off-white border border-custom-light-gray">
-              {['Interior', 'Design'].map((tab) => (
+              {['Safety score', 'Product comparison'].map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => setActiveTab(tab.toLowerCase())}
+                  onClick={() => setActiveTab(tab === 'Safety score' ? 'safety' : 'comparison')}
                   className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeTab === tab.toLowerCase()
+                    (tab === 'Safety score' && activeTab === 'safety') || (tab === 'Product comparison' && activeTab === 'comparison')
                       ? 'bg-custom-charcoal text-custom-white'
                       : 'text-custom-dark-gray hover:text-custom-charcoal'
                   }`}
@@ -99,27 +99,56 @@ function Hero() {
              <div className="bg-custom-white border border-custom-light-gray rounded-3xl p-10 md:p-12 space-y-6">
               <div className="space-y-2">
                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase font-medium">Featured</p>
-               <h3 className="font-playfair text-3xl md:text-4xl text-custom-charcoal font-light">
-                  Unique design & ergonomics
-                </h3>
-                <p className="text-sm text-custom-dark-gray pt-2">
-                  From blueprints to renders.
-                </p>
+                {activeTab === 'safety' ? (
+                  <>
+                    <h3 className="font-playfair text-3xl md:text-4xl text-custom-charcoal font-light">
+                      Personalized Safety score
+                    </h3>
+                    <p className="text-sm text-custom-dark-gray pt-2">
+                      Get your personalized safety rating.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="font-playfair text-3xl md:text-4xl text-custom-charcoal font-light">
+                      Product comparison with safety score
+                    </h3>
+                    <p className="text-sm text-custom-dark-gray pt-2">
+                      Compare products side by side.
+                    </p>
+                  </>
+                )}
               </div>
 
-               {/* Product showcase with button */}
-               <div className="relative h-48 md:h-56 rounded-2xl bg-custom-light-gray overflow-hidden group">
-                 <div className="absolute inset-0 flex items-center justify-center">
-                   <div className="w-16 h-16 rounded-full bg-custom-charcoal flex items-center justify-center group-hover:scale-110 transition-transform duration-300 cursor-pointer">
-                     <span className="text-custom-white text-2xl ml-1">▶</span>
-                   </div>
-                 </div>
+               {/* Content Container - Changes based on active tab */}
+               <div className="relative rounded-2xl bg-custom-light-gray overflow-hidden h-48 md:h-56">
+                {activeTab === 'safety' ? (
+                  // Safety Score Image Placeholder
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-custom-light-gray to-custom-off-white">
+                    {/* Image placeholder for Safety Score - Edit this manually */}
+                    <img 
+                      src="/Safetyscore.png" 
+                      alt="Safety Score" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  // Product Comparison Image Placeholder
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-custom-light-gray to-custom-off-white">
+                    {/* Image placeholder for Product Comparison - Edit this manually */}
+                    <img 
+                      src="/productcompare.png" 
+                      alt="Product Comparison" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
                </div>
 
                {/* Product Label Badge */}
                <div className="absolute -bottom-6 right-6 bg-custom-white border border-custom-light-gray px-6 py-4 rounded-2xl shadow-xl">
                 <p className="text-sm font-semibold text-custom-charcoal uppercase tracking-wider">
-                  Boddtour
+                  {activeTab === 'safety' ? 'Safety' : 'Compare'}
                 </p>
               </div>
             </div>

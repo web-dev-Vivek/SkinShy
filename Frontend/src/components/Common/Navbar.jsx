@@ -75,44 +75,44 @@ function Navbar() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 group flex-shrink-0"
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group flex-shrink-0 hover:bg-custom-light-gray/20 rounded-lg transition-all duration-200 active:bg-custom-light-gray/40"
           >
-            <div className={`w-full h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
-            <div className={`w-full h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></div>
-            <div className={`w-full h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+            <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+            <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></div>
+            <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
-          <div className="bg-custom-white flex flex-col gap-3 py-4 border-t border-custom-light-gray">
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
+          <div className="bg-custom-white/95 backdrop-blur-sm flex flex-col gap-1 py-4 px-4 border-t border-custom-light-gray/30">
             {isSignedIn && (
               <>
                 <button
                   onClick={() => handleNavigation('/search')}
-                  className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
+                  className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
                 >
-                  Browse
+                  🔍 Browse Products
                 </button>
                 <button
                   onClick={() => handleNavigation('/ingredient-glossary')}
-                  className="text-left text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors py-2 text-sm"
+                  className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
                 >
-                  Compare
+                  📖 Compare Ingredients
                 </button>
               </>
             )}
-            <div className="flex flex-col gap-2 pt-3 border-t border-custom-light-gray">
+            <div className="flex flex-col gap-3 pt-2 border-t border-custom-light-gray/30 mt-2">
               {!isSignedIn ? (
                 <button
                   onClick={() => handleNavigation('/signup')}
-                  className="px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium w-full text-sm"
+                  className="px-4 py-3 bg-custom-charcoal text-custom-white font-semibold rounded-lg hover:bg-custom-black active:scale-95 transition-all duration-200 w-full text-sm"
                 >
-                  Sign Up
+                  Sign Up Free
                 </button>
               ) : (
                 <>
-                  <div className="border-t border-custom-light-gray pt-2">
+                  <div className="pt-2">
                     <ProfileDropdown isMobile={true} />
                   </div>
                 </>
