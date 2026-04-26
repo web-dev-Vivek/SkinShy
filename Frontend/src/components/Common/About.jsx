@@ -1,8 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
+import BtnrotatingBg from '..//BtnrotatingBg';
 
 function About() {
   const navigate = useNavigate();
+  const { isSignedIn, isLoaded } = useAuth();
+
+  const handleGetStarted = () => {
+    if (!isLoaded) return; // Wait for auth to load
+    
+    if (isSignedIn) {
+      navigate('/search');
+    } else {
+      navigate('/signup');
+    }
+  };
 
   return (
     <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c]">
@@ -122,12 +135,9 @@ function About() {
              Stop wasting money on products that don't work. Start your personalized skincare journey today.
            </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2 sm:px-0">
-              <button
-                onClick={() => navigate('/search')}
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-custom-white text-custom-charcoal font-semibold text-sm sm:text-base rounded-xl hover:bg-gray-100 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                🚀 Get Started Free
-              </button>
+              <BtnrotatingBg onClick={handleGetStarted}>
+                Get Started Free
+              </BtnrotatingBg>
             </div>
          </div>
       </div>
