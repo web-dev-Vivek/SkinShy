@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
