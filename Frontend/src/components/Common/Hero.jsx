@@ -1,29 +1,41 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 
 function Hero() {
   const navigate = useNavigate();
+  const { isSignedIn, isLoaded } = useAuth();
   const [activeTab, setActiveTab] = useState('safety');
 
+  const handleBrowseProducts = () => {
+    if (!isLoaded) return; // Wait for auth to load
+    
+    if (isSignedIn) {
+      navigate('/search');
+    } else {
+      navigate('/signup');
+    }
+  };
+
   return (
-    <section className="relative w-full min-h-screen pt-24 pb-12 overflow-hidden bg-custom-white">
+    <section className="relative w-full min-h-screen pt-12 pb-12 overflow-hidden bg-custom-white">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
         style={{ backgroundImage: 'url(/Hero.jpeg)' }}
       ></div>
 
-       {/* Background Elements */}
-       <div className="absolute inset-0 -z-10">
-         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"></div>
-       </div>
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"></div>
+      </div>
 
       <div className="container-custom h-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start min-h-[90vh] py-12 md:py-20">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start min-h-[90vh] pb-12 md:pb-20">
+
           {/* Left Content - Editorial Style */}
           <div className="flex flex-col gap-12 md:gap-16 animate-slide-up pt-12 md:pt-20">
-            
+
             {/* Main Heading - Premium Typography */}
             <div className="space-y-6">
               <div className="space-y-2">
@@ -31,12 +43,12 @@ function Hero() {
                   Discover Premium Skincare
                 </span>
               </div>
-              
+
               {/* Large Playfair Display Headline */}
               <h1 className="font-playfair text-7xl md:text-8xl lg:text-9xl leading-none tracking-tight text-custom-charcoal font-light">
                 Skincare
               </h1>
-              
+
               <h2 className="font-playfair text-6xl md:text-7xl lg:text-8xl leading-tight tracking-tight text-custom-charcoal font-light">
                 Reimagined<span className="text-5xl md:text-6xl lg:text-7xl">®</span>
               </h2>
@@ -48,21 +60,27 @@ function Hero() {
             </div>
 
             {/* CTA Button - Minimal Design */}
-             <div className="flex items-center gap-6">
-               <button
-                 onClick={() => navigate('/search')}
-                 className="px-10 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-full hover:bg-custom-black transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider"
-               >
-                 Browse Products
-               </button>
-               <div className="flex items-center gap-3">
-                 <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
-                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase">Explore</p>
-               </div>
-             </div>
+            <div className="">
+              <button
+                onClick={handleBrowseProducts}
+                className="px-5 py-3  text-custom-black font-semibold rounded-full transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider flex justify-center gap-2 items-center shadow-xl bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-black hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 overflow-hidden border-2 group"
+              >
+                Browse Products
+                <svg
+                  class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+                  viewBox="0 0 16 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                    class="fill-gray-800 group-hover:fill-gray-800"
+                  ></path>
+                </svg>
+              </button>
+            </div>
 
-             {/* Material Info Card - Bottom Left */}
-             <div className="bg-custom-white border border-custom-light-gray p-8 md:p-10 max-w-sm rounded-3xl mt-auto">
+            {/* Material Info Card - Bottom Left */}
+            <div className="bg-custom-white border border-custom-light-gray p-8 md:p-10 max-w-sm rounded-3xl mt-auto">
               <h4 className="font-playfair font-bold text-xl md:text-2xl text-custom-charcoal mb-3">
                 We use best ingredients!
               </h4>
@@ -74,18 +92,17 @@ function Hero() {
 
           {/* Right Content - Interactive Section */}
           <div className="hidden lg:flex flex-col gap-8 animate-slide-up delay-2 pt-8">
-            
-             {/* Tab Navigation - Design Elements */}
-             <div className="inline-flex gap-4 p-1.5 rounded-full w-fit bg-custom-off-white border border-custom-light-gray">
+
+            {/* Tab Navigation - Design Elements */}
+            <div className="inline-flex gap-4 p-1.5 rounded-full w-fit bg-custom-off-white border border-custom-light-gray">
               {['Safety score', 'Product comparison'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab === 'Safety score' ? 'safety' : 'comparison')}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    (tab === 'Safety score' && activeTab === 'safety') || (tab === 'Product comparison' && activeTab === 'comparison')
-                      ? 'bg-custom-charcoal text-custom-white'
-                      : 'text-custom-dark-gray hover:text-custom-charcoal'
-                  }`}
+                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${(tab === 'Safety score' && activeTab === 'safety') || (tab === 'Product comparison' && activeTab === 'comparison')
+                    ? 'bg-custom-charcoal text-custom-white'
+                    : 'text-custom-dark-gray hover:text-custom-charcoal'
+                    }`}
                 >
                   {tab}
                 </button>
@@ -95,8 +112,8 @@ function Hero() {
               </div>
             </div>
 
-             {/* Premium Feature Card */}
-             <div className="bg-custom-white border border-custom-light-gray rounded-3xl p-10 md:p-12 space-y-6">
+            {/* Premium Feature Card */}
+            <div className="bg-custom-white border border-custom-light-gray rounded-3xl p-10 md:p-12 space-y-6">
               <div className="space-y-2">
                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase font-medium">Featured</p>
                 {activeTab === 'safety' ? (
@@ -120,15 +137,15 @@ function Hero() {
                 )}
               </div>
 
-               {/* Content Container - Changes based on active tab */}
-               <div className="relative rounded-2xl bg-custom-light-gray overflow-hidden h-48 md:h-56">
+              {/* Content Container - Changes based on active tab */}
+              <div className="relative rounded-2xl bg-custom-light-gray overflow-hidden h-48 md:h-56">
                 {activeTab === 'safety' ? (
                   // Safety Score Image Placeholder
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-custom-light-gray to-custom-off-white">
                     {/* Image placeholder for Safety Score - Edit this manually */}
-                    <img 
-                      src="/Safetyscore.png" 
-                      alt="Safety Score" 
+                    <img
+                      src="/Safetyscore.png"
+                      alt="Safety Score"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -136,17 +153,17 @@ function Hero() {
                   // Product Comparison Image Placeholder
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-custom-light-gray to-custom-off-white">
                     {/* Image placeholder for Product Comparison - Edit this manually */}
-                    <img 
-                      src="/productcompare.png" 
-                      alt="Product Comparison" 
+                    <img
+                      src="/productcompare.png"
+                      alt="Product Comparison"
                       className="w-full h-full object-cover"
                     />
                   </div>
                 )}
-               </div>
+              </div>
 
-               {/* Product Label Badge */}
-               <div className="absolute -bottom-6 right-6 bg-custom-white border border-custom-light-gray px-6 py-4 rounded-2xl shadow-xl">
+              {/* Product Label Badge */}
+              <div className="absolute -bottom-6 right-6 bg-custom-white border border-custom-light-gray px-6 py-4 rounded-2xl shadow-xl">
                 <p className="text-sm font-semibold text-custom-charcoal uppercase tracking-wider">
                   {activeTab === 'safety' ? 'Safety' : 'Compare'}
                 </p>
@@ -159,10 +176,10 @@ function Hero() {
                 <div className="w-12 h-12 rounded-full bg-custom-light-gray flex items-center justify-center text-lg">👤</div>
                 <div className="w-12 h-12 rounded-full bg-custom-light-gray flex items-center justify-center text-lg -ml-4">👤</div>
               </div>
-              
+
               <div className="space-y-2">
                 <p className="font-playfair text-lg md:text-xl text-custom-charcoal font-light">
-                  WE CAN COMBINE<br/>NATURE & HOME<br/>COMFORT
+                  WE CAN COMBINE<br />NATURE & HOME<br />COMFORT
                 </p>
                 <button className="text-xs font-semibold text-custom-charcoal uppercase tracking-wider hover:text-custom-black transition-colors pt-2">
                   LEARN MORE →

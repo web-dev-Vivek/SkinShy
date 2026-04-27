@@ -191,7 +191,7 @@ export default function ProductPage() {
 
              {/* Product Name & Price */}
              <div className="border-t pt-6 space-y-3">
-               <h1 className="text-2xl lg:text-3xl font-bold text-custom-charcoal font-playfair break-words">{product.productName}</h1>
+               <h1 className="text-xl lg:text-2xl font-bold text-custom-charcoal font-serif break-words">{product.productName}</h1>
                
                {product.productType && (
                  <p className="text-custom-dark-gray text-sm lg:text-base">{product.productType}</p>
@@ -241,7 +241,16 @@ export default function ProductPage() {
               </div>
             )}
             
-            {/* Ingredients Section */}
+            {/* Safety & Risk Percentage - Below Ingredients */}
+                    {isSignedIn && (
+                      safetyScore ? (
+                        <SafetyBar safetyScore={safetyScore} />
+                      ) : (
+                        <SafetyScoreSkeleton />
+                      )
+                    )}
+
+                    {/* Ingredients Section */}
             {ingredientsList.length > 0 && (
               <div className="bg-custom-off-white border border-custom-light-gray/20 rounded-2xl p-6 lg:p-8">
                 <div className="flex items-center justify-between mb-6">
@@ -272,15 +281,6 @@ export default function ProductPage() {
                   ))}
                 </div>
               </div>
-            )}
-
-            {/* Safety & Risk Percentage - Below Ingredients */}
-            {isSignedIn && (
-              safetyScore ? (
-                <SafetyBar safetyScore={safetyScore} />
-              ) : (
-                <SafetyScoreSkeleton />
-              )
             )}
           </div>
         </div>

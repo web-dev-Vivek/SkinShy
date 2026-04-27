@@ -179,7 +179,7 @@ export default function SearchPage() {
                    onClick={() => handleProductClick(product._id, product.productName)}
                    className="border border-custom-light-gray/20 rounded-lg p-4 hover:shadow-lg hover:border-custom-charcoal/30 transition cursor-pointer hover:scale-105 transform"
                  >
-                  <h3 className="font-semibold text-custom-charcoal mb-2 line-clamp-2 hover:text-custom-black">
+                  <h3 className="font-semibold text-custom-charcoal text-2xl font-lato mb-2 line-clamp-2 hover:text-custom-black">
                     {product.productName}
                   </h3>
                   <p className="text-sm text-custom-dark-gray mb-2">
