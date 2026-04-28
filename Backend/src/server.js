@@ -24,11 +24,18 @@ const corsOptions = {
       'http://127.0.0.1:3000',
       'http://127.0.0.1:3001',
       process.env.FRONTEND_URL
-    ];
+    ].filter(Boolean); // Remove undefined values
     
-    if (allowedOrigins.includes(origin) || process.env.NODE_ENV === 'development') {
+    // In development, allow all origins
+    if (process.env.NODE_ENV === 'development') {
+      return callback(null, true);
+    }
+    
+    // In production, only allow specified origins
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.warn(`CORS blocked request from origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },

@@ -7,6 +7,7 @@ import ProductCardSkeleton from '../components/Skeletons/ProductCardSkeleton';
 import CurrencySelector from '../components/Common/CurrencySelector';
 import { convertPrice } from '../utils/currencyConverter';
 import { useCurrency } from '../context/CurrencyContext';
+import api from '../services/api';
 
 const PRODUCTS_PER_PAGE = 100;
 
@@ -31,14 +32,17 @@ export default function SearchPage() {
     setFilteredProducts([]);
     setHasMoreProducts(true);
     
-    let url = `http://localhost:5000/api/products?skip=0&limit=${PRODUCTS_PER_PAGE}`;
+    let params = {
+      skip: 0,
+      limit: PRODUCTS_PER_PAGE
+    };
     if (searchQuery.trim()) {
-      url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+      params.search = searchQuery.trim();
     }
     
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
+    api.get('/products', { params })
+      .then(res => {
+        const data = res.data;
         setProducts(data.data || []);
         setFilteredProducts(data.data || []);
         // Check if there are more products available by comparing with total count
@@ -61,14 +65,17 @@ export default function SearchPage() {
     setLoadingMore(true);
     const skip = currentPage * PRODUCTS_PER_PAGE;
     
-    let url = `http://localhost:5000/api/products?skip=${skip}&limit=${PRODUCTS_PER_PAGE}`;
+    let params = {
+      skip,
+      limit: PRODUCTS_PER_PAGE
+    };
     if (searchQuery.trim()) {
-      url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+      params.search = searchQuery.trim();
     }
     
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
+    api.get('/products', { params })
+      .then(res => {
+        const data = res.data;
         const newProducts = data.data || [];
         setProducts(prev => {
           const combined = [...prev, ...newProducts];
