@@ -15,7 +15,6 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import OnboardingPage from './pages/OnboardingPage';
 import ProductComparePage from './pages/ProductComparePage';
-import IngredientGlossaryPage from './pages/IngredientGlossaryPage';
 import GuidePage from './pages/GuidePage';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -80,7 +79,7 @@ function AppRoutes() {
           path="/ingredient-glossary"
           element={
             <ProtectedRoute>
-              <IngredientGlossaryPage />
+              <ProductComparePage />
             </ProtectedRoute>
           }
         />
