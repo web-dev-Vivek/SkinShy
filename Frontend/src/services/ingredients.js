@@ -10,11 +10,10 @@ export const searchIngredients = async (query) => {
     return response.data.data;
   } catch (error) {
     console.error('Error searching ingredients:', error.response?.data || error.message);
-    throw {
-      message: error.response?.data?.error || error.message || 'Failed to search ingredients',
-      status: error.response?.status,
-      details: error.response?.data
-    };
+    const err = new Error(error.response?.data?.error || error.message || 'Failed to search ingredients');
+    err.status = error.response?.status;
+    err.details = error.response?.data;
+    throw err;
   }
 };
 
@@ -26,11 +25,10 @@ export const getIngredientDetails = async (ingredientName) => {
     return response.data.data;
   } catch (error) {
     console.error('Error fetching ingredient details:', error.response?.data || error.message);
-    throw {
-      message: error.response?.data?.error || error.message || 'Failed to load ingredient details',
-      status: error.response?.status,
-      details: error.response?.data
-    };
+    const err = new Error(error.response?.data?.error || error.message || 'Failed to load ingredient details');
+    err.status = error.response?.status;
+    err.details = error.response?.data;
+    throw err;
   }
 };
 
@@ -40,10 +38,9 @@ export const getAllIngredients = async () => {
     return response.data.data;
   } catch (error) {
     console.error('Error fetching all ingredients:', error.response?.data || error.message);
-    throw {
-      message: error.response?.data?.error || error.message || 'Failed to fetch ingredients',
-      status: error.response?.status,
-      details: error.response?.data
-    };
+    const err = new Error(error.response?.data?.error || error.message || 'Failed to fetch ingredients');
+    err.status = error.response?.status;
+    err.details = error.response?.data;
+    throw err;
   }
 };
