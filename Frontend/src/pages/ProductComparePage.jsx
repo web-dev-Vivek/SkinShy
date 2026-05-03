@@ -4,6 +4,7 @@ import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
 import SafetyScoreComparisonSkeleton from '../components/Skeletons/SafetyScoreComparisonSkeleton';
 import { getProductById } from '../services/products';
+import { api } from '../services/api';
 import { convertPrice } from '../utils/currencyConverter';
 import { useCurrency } from '../context/CurrencyContext';
 
@@ -23,11 +24,10 @@ export default function ProductComparePage() {
   // Fetch all products
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:5000/api/products?limit=100')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data.data);
-        setFilteredProducts(data.data);
+    api.get('/products?limit=100')
+      .then(res => {
+        setProducts(res.data.data);
+        setFilteredProducts(res.data.data);
         setLoading(false);
       })
       .catch(err => {
