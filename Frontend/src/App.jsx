@@ -15,6 +15,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import OnboardingPage from './pages/OnboardingPage';
 import ProductComparePage from './pages/ProductComparePage';
+import IngredientGlossaryPage from './pages/IngredientGlossaryPage';
+import GuidePage from './pages/GuidePage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Component to initialize token getter - must be inside Router
@@ -78,9 +80,13 @@ function AppRoutes() {
           path="/ingredient-glossary"
           element={
             <ProtectedRoute>
-              <ProductComparePage />
+              <IngredientGlossaryPage />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/guide"
+          element={<GuidePage />}
         />
       </Routes>
     </>

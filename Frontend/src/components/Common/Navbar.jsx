@@ -30,6 +30,12 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
+            <button
+              onClick={() => handleNavigation('/guide')}
+              className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
+            >
+              Guide
+            </button>
             {isSignedIn && (
               <>
                 <button
@@ -78,6 +84,12 @@ function Navbar() {
         {/* Mobile Menu */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
           <div className="bg-custom-white/95 backdrop-blur-sm flex flex-col gap-1 py-4 px-4 border-t border-custom-light-gray/30">
+            <button
+              onClick={() => handleNavigation('/guide')}
+              className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
+            >
+              📚 Guide
+            </button>
             {isSignedIn && (
               <>
                 <button
