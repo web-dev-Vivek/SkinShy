@@ -22,7 +22,27 @@ export default function SearchPage() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMoreProducts, setHasMoreProducts] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const observerTarget = useRef(null);
+
+  // Handle responsive background image
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Preload background images
+  useEffect(() => {
+    const preloadImage = (src) => {
+      const img = new Image();
+      img.src = src;
+    };
+    preloadImage('/Backmen.png');
+    preloadImage('/Backmenmobile.png');
+  }, []);
 
   // Initial load - fetch first batch of products
   useEffect(() => {
@@ -124,102 +144,116 @@ export default function SearchPage() {
     navigate(`/search/${productId}`, { state: { productName } });
   };
 
-  return (
-    <>
-      <OnboardingWarningBanner />
-      <div className="min-h-screen bg-custom-white px-4 py-8 mt-20">
-      <div className="max-w-7xl mx-auto">
-       {/* Header */}
-          <div className="mb-8">
-            <div className="mb-4">
-              <h1 className="text-4xl font-bold font-playfair text-custom-charcoal mb-2">
-                Welcome, {user?.firstName || 'User'}!
-              </h1>
-              <p className="text-custom-dark-gray">
-                Browse personalized skincare products for you
-              </p>
-            </div>
-            
-            {/* Search Bar and Currency Converter on same line */}
-            <div className="flex gap-2">
-              <div className="w-12/14">
-                <input
-                  type="text"
-                  placeholder="Search products by name or type..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 border border-custom-light-gray/30 rounded-lg focus:ring-2 focus:ring-custom-charcoal focus:border-transparent text-custom-charcoal placeholder-custom-dark-gray"
-                />
+   return (
+     <>
+       <OnboardingWarningBanner />
+        <div 
+          className="h-screen overflow-y-auto relative"
+          style={{
+            backgroundImage: `url('${isMobile ? '/Backmenmobile.png' : '/Backmen.png'}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          {/* Blur overlay */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-md pointer-events-none"></div>
+          
+          {/* Content wrapper */}
+          <div className="relative z-10 px-4 py-8 mt-20 pb-20">
+           <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="mb-8">
+              <div className="mb-4">
+                <h1 className="text-4xl font-bold font-playfair text-white mb-2">
+                  Welcome, {user?.firstName || 'User'}!
+                </h1>
+                <p className="text-white/80">
+                  Browse personalized skincare products for you
+                </p>
               </div>
-              <div className="w-1/14 flex items-center">
-                <CurrencySelector />
-              </div>
-            </div>
-          </div>
-
-        {/* Results Count */}
-        <div className="mb-6 text-sm text-custom-dark-gray">
-          Found {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-        </div>
-
-        {/* Loading State */}
-        {loading && (
-          <ProductGridSkeleton count={12} />
-        )}
-
-        {/* No Results */}
-        {!loading && filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-custom-dark-gray text-lg">
-              No products found matching "{searchQuery}"
-            </p>
-          </div>
-        )}
-
-        {/* Products Grid */}
-        {!loading && filteredProducts.length > 0 && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-               {filteredProducts.map(product => (
-                 <div
-                   key={product._id}
-                   onClick={() => handleProductClick(product._id, product.productName)}
-                   className="border border-custom-light-gray/20 rounded-lg p-4 hover:shadow-lg hover:border-custom-charcoal/30 transition cursor-pointer hover:scale-105 transform"
-                 >
-                  <h3 className="font-semibold text-custom-charcoal mb-2 line-clamp-2 hover:text-custom-black">
-                    {product.productName}
-                  </h3>
-                  <p className="text-sm text-custom-dark-gray mb-2">
-                    {product.productType}
-                  </p>
-                   <p className="text-lg font-bold text-custom-charcoal">
-                     {convertPrice(product.price, selectedCurrency)}
-                   </p>
+              
+              {/* Search Bar and Currency Converter on same line */}
+              <div className="flex gap-2">
+                <div className="md:w-12/14">
+                  <input
+                    type="text"
+                    placeholder="Search products by name or type..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-4 py-3 border border-white/30 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent text-custom-charcoal placeholder-custom-dark-gray bg-white/90 backdrop-blur-sm"
+                  />
                 </div>
-              ))}
+                <div className="w-1/14 flex items-center">
+                  <CurrencySelector />
+                </div>
+              </div>
             </div>
 
-            {/* Loading More Indicator */}
-            {loadingMore && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {Array.from({ length: 4 }).map((_, idx) => (
-                  <ProductCardSkeleton key={idx} />
-                ))}
+            {/* Results Count */}
+            <div className="mb-6 text-sm text-white/80">
+              Found {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+            </div>
+
+            {/* Loading State */}
+            {loading && (
+              <ProductGridSkeleton count={12} />
+            )}
+
+            {/* No Results */}
+            {!loading && filteredProducts.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-white/80 text-lg">
+                  No products found matching "{searchQuery}"
+                </p>
               </div>
             )}
 
-            {/* Observer target for infinite scroll */}
-            <div ref={observerTarget} className="py-8" />
+            {/* Products Grid */}
+            {!loading && filteredProducts.length > 0 && (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {filteredProducts.map(product => (
+                    <div
+                      key={product._id}
+                      onClick={() => handleProductClick(product._id, product.productName)}
+                      className="border border-white/20 rounded-lg p-4 hover:shadow-lg hover:border-white/50 transition cursor-pointer hover:scale-105 transform bg-white/10 backdrop-blur-sm"
+                    >
+                      <h3 className="font-semibold text-white mb-2 line-clamp-2 hover:text-white/80">
+                        {product.productName}
+                      </h3>
+                      <p className="text-sm text-white/70 mb-2">
+                        {product.productType}
+                      </p>
+                      <p className="text-lg font-bold text-white">
+                        {convertPrice(product.price, selectedCurrency)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-            {/* No More Products Message */}
-            {!hasMoreProducts && filteredProducts.length > 0 && (
-              <div className="text-center py-8">
-                <p className="text-custom-dark-gray">You've reached the end of available products</p>
-              </div>
+                {/* Loading More Indicator */}
+                {loadingMore && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {Array.from({ length: 4 }).map((_, idx) => (
+                      <ProductCardSkeleton key={idx} />
+                    ))}
+                  </div>
+                )}
+
+                {/* Observer target for infinite scroll */}
+                <div ref={observerTarget} className="py-8" />
+
+                {/* No More Products Message */}
+                {!hasMoreProducts && filteredProducts.length > 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-white/80">You've reached the end of available products</p>
+                  </div>
+                )}
+              </>
             )}
-          </>
-        )}
-       </div>
+          </div>
+        </div>
       </div>
     </>
   );

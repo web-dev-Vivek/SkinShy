@@ -5,25 +5,38 @@ function About() {
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c] bg-center bg-cover bg-no-repeat" data-scroll
-      data-scroll-speed="1"  style={{ backgroundImage: `
+    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c] bg-center bg-cover bg-no-repeat overflow-hidden" data-scroll
+      style={{ backgroundImage: `
       url(${window.innerWidth >= 768 ? '/Back2.png' : '/Back2mobile.png'})
     `}}>
+      
+      {/* Parallax Background - moves slower than content */}
+      <div className="absolute inset-0 -z-20 will-change-transform"
+        data-scroll
+        data-scroll-speed="-0.4"
+        style={{
+          backgroundImage: `url(${window.innerWidth >= 768 ? '/Back2.png' : '/Back2mobile.png'})`,
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+       >
+      </div>
       
       {/* Decorative Elements */}
       <div className="absolute inset-0 -z-10"
        >
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-custom-off-white opacity-30 blur-3xl"></div>
-        <div className="absolute top-20 left-0 w-64 h-64 rounded-full bg-custom-light-gray opacity-20 blur-3xl"></div>
-      </div>
+         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-custom-off-white opacity-30 blur-3xl"></div>
+         <div className="absolute top-20 left-0 w-64 h-64 rounded-full bg-custom-light-gray opacity-20 blur-3xl"></div>
+       </div>
 
       <div className="container-custom">
         
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
-          {/* Left Content */}
-          <div className="space-y-8 animate-slide-up">
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+           
+           {/* Left Content */}
+           <div className="space-y-8 animate-slide-up will-change-transform" data-scroll data-scroll-speed="1">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-3 mb-4">
                 <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
@@ -81,14 +94,14 @@ function About() {
             </button>
           </div>
 
-           {/* Right Visual */}
-           <div className="relative animate-slide-up delay-2">
+            {/* Right Visual */}
+            <div className="relative animate-slide-up delay-2 will-change-transform" data-scroll data-scroll-speed="1">
              <div className="grid grid-cols-2 gap-6">
                {/* Large Card */}
                <div className="glass-premium col-span-2 rounded-3xl p-8 md:p-10">
                  <div className="flex items-center justify-between mb-4">
                    <h4 className="font-playfair font-bold text-2xl text-custom-charcoal">Premium Match</h4>
-                   <span className="text-3xl">🎯</span>
+                   
                  </div>
                  <p className="text-custom-dark-gray">AI finds your perfect product match</p>
                </div>
@@ -117,8 +130,8 @@ function About() {
            </div>
         </div>
 
-        {/* Final CTA */}
-         <div className="glass-dark mt-16 sm:mt-24 py-12 sm:py-16 md:py-20 px-4 sm:px-8 rounded-2xl sm:rounded-3xl text-custom-white text-center animate-slide-up delay-3">
+         {/* Final CTA */}
+          <div className="glass-dark mt-16 sm:mt-24 py-12 sm:py-16 md:py-20 px-4 sm:px-8 rounded-2xl sm:rounded-3xl text-custom-white text-center animate-slide-up delay-3 will-change-transform" data-scroll data-scroll-speed="0.8">
            <h3 className="heading-gradient text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-6 font-playfair font-bold leading-snug">
              Your Perfect Skincare Match Awaits
            </h3>
@@ -130,7 +143,7 @@ function About() {
                 onClick={() => navigate('/search')}
                 className="px-6 sm:px-8 py-3 sm:py-4 bg-custom-white text-custom-charcoal font-semibold text-sm sm:text-base rounded-xl hover:bg-gray-100 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                🚀 Get Started Free
+               Get Started Free
               </button>
             </div>
          </div>

@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser } from '@clerk/clerk-react';
 import gsap from 'gsap';
-import ProfileDropdown from './ProfileDropdown';
 
 function Navbar() {
   const navigate = useNavigate();
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, signOut } = useAuth();
+  const { user: clerkUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef(null);
+  const overlayRef = useRef(null);
+  const drawerRef = useRef(null);
   const lastScrollRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isOpen) return; // Don't animate if mobile menu is open
+      if (isOpen) return;
 
       const currentScroll = window.scrollY;
       
-      // Prevent tiny scroll jitter - only animate on significant scroll
       if (Math.abs(currentScroll - lastScrollRef.current) < 50) return;
 
       const isScrollingDown = currentScroll > lastScrollRef.current;
@@ -39,7 +40,7 @@ function Navbar() {
     };
   }, [isOpen]);
 
-  // Reset navbar position when mobile menu opens
+  // Handle drawer animation
   useEffect(() => {
     if (isOpen) {
       gsap.to(navRef.current, {
@@ -47,6 +48,40 @@ function Navbar() {
         duration: 0.5,
         ease: 'power3.in'
       });
+
+      // Animate overlay in
+      gsap.to(overlayRef.current, {
+        opacity: 1,
+        pointerEvents: 'auto',
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+
+      // Animate drawer in from right
+      gsap.to(drawerRef.current, {
+        x: 0,
+        opacity: 1,
+        duration: 0.4,
+        ease: 'power3.out'
+      });
+
+      document.body.style.overflow = 'hidden';
+    } else {
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        pointerEvents: 'none',
+        duration: 0.3,
+        ease: 'power2.in'
+      });
+
+      gsap.to(drawerRef.current, {
+        x: 400,
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power3.in'
+      });
+
+      document.body.style.overflow = 'unset';
     }
   }, [isOpen]);
 
@@ -55,119 +90,202 @@ function Navbar() {
     setIsOpen(false);
   };
 
-  return (
-    <nav ref={navRef} className="fixed top-0 backdrop-blur-xl left-0 right-0 z-50 ">
-      <div className="container-custom">
-        <div className="flex justify-between items-center h-16 sm:h-20">
-          {/* Logo */}
-          <div 
-            onClick={() => handleNavigation('/')}
-            className="cursor-pointer group flex-shrink-0"
-          >
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
-              Skinshy
-            </h1>
-            <div className="h-0.5 w-0 group-hover:w-full bg-custom-charcoal transition-all duration-300"></div>
-          </div>
+  const handleSignOut = () => {
+    signOut(() => {
+      window.location.href = '/';
+    });
+  };
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-8">
-            <button
-              onClick={() => handleNavigation('/guide')}
-              className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  const menuItems = isSignedIn ? [
+    { label: 'Guide', icon: '📚', path: '/guide' },
+    { label: 'Browse', icon: '🔍', path: '/search' },
+    { label: 'Compare', icon: '⚖️', path: '/product_Comparasion' },
+  ] : [
+    { label: 'Guide', icon: '📚', path: '/guide' },
+  ];
+
+  return (
+    <>
+      {/* Navbar */}
+      <nav ref={navRef} className="fixed top-0 backdrop-blur-xl bg-custom-white/95 left-0 right-0 z-40 border-b border-custom-light-gray/20">
+        <div className="container-custom">
+          <div className="flex justify-between items-center h-16 sm:h-20">
+            {/* Logo */}
+            <div 
+              onClick={() => handleNavigation('/')}
+              className="cursor-pointer group flex-shrink-0"
             >
-              Guide
-            </button>
-            {isSignedIn && (
-              <>
-                <button
-                  onClick={() => handleNavigation('/search')}
-                  className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
-                >
-                  Browse
-                </button>
-                <button
-                  onClick={() => handleNavigation('/product_Comparasion')}
-                  className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
-                >
-                  Compare
-                </button>
-              </>
-            )}
-          </div>
+              <h1 className="text-2xl sm:text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
+                Skinshy
+              </h1>
+              <div className="h-0.5 w-0 group-hover:w-full bg-custom-charcoal transition-all duration-300"></div>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center gap-12">
+              <button
+                onClick={() => handleNavigation('/guide')}
+                className="text-sm font-medium text-custom-dark-gray hover:text-custom-charcoal transition-colors duration-200 relative group font-lato"
+              >
+                Guide
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-custom-charcoal group-hover:w-full transition-all duration-300"></span>
+              </button>
+              {isSignedIn && (
+                <>
+                  <button
+                    onClick={() => handleNavigation('/search')}
+                    className="text-sm font-medium text-custom-dark-gray hover:text-custom-charcoal transition-colors duration-200 relative group font-lato"
+                  >
+                    Browse
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-custom-charcoal group-hover:w-full transition-all duration-300"></span>
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('/product_Comparasion')}
+                    className="text-sm font-medium text-custom-dark-gray hover:text-custom-charcoal transition-colors duration-200 relative group font-lato"
+                  >
+                    Compare
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-custom-charcoal group-hover:w-full transition-all duration-300"></span>
+                  </button>
+                </>
+              )}
+            </div>
 
             {/* Right Side Buttons - Desktop */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-6">
               {!isSignedIn ? (
                 <>
                   <button
                     onClick={() => handleNavigation('/signup')}
-                    className="px-3 sm:px-4 py-2 bg-custom-charcoal text-custom-white rounded-lg hover:bg-custom-black transition font-medium text-sm"
+                    className="px-6 py-2.5 bg-custom-charcoal text-custom-white rounded-full hover:bg-custom-black transition-all duration-200 font-medium text-sm font-lato"
                   >
                     Sign Up
                   </button>
                 </>
               ) : (
-                <ProfileDropdown />
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="w-10 h-10 rounded-full overflow-hidden border-2 border-custom-light-gray hover:border-custom-charcoal transition-all duration-200"
+                >
+                  {clerkUser?.profileImageUrl ? (
+                    <img
+                      src={clerkUser.profileImageUrl}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-custom-charcoal flex items-center justify-center text-custom-white text-sm font-semibold font-playfair">
+                      {clerkUser?.firstName?.charAt(0).toUpperCase() || 'U'}
+                    </div>
+                  )}
+                </button>
               )}
             </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group flex-shrink-0 hover:bg-custom-light-gray/20 rounded-lg transition-all duration-200 active:bg-custom-light-gray/40"
-          >
-            <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
-            <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></div>
-            <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-          <div className="bg-custom-white flex flex-col gap-1 py-4 px-4">
+            {/* Mobile Menu Toggle */}
             <button
-              onClick={() => handleNavigation('/guide')}
-              className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group flex-shrink-0 hover:bg-custom-light-gray/20 rounded-lg transition-all duration-200 active:bg-custom-light-gray/40"
             >
-              📚 Guide
+              <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+              <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></div>
+              <div className={`w-5 h-0.5 bg-custom-charcoal transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
             </button>
-            {isSignedIn && (
-              <>
-                <button
-                  onClick={() => handleNavigation('/search')}
-                  className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
-                >
-                  🔍 Browse Products
-                </button>
-                <button
-                  onClick={() => handleNavigation('/product_Comparasion')}
-                  className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
-                >
-                  📖 Compare Ingredients
-                </button>
-              </>
-            )}
-            <div className="flex flex-col gap-3 pt-2 border-t border-custom-light-gray/30 mt-2">
-              {!isSignedIn ? (
-                <button
-                  onClick={() => handleNavigation('/signup')}
-                  className="px-4 py-3 bg-custom-charcoal text-custom-white font-semibold rounded-lg hover:bg-custom-black active:scale-95 transition-all duration-200 w-full text-sm"
-                >
-                  Sign Up Free
-                </button>
-              ) : (
-                <>
-                  <div className="pt-2">
-                    <ProfileDropdown isMobile={true} />
-                  </div>
-                </>
-              )}
-            </div>
           </div>
         </div>
+      </nav>
+
+      {/* Overlay */}
+      <div
+        ref={overlayRef}
+        onClick={closeMenu}
+        className="fixed inset-0 bg-custom-charcoal/40 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-300"
+        style={{ top: '0' }}
+      />
+
+      {/* Drawer Menu - Premium Design */}
+      <div
+        ref={drawerRef}
+        className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-custom-white z-40 shadow-2xl rounded-l-3xl flex flex-col overflow-hidden"
+        style={{ transform: 'translateX(400px)', opacity: 0 }}
+      >
+        {/* Profile Section */}
+        {isSignedIn && (
+          <div className="bg-gradient-to-b from-custom-light-gray/30 to-custom-off-white/20 backdrop-blur-sm p-8 border-b border-custom-light-gray/20">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-custom-charcoal shadow-lg">
+                {clerkUser?.profileImageUrl ? (
+                  <img
+                    src={clerkUser.profileImageUrl}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-custom-charcoal flex items-center justify-center text-custom-white text-2xl font-bold font-playfair">
+                    {clerkUser?.firstName?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                )}
+              </div>
+              <div className="text-center">
+                <h2 className="text-lg font-playfair font-bold text-custom-charcoal">
+                  {clerkUser?.firstName || 'User'}
+                </h2>
+                <button
+                  onClick={() => {
+                    handleNavigation('/profile');
+                  }}
+                  className="text-xs text-custom-dark-gray hover:text-custom-charcoal transition-colors mt-1 font-lato"
+                >
+                  View profile
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Menu Items */}
+        <div className="flex-1 overflow-y-auto px-4 py-8 space-y-3">
+          {menuItems.map((item) => (
+            <button
+              key={item.path}
+              onClick={() => handleNavigation(item.path)}
+              className="w-full flex items-center gap-4 px-6 py-4 text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/15 rounded-2xl transition-all duration-200 group active:bg-custom-light-gray/30 font-lato text-sm font-medium"
+            >
+              <span className="text-xl group-hover:scale-110 transition-transform duration-200">
+                {item.icon}
+              </span>
+              <span className="group-hover:translate-x-1 transition-transform duration-200">
+                {item.label}
+              </span>
+            </button>
+          ))}
+
+          {!isSignedIn && (
+            <button
+              onClick={() => handleNavigation('/signup')}
+              className="w-full mt-6 px-6 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-2xl hover:bg-custom-black transition-all duration-200 font-lato text-sm"
+            >
+              Sign Up
+            </button>
+          )}
+        </div>
+
+        {/* Footer - Sign Out */}
+        {isSignedIn && (
+          <div className="border-t border-custom-light-gray/20 p-6">
+            <button
+              onClick={handleSignOut}
+              className="w-full px-6 py-3 text-custom-charcoal border border-custom-light-gray rounded-2xl hover:bg-custom-light-gray/20 transition-all duration-200 font-lato text-sm font-medium"
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
       </div>
-    </nav>
+    </>
   );
 }
 

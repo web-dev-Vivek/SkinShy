@@ -12,33 +12,33 @@ function Hero() {
     >
       {/* Background Image - Parallax effect (moves slower) */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70 will-change-transform"
         data-scroll
         data-scroll-speed="-1"
         style={{ backgroundImage: 'url(/Backmen.png)' }}
       ></div>
 
         <div 
-          className="block md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
+          className="block md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70 will-change-transform"
           data-scroll
-          data-scroll-speed="-1"
+          data-scroll-speed="-3"
           style={{ backgroundImage: 'url(/Backmenmobile.png)' }}
         ></div>
 
        {/* Background Elements */}
        <div className="absolute inset-0 -z-10">
          <div 
-           className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"
+           className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60 will-change-transform"
            data-scroll
-           data-scroll-speed="-1"
+           data-scroll-speed="-2"
          ></div>
        </div>
 
        <div className="container-custom h-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start min-h-[90vh] py-12 md:py-20">
-          
-           {/* Left Content - Editorial Style */}
-           <div className="flex flex-col gap-12 md:gap-16 pt-12 md:pt-20" data-scroll data-scroll-speed="">
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start min-h-[90vh] py-12 md:py-20">
+           
+            {/* Left Content - Editorial Style */}
+            <div className="flex flex-col gap-12 md:gap-16 pt-12 md:pt-20 will-change-transform" data-scroll data-scroll-speed="1">
             
             {/* Main Heading - Premium Typography */}
             <div className="space-y-6">
@@ -88,8 +88,8 @@ function Hero() {
             </div>
           </div>
 
-           {/* Right Content - Desktop Featured Card Section */}
-           <div className="hidden lg:flex flex-col gap-8 animate-slide-up delay-2 pt-8" data-scroll data-scroll-speed="">
+            {/* Right Content - Desktop Featured Card Section */}
+            <div className="hidden lg:flex flex-col gap-8 animate-slide-up delay-2 pt-8 will-change-transform" data-scroll data-scroll-speed="1">
             
              {/* Tab Navigation - Design Elements */}
              <div className="inline-flex gap-4 p-1.5 rounded-full w-fit bg-custom-off-white border border-custom-light-gray">

@@ -199,3 +199,55 @@ html.has-scroll-smooth body {
 [data-scroll] {
   will-change: transform;
 }
+
+/* Glass morphism effect for parallax sections */
+.glass {
+  @apply backdrop-blur-md bg-white/15;
+}
+
+.glass-hover {
+  @apply hover:bg-white/25 hover:backdrop-blur-lg;
+}
+
+/* Performance optimization for parallax layers */
+[data-scroll-speed] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth parallax transitions */
+.will-change-transform {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Premium Drawer Styling */
+.drawer-menu {
+  animation: slideInRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Overlay blur effect */
+.drawer-overlay {
+  backdrop-filter: blur(4px);
+}
+
+/* Premium font stack for drawer */
+.font-lato {
+  font-family: 'Lato', system-ui, sans-serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}

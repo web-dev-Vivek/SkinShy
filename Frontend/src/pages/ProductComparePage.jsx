@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
-import SafetyScoreComparisonSkeleton from '../components/Skeletons/SafetyScoreComparisonSkeleton';
 import { getProductById } from '../services/products';
 import { api } from '../services/api';
 import { convertPrice } from '../utils/currencyConverter';
@@ -20,337 +19,552 @@ export default function ProductComparePage() {
   const [loading, setLoading] = useState(true);
   const [loadingDetails, setLoadingDetails] = useState(false);
   const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-   // Fetch all products
+   // Handle responsive background image
    useEffect(() => {
-     setLoading(true);
-     api.get('/products?limit=100')
-       .then(res => {
-         setProducts(res.data.data);
-         setFilteredProducts(res.data.data);
-         setLoading(false);
-       })
-       .catch(err => {
-         setError('Failed to load products');
-         setLoading(false);
-       });
+     const handleResize = () => {
+       setIsMobile(window.innerWidth <= 768);
+     };
+     window.addEventListener('resize', handleResize);
+     return () => window.removeEventListener('resize', handleResize);
    }, []);
 
-  // Filter products based on search query
+  // Preload background images
   useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredProducts(products);
-    } else {
-      const query = searchQuery.toLowerCase();
-      const filtered = products.filter(product =>
-        product.productName.toLowerCase().includes(query) ||
-        product.productType.toLowerCase().includes(query)
-      );
-      setFilteredProducts(filtered);
-    }
-  }, [searchQuery, products]);
+    const preloadImage = (src) => {
+      const img = new Image();
+      img.src = src;
+    };
+    preloadImage('/Back.png');
+    preloadImage('/Backmenmobile.png');
+  }, []);
 
-  // Load product details when selected
-  const handleProductSelect = async (product) => {
-    if (selectedProducts.find(p => p._id === product._id)) {
-      // Deselect if already selected
-      setSelectedProducts(selectedProducts.filter(p => p._id !== product._id));
-      const newDetails = { ...productDetails };
-      delete newDetails[product._id];
-      setProductDetails(newDetails);
-    } else if (selectedProducts.length < 3) {
-      // Add to comparison if less than 3 selected
-      setLoadingDetails(true);
-       try {
-         const details = await getProductById(product._id);
-         setSelectedProducts([...selectedProducts, product]);
-         setProductDetails({
-           ...productDetails,
-           [product._id]: details
-         });
-       } catch (err) {
-         setError('Failed to load product details');
-       } finally {
-         setLoadingDetails(false);
-       }
-    }
-  };
+    // Fetch all products
+    useEffect(() => {
+      setLoading(true);
+      api.get('/products?limit=100')
+        .then(res => {
+          setProducts(res.data.data);
+          setFilteredProducts(res.data.data);
+          setLoading(false);
+        })
+        .catch(err => {
+          setError('Failed to load products');
+          setLoading(false);
+        });
+    }, []);
 
-  // Check if product is selected
-  const isProductSelected = (productId) => {
-    return selectedProducts.some(p => p._id === productId);
-  };
+   // Filter products based on search query
+   useEffect(() => {
+     if (searchQuery.trim() === '') {
+       setFilteredProducts(products);
+     } else {
+       const query = searchQuery.toLowerCase();
+       const filtered = products.filter(product =>
+         product.productName.toLowerCase().includes(query) ||
+         product.productType.toLowerCase().includes(query)
+       );
+       setFilteredProducts(filtered);
+     }
+   }, [searchQuery, products]);
 
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen bg-custom-white mt-20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-          <p className="text-custom-dark-gray">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+   // Load product details when selected
+   const handleProductSelect = async (product) => {
+     if (selectedProducts.find(p => p._id === product._id)) {
+       // Deselect if already selected
+       setSelectedProducts(selectedProducts.filter(p => p._id !== product._id));
+       const newDetails = { ...productDetails };
+       delete newDetails[product._id];
+       setProductDetails(newDetails);
+     } else if (selectedProducts.length < 3) {
+       // Add to comparison if less than 3 selected
+       setLoadingDetails(true);
+        try {
+          const details = await getProductById(product._id);
+          setSelectedProducts([...selectedProducts, product]);
+          setProductDetails({
+            ...productDetails,
+            [product._id]: details
+          });
+        } catch (err) {
+          setError('Failed to load product details');
+        } finally {
+          setLoadingDetails(false);
+        }
+     }
+   };
 
-  if (!isSignedIn) {
-    return (
-      <div className="min-h-screen bg-custom-white mt-20 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-custom-dark-gray mb-4">Please sign in to compare products</p>
-        </div>
-      </div>
-    );
-  }
+   // Check if product is selected
+   const isProductSelected = (productId) => {
+     return selectedProducts.some(p => p._id === productId);
+   };
 
-  return (
-    <>
-      <OnboardingWarningBanner />
-      <div className="min-h-screen bg-white pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="heading-gradient text-4xl md:text-5xl lg:text-6xl mb-4">
-              Compare Products
-            </h1>
-            <p className="text-lg text-custom-dark-gray max-w-2xl mx-auto">
-              Select up to 3 products to compare side-by-side. View ingredients, safety scores, and allergen warnings.
-            </p>
-          </div>
+   if (!isLoaded) {
+     return (
+       <div className="h-screen bg-custom-white mt-20 flex items-center justify-center">
+         <div className="text-center">
+           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
+           <p className="text-custom-dark-gray">Loading...</p>
+         </div>
+       </div>
+     );
+   }
 
-          {/* Error Message */}
-          {error && (
-            <div className="max-w-7xl mx-auto mb-8 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-              {error}
-            </div>
-          )}
+   if (!isSignedIn) {
+     return (
+       <div className="h-screen bg-custom-white mt-20 flex items-center justify-center">
+         <div className="text-center">
+           <p className="text-custom-dark-gray mb-4">Please sign in to compare products</p>
+         </div>
+       </div>
+     );
+   }
 
-          {/* Main Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Left Side: Product Selection */}
-            <div className="lg:col-span-1">
-              {/* Search Bar */}
-              <div className="mb-6">
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-custom-charcoal/20 bg-white/80 backdrop-blur text-custom-charcoal placeholder:text-custom-dark-gray focus:outline-none focus:border-custom-charcoal transition-all"
-                />
-              </div>
+   return (
+     <>
+       <OnboardingWarningBanner />
+       
+       <div 
+         className="h-screen overflow-hidden relative"
+         style={{
+           backgroundImage: `url('${isMobile ? '/Backmenmobile.png' : '/Back.png'}')`,
+           backgroundSize: 'cover',
+           backgroundPosition: 'center',
+           backgroundRepeat: 'no-repeat',
+         }}
+       >
+         {/* Blur overlay */}
+         <div className="absolute inset-0 bg-black/40 backdrop-blur-md pointer-events-none"></div>
+         
+         {/* ============ MOBILE VIEW (Vertical Stack) ============ */}
+         {isMobile && (
+           <div className="relative z-10 pt-24 pb-8 px-4 h-full overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
+             {/* Header */}
+             <div className="text-center mb-6 max-w-md mx-auto">
+               <h1 className="text-3xl font-bold text-white mb-2">
+                 Compare Products
+               </h1>
+               <p className="text-sm text-white/80">
+                 Select up to 3 products to compare side-by-side. View ingredients, safety scores, and allergen warnings.
+               </p>
+             </div>
 
-              {/* Selected Count */}
-              <div className="glass rounded-lg p-4 mb-6 border border-white/20">
-                <p className="text-sm text-custom-dark-gray font-semibold">
-                  Selected: <span className="text-custom-charcoal">{selectedProducts.length}/3</span>
-                </p>
-              </div>
+             {/* Error Message */}
+             {error && (
+               <div className="mb-4 max-w-md mx-auto">
+                 <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 backdrop-blur-sm text-sm">
+                   {error}
+                 </div>
+               </div>
+             )}
 
-              {/* Product Grid */}
-              {loading ? (
-                <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-2"></div>
-                  <p className="text-sm text-custom-dark-gray">Loading products...</p>
-                </div>
-              ) : (
-                <div className="space-y-3 max-h-[70vh] overflow-y-auto pr-2">
-                  {filteredProducts.map(product => (
-                    <button
-                      key={product._id}
-                      onClick={() => handleProductSelect(product)}
-                      disabled={loadingDetails}
-                      className={`w-full text-left p-3 rounded-lg transition-all border-2 ${
-                        isProductSelected(product._id)
-                          ? 'glass border-custom-charcoal bg-black/30 shadow-lg'
-                          : 'glass border-black/20 hover:border-custom-charcoal/50 hover:bg-white/20'
-                      } ${selectedProducts.length === 3 && !isProductSelected(product._id) ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    >
-                      <p className="font-semibold text-sm text-custom-charcoal truncate">
-                        {product.productName}
-                      </p>
-                      <p className="text-xs text-custom-dark-gray mt-1">
-                        {product.productType}
-                      </p>
-                       <p className="text-sm font-bold text-custom-charcoal mt-1">
-                         {convertPrice(product.price, selectedCurrency)}
+             {/* Vertical Levels */}
+             <div className="mx-auto max-w-md space-y-4">
+               
+               {/* LEVEL 1: Search Bar */}
+               <div className="p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm">
+                 <input
+                   type="text"
+                   placeholder="Search bar"
+                   value={searchQuery}
+                   onChange={(e) => setSearchQuery(e.target.value)}
+                   className="w-full px-4 py-3 rounded-lg border-2 border-white/30 bg-white/90 backdrop-blur text-custom-charcoal placeholder:text-custom-dark-gray focus:outline-none focus:border-white transition-all text-sm font-semibold"
+                 />
+               </div>
+
+               {/* LEVEL 2: First Selected Product */}
+               {selectedProducts.length >= 1 && (
+                 <div className="p-4 rounded-lg bg-white/25 border-2 border-white/60 backdrop-blur-sm hover:bg-white/30 transition-all">
+                   <div className="flex justify-between items-start gap-3 mb-2">
+                     <div className="flex-1 min-w-0">
+                       <p className="font-semibold text-sm text-white truncate">
+                         {selectedProducts[0].productName}
                        </p>
-                      {isProductSelected(product._id) && (
-                        <div className="mt-2 text-xs bg-custom-charcoal text-white px-2 py-1 rounded w-fit">
-                          ✓ Selected
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                       <div className="flex items-center gap-3 mt-2">
+                         <div className="w-12 h-0.5 bg-white/50"></div>
+                         <p className="text-sm font-bold text-white whitespace-nowrap">
+                           {convertPrice(selectedProducts[0].price, selectedCurrency)}
+                         </p>
+                       </div>
+                     </div>
+                     <button
+                       onClick={() => handleProductSelect(selectedProducts[0])}
+                       className="text-white/70 hover:text-red-300 transition-colors flex-shrink-0 text-lg font-bold"
+                     >
+                       ✕
+                     </button>
+                   </div>
+                   {productDetails[selectedProducts[0]._id]?.safetyScore && complete_onboarding === 1 && (
+                     <div className="mt-2 text-xs text-white/80">
+                       <span className="font-semibold">Safety Score: </span>
+                       <span className="font-bold text-white">
+                         {Math.round(productDetails[selectedProducts[0]._id].safetyScore.score)}%
+                       </span>
+                     </div>
+                   )}
+                 </div>
+               )}
 
-            {/* Right Side: Comparison View */}
-            <div className="lg:col-span-3">
-              {selectedProducts.length === 0 ? (
-                <div className="glass rounded-2xl p-12 text-center border border-white/20 h-full flex items-center justify-center">
-                  <div>
-                    <p className="text-lg text-custom-charcoal font-semibold mb-2">
-                      No Products Selected
-                    </p>
-                    <p className="text-custom-dark-gray">
-                      Select products from the list to compare them side-by-side
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {selectedProducts.map(product => {
-                    const details = productDetails[product._id];
-                    return (
-                      <div
-                        key={product._id}
-                        className="glass rounded-xl border border-white/20 overflow-hidden"
-                      >
-                        {/* Product Header */}
-                        <div className="bg-white/20 backdrop-blur-sm p-4 border-b border-white/20">
-                          <div className="flex justify-between items-start gap-2">
-                            <div>
-                              <h3 className="font-bold text-custom-charcoal line-clamp-2">
-                                {product.productName}
-                              </h3>
-                              <p className="text-xs text-custom-dark-gray mt-1">
-                                {product.productType}
-                              </p>
-                            </div>
-                            <button
-                              onClick={() => handleProductSelect(product)}
-                              className="text-xl hover:scale-110 transition-transform"
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Product Content */}
-                        <div className="p-4 space-y-4">
-                          {/* Price and Safety Score */}
-                          <div className="space-y-2">
-                             <div className="flex justify-between items-center text-sm">
-                               <span className="text-custom-dark-gray">Price:</span>
-                               <span className="font-bold text-custom-charcoal">{convertPrice(product.price, selectedCurrency)}</span>
+               {/* LEVEL 3: Second Selected Product OR Product List */}
+               {selectedProducts.length >= 2 ? (
+                 <div className="p-4 rounded-lg bg-white/25 border-2 border-white/60 backdrop-blur-sm hover:bg-white/30 transition-all">
+                   <div className="flex justify-between items-start gap-3 mb-2">
+                     <div className="flex-1 min-w-0">
+                       <p className="font-semibold text-sm text-white truncate">
+                         {selectedProducts[1].productName}
+                       </p>
+                       <div className="flex items-center gap-3 mt-2">
+                         <div className="w-12 h-0.5 bg-white/50"></div>
+                         <p className="text-sm font-bold text-white whitespace-nowrap">
+                           {convertPrice(selectedProducts[1].price, selectedCurrency)}
+                         </p>
+                       </div>
+                     </div>
+                     <button
+                       onClick={() => handleProductSelect(selectedProducts[1])}
+                       className="text-white/70 hover:text-red-300 transition-colors flex-shrink-0 text-lg font-bold"
+                     >
+                       ✕
+                     </button>
+                   </div>
+                   {productDetails[selectedProducts[1]._id]?.safetyScore && complete_onboarding === 1 && (
+                     <div className="mt-2 text-xs text-white/80">
+                       <span className="font-semibold">Safety Score: </span>
+                       <span className="font-bold text-white">
+                         {Math.round(productDetails[selectedProducts[1]._id].safetyScore.score)}%
+                       </span>
+                     </div>
+                   )}
+                 </div>
+               ) : (
+                 selectedProducts.length < 2 && (
+                   <div className="space-y-2 p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm max-h-96 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
+                     {loading ? (
+                       <div className="text-center py-4">
+                         <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
+                         <p className="text-xs text-white/80">Loading products...</p>
+                       </div>
+                     ) : filteredProducts.length === 0 ? (
+                       <div className="text-center py-6">
+                         <p className="text-sm text-white/70">No products found</p>
+                       </div>
+                     ) : (
+                       filteredProducts.map(product => (
+                         <button
+                           key={product._id}
+                           onClick={() => handleProductSelect(product)}
+                           disabled={loadingDetails || (selectedProducts.length === 3 && !isProductSelected(product._id))}
+                           className={`w-full text-left p-3 rounded-lg transition-all border-2 backdrop-blur-sm ${
+                             isProductSelected(product._id)
+                               ? 'bg-white/30 border-white/80 cursor-default'
+                               : 'bg-white/10 border-white/20 hover:border-white/50 hover:bg-white/20'
+                           } ${selectedProducts.length === 3 && !isProductSelected(product._id) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                         >
+                           <div className="flex justify-between items-start gap-2">
+                             <div className="flex-1 min-w-0">
+                               <p className="font-semibold text-sm text-white truncate">
+                                 {product.productName}
+                               </p>
+                               <div className="flex items-center gap-3 mt-2">
+                                 <div className="w-10 h-0.5 bg-white/50"></div>
+                                 <p className="text-sm font-bold text-white whitespace-nowrap">
+                                   {convertPrice(product.price, selectedCurrency)}
+                                 </p>
+                               </div>
                              </div>
+                             {isProductSelected(product._id) && (
+                               <div className="text-xs bg-white/60 text-custom-charcoal px-2 py-1 rounded font-bold flex-shrink-0">
+                                 ✓
+                               </div>
+                             )}
+                           </div>
+                         </button>
+                       ))
+                     )}
+                   </div>
+                 )
+               )}
+
+               {/* LEVEL 4: Third Selected Product */}
+               {selectedProducts.length >= 3 && (
+                 <div className="p-4 rounded-lg bg-white/25 border-2 border-white/60 backdrop-blur-sm hover:bg-white/30 transition-all">
+                   <div className="flex justify-between items-start gap-3 mb-2">
+                     <div className="flex-1 min-w-0">
+                       <p className="font-semibold text-sm text-white truncate">
+                         {selectedProducts[2].productName}
+                       </p>
+                       <div className="flex items-center gap-3 mt-2">
+                         <div className="w-12 h-0.5 bg-white/50"></div>
+                         <p className="text-sm font-bold text-white whitespace-nowrap">
+                           {convertPrice(selectedProducts[2].price, selectedCurrency)}
+                         </p>
+                       </div>
+                     </div>
+                     <button
+                       onClick={() => handleProductSelect(selectedProducts[2])}
+                       className="text-white/70 hover:text-red-300 transition-colors flex-shrink-0 text-lg font-bold"
+                     >
+                       ✕
+                     </button>
+                   </div>
+                   {productDetails[selectedProducts[2]._id]?.safetyScore && complete_onboarding === 1 && (
+                     <div className="mt-2 text-xs text-white/80">
+                       <span className="font-semibold">Safety Score: </span>
+                       <span className="font-bold text-white">
+                         {Math.round(productDetails[selectedProducts[2]._id].safetyScore.score)}%
+                       </span>
+                     </div>
+                   )}
+                 </div>
+               )}
+
+               {/* LEVEL 5: Product List */}
+               {selectedProducts.length >= 2 && (
+                 <div className="space-y-2 p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm max-h-96 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
+                   {loading ? (
+                     <div className="text-center py-4">
+                       <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
+                       <p className="text-xs text-white/80">Loading products...</p>
+                     </div>
+                   ) : filteredProducts.length === 0 ? (
+                     <div className="text-center py-4">
+                       <p className="text-xs text-white/70">No products found</p>
+                     </div>
+                   ) : (
+                     <>
+                       {filteredProducts.map(product => (
+                         <button
+                           key={product._id}
+                           onClick={() => handleProductSelect(product)}
+                           disabled={loadingDetails || (selectedProducts.length === 3 && !isProductSelected(product._id))}
+                           className={`w-full text-left p-3 rounded-lg transition-all border-2 backdrop-blur-sm ${
+                             isProductSelected(product._id)
+                               ? 'bg-white/30 border-white/80 cursor-default'
+                               : 'bg-white/10 border-white/20 hover:border-white/50 hover:bg-white/20'
+                           } ${selectedProducts.length === 3 && !isProductSelected(product._id) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                         >
+                           <div className="flex justify-between items-start gap-2">
+                             <div className="flex-1 min-w-0">
+                               <p className="font-semibold text-sm text-white truncate">
+                                 {product.productName}
+                               </p>
+                               <div className="flex items-center gap-3 mt-2">
+                                 <div className="w-10 h-0.5 bg-white/50"></div>
+                                 <p className="text-sm font-bold text-white whitespace-nowrap">
+                                   {convertPrice(product.price, selectedCurrency)}
+                                 </p>
+                               </div>
+                             </div>
+                             {isProductSelected(product._id) && (
+                               <div className="text-xs bg-white/60 text-custom-charcoal px-2 py-1 rounded font-bold flex-shrink-0">
+                                 ✓
+                               </div>
+                             )}
+                           </div>
+                         </button>
+                       ))}
+                       <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
+                         <p className="text-xs text-white/70 font-semibold">
+                           Product of database
+                         </p>
+                       </div>
+                     </>
+                   )}
+                 </div>
+               )}
+             </div>
+           </div>
+         )}
+
+         {/* ============ DESKTOP VIEW (Two Panels) ============ */}
+         {!isMobile && (
+           <div className="relative z-10 h-full pt-24 pb-8 px-4">
+             {/* Header */}
+             <div className="text-center mb-6 max-w-2xl mx-auto">
+               <h1 className="text-3xl font-bold text-white mb-2">
+                 Compare Products
+               </h1>
+               <p className="text-sm text-white/80">
+                 Select up to 3 products to compare side-by-side. View ingredients, safety scores, and allergen warnings.
+               </p>
+             </div>
+
+             {/* Error Message */}
+             {error && (
+               <div className="mb-4 max-w-6xl mx-auto">
+                 <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 backdrop-blur-sm text-sm">
+                   {error}
+                 </div>
+               </div>
+             )}
+
+             {/* Two Panel Layout */}
+             <div className="h-[calc(100%-180px)] mx-auto max-w-6xl flex gap-4">
+               
+               {/* LEFT PANEL: Product Selection */}
+               <div className="w-1/3 flex flex-col bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm p-4 overflow-hidden">
+                 {/* Search Bar */}
+                 <div className="mb-4 flex-shrink-0">
+                   <input
+                     type="text"
+                     placeholder="Search products..."
+                     value={searchQuery}
+                     onChange={(e) => setSearchQuery(e.target.value)}
+                     className="w-full px-4 py-3 rounded-lg border-2 border-white/30 bg-white/90 backdrop-blur text-custom-charcoal placeholder:text-custom-dark-gray focus:outline-none focus:border-white transition-all text-sm"
+                   />
+                 </div>
+
+                 {/* Product List - Scrollable */}
+                 <div className="flex-1 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10 space-y-2 pr-2">
+                   {loading ? (
+                     <div className="text-center py-8">
+                       <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
+                       <p className="text-xs text-white/80">Loading products...</p>
+                     </div>
+                   ) : filteredProducts.length === 0 ? (
+                     <div className="text-center py-6">
+                       <p className="text-sm text-white/70">No products found</p>
+                     </div>
+                   ) : (
+                     filteredProducts.map(product => (
+                       <button
+                         key={product._id}
+                         onClick={() => handleProductSelect(product)}
+                         disabled={loadingDetails || (selectedProducts.length === 3 && !isProductSelected(product._id))}
+                         className={`w-full text-left p-3 rounded-lg transition-all border-2 backdrop-blur-sm ${
+                           isProductSelected(product._id)
+                             ? 'bg-white/30 border-white/80 cursor-default'
+                             : 'bg-white/10 border-white/20 hover:border-white/50 hover:bg-white/20'
+                         } ${selectedProducts.length === 3 && !isProductSelected(product._id) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                       >
+                         <div className="flex justify-between items-start gap-2">
+                           <div className="flex-1 min-w-0">
+                             <p className="font-semibold text-sm text-white truncate">
+                               {product.productName}
+                             </p>
+                             <div className="flex items-center gap-3 mt-2">
+                               <div className="w-8 h-0.5 bg-white/50"></div>
+                               <p className="text-xs font-bold text-white whitespace-nowrap">
+                                 {convertPrice(product.price, selectedCurrency)}
+                               </p>
+                             </div>
+                           </div>
+                           {isProductSelected(product._id) && (
+                             <div className="text-xs bg-white/60 text-custom-charcoal px-2 py-1 rounded font-bold flex-shrink-0">
+                               ✓
+                             </div>
+                           )}
+                         </div>
+                       </button>
+                     ))
+                   )}
+                 </div>
+               </div>
+
+               {/* RIGHT PANEL: Comparison View */}
+               <div className="w-2/3 flex flex-col bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm p-4 overflow-hidden">
+                 {selectedProducts.length === 0 ? (
+                   <div className="flex-1 flex items-center justify-center text-center">
+                     <div>
+                       <p className="text-lg text-white font-semibold mb-2">
+                         No Products Selected
+                       </p>
+                       <p className="text-white/80 text-sm">
+                         Select products from the left to compare them
+                       </p>
+                     </div>
+                   </div>
+                 ) : (
+                   <div className="flex-1 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10 pr-2">
+                     <div className="space-y-4">
+                       {selectedProducts.map(product => {
+                         const details = productDetails[product._id];
+                         return (
+                           <div key={product._id} className="p-4 rounded-lg bg-white/25 border-2 border-white/60 backdrop-blur-sm hover:bg-white/30 transition-all">
+                             <div className="flex justify-between items-start gap-3 mb-3">
+                               <div className="flex-1 min-w-0">
+                                 <p className="font-semibold text-sm text-white truncate">
+                                   {product.productName}
+                                 </p>
+                                 <p className="text-xs text-white/70 mt-1">
+                                   {product.productType}
+                                 </p>
+                                 <div className="flex items-center gap-3 mt-2">
+                                   <div className="w-12 h-0.5 bg-white/50"></div>
+                                   <p className="text-sm font-bold text-white whitespace-nowrap">
+                                     {convertPrice(product.price, selectedCurrency)}
+                                   </p>
+                                 </div>
+                               </div>
+                               <button
+                                 onClick={() => handleProductSelect(product)}
+                                 className="text-white/70 hover:text-red-300 transition-colors flex-shrink-0 text-lg font-bold"
+                               >
+                                 ✕
+                               </button>
+                             </div>
+
+                             {/* Safety Score */}
                              {details?.safetyScore && complete_onboarding === 1 && (
-                               <div className="flex justify-between items-center text-sm">
-                                 <span className="text-custom-dark-gray">Safety Score:</span>
-                                 <div className="flex items-center gap-2">
-                                   <div className="w-24 bg-gray-200 rounded-full h-2">
-                                     <div
-                                       className={`h-2 rounded-full transition-all ${
-                                         details.safetyScore.score >= 75
-                                           ? 'bg-green-500'
-                                           : details.safetyScore.score >= 50
-                                           ? 'bg-yellow-500'
-                                           : 'bg-red-500'
-                                       }`}
-                                       style={{
-                                         width: `${details.safetyScore.score}%`
-                                       }}
-                                     ></div>
+                               <div className="mt-3 pt-3 border-t border-white/20">
+                                 <div className="flex justify-between items-center">
+                                   <span className="text-xs text-white/70">Safety Score:</span>
+                                   <div className="flex items-center gap-2">
+                                     <div className="w-20 bg-white/20 rounded-full h-1.5">
+                                       <div
+                                         className={`h-1.5 rounded-full transition-all ${
+                                           details.safetyScore.score >= 75
+                                             ? 'bg-green-400'
+                                             : details.safetyScore.score >= 50
+                                             ? 'bg-yellow-400'
+                                             : 'bg-red-400'
+                                         }`}
+                                         style={{
+                                           width: `${details.safetyScore.score}%`
+                                         }}
+                                       ></div>
+                                     </div>
+                                     <span className="font-bold text-white text-xs">
+                                       {Math.round(details.safetyScore.score)}%
+                                     </span>
                                    </div>
-                                   <span className="font-bold text-custom-charcoal">
-                                     {Math.round(details.safetyScore.score)}%
-                                   </span>
                                  </div>
                                </div>
                              )}
-                             {!complete_onboarding && details && (
-                               <SafetyScoreComparisonSkeleton />
+
+                             {/* Ingredients Summary */}
+                             {details?.ingredients && (
+                               <div className="mt-3 pt-3 border-t border-white/20">
+                                 <h4 className="text-xs font-bold text-white mb-2">
+                                   Top Ingredients ({details.ingredients.length})
+                                 </h4>
+                                 <div className="space-y-1">
+                                   {details.ingredients.slice(0, 3).map((ing, idx) => (
+                                     <p key={idx} className="text-xs text-white/70">
+                                       {idx + 1}. {ing.name}
+                                       {ing.knownAllergen && <span className="text-red-300"> ⚠️</span>}
+                                     </p>
+                                   ))}
+                                   {details.ingredients.length > 3 && (
+                                     <p className="text-xs text-white/70">
+                                       +{details.ingredients.length - 3} more...
+                                     </p>
+                                   )}
+                                 </div>
+                               </div>
                              )}
-                          </div>
-
-                          {/* Ingredients */}
-                          <div className="border-t border-white/20 pt-4">
-                            <h4 className="text-sm font-bold text-custom-charcoal mb-3">
-                              Ingredients ({details?.ingredients?.length || 0})
-                            </h4>
-                            <div className="space-y-2 max-h-[200px] overflow-y-auto">
-                              {details?.ingredients && details.ingredients.length > 0 ? (
-                                details.ingredients.map((ing, idx) => (
-                                  <div key={idx} className="text-xs">
-                                    <div className="flex items-start gap-2">
-                                      <span className="text-custom-dark-gray min-w-fit">
-                                        {idx + 1}.
-                                      </span>
-                                      <div>
-                                        <p className="font-semibold text-custom-charcoal">
-                                          {ing.name}
-                                        </p>
-                                        <p className="text-custom-dark-gray text-[11px]">
-                                          {ing.ingredientClass}
-                                        </p>
-                                        {ing.knownAllergen && (
-                                          <p className="text-red-600 font-bold text-[11px] mt-1">
-                                            ⚠️ Known Allergen
-                                          </p>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))
-                              ) : (
-                                <p className="text-custom-dark-gray text-xs">
-                                  No ingredients available
-                                </p>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Allergens Summary */}
-                          {details?.ingredients && (
-                            <div className="border-t border-white/20 pt-4">
-                              <h4 className="text-sm font-bold text-custom-charcoal mb-2">
-                                Allergen Warnings
-                              </h4>
-                              {(() => {
-                                const allergens = details.ingredients.filter(ing => ing.knownAllergen);
-                                return allergens.length > 0 ? (
-                                  <div className="space-y-1">
-                                    {allergens.map((ing, idx) => (
-                                      <p key={idx} className="text-xs text-red-600 font-semibold">
-                                        • {ing.allergenGroup || ing.name}
-                                      </p>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="text-xs text-green-600 font-semibold">
-                                    ✓ No known allergens
-                                  </p>
-                                );
-                              })()}
-                            </div>
-                          )}
-
-                          {/* Action Buttons */}
-                          <div className="border-t border-white/20 pt-4 space-y-2">
-                            <a
-                              href={`/search/${product._id}`}
-                              className="block text-center text-sm font-semibold text-custom-charcoal hover:text-custom-black transition-colors py-2 px-3 rounded-lg bg-white/20 hover:bg-white/30"
-                            >
-                              View Details
-                            </a>
-                            <button
-                              onClick={() => handleProductSelect(product)}
-                              className="w-full text-sm font-semibold text-red-600 hover:text-red-700 transition-colors py-2 px-3 rounded-lg bg-white/20 hover:bg-white/30"
-                            >
-                              Remove from Comparison
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+                           </div>
+                         );
+                       })}
+                     </div>
+                   </div>
+                 )}
+               </div>
+             </div>
+           </div>
+         )}
+       </div>
+     </>
+   );
 }

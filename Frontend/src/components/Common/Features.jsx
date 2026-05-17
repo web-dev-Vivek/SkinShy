@@ -8,69 +8,68 @@ function Features() {
       icon: 'safetyscore.png',
       title: 'Safety Score',
       description: 'Get personalized safety ratings for every product based on your skin type, allergies, and sensitivities.',
-      highlight: 'Core Feature'
+      speed:1
+      ,highlight: 'Core Feature'
     },
     {
       id: 2,
       icon: 'search.png',
       title: 'Browse & Search',
       description: 'Easily search and browse through 1000+ skincare products with detailed information and ratings.',
-      highlight: 'Curated'
+      speed:1.2
+      ,highlight: 'Curated'
     },
     {
       id: 3,
       icon: 'smart_matching.png',
       title: 'Smart Matching',
       description: 'Products matched to your unique skin profile with personalized compatibility analysis.',
-      highlight: 'Personalized'
+      speed:1.4
+      ,highlight: 'Personalized'
     },
     {
       id: 4,
       icon: 'Allergen.png',
       title: 'Allergen Protection',
       description: 'Comprehensive allergen detection and warnings to keep your skin safe from triggers.',
-      highlight: 'Safe'
+      speed:1.6
+      ,highlight: 'Safe'
     },
     {
       id: 5,
       icon: 'DetailInsight.png',
       title: 'Detailed Insights',
       description: 'In-depth analysis of product formulations, ingredient interactions, and effectiveness for you.',
-      highlight: 'Smart'
+      speed:1.8
+      ,highlight: 'Smart'
     }
   ];
 
   return (
     <section 
       id="features" 
-      className="section-spacing relative w-full h-[150vh] md:h-full bg-center bg-contain md:bg-cover bg-no-repeat"
-      data-scroll
-      data-scroll-speed=""
-      style={{ backgroundImage: `
-      url(${window.innerWidth >= 768 ? '/Back.png' : '/Backmobile.jpeg'})
-    ` }}
+      className="section-spacing relative w-full min-h-screen bg-bottom md:bg-center bg-contain md:bg-cover bg-no-repeat overflow-hidden"
+      
     >
 
-
       {/* Parallax Background - moves slower than content */}
-      {/*<div
-        className="absolute inset-0 -z-10"
+      <div
+        className="absolute inset-0 -z-10 will-change-transform"
         data-scroll
-        data-scroll-speed="-3"
+        data-scroll-speed="-1.2"
         style={{
-          backgroundImage: 'url(/Back.png)',
+          backgroundImage: `url(${window.innerWidth >= 768 ? '/Back.png' : '/Backmobile.jpeg'})`,
           backgroundAttachment: 'fixed',
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center'
         }}
-      ></div>*/}
+      ></div>
 
-      <div className="container-custom relative z-10" data-scroll
-      data-scroll-speed="1">
+      <div className="container-custom relative z-10" >
         
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20 animate-slide-up"
-        >
+         <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20 animate-slide-up will-change-transform" data-scroll data-scroll-speed="1"
+         >
           <div className="inline-flex items-center gap-3 mb-6">
             <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
             <span className="text-xs md:text-sm font-medium text-custom-dark-gray tracking-widest uppercase">
@@ -81,35 +80,32 @@ function Features() {
           
           <h2 
             className="heading-gradient text-4xl md:text-5xl lg:text-6xl mb-6"
-            data-scroll
-            data-scroll-speed=""
+           
           >
             Designed for You
           </h2>
           
           <p 
             className="text-lg md:text-xl text-custom-dark-gray leading-relaxed"
-            data-scroll
-            data-scroll-speed=""
+           
           >
             Discover the powerful features that make skincare selection personalized, safe, and informed.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {features.map((feature, index) => (
-            <div
-              
-              className="animate-slide-up"
-              data-scroll
-              data-scroll-speed=""
-            >
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+           {features.map((feature, index) => (
+             <div
+               className="animate-slide-up will-change-transform"
+               data-scroll 
+               data-scroll-speed={`${0.5 + (index * 0.2)}`}
+             >
               <div className="glass glass-hover rounded-3xl p-8 group h-full cursor-pointer border border-white/20 shadow-lg hover:shadow-2xl relative">
                  
                    {/* Icon Container */}
                    <div className="mb-6">
-                     <div className="inline-flex items-center justify-center  w-16 h-16 rounded-full bg-white/15 backdrop-blur-md group-hover:bg-white/25 transition-all duration-300 border border-white/20 shadow-md">
+                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/15 backdrop-blur-md group-hover:bg-white/25 transition-all duration-300 border border-white/20 shadow-md">
                        <img 
                          src={`/${feature.icon}`} 
                          alt={feature.title}

@@ -15,7 +15,7 @@ export default function CurrencySelector() {
       <select
         value={selectedCurrency}
         onChange={(e) => setSelectedCurrency(e.target.value)}
-        className="appearance-none px-4 py-2 pr-8 border-2 border-custom-charcoal rounded-lg font-semibold text-custom-charcoal bg-custom-white hover:border-custom-black transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-custom-charcoal focus:ring-offset-2"
+        className="appearance-none px-4 py-2 pr-8 pt-3 pb-3 border-2 border-custom-charcoal rounded-lg font-semibold text-custom-charcoal bg-custom-white hover:border-custom-black transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-custom-charcoal focus:ring-offset-2"
       >
        {currencies.map((currency) => (
            <option key={currency.code} value={currency.code}>
