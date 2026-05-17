@@ -14,7 +14,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-custom-white/70 border-b border-custom-light-gray">
+    <nav className="fixed top-0 left-0 right-0 z-50 ">
       <div className="container-custom">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
@@ -83,7 +83,7 @@ function Navbar() {
 
         {/* Mobile Menu */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-          <div className="bg-custom-white/95 backdrop-blur-sm flex flex-col gap-1 py-4 px-4 border-t border-custom-light-gray/30">
+          <div className="bg-custom-white flex flex-col gap-1 py-4 px-4">
             <button
               onClick={() => handleNavigation('/guide')}
               className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"

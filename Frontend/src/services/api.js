@@ -25,15 +25,10 @@ api.interceptors.request.use(
         const token = await clerkGetToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
-          console.log(`[API] Token attached to ${config.method.toUpperCase()} ${config.url}`);
-        } else {
-          console.warn(`[API] No token available for ${config.method.toUpperCase()} ${config.url}`);
         }
-      } else {
-        console.warn(`[API] clerkGetToken not initialized for ${config.method.toUpperCase()} ${config.url}`);
       }
     } catch (error) {
-      console.error('Failed to get Clerk token:', error);
+      // Silently fail on token retrieval
     }
     return config;
   },
@@ -45,12 +40,9 @@ api.interceptors.request.use(
 // Handle response errors
 api.interceptors.response.use(
   (response) => {
-    console.log(`[API] ✓ ${response.config.method.toUpperCase()} ${response.config.url}:`, response.status);
     return response;
   },
   (error) => {
-    console.error(`[API] ✗ ${error.response?.status || 'Network'} Error:`, error.response?.data?.error || error.message);
-    
     // Handle 401 Unauthorized
     if (error.response?.status === 401) {
       localStorage.removeItem('clerk_user');

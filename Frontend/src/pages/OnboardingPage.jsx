@@ -157,53 +157,46 @@ export default function OnboardingPage() {
        setLoading(true);
 
        try {
-         // Get Clerk token to verify authentication
-         const token = await getToken();
-         if (!token) {
-           throw new Error('No authentication token available. Please refresh and try again.');
-         }
+          // Get Clerk token to verify authentication
+          const token = await getToken();
+          if (!token) {
+            throw new Error('No authentication token available. Please refresh and try again.');
+          }
 
-         console.log('✅ Authenticated with Clerk token');
+          // Create user in MongoDB first if needed
+          try {
+            await api.post('/users', {
+              clerkId: user.id,
+              email: getUserEmail(user),
+              name: getUserName(user)
+            });
+          } catch (err) {
+            // Only ignore 409 (conflict - user already exists)
+            if (err.response?.status !== 409) {
+              throw new Error(`Failed to create user: ${err.response?.data?.error || err.message}`);
+            }
+          }
 
-         // Create user in MongoDB first if needed
-         try {
-           await api.post('/users', {
-             clerkId: user.id,
-             email: getUserEmail(user),
-             name: getUserName(user)
+           // Complete onboarding - note: highSensitivity and knownAllergies are optional
+           await api.post('/users/complete-onboarding', {
+             skinType: formData.skinType,
+             highSensitivity: formData.highSensitivity,
+             knownAllergies: formData.knownAllergies || [],
+             productChangeRate: formData.productChangeRate
            });
-           console.log('✅ User created in MongoDB');
+
+           // Set onboarding complete flag to 1 - prevents redirect loop
+           setOnboardingComplete();
+           
+           // Show completion page instead of immediate redirect
+           setOnboardingCompleteState(true);
+
+           // Redirect to search after a delay (5 seconds)
+           setTimeout(() => {
+             navigate('/search', { replace: true });
+           }, 5000);
          } catch (err) {
-           // Only ignore 409 (conflict - user already exists)
-           if (err.response?.status !== 409) {
-             console.error('User creation failed:', err);
-             throw new Error(`Failed to create user: ${err.response?.data?.error || err.message}`);
-           }
-           console.log('✅ User already exists in MongoDB');
-         }
-
-          // Complete onboarding - note: highSensitivity and knownAllergies are optional
-          await api.post('/users/complete-onboarding', {
-            skinType: formData.skinType,
-            highSensitivity: formData.highSensitivity,
-            knownAllergies: formData.knownAllergies || [],
-            productChangeRate: formData.productChangeRate
-          });
-          console.log('✅ Onboarding completed successfully');
-
-          // Set onboarding complete flag to 1 - prevents redirect loop
-          setOnboardingComplete();
-          
-          // Show completion page instead of immediate redirect
-          setOnboardingCompleteState(true);
-
-          // Redirect to search after a delay (5 seconds)
-          setTimeout(() => {
-            navigate('/search', { replace: true });
-          }, 5000);
-        } catch (err) {
-          console.error('Onboarding error:', err);
-          setError(err.response?.data?.error || err.message || 'Failed to complete onboarding');
+           setError(err.response?.data?.error || err.message || 'Failed to complete onboarding');
         } finally {
           setLoading(false);
         }

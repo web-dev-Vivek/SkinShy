@@ -7,7 +7,8 @@ const Product = require('../src/models/Product');
 const testAllProducts = async () => {
   try {
     console.log('🔗 Connecting to MongoDB...');
-    await mongoose.connect('mongodb://localhost:27017/skinshy', {
+    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/skinshy';
+    await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 10000
     });
     

@@ -15,7 +15,6 @@ const asyncHandler = (fn) => (req, res, next) => {
  * Protected: YES
  */
 router.post('/', authenticate, asyncHandler(async (req, res) => {
-  console.log('📝 POST /users - Request received');
   const { clerkId, email, name } = req.body;
 
   // Verify that the clerkId matches the authenticated user
@@ -27,11 +26,9 @@ router.post('/', authenticate, asyncHandler(async (req, res) => {
   }
 
   // Check if user already exists
-  console.log('🔍 Checking if user exists with clerkId:', clerkId);
   let user = await User.findOne({ clerkId });
 
   if (user) {
-    console.log('✅ User already exists');
     return res.json({
       success: true,
       message: 'User already exists',
@@ -46,16 +43,13 @@ router.post('/', authenticate, asyncHandler(async (req, res) => {
   }
 
   // Create new user
-  console.log('➕ Creating new user with email:', email);
   user = new User({
     clerkId,
     email,
     name: name || email.split('@')[0] // Use email prefix as fallback name
   });
 
-  console.log('💾 Saving user to MongoDB...');
   await user.save();
-  console.log('✅ User saved successfully');
 
   res.status(201).json({
     success: true,

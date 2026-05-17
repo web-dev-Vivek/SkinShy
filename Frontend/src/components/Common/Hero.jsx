@@ -10,7 +10,7 @@ function Hero() {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
-        style={{ backgroundImage: 'url(/Hero.jpeg)' }}
+        style={{ backgroundImage: 'url(/Backmen.png)' }}
       ></div>
 
        {/* Background Elements */}
@@ -96,7 +96,7 @@ function Hero() {
             </div>
 
              {/* Premium Feature Card */}
-             <div className="bg-custom-white border border-custom-light-gray rounded-3xl p-10 md:p-12 space-y-6">
+             <div className="bg-custom-white border border-custom-light-gray rounded-3xl p-10 md:p-12 space-y-3">
               <div className="space-y-2">
                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase font-medium">Featured</p>
                 {activeTab === 'safety' ? (
@@ -121,13 +121,13 @@ function Hero() {
               </div>
 
                {/* Content Container - Changes based on active tab */}
-               <div className="relative rounded-2xl bg-custom-light-gray overflow-hidden h-48 md:h-56">
+               <div className="relative rounded-2xl bg-custom-light-gray overflow-hidden h-48 md:h-80">
                 {activeTab === 'safety' ? (
                   // Safety Score Image Placeholder
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-custom-light-gray to-custom-off-white">
                     {/* Image placeholder for Safety Score - Edit this manually */}
                     <img 
-                      src="/Safetyscore.png" 
+                      src="/Happyskin.jpg" 
                       alt="Safety Score" 
                       className="w-full h-full object-cover"
                     />
