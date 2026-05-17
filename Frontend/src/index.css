@@ -177,7 +177,25 @@
 
 /* Responsive Utilities */
 @media (max-width: 640px) {
-  h1 { @apply text-2xl; }
-  h2 { @apply text-xl; }
-  h3 { @apply text-lg; }
+   h1 { @apply text-2xl; }
+   h2 { @apply text-xl; }
+   h3 { @apply text-lg; }
+}
+
+/* Locomotive Scroll Styles */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+/* Parallax effect for background images */
+[data-scroll] {
+  will-change: transform;
 }

@@ -5,7 +5,6 @@ import { api } from '../services/api';
 import { getUserName, getUserEmail } from '../services/auth';
 import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingInstructionsPanel from '../components/Onboarding/OnboardingInstructionsPanel';
-import InstructionModal from '../components/Onboarding/InstructionModal';
 
 const ALLERGIES = [
   'none',
@@ -84,7 +83,6 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [onboardingComplete, setOnboardingCompleteState] = useState(false);
-  const [showInstructionModal, setShowInstructionModal] = useState(false);
 
   // Redirect if onboarding already complete to prevent loop
   useEffect(() => {

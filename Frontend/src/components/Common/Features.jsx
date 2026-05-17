@@ -5,42 +5,35 @@ function Features() {
   const features = [
     {
       id: 1,
-      icon: '🔐',
+      icon: 'safetyscore.png',
       title: 'Safety Score',
       description: 'Get personalized safety ratings for every product based on your skin type, allergies, and sensitivities.',
       highlight: 'Core Feature'
     },
     {
       id: 2,
-      icon: '🔍',
+      icon: 'search.png',
       title: 'Browse & Search',
-      description: 'Easily search and browse through 700+ skincare products with detailed information and ratings.',
+      description: 'Easily search and browse through 1000+ skincare products with detailed information and ratings.',
       highlight: 'Curated'
     },
     {
       id: 3,
-      icon: '📚',
-      title: 'Ingredient Glossary',
-      description: 'Learn about every ingredient with benefits, warnings, reactivity scores, and skin type compatibility.',
-      highlight: 'Educational'
-    },
-    {
-      id: 4,
-      icon: '🎯',
+      icon: 'smart_matching.png',
       title: 'Smart Matching',
       description: 'Products matched to your unique skin profile with personalized compatibility analysis.',
       highlight: 'Personalized'
     },
     {
-      id: 5,
-      icon: '⚠️',
+      id: 4,
+      icon: 'Allergen.png',
       title: 'Allergen Protection',
       description: 'Comprehensive allergen detection and warnings to keep your skin safe from triggers.',
       highlight: 'Safe'
     },
     {
-      id: 6,
-      icon: '💡',
+      id: 5,
+      icon: 'DetailInsight.png',
       title: 'Detailed Insights',
       description: 'In-depth analysis of product formulations, ingredient interactions, and effectiveness for you.',
       highlight: 'Smart'
@@ -48,14 +41,32 @@ function Features() {
   ];
 
   return (
-    <section id="features" className="section-spacing relative w-full bg-gradient-to-b from-[#E9D4BC] to-white">
-      
-      
+    <section 
+      id="features" 
+      className="section-spacing relative w-full h-full bg-center bg-cover bg-no-repeat"
+      data-scroll
+      data-scroll-speed=""
+      style={{ backgroundImage: 'url(/Back.png)' }}
+    >
+      {/* Parallax Background - moves slower than content */}
+      {/*<div
+        className="absolute inset-0 -z-10"
+        data-scroll
+        data-scroll-speed="-3"
+        style={{
+          backgroundImage: 'url(/Back.png)',
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      ></div>*/}
 
-      <div className="container-custom">
+      <div className="container-custom relative z-10" data-scroll
+      data-scroll-speed="">
         
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20 animate-slide-up">
+        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20 animate-slide-up"
+        >
           <div className="inline-flex items-center gap-3 mb-6">
             <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
             <span className="text-xs md:text-sm font-medium text-custom-dark-gray tracking-widest uppercase">
@@ -64,11 +75,19 @@ function Features() {
             <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
           </div>
           
-          <h2 className="heading-gradient text-4xl md:text-5xl lg:text-6xl mb-6">
+          <h2 
+            className="heading-gradient text-4xl md:text-5xl lg:text-6xl mb-6"
+            data-scroll
+            data-scroll-speed=""
+          >
             Designed for You
           </h2>
           
-          <p className="text-lg md:text-xl text-custom-dark-gray leading-relaxed">
+          <p 
+            className="text-lg md:text-xl text-custom-dark-gray leading-relaxed"
+            data-scroll
+            data-scroll-speed=""
+          >
             Discover the powerful features that make skincare selection personalized, safe, and informed.
           </p>
         </div>
@@ -77,18 +96,21 @@ function Features() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <div
-              key={feature.id}
+              
               className="animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              data-scroll
+              data-scroll-speed=""
             >
               <div className="glass glass-hover rounded-3xl p-8 group h-full cursor-pointer border border-white/20 shadow-lg hover:shadow-2xl relative">
                  
-                  {/* Icon Container */}
-                  <div className="mb-6">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md group-hover:bg-white/25 transition-all duration-300 border border-white/20 shadow-md">
-                      <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">
-                        {feature.icon}
-                      </span>
+                   {/* Icon Container */}
+                   <div className="mb-6">
+                     <div className="inline-flex items-center justify-center  w-16 h-16 rounded-full bg-white/15 backdrop-blur-md group-hover:bg-white/25 transition-all duration-300 border border-white/20 shadow-md">
+                       <img 
+                         src={`/${feature.icon}`} 
+                         alt={feature.title}
+                         className="text-3xl rounded-full transform group-hover:scale-110 transition-transform duration-300"
+                       />
                     </div>
                   </div>
 
@@ -115,25 +137,12 @@ function Features() {
                   </span>
                 </div>
 
-                {/* Hover Line */}
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-custom-charcoal/40 to-custom-dark-gray/40 group-hover:w-full transition-all duration-300 rounded-b-3xl"></div>
-              </div>
+               </div>
             </div>
           ))}
         </div>
 
-         {/* CTA Section */}
-         <div className="bg-custom-charcoal mt-20 md:mt-32 p-12 md:p-16 rounded-3xl text-custom-white text-center animate-slide-up delay-3">
-            <h3 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
-             Ready to Transform Your Skincare?
-            </h3>
-             <p className="text-lg text-custom-white/90 mb-8 max-w-2xl mx-auto">
-              Join thousands of users discovering products perfectly matched to their skin.
-            </p>
-             <button className="px-8 py-4 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">
-              Browse Products
-            </button>
-         </div>
+          
       </div>
     </section>
   );

@@ -1,12 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
+import gsap from 'gsap';
 import ProfileDropdown from './ProfileDropdown';
 
 function Navbar() {
   const navigate = useNavigate();
   const { isSignedIn } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef(null);
+  const lastScrollRef = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isOpen) return; // Don't animate if mobile menu is open
+
+      const currentScroll = window.scrollY;
+      
+      // Prevent tiny scroll jitter - only animate on significant scroll
+      if (Math.abs(currentScroll - lastScrollRef.current) < 50) return;
+
+      const isScrollingDown = currentScroll > lastScrollRef.current;
+
+      gsap.to(navRef.current, {
+        y: isScrollingDown ? -100 : 0,
+        duration: 0.5,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+
+      lastScrollRef.current = currentScroll;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isOpen]);
+
+  // Reset navbar position when mobile menu opens
+  useEffect(() => {
+    if (isOpen) {
+      gsap.to(navRef.current, {
+        y: 0,
+        duration: 0.5,
+        ease: 'power3.in'
+      });
+    }
+  }, [isOpen]);
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -14,7 +56,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 ">
+    <nav ref={navRef} className="fixed top-0 backdrop-blur-xl left-0 right-0 z-50 ">
       <div className="container-custom">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
@@ -45,7 +87,7 @@ function Navbar() {
                   Browse
                 </button>
                 <button
-                  onClick={() => handleNavigation('/ingredient-glossary')}
+                  onClick={() => handleNavigation('/product_Comparasion')}
                   className="text-custom-dark-gray hover:text-custom-charcoal font-medium transition-colors text-sm"
                 >
                   Compare
@@ -99,7 +141,7 @@ function Navbar() {
                   🔍 Browse Products
                 </button>
                 <button
-                  onClick={() => handleNavigation('/ingredient-glossary')}
+                  onClick={() => handleNavigation('/product_Comparasion')}
                   className="text-left text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/20 font-medium transition-all py-3 px-3 text-sm rounded-lg"
                 >
                   📖 Compare Ingredients

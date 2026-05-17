@@ -6,23 +6,32 @@ function Hero() {
   const [activeTab, setActiveTab] = useState('safety');
 
   return (
-    <section className="relative w-full min-h-screen pt-24 pb-12 overflow-hidden bg-custom-white">
-      {/* Background Image */}
+    <section 
+      className="relative w-full min-h-screen pt-24 pb-12 overflow-hidden bg-custom-white"
+      data-scroll
+    >
+      {/* Background Image - Parallax effect (moves slower) */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
+        data-scroll
+        data-scroll-speed="-1"
         style={{ backgroundImage: 'url(/Backmen.png)' }}
       ></div>
 
        {/* Background Elements */}
        <div className="absolute inset-0 -z-10">
-         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"></div>
+         <div 
+           className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-custom-off-white -z-10 blur-3xl opacity-60"
+           data-scroll
+           data-scroll-speed="-1"
+         ></div>
        </div>
 
-      <div className="container-custom h-full">
+       <div className="container-custom h-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start min-h-[90vh] py-12 md:py-20">
           
-          {/* Left Content - Editorial Style */}
-          <div className="flex flex-col gap-12 md:gap-16 animate-slide-up pt-12 md:pt-20">
+           {/* Left Content - Editorial Style */}
+           <div className="flex flex-col gap-12 md:gap-16 animate-slide-up pt-12 md:pt-20" data-scroll data-scroll-speed="2">
             
             {/* Main Heading - Premium Typography */}
             <div className="space-y-6">
@@ -72,8 +81,8 @@ function Hero() {
             </div>
           </div>
 
-          {/* Right Content - Interactive Section */}
-          <div className="hidden lg:flex flex-col gap-8 animate-slide-up delay-2 pt-8">
+           {/* Right Content - Interactive Section */}
+           <div className="hidden lg:flex flex-col gap-8 animate-slide-up delay-2 pt-8" data-scroll data-scroll-speed="1.5">
             
              {/* Tab Navigation - Design Elements */}
              <div className="inline-flex gap-4 p-1.5 rounded-full w-fit bg-custom-off-white border border-custom-light-gray">

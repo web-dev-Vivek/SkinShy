@@ -21,21 +21,20 @@ export default function ProductComparePage() {
   const [loadingDetails, setLoadingDetails] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch all products
-  useEffect(() => {
-    setLoading(true);
-    api.get('/products?limit=100')
-      .then(res => {
-        setProducts(res.data.data);
-        setFilteredProducts(res.data.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error fetching products:', err);
-        setError('Failed to load products');
-        setLoading(false);
-      });
-  }, []);
+   // Fetch all products
+   useEffect(() => {
+     setLoading(true);
+     api.get('/products?limit=100')
+       .then(res => {
+         setProducts(res.data.data);
+         setFilteredProducts(res.data.data);
+         setLoading(false);
+       })
+       .catch(err => {
+         setError('Failed to load products');
+         setLoading(false);
+       });
+   }, []);
 
   // Filter products based on search query
   useEffect(() => {
@@ -62,19 +61,18 @@ export default function ProductComparePage() {
     } else if (selectedProducts.length < 3) {
       // Add to comparison if less than 3 selected
       setLoadingDetails(true);
-      try {
-        const details = await getProductById(product._id);
-        setSelectedProducts([...selectedProducts, product]);
-        setProductDetails({
-          ...productDetails,
-          [product._id]: details
-        });
-      } catch (err) {
-        console.error('Failed to load product details:', err);
-        setError('Failed to load product details');
-      } finally {
-        setLoadingDetails(false);
-      }
+       try {
+         const details = await getProductById(product._id);
+         setSelectedProducts([...selectedProducts, product]);
+         setProductDetails({
+           ...productDetails,
+           [product._id]: details
+         });
+       } catch (err) {
+         setError('Failed to load product details');
+       } finally {
+         setLoadingDetails(false);
+       }
     }
   };
 
@@ -107,7 +105,7 @@ export default function ProductComparePage() {
   return (
     <>
       <OnboardingWarningBanner />
-      <div className="min-h-screen bg-gradient-to-b from-[#E9D4BC] to-white pt-24 pb-16">
+      <div className="min-h-screen bg-white pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-12">
@@ -163,8 +161,8 @@ export default function ProductComparePage() {
                       disabled={loadingDetails}
                       className={`w-full text-left p-3 rounded-lg transition-all border-2 ${
                         isProductSelected(product._id)
-                          ? 'glass border-custom-charcoal bg-white/30 shadow-lg'
-                          : 'glass border-white/20 hover:border-custom-charcoal/50 hover:bg-white/20'
+                          ? 'glass border-custom-charcoal bg-black/30 shadow-lg'
+                          : 'glass border-black/20 hover:border-custom-charcoal/50 hover:bg-white/20'
                       } ${selectedProducts.length === 3 && !isProductSelected(product._id) ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                       <p className="font-semibold text-sm text-custom-charcoal truncate">

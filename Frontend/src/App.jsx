@@ -76,7 +76,7 @@ function AppRoutes() {
           }
         />
         <Route
-          path="/ingredient-glossary"
+          path="/product_Comparasion"
           element={
             <ProtectedRoute>
               <ProductComparePage />

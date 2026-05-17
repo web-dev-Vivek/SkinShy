@@ -122,10 +122,8 @@ export default function OnboardingInstructionsPanel({ questionId, isMobileModal 
     );
   };
 
-  const textColorClass = isMobileModal ? 'text-custom-charcoal' : 'text-white';
+  // const textColorClass = isMobileModal ? 'text-custom-charcoal' : 'text-white';
   const titleColorClass = isMobileModal ? 'text-custom-charcoal' : 'text-white';
-  const subtitleColorClass = isMobileModal ? 'text-gray-600' : 'text-gray-300';
-  const descriptionColorClass = isMobileModal ? 'text-gray-700' : 'text-gray-300';
   const bgColorClass = isMobileModal ? 'bg-gray-100' : 'bg-white/5';
   const borderColorClass = isMobileModal ? 'border-gray-300' : 'border-white/10';
 

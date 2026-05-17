@@ -5,10 +5,11 @@ function About() {
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c]">
+    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c] bg-center bg-cover bg-no-repeat"  style={{ backgroundImage: 'url(/Back2.png)' }}>
       
       {/* Decorative Elements */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10"
+       >
         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-custom-off-white opacity-30 blur-3xl"></div>
         <div className="absolute top-20 left-0 w-64 h-64 rounded-full bg-custom-light-gray opacity-20 blur-3xl"></div>
       </div>
