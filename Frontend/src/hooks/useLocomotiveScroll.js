@@ -35,7 +35,9 @@ export const useLocomotiveScroll = (enabled = true) => {
 
     // Update Locomotive Scroll on window resize
     const handleResize = () => {
-      scroll.update();
+      if (scrollInstanceRef.current) {
+        scrollInstanceRef.current.update();
+      }
     };
 
     window.addEventListener('resize', handleResize);

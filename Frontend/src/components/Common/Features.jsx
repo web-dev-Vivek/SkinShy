@@ -43,11 +43,15 @@ function Features() {
   return (
     <section 
       id="features" 
-      className="section-spacing relative w-full h-full bg-center bg-cover bg-no-repeat"
+      className="section-spacing relative w-full h-[150vh] md:h-full bg-center bg-contain md:bg-cover bg-no-repeat"
       data-scroll
       data-scroll-speed=""
-      style={{ backgroundImage: 'url(/Back.png)' }}
+      style={{ backgroundImage: `
+      url(${window.innerWidth >= 768 ? '/Back.png' : '/Backmobile.jpeg'})
+    ` }}
     >
+
+
       {/* Parallax Background - moves slower than content */}
       {/*<div
         className="absolute inset-0 -z-10"
@@ -62,7 +66,7 @@ function Features() {
       ></div>*/}
 
       <div className="container-custom relative z-10" data-scroll
-      data-scroll-speed="">
+      data-scroll-speed="1">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20 animate-slide-up"
@@ -139,7 +143,7 @@ function Features() {
 
                </div>
             </div>
-          ))}
+          ))} 
         </div>
 
           

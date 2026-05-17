@@ -5,7 +5,10 @@ function About() {
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c] bg-center bg-cover bg-no-repeat"  style={{ backgroundImage: 'url(/Back2.png)' }}>
+    <section id="about" className="section-spacing relative w-full bg-gradient-to-b from-white to-[#a08a7c] bg-center bg-cover bg-no-repeat" data-scroll
+      data-scroll-speed="1"  style={{ backgroundImage: `
+      url(${window.innerWidth >= 768 ? '/Back2.png' : '/Back2mobile.png'})
+    `}}>
       
       {/* Decorative Elements */}
       <div className="absolute inset-0 -z-10"
