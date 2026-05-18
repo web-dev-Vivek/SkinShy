@@ -101,11 +101,11 @@ function Navbar() {
   };
 
   const menuItems = isSignedIn ? [
-    { label: 'Guide', icon: '📚', path: '/guide' },
-    { label: 'Browse', icon: '🔍', path: '/search' },
-    { label: 'Compare', icon: '⚖️', path: '/product_Comparasion' },
+    { label: 'Guide', icon: '📚', image: '/Guide.png', path: '/guide' },
+    { label: 'Browse', icon: '🔍', image: '/Browser.png', path: '/search' },
+    { label: 'Compare', icon: '⚖️', image: '/Compare.png', path: '/product_Comparasion' },
   ] : [
-    { label: 'Guide', icon: '📚', path: '/guide' },
+    { label: 'Guide', icon: '📚', image: '/Guide.png', path: '/guide' },
   ];
 
   return (
@@ -114,16 +114,16 @@ function Navbar() {
       <nav ref={navRef} className="fixed top-0 backdrop-blur-xl bg-custom-white/95 left-0 right-0 z-40 border-b border-custom-light-gray/20">
         <div className="container-custom">
           <div className="flex justify-between items-center h-16 sm:h-20">
-            {/* Logo */}
-            <div 
-              onClick={() => handleNavigation('/')}
-              className="cursor-pointer group flex-shrink-0"
-            >
-              <h1 className="text-2xl sm:text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
-                Skinshy
-              </h1>
-              <div className="h-0.5 w-0 group-hover:w-full bg-custom-charcoal transition-all duration-300"></div>
-            </div>
+             {/* Logo */}
+             <div 
+               onClick={() => handleNavigation('/')}
+               className="cursor-pointer group flex-shrink-0"
+             >
+               <h1 className="text-2xl sm:text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
+                 Skinshy
+               </h1>
+               <div className="h-0.5 w-0 group-hover:w-full bg-custom-charcoal transition-all duration-300"></div>
+             </div>
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-12">
@@ -254,9 +254,12 @@ function Navbar() {
               onClick={() => handleNavigation(item.path)}
               className="w-full flex items-center gap-4 px-6 py-4 text-custom-dark-gray hover:text-custom-charcoal hover:bg-custom-light-gray/15 rounded-2xl transition-all duration-200 group active:bg-custom-light-gray/30 font-lato text-sm font-medium"
             >
-              <span className="text-xl group-hover:scale-110 transition-transform duration-200">
-                {item.icon}
-              </span>
+              {/* Use PNG image on all views */}
+              <img 
+                src={item.image} 
+                alt={item.label}
+                className="w-6 h-6 group-hover:scale-110 transition-transform duration-200"
+              />
               <span className="group-hover:translate-x-1 transition-transform duration-200">
                 {item.label}
               </span>

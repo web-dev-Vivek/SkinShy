@@ -155,7 +155,7 @@ function Hero() {
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-custom-light-gray to-custom-off-white">
                     {/* Image placeholder for Product Comparison - Edit this manually */}
                     <img 
-                      src="/productcompare.png" 
+                      src="/manface.jpg" 
                       alt="Product Comparison" 
                       className="w-full h-full object-cover"
                     />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
@@ -6,6 +6,8 @@ import { getProductById } from '../services/products';
 import { api } from '../services/api';
 import { convertPrice } from '../utils/currencyConverter';
 import { useCurrency } from '../context/CurrencyContext';
+
+const PRODUCTS_PER_PAGE = 100;
 
 export default function ProductComparePage() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -18,8 +20,12 @@ export default function ProductComparePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [loadingDetails, setLoadingDetails] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [hasMoreProducts, setHasMoreProducts] = useState(true);
+  const observerTarget = useRef(null);
 
    // Handle responsive background image
    useEffect(() => {
@@ -40,13 +46,19 @@ export default function ProductComparePage() {
     preloadImage('/Backmenmobile.png');
   }, []);
 
-    // Fetch all products
+    // Fetch products with pagination
     useEffect(() => {
       setLoading(true);
-      api.get('/products?limit=100')
+      const skip = 0;
+      api.get(`/products?skip=${skip}&limit=${PRODUCTS_PER_PAGE}`)
         .then(res => {
           setProducts(res.data.data);
           setFilteredProducts(res.data.data);
+          // Check if there are more products
+          const totalProducts = res.data.pagination?.total || 0;
+          const loadedProducts = (res.data.data || []).length;
+          setHasMoreProducts(loadedProducts + skip < totalProducts);
+          setCurrentPage(1);
           setLoading(false);
         })
         .catch(err => {
@@ -95,10 +107,63 @@ export default function ProductComparePage() {
      }
    };
 
-   // Check if product is selected
-   const isProductSelected = (productId) => {
-     return selectedProducts.some(p => p._id === productId);
-   };
+    // Check if product is selected
+    const isProductSelected = (productId) => {
+      return selectedProducts.some(p => p._id === productId);
+    };
+
+    // Load more products on infinite scroll
+    const loadMoreProducts = useCallback(() => {
+      if (loadingMore || !hasMoreProducts) return;
+
+      setLoadingMore(true);
+      const skip = currentPage * PRODUCTS_PER_PAGE;
+      
+      api.get(`/products?skip=${skip}&limit=${PRODUCTS_PER_PAGE}`)
+        .then(res => {
+          const newProducts = res.data.data || [];
+          setProducts(prev => {
+            const combined = [...prev, ...newProducts];
+            // Remove duplicates based on product ID
+            const uniqueProducts = Array.from(new Map(combined.map(p => [p._id, p])).values());
+            setFilteredProducts(uniqueProducts);
+            return uniqueProducts;
+          });
+          // Check if there are more products
+          const totalProducts = res.data.pagination?.total || 0;
+          const currentLoadedCount = products.length + newProducts.length;
+          setHasMoreProducts(currentLoadedCount < totalProducts);
+          setCurrentPage(prev => prev + 1);
+          setLoadingMore(false);
+        })
+        .catch(err => {
+          console.error('Error fetching more products:', err);
+          setLoadingMore(false);
+        });
+    }, [currentPage, loadingMore, hasMoreProducts, products.length]);
+
+    // Intersection Observer for infinite scroll
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        entries => {
+          if (entries[0].isIntersecting && !loadingMore && hasMoreProducts) {
+            loadMoreProducts();
+          }
+        },
+        { threshold: 0.1 }
+      );
+
+      const target = observerTarget.current;
+      if (target) {
+        observer.observe(target);
+      }
+
+      return () => {
+        if (target) {
+          observer.unobserve(target);
+        }
+      };
+    }, [loadMoreProducts, loadingMore, hasMoreProducts]);
 
    if (!isLoaded) {
      return (
@@ -160,7 +225,7 @@ export default function ProductComparePage() {
              )}
 
              {/* Vertical Levels */}
-             <div className="mx-auto max-w-md space-y-4">
+             <div className="mx-auto h-full max-w-md space-y-4">
                
                {/* LEVEL 1: Search Bar */}
                <div className="p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm">
@@ -239,7 +304,7 @@ export default function ProductComparePage() {
                  </div>
                ) : (
                  selectedProducts.length < 2 && (
-                   <div className="space-y-2 p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm max-h-96 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
+                   <div className="space-y-2 p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm h-3/4 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
                      {loading ? (
                        <div className="text-center py-4">
                          <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
@@ -280,9 +345,26 @@ export default function ProductComparePage() {
                              )}
                            </div>
                          </button>
-                       ))
-                     )}
-                   </div>
+                      ))
+                    )}
+                    {/* Loading More Indicator */}
+                    {loadingMore && (
+                      <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
+                        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mx-auto mb-1"></div>
+                        <p className="text-xs text-white/70 font-semibold">Loading more products...</p>
+                      </div>
+                    )}
+                    {/* Observer target for infinite scroll */}
+                    <div ref={observerTarget} className="py-4" />
+                    {/* End of products message */}
+                    {!hasMoreProducts && (
+                      <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
+                        <p className="text-xs text-white/70 font-semibold">
+                          End of available products
+                        </p>
+                      </div>
+                    )}
+                  </div>
                  )
                )}
 
@@ -363,14 +445,26 @@ export default function ProductComparePage() {
                              )}
                            </div>
                          </button>
-                       ))}
-                       <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
-                         <p className="text-xs text-white/70 font-semibold">
-                           Product of database
-                         </p>
-                       </div>
-                     </>
-                   )}
+                        ))}
+                        {/* Loading More Indicator */}
+                        {loadingMore && (
+                          <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
+                            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mx-auto mb-1"></div>
+                            <p className="text-xs text-white/70 font-semibold">Loading more products...</p>
+                          </div>
+                        )}
+                        {/* Observer target for infinite scroll */}
+                        <div ref={observerTarget} className="py-4" />
+                        {/* End of products message */}
+                        {!hasMoreProducts && (
+                          <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
+                            <p className="text-xs text-white/70 font-semibold">
+                              End of available products
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    )}
                  </div>
                )}
              </div>

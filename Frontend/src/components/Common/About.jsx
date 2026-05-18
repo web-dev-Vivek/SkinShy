@@ -45,14 +45,14 @@ function About() {
                 </span>
               </div>
               
-              <h2 className="heading-gradient text-4xl md:text-5xl lg:text-6xl">
-                Precision Meets Beauty
-              </h2>
+               <h2 className="heading-gradient text-4xl md:text-5xl lg:text-6xl text-white">
+                 Precision Meets Beauty
+               </h2>
             </div>
 
-            <p className="text-lg text-custom-dark-gray leading-relaxed max-w-2xl">
-              We believe skincare isn't one-size-fits-all. Skinshy combines cutting-edge AI technology with deep skincare expertise to deliver truly personalized recommendations. Every product match is backed by data, science, and thousands of user experiences.
-            </p>
+             <p className="text-lg text-white leading-relaxed max-w-2xl">
+               We believe skincare isn't one-size-fits-all. Skinshy combines cutting-edge AI technology with deep skincare expertise to deliver truly personalized recommendations. Every product match is backed by data, science, and thousands of user experiences.
+             </p>
 
             <div className="space-y-4">
               <div className="flex gap-4">
@@ -60,9 +60,9 @@ function About() {
                   <span className="text-custom-white text-sm">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-archivo font-bold text-custom-charcoal mb-1">Data-Driven</h4>
-                  <p className="text-custom-dark-gray">Every recommendation backed by advanced analytics</p>
-                </div>
+                   <h4 className="font-archivo font-bold text-white mb-1">Data-Driven</h4>
+                   <p className="text-white">Every recommendation backed by advanced analytics</p>
+                 </div>
               </div>
               
               <div className="flex gap-4">
@@ -70,9 +70,9 @@ function About() {
                   <span className="text-custom-white text-sm">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-archivo font-bold text-custom-charcoal mb-1">Expert Curated</h4>
-                  <p className="text-custom-dark-gray">Verified by dermatologists and beauty experts</p>
-                </div>
+                   <h4 className="font-archivo font-bold text-white mb-1">Expert Curated</h4>
+                   <p className="text-white">Verified by dermatologists and beauty experts</p>
+                 </div>
               </div>
               
               <div className="flex gap-4">
@@ -80,9 +80,9 @@ function About() {
                   <span className="text-custom-white text-sm">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-archivo font-bold text-custom-charcoal mb-1">Community Driven</h4>
-                  <p className="text-custom-dark-gray">Insights from thousands of real skin profiles</p>
-                </div>
+                   <h4 className="font-archivo font-bold text-white mb-1">Community Driven</h4>
+                   <p className="text-white">Insights from thousands of real skin profiles</p>
+                 </div>
               </div>
             </div>
 
