@@ -57,24 +57,24 @@ export default function SignupPage() {
   }, [isLoaded, user, complete_signup, complete_onboarding, navigate]);
 
   return (
-    <div className="min-h-screen bg-custom-white flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+    <div className="w-full min-h-screen bg-custom-white flex flex-col items-center justify-center px-4 py-8 md:py-12">
+      <div className="w-full max-w-md flex flex-col">
         {/* Back Button */}
         <button
           onClick={() => navigate('/')}
-          className="mb-8 flex items-center text-custom-charcoal hover:text-custom-dark-gray transition"
+          className="mb-8 flex items-center text-custom-charcoal hover:text-custom-dark-gray transition text-sm md:text-base"
         >
           ← Back to Home
         </button>
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold font-playfair text-custom-charcoal mb-2">Join Skinshy</h1>
-          <p className="text-custom-dark-gray">Create your account to get personalized skin recommendations</p>
+        <div className="mb-8 text-center md:text-left">
+          <h1 className="text-2xl sm:text-3xl font-bold font-playfair text-custom-charcoal mb-2">Join Skinshy</h1>
+          <p className="text-sm sm:text-base text-custom-dark-gray">Create your account to get personalized skin recommendations</p>
         </div>
 
          {/* Clerk SignUp Component */}
-         <div className="bg-custom-white rounded-lg border border-custom-light-gray/20 p-8">
+         <div className="bg-custom-white rounded-lg border border-custom-light-gray/20 p-6 sm:p-8 w-full">
            <SignUp
              appearance={{
                elements: {
@@ -82,7 +82,7 @@ export default function SignupPage() {
                  card: 'bg-custom-white shadow-none border-0',
                  formButtonPrimary: 'bg-custom-charcoal hover:bg-custom-black transition w-full',
                  formFieldInput: 'border border-custom-light-gray/30 focus:ring-custom-charcoal',
-                 footerAction: 'text-custom-dark-gray',
+                 footerAction: 'text-custom-dark-gray text-xs sm:text-sm',
                  footerActionLink: 'text-custom-charcoal hover:text-custom-black',
                }
              }}
@@ -92,7 +92,7 @@ export default function SignupPage() {
          </div>
 
         {/* Footer */}
-        <div className="mt-6 text-center text-sm text-custom-dark-gray">
+        <div className="mt-6 text-center text-xs sm:text-sm text-custom-dark-gray">
           Already have an account?{' '}
           <button
             onClick={() => navigate('/login')}

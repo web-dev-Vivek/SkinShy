@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useProtectedNavigate from '../../hooks/useProtectedNavigate';
 
 function Hero() {
   const navigate = useNavigate();
+  const protectedNavigate = useProtectedNavigate();
   const [activeTab, setActiveTab] = useState('safety');
 
   return (
@@ -43,7 +45,7 @@ function Hero() {
             {/* Main Heading - Premium Typography */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <span className="text-xs md:text-sm font-medium text-custom-dark-gray tracking-widest uppercase">
+                <span className="text-xs md:text-sm font-medium text-[#f9f9f9] tracking-widest uppercase">
                   Discover Premium Skincare
                 </span>
               </div>
@@ -58,22 +60,22 @@ function Hero() {
               </h2>
 
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-custom-dark-gray font-light max-w-xl leading-relaxed pt-4">
-                / We craft personalized skincare solutions /
+              <p className="text-lg md:text-xl text-[#f9f9f9] font-light max-w-xl leading-relaxed pt-4">
+                We craft personalized skincare solutions
               </p>
             </div>
 
             {/* CTA Button - Minimal Design */}
              <div className="flex items-center gap-6">
-               <button
-                 onClick={() => navigate('/search')}
-                 className="px-10 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-full hover:bg-custom-black transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider"
-               >
-                 Browse Products
-               </button>
+                <button
+                  onClick={() => protectedNavigate('/search')}
+                  className="px-10 py-4 bg-custom-charcoal text-custom-white font-semibold rounded-full hover:bg-custom-black transition-all duration-300 hover:shadow-xl uppercase text-sm tracking-wider"
+                >
+                  Browse Products
+                </button>
                <div className="flex items-center gap-3">
                  <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
-                 <p className="text-xs text-custom-dark-gray tracking-widest uppercase">Explore</p>
+                 <p className="text-xs text-[#f9f9f9] tracking-widest uppercase">Explore</p>
                </div>
              </div>
 
@@ -121,13 +123,13 @@ function Hero() {
                       Personalized Safety score
                     </h3>
                     <p className="text-sm text-custom-dark-gray pt-2">
-                      Get your personalized safety rating.
+                      Get your personalized safety rating of you cosmetic products.
                     </p>
                   </>
                 ) : (
                   <>
                     <h3 className="font-playfair text-3xl md:text-4xl text-custom-charcoal font-light">
-                      Product comparison with safety score
+                      Comparison with safety score
                     </h3>
                     <p className="text-sm text-custom-dark-gray pt-2">
                       Compare products side by side.
@@ -173,11 +175,7 @@ function Hero() {
 
             {/* Statistics Section - Bottom Right */}
             <div className="flex items-center gap-8 pt-8">
-              <div className="flex gap-3">
-                <div className="w-12 h-12 rounded-full bg-custom-light-gray flex items-center justify-center text-lg">👤</div>
-                <div className="w-12 h-12 rounded-full bg-custom-light-gray flex items-center justify-center text-lg -ml-4">👤</div>
-              </div>
-              
+                          
               <div className="space-y-2">
                 <p className="font-playfair text-lg md:text-xl text-custom-charcoal font-light">
                   WE CAN COMBINE<br/>NATURE & HOME<br/>COMFORT

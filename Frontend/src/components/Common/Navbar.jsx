@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import gsap from 'gsap';
+import useProtectedNavigate from '../../hooks/useProtectedNavigate';
 
 function Navbar() {
   const navigate = useNavigate();
+  const protectedNavigate = useProtectedNavigate();
   const { isSignedIn, signOut } = useAuth();
   const { user: clerkUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +88,7 @@ function Navbar() {
   }, [isOpen]);
 
   const handleNavigation = (path) => {
-    navigate(path);
+    protectedNavigate(path);
     setIsOpen(false);
   };
 
@@ -206,15 +208,26 @@ function Navbar() {
         style={{ top: '0' }}
       />
 
-      {/* Drawer Menu - Premium Design */}
-      <div
-        ref={drawerRef}
-        className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-custom-white z-40 shadow-2xl rounded-l-3xl flex flex-col overflow-hidden"
-        style={{ transform: 'translateX(400px)', opacity: 0 }}
-      >
-        {/* Profile Section */}
-        {isSignedIn && (
-          <div className="bg-gradient-to-b from-custom-light-gray/30 to-custom-off-white/20 backdrop-blur-sm p-8 border-b border-custom-light-gray/20">
+       {/* Drawer Menu - Premium Design */}
+       <div
+         ref={drawerRef}
+         className="fixed top-0 right-0 bottom-0 w-4/5 sm:w-3/4 md:max-w-sm bg-custom-white z-40 shadow-2xl rounded-l-3xl flex flex-col overflow-hidden"
+         style={{ transform: 'translateX(400px)', opacity: 0 }}
+       >
+         {/* Close Button */}
+         <button
+           onClick={closeMenu}
+           className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full hover:bg-custom-light-gray/20 transition-all duration-200 z-50"
+           aria-label="Close menu"
+         >
+           <svg className="w-6 h-6 text-custom-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+           </svg>
+         </button>
+
+         {/* Profile Section */}
+         {isSignedIn && (
+           <div className="bg-gradient-to-b from-custom-light-gray/30 to-custom-off-white/20 backdrop-blur-sm p-8 pt-16 border-b border-custom-light-gray/20">
             <div className="flex flex-col items-center gap-4">
               <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-custom-charcoal shadow-lg">
                 {clerkUser?.profileImageUrl ? (
