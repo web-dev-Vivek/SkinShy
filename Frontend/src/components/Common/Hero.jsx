@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useProtectedNavigate from '../../hooks/useProtectedNavigate';
 
 function Hero() {
-  const navigate = useNavigate();
   const protectedNavigate = useProtectedNavigate();
   const [activeTab, setActiveTab] = useState('safety');
 

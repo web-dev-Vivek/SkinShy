@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import gsap from 'gsap';
 import useProtectedNavigate from '../../hooks/useProtectedNavigate';
 
 function Navbar() {
-  const navigate = useNavigate();
   const protectedNavigate = useProtectedNavigate();
   const { isSignedIn, signOut } = useAuth();
   const { user: clerkUser } = useUser();
