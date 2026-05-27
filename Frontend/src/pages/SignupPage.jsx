@@ -57,12 +57,12 @@ export default function SignupPage() {
   }, [isLoaded, user, complete_signup, complete_onboarding, navigate]);
 
   return (
-    <div className="w-full min-h-screen bg-custom-white flex flex-col items-center justify-center px-4 py-8 md:py-12">
+    <div className="w-full min-h-screen bg-custom-white flex flex-col items-center justify-center md:px-4 py-8 md:py-12">
       <div className="w-full max-w-md flex flex-col">
         {/* Back Button */}
         <button
           onClick={() => navigate('/')}
-          className="mb-8 flex items-center text-custom-charcoal hover:text-custom-dark-gray transition text-sm md:text-base"
+          className="mb-8 flex items-center px-4 md:px-0 text-custom-charcoal hover:text-custom-dark-gray transition text-sm md:text-base"
         >
           ← Back to Home
         </button>
@@ -74,7 +74,7 @@ export default function SignupPage() {
         </div>
 
          {/* Clerk SignUp Component */}
-         <div className="bg-custom-white rounded-lg border border-custom-light-gray/20 p-6 sm:p-8 w-full">
+         <div className="bg-custom-white min-h-screen rounded-lg border border-custom-light-gray/20 p-6 sm:p-8 w-full">
            <SignUp
              appearance={{
                elements: {
