@@ -269,18 +269,7 @@ function GuidePage() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="bg-gradient-to-r from-custom-charcoal to-custom-charcoal/90 rounded-2xl p-12 text-center mb-8">
-          <h2 className="text-3xl font-playfair font-bold text-custom-white mb-4">
-            Ready to Find Your Perfect Skincare?
-          </h2>
-          <p className="text-custom-white/90 mb-8 max-w-2xl mx-auto">
-            Start exploring skincare products matched to your unique skin profile. Your journey to healthier skin begins here.
-          </p>
-          <button className="px-8 py-3 bg-custom-white text-custom-charcoal font-semibold rounded-lg hover:bg-custom-white/90 transition-all duration-200 active:scale-95">
-            Go to Browse Products
-          </button>
-        </div>
+        
       </div>
     </div>
   );

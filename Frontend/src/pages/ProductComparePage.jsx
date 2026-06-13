@@ -167,11 +167,12 @@ export default function ProductComparePage() {
 
    if (!isLoaded) {
      return (
-       <div className="h-screen bg-custom-white mt-20 flex items-center justify-center">
-         <div className="text-center">
-           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-custom-charcoal mx-auto mb-4"></div>
-           <p className="text-custom-dark-gray">Loading...</p>
-         </div>
+       <div className="fixed inset-0 flex items-center justify-center z-50 bg-custom-white animate-scale-grow">
+         <img 
+           src="/Product.png" 
+           alt="Loading" 
+           className="w-3/4 md:w-1/2 lg:w-1/3 h-auto object-cover rounded-3xl border-2 border-custom-charcoal/20"
+         />
        </div>
      );
    }
@@ -231,14 +232,21 @@ export default function ProductComparePage() {
                <div className="p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm">
                  <input
                    type="text"
-                   placeholder="Search bar"
+                   placeholder="Search Products..."
                    value={searchQuery}
                    onChange={(e) => setSearchQuery(e.target.value)}
                    className="w-full px-4 py-3 rounded-lg border-2 border-white/30 bg-white/90 backdrop-blur text-custom-charcoal placeholder:text-custom-dark-gray focus:outline-none focus:border-white transition-all text-sm font-semibold"
                  />
-               </div>
+                </div>
 
-               {/* LEVEL 2: First Selected Product */}
+                {/* Instruction text between search and product list */}
+                {selectedProducts.length === 0 && (
+                  <div className="p-3 rounded-lg bg-white/15 border border-white/30 backdrop-blur-sm text-center">
+                    <p className="text-xs text-white/80 font-semibold">Select product from product list</p>
+                  </div>
+                )}
+
+                {/* LEVEL 2: First Selected Product */}
                {selectedProducts.length >= 1 && (
                  <div className="p-4 rounded-lg bg-white/25 border-2 border-white/60 backdrop-blur-sm hover:bg-white/30 transition-all">
                    <div className="flex justify-between items-start gap-3 mb-2">
@@ -305,11 +313,10 @@ export default function ProductComparePage() {
                ) : (
                  selectedProducts.length < 2 && (
                    <div className="space-y-2 p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm h-3/4 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
-                     {loading ? (
-                       <div className="text-center py-4">
-                         <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
-                         <p className="text-xs text-white/80">Loading products...</p>
-                       </div>
+                      {loading ? (
+                        <div className="text-center py-4">
+                          <p className="text-xs text-white/80 font-semibold">Loading products...</p>
+                        </div>
                      ) : filteredProducts.length === 0 ? (
                        <div className="text-center py-6">
                          <p className="text-sm text-white/70">No products found</p>
@@ -350,7 +357,6 @@ export default function ProductComparePage() {
                     {/* Loading More Indicator */}
                     {loadingMore && (
                       <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
-                        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mx-auto mb-1"></div>
                         <p className="text-xs text-white/70 font-semibold">Loading more products...</p>
                       </div>
                     )}
@@ -404,11 +410,10 @@ export default function ProductComparePage() {
                {/* LEVEL 5: Product List */}
                {selectedProducts.length >= 2 && (
                  <div className="space-y-2 p-4 rounded-lg bg-white/10 border border-white/20 backdrop-blur-sm max-h-96 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
-                   {loading ? (
-                     <div className="text-center py-4">
-                       <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
-                       <p className="text-xs text-white/80">Loading products...</p>
-                     </div>
+                    {loading ? (
+                      <div className="text-center py-4">
+                        <p className="text-xs text-white/80 font-semibold">Loading products...</p>
+                      </div>
                    ) : filteredProducts.length === 0 ? (
                      <div className="text-center py-4">
                        <p className="text-xs text-white/70">No products found</p>
@@ -449,7 +454,6 @@ export default function ProductComparePage() {
                         {/* Loading More Indicator */}
                         {loadingMore && (
                           <div className="mt-2 p-3 rounded-lg bg-white/15 border border-white/20 text-center">
-                            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mx-auto mb-1"></div>
                             <p className="text-xs text-white/70 font-semibold">Loading more products...</p>
                           </div>
                         )}
@@ -509,13 +513,12 @@ export default function ProductComparePage() {
                    />
                  </div>
 
-                 {/* Product List - Scrollable */}
-                 <div className="flex-1 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10 space-y-2 pr-2">
-                   {loading ? (
-                     <div className="text-center py-8">
-                       <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
-                       <p className="text-xs text-white/80">Loading products...</p>
-                     </div>
+                  {/* Product List - Scrollable */}
+                  <div className="flex-1 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10 space-y-2 pr-2">
+                    {loading ? (
+                      <div className="text-center py-8">
+                        <p className="text-xs text-white/80 font-semibold">Loading products...</p>
+                      </div>
                    ) : filteredProducts.length === 0 ? (
                      <div className="text-center py-6">
                        <p className="text-sm text-white/70">No products found</p>

@@ -85,21 +85,21 @@ function Features() {
          >
           <div className="inline-flex items-center gap-3 mb-6">
             <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
-            <span className="text-xs md:text-sm font-medium text-custom-dark-gray tracking-widest uppercase">
+            <span className="text-xs md:text-sm font-medium text-white tracking-widest uppercase">
               Why Choose Us
             </span>
             <div className="w-1 h-1 bg-custom-charcoal rounded-full"></div>
           </div>
           
           <h2 
-            className="heading-gradient text-4xl md:text-5xl lg:text-6xl mb-6"
+            className="heading-gradient text-white text-4xl md:text-5xl lg:text-6xl mb-6"
            
           >
             Designed for You
           </h2>
           
           <p 
-            className="text-lg md:text-xl text-custom-dark-gray leading-relaxed"
+            className="text-lg md:text-xl text-white leading-relaxed"
            
           >
             Discover the powerful features that make skincare selection personalized, safe, and informed.
@@ -115,10 +115,10 @@ function Features() {
                data-scroll 
                data-scroll-speed={`${0.5 + (index * 0.2)}`}
              >
-               <div className="glass glass-hover rounded-3xl p-4 md:p-8 group cursor-pointer border border-white/20 shadow-lg hover:shadow-2xl relative md:h-full">
+               <div className="glass glass-hover rounded-3xl flex md:block justify-between items-center  p-4 md:p-8 group cursor-pointer border border-white/20 shadow-lg hover:shadow-2xl relative md:h-full">
                   
                     {/* Icon Container */}
-                    <div className="mb-2 md:mb-6">
+                    <div className=" md:mb-6">
                       <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/15 backdrop-blur-md group-hover:bg-white/25 transition-all duration-300 border border-white/20 shadow-md">
                         <img 
                           src={`/${feature.icon}`} 
@@ -129,9 +129,9 @@ function Features() {
                    </div>
 
                  {/* Content */}
-                 <div className="space-y-2 md:space-y-3">
+                 <div className="space-y-2 md:space-y-3 ">
                    <div className="flex items-start justify-between gap-2 md:gap-3">
-                     <h3 className="text-sm md:text-2xl font-playfair font-bold text-custom-charcoal group-hover:text-custom-black transition-colors">
+                     <h3 className="text-xl flex justify-center items-center md:text-2xl font-playfair font-bold text-custom-black md:text-custom-charcoal md:group-hover:text-custom-black transition-colors">
                        {feature.title}
                      </h3>
                      <span className="hidden md:inline-block text-xs font-semibold text-custom-charcoal bg-white/30 backdrop-blur-md px-2 md:px-3 py-1 rounded-full group-hover:bg-white/40 transition-all duration-300 border border-white/20 whitespace-nowrap flex-shrink-0">
