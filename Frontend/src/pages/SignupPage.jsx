@@ -5,6 +5,7 @@ import { useUser } from '@clerk/clerk-react';
 import { useOnboarding } from '../context/OnboardingContext';
 import { api } from '../services/api';
 import { getUserName, getUserEmail } from '../services/auth';
+import BackButton from "../components/Back"
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -57,24 +58,24 @@ export default function SignupPage() {
   }, [isLoaded, user, complete_signup, complete_onboarding, navigate]);
 
   return (
-    <div className="w-full min-h-screen bg-custom-white flex flex-col items-center justify-center md:px-4 py-8 md:py-12">
+    <div className="w-full min-h-screen bg-custom-white flex flex-col items-center justify-center px-3 sm:px-4 py-6 sm:py-8">
+      {/* Back Button */}
+        <BackButton
+          text="← Back to Home"
+          path="/"
+        />
+
       <div className="w-full max-w-md flex flex-col">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate('/')}
-          className="mb-8 flex items-center px-4 md:px-0 text-custom-charcoal hover:text-custom-dark-gray transition text-sm md:text-base"
-        >
-          ← Back to Home
-        </button>
+        
 
         {/* Header */}
-        <div className="mb-8 text-center md:text-left">
+        <div className="mb-6 sm:mb-8 text-center sm:text-left">
           <h1 className="text-2xl sm:text-3xl font-bold font-playfair text-custom-charcoal mb-2">Join Skinshy</h1>
           <p className="text-sm sm:text-base text-custom-dark-gray">Create your account to get personalized skin recommendations</p>
         </div>
 
          {/* Clerk SignUp Component */}
-         <div className="bg-custom-white min-h-screen rounded-lg border border-custom-light-gray/20 p-6 sm:p-8 w-full">
+         <div className="bg-custom-white rounded-lg border border-custom-light-gray/20 p-5 sm:p-8 w-full">
            <SignUp
              appearance={{
                elements: {
@@ -92,7 +93,7 @@ export default function SignupPage() {
          </div>
 
         {/* Footer */}
-        <div className="mt-6 text-center text-xs sm:text-sm text-custom-dark-gray">
+        <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-custom-dark-gray px-2">
           Already have an account?{' '}
           <button
             onClick={() => navigate('/login')}
