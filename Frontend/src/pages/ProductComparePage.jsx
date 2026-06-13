@@ -556,20 +556,29 @@ export default function ProductComparePage() {
                  </div>
                </div>
 
-               {/* RIGHT PANEL: Comparison View */}
-               <div className="w-2/3 flex flex-col bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm p-4 overflow-hidden">
-                 {selectedProducts.length === 0 ? (
-                   <div className="flex-1 flex items-center justify-center text-center">
-                     <div>
-                       <p className="text-lg text-white font-semibold mb-2">
-                         No Products Selected
-                       </p>
-                       <p className="text-white/80 text-sm">
-                         Select products from the left to compare them
-                       </p>
-                     </div>
-                   </div>
-                 ) : (
+                {/* RIGHT PANEL: Comparison View */}
+                <div className="w-2/3 flex flex-col bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm p-4 overflow-hidden">
+                  {selectedProducts.length === 0 ? (
+                    <div className="flex-1 flex items-center justify-center text-center">
+                      <div className="flex flex-col items-center gap-4">
+                        <div className="w-3/4 h-3/4 rounded-lg border-2 border-white/30 overflow-hidden">
+                          <img 
+                            src="/Product.png" 
+                            alt="Product placeholder" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-lg text-white font-semibold mb-2">
+                            No Products Selected
+                          </p>
+                          <p className="text-white/80 text-sm">
+                            Select products from the left to compare them
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
                    <div className="flex-1 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10 pr-2">
                      <div className="space-y-4">
                        {selectedProducts.map(product => {
@@ -627,27 +636,7 @@ export default function ProductComparePage() {
                                </div>
                              )}
 
-                             {/* Ingredients Summary */}
-                             {details?.ingredients && (
-                               <div className="mt-3 pt-3 border-t border-white/20">
-                                 <h4 className="text-xs font-bold text-white mb-2">
-                                   Top Ingredients ({details.ingredients.length})
-                                 </h4>
-                                 <div className="space-y-1">
-                                   {details.ingredients.slice(0, 3).map((ing, idx) => (
-                                     <p key={idx} className="text-xs text-white/70">
-                                       {idx + 1}. {ing.name}
-                                       {ing.knownAllergen && <span className="text-red-300"> ⚠️</span>}
-                                     </p>
-                                   ))}
-                                   {details.ingredients.length > 3 && (
-                                     <p className="text-xs text-white/70">
-                                       +{details.ingredients.length - 3} more...
-                                     </p>
-                                   )}
-                                 </div>
-                               </div>
-                             )}
+                             
                            </div>
                          );
                        })}

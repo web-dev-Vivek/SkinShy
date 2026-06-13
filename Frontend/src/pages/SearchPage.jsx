@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
-import ProductGridSkeleton from '../components/Skeletons/ProductGridSkeleton';
-import ProductCardSkeleton from '../components/Skeletons/ProductCardSkeleton';
 import CurrencySelector from '../components/Common/CurrencySelector';
 import { convertPrice } from '../utils/currencyConverter';
 import { useCurrency } from '../context/CurrencyContext';
@@ -203,7 +201,10 @@ export default function SearchPage() {
 
                 {/* Loading State */}
                 {loading && (
-                  <ProductGridSkeleton count={12} />
+                  <div className="text-center py-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mx-auto mb-4"></div>
+                    <p className="text-white/80">Loading products...</p>
+                  </div>
                 )}
 
                 {/* No Results */}
@@ -240,10 +241,9 @@ export default function SearchPage() {
 
                     {/* Loading More Indicator */}
                     {loadingMore && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-8">
-                        {Array.from({ length: 4 }).map((_, idx) => (
-                          <ProductCardSkeleton key={idx} />
-                        ))}
+                      <div className="text-center py-8">
+                        <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white mx-auto mb-2"></div>
+                        <p className="text-white/70 text-sm">Loading more products...</p>
                       </div>
                     )}
 
