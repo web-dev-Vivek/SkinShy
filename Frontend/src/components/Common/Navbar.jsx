@@ -170,7 +170,7 @@ function Navbar() {
                 </>
               ) : (
                 <button
-                  onClick={() => setIsOpen(true)}
+                  onClick={() => handleNavigation('/profile')}
                   className="w-10 h-10 rounded-full overflow-hidden border-2 border-custom-light-gray hover:border-custom-charcoal transition-all duration-200"
                 >
                   {clerkUser?.profileImageUrl ? (
@@ -205,14 +205,14 @@ function Navbar() {
       <div
         ref={overlayRef}
         onClick={closeMenu}
-        className="fixed inset-0 bg-custom-charcoal/40 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-300"
+        className="fixed inset-0 bg-custom-charcoal/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"
         style={{ top: '0' }}
       />
 
        {/* Drawer Menu - Premium Design */}
        <div
          ref={drawerRef}
-         className="fixed top-0 right-0 bottom-0 w-4/5 sm:w-3/4 md:max-w-sm bg-custom-white z-40 shadow-2xl rounded-l-3xl flex flex-col overflow-hidden"
+         className="fixed top-0 right-0 bottom-0 w-4/5 sm:w-3/4 md:max-w-sm bg-custom-white z-50 shadow-2xl rounded-l-3xl flex flex-col overflow-hidden"
          style={{ transform: 'translateX(400px)', opacity: 0 }}
        >
          {/* Close Button */}
