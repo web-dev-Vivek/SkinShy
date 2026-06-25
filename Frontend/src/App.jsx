@@ -3,12 +3,13 @@ import { ClerkProvider } from '@clerk/clerk-react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import { OnboardingProvider } from './context/OnboardingContext';
-import { UserProvider } from './context/UserContext';
 import { CurrencyProvider } from './context/CurrencyContext';
 import { setClerkTokenGetter } from './services/api';
 import Navbar from './components/Common/Navbar';
 import LoadingFallback from './components/LoadingFallback';
 import ProtectedRoute from './components/ProtectedRoute';
+import HomeSkeleton from './components/Skeletons/HomeSkeleton';
+import GuideSkeleton from './components/Skeletons/GuideSkeleton';
 
 // Lazy load all pages for code splitting
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -42,57 +43,55 @@ function AppRoutes() {
     <>
       <TokenInitializer />
       {shouldShowNavbar && <Navbar />}
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route
-            path="/onboarding"
-            element={
-              <ProtectedRoute>
-                <OnboardingPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/search"
-            element={
-              <ProtectedRoute>
-                <SearchPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/search/:id"
-            element={
-              <ProtectedRoute>
-                <ProductPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/product_Comparasion"
-            element={
-              <ProtectedRoute>
-                <ProductComparePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/guide"
-            element={<GuidePage />}
-          />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route path="/" element={<Suspense fallback={<HomeSkeleton />}><LandingPage /></Suspense>} />
+        <Route path="/login" element={<Suspense fallback={<LoadingFallback />}><LoginPage /></Suspense>} />
+        <Route path="/signup" element={<Suspense fallback={<LoadingFallback />}><SignupPage /></Suspense>} />
+        <Route
+          path="/onboarding"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}><OnboardingPage /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}><SearchPage /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search/:id"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}><ProductPage /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}><ProfilePage /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/product_Comparasion"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<LoadingFallback />}><ProductComparePage /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/guide"
+          element={<Suspense fallback={<GuideSkeleton />}><GuidePage /></Suspense>}
+        />
+      </Routes>
     </>
   );
 }
@@ -100,15 +99,13 @@ function AppRoutes() {
 export default function App() {
   return (
     <ClerkProvider publishableKey={process.env.REACT_APP_CLERK_PUBLISHABLE_KEY}>
-      <UserProvider>
-        <OnboardingProvider>
-          <CurrencyProvider>
-            <Router>
-              <AppRoutes />
-            </Router>
-          </CurrencyProvider>
-        </OnboardingProvider>
-      </UserProvider>
+      <OnboardingProvider>
+        <CurrencyProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </CurrencyProvider>
+      </OnboardingProvider>
     </ClerkProvider>
   );
 }

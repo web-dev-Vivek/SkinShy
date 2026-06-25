@@ -69,7 +69,7 @@ export default function LoginPage() {
             <img 
               src="/Login.png" 
               alt="Login illustration skeleton" 
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
         )}

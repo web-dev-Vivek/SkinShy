@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# ──────────────────────────────────────────────────────────────
+# Cleanup: kill background servers when script exits for any
+# reason — Ctrl+C (SIGINT), kill (SIGTERM), or normal EXIT.
+# BACKEND_PID / FRONTEND_PID are set further down after `npm start &`
+# ──────────────────────────────────────────────────────────────
+cleanup() {
+  echo ""
+  echo "⛔ Stopping Skinshy Servers..."
+  kill "$BACKEND_PID"  2>/dev/null
+  kill "$FRONTEND_PID" 2>/dev/null
+  # Give processes up to 3 seconds to exit cleanly, then force-kill
+  sleep 1
+  kill -0 "$BACKEND_PID"  2>/dev/null && kill -9 "$BACKEND_PID"  2>/dev/null
+  kill -0 "$FRONTEND_PID" 2>/dev/null && kill -9 "$FRONTEND_PID" 2>/dev/null
+  echo "✅ All servers stopped. Ports 3000 & 5000 are now free."
+  exit 0
+}
+
+trap cleanup SIGINT SIGTERM EXIT
+
 echo "================================================"
 echo "SKINSHY - APPLICATION STARTUP"
 echo "================================================"
