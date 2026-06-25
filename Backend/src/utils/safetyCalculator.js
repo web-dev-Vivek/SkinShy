@@ -5,6 +5,18 @@
 
 const topIngredientCategories = require('./topIngredientCategories.json');
 
+// Mapping user allergy selection to database allergen groups
+const allergyMap = {
+  'fragrances': 'fragrance',
+  'fragrance': 'fragrance',
+  'essential_oils': 'botanical_oil',
+  'essential oils': 'botanical_oil',
+  'parabens': 'paraben',
+  'paraben': 'paraben',
+  'lanolin': 'wool_wax',
+  // Add other mappings if needed
+};
+
 const calculateSafetyScore = (product, userProfile) => {
   let penalties = 0;
   let bonuses = 0;
@@ -88,7 +100,13 @@ const calculateSafetyScore = (product, userProfile) => {
   // STAGE 2: Allergen Triggers
   product.ingredients.forEach(ingredient => {
     if (ingredient.knownAllergen && userProfile.knownAllergies) {
-      if (userProfile.knownAllergies.includes(ingredient.allergenGroup)) {
+      // Map user allergy input to database format before comparison
+      const userHasAllergy = userProfile.knownAllergies.some(userAllergy => {
+        const dbAllergenGroup = allergyMap[userAllergy.toLowerCase()] || userAllergy.toLowerCase();
+        return dbAllergenGroup === ingredient.allergenGroup;
+      });
+
+      if (userHasAllergy) {
         let penalty = 0;
 
         if (ingredient.categoryType === 'A') {
