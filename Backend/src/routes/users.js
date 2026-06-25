@@ -176,7 +176,15 @@ router.put('/preferences', authenticate, asyncHandler(async (req, res) => {
 
   if (skinType) user.profile.skinType = skinType;
   if (typeof highSensitivity === 'boolean') user.profile.highSensitivity = highSensitivity;
-  if (Array.isArray(knownAllergies)) user.profile.knownAllergies = knownAllergies;
+  if (Array.isArray(knownAllergies)) {
+    if (knownAllergies.length > 20) {
+      return res.status(400).json({ error: 'Too many allergies listed (max 20)' });
+    }
+    const validAllergies = knownAllergies
+      .filter(a => typeof a === 'string' && a.length <= 50)
+      .slice(0, 20);
+    user.profile.knownAllergies = validAllergies;
+  }
   if (productChangeRate) user.profile.productChangeRate = productChangeRate;
 
   // Mark onboarding as completed if all required fields are set
@@ -229,7 +237,13 @@ router.post('/complete-onboarding', authenticate, asyncHandler(async (req, res) 
     user.profile.highSensitivity = highSensitivity;
   }
   if (Array.isArray(knownAllergies)) {
-    user.profile.knownAllergies = knownAllergies;
+    if (knownAllergies.length > 20) {
+      return res.status(400).json({ error: 'Too many allergies listed (max 20)' });
+    }
+    const validAllergies = knownAllergies
+      .filter(a => typeof a === 'string' && a.length <= 50)
+      .slice(0, 20);
+    user.profile.knownAllergies = validAllergies;
   }
   user.profile.productChangeRate = productChangeRate;
   user.profile.onboardingCompleted = true;

@@ -89,6 +89,11 @@ router.post('/batch', authenticate, asyncHandler(async (req, res) => {
     return res.status(400).json({ error: 'Product IDs array is required' });
   }
 
+  // ✅ Maximum 20 products at a time
+  if (productIds.length > 20) {
+    return res.status(400).json({ error: 'Maximum 20 products can be processed at once' });
+  }
+
   const user = await User.findOne({ clerkId: req.userId });
   if (!user || !user.profile.onboardingCompleted) {
     return res.status(400).json({ error: 'Please complete onboarding first' });
