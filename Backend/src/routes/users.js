@@ -1,8 +1,11 @@
 const express = require('express');
 const User = require('../models/User');
 const { authenticate } = require('../middleware/auth');
+const { createClerkClient } = require('@clerk/backend');
 
 const router = express.Router();
+
+const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
 
 // Wrapper to handle async/await errors in route handlers
 const asyncHandler = (fn) => (req, res, next) => {
@@ -12,13 +15,27 @@ const asyncHandler = (fn) => (req, res, next) => {
 const findOrCreateUser = async (clerkId, clerkUser) => {
   let user = await User.findOne({ clerkId });
   if (!user) {
-    const email = clerkUser?.email || (clerkUser?.email_addresses && clerkUser.email_addresses[0]) || `user_${clerkId}@example.com`;
-    const name = clerkUser?.name || email.split('@')[0];
-    
+    let email = `user_${clerkId}@example.com`;
+    let name = `user_${clerkId}`;
+    let profileImage = '';
+
+    try {
+      // Query Clerk API directly to fetch full profile metadata
+      const fullClerkUser = await clerkClient.users.getUser(clerkId);
+      if (fullClerkUser) {
+        email = fullClerkUser.emailAddresses?.[0]?.emailAddress || email;
+        name = `${fullClerkUser.firstName || ''} ${fullClerkUser.lastName || ''}`.trim() || email.split('@')[0];
+        profileImage = fullClerkUser.imageUrl || '';
+      }
+    } catch (err) {
+      console.warn('⚠️ Failed to fetch full user info from Clerk API, using fallbacks:', err.message);
+    }
+
     user = new User({
       clerkId,
       email,
-      name
+      name,
+      profileImage
     });
     await user.save();
     console.log(`✓ Self-healed: Dynamic profile created for Clerk user: ${clerkId}`);
