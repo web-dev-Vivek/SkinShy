@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllProducts } from '../services/productsJSON';
+import { getProducts, searchProducts } from '../services/products';
 
 export default function ProductDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,8 +30,8 @@ export default function ProductDropdown() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const data = await getAllProducts();
-      setProducts(Array.isArray(data) ? data : [data]);
+      const response = await getProducts(1, 20);
+      setProducts(response.data || []);
     } catch (err) {
       console.error('Failed to load products for dropdown:', err);
       setProducts([]);
@@ -40,16 +40,31 @@ export default function ProductDropdown() {
     }
   };
 
-  const handleProductClick = (productName) => {
-    const encodedName = encodeURIComponent(productName);
-    navigate(`/search/${encodedName}`);
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    if (query.trim().length > 1) {
+      setLoading(true);
+      try {
+        const response = await searchProducts(query);
+        setProducts(response.data || []);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    } else if (query.trim().length === 0) {
+      fetchProducts();
+    }
+  };
+
+  const handleProductClick = (product) => {
+    navigate(`/search/${product._id}`);
     setIsOpen(false);
     setSearchQuery('');
   };
 
-  const filteredProducts = products.filter(product =>
-    product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts = products;
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -78,7 +93,7 @@ export default function ProductDropdown() {
               type="text"
               placeholder="Search products..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
               className="w-full px-3 py-2 border border-custom-light-gray/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-charcoal text-sm"
               autoFocus
             />
@@ -97,15 +112,15 @@ export default function ProductDropdown() {
             ) : (
               filteredProducts.map(product => (
                 <button
-                  key={product.product_name}
-                  onClick={() => handleProductClick(product.product_name)}
+                  key={product._id}
+                  onClick={() => handleProductClick(product)}
                   className="w-full text-left px-4 py-3 hover:bg-custom-light-gray/10 border-b border-custom-light-gray/10 last:border-b-0 transition-colors"
                 >
                   <p className="font-medium text-custom-charcoal text-sm line-clamp-1">
-                    {product.product_name}
+                    {product.productName}
                   </p>
                   <p className="text-xs text-custom-dark-gray">
-                    {product.product_type}
+                    {product.productType}
                   </p>
                 </button>
               ))
