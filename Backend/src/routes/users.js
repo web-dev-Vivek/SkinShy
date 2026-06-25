@@ -8,6 +8,23 @@ const router = express.Router();
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
+// Helper to find a user or dynamically create one if they exist in Clerk but not MongoDB
+const findOrCreateUser = async (clerkId, clerkUser) => {
+  let user = await User.findOne({ clerkId });
+  if (!user) {
+    const email = clerkUser?.email || (clerkUser?.email_addresses && clerkUser.email_addresses[0]) || `user_${clerkId}@example.com`;
+    const name = clerkUser?.name || email.split('@')[0];
+    
+    user = new User({
+      clerkId,
+      email,
+      name
+    });
+    await user.save();
+    console.log(`✓ Self-healed: Dynamic profile created for Clerk user: ${clerkId}`);
+  }
+  return user;
+};
 
 /**
  * POST /users - Create or get user (called during signup)
@@ -70,22 +87,7 @@ router.post('/', authenticate, asyncHandler(async (req, res) => {
  * Uses Clerk ID from token
  */
 router.get('/profile', authenticate, asyncHandler(async (req, res) => {
-  let user = await User.findOne({ clerkId: req.userId });
-
-  if (!user) {
-    // Self-healing: create the user document dynamically if authenticated via Clerk
-    // Clerk decoded token claims: check decoded values
-    const email = req.clerkUser?.email || (req.clerkUser?.email_addresses && req.clerkUser.email_addresses[0]) || `user_${req.userId}@example.com`;
-    const name = req.clerkUser?.name || email.split('@')[0];
-    
-    user = new User({
-      clerkId: req.userId,
-      email,
-      name
-    });
-    await user.save();
-    console.log(`✓ Self-healed: Dynamic profile created for Clerk user: ${req.userId}`);
-  }
+  const user = await findOrCreateUser(req.userId, req.clerkUser);
 
   res.json({
     success: true,
@@ -107,14 +109,7 @@ router.get('/profile', authenticate, asyncHandler(async (req, res) => {
  */
 router.put('/profile', authenticate, asyncHandler(async (req, res) => {
   const { name, email } = req.body;
-  const user = await User.findOne({ clerkId: req.userId });
-
-  if (!user) {
-    return res.status(404).json({
-      success: false,
-      error: 'User not found'
-    });
-  }
+  const user = await findOrCreateUser(req.userId, req.clerkUser);
 
   if (name) user.name = name;
   if (email) {
@@ -149,14 +144,7 @@ router.put('/profile', authenticate, asyncHandler(async (req, res) => {
  * Protected: YES
  */
 router.get('/preferences', authenticate, asyncHandler(async (req, res) => {
-  const user = await User.findOne({ clerkId: req.userId });
-
-  if (!user) {
-    return res.status(404).json({
-      success: false,
-      error: 'User not found'
-    });
-  }
+  const user = await findOrCreateUser(req.userId, req.clerkUser);
 
   res.json({
     success: true,
@@ -171,14 +159,7 @@ router.get('/preferences', authenticate, asyncHandler(async (req, res) => {
  */
 router.put('/preferences', authenticate, asyncHandler(async (req, res) => {
   const { skinType, highSensitivity, knownAllergies, productChangeRate } = req.body;
-  const user = await User.findOne({ clerkId: req.userId });
-
-  if (!user) {
-    return res.status(404).json({
-      success: false,
-      error: 'User not found'
-    });
-  }
+  const user = await findOrCreateUser(req.userId, req.clerkUser);
 
   if (skinType) user.profile.skinType = skinType;
   if (typeof highSensitivity === 'boolean') user.profile.highSensitivity = highSensitivity;
@@ -229,14 +210,7 @@ router.post('/complete-onboarding', authenticate, asyncHandler(async (req, res) 
     });
   }
 
-  const user = await User.findOne({ clerkId: req.userId });
-
-  if (!user) {
-    return res.status(404).json({
-      success: false,
-      error: 'User not found'
-    });
-  }
+  const user = await findOrCreateUser(req.userId, req.clerkUser);
 
   user.profile.skinType = skinType;
   if (typeof highSensitivity === 'boolean') {
