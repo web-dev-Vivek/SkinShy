@@ -146,8 +146,13 @@ export function convertEURtoINRWithDecimals(priceStr) {
 
   if (isNaN(numericValue)) return '₹0.00';
 
-  const inrPrice = (numericValue * CURRENCY_RATES.INR).toFixed(2);
+  // Keep as Number — do NOT call .toFixed() here, it converts to String
+  // and makes .toLocaleString() a no-op (strings don't reformat).
+  const inrPrice = numericValue * CURRENCY_RATES.INR;
 
-  return `₹${inrPrice.toLocaleString('en-IN')}`;
+  return `₹${inrPrice.toLocaleString('en-IN', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
