@@ -1,6 +1,70 @@
 const fs = require('fs');
 const path = require('path');
 const Product = require('../models/Product');
+const topIngredientCategories = require('./topIngredientCategories.json');
+
+// Normalize ingredient name for matching
+const normalizeIngredientName = (name) => {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/\(.*?\)/g, '') // Remove parentheses content
+    .trim();
+};
+
+// Find ingredient metadata from reference database
+const findIngredientMetadata = (ingredientName) => {
+  if (!ingredientName) return {
+    reactivityScore: 2,
+    ingredientClass: 'unknown',
+    knownAllergen: false,
+    allergenGroup: null,
+    categoryType: 'B'
+  };
+  
+  const normalized = normalizeIngredientName(ingredientName);
+  
+  // Try to find exact match
+  let found = topIngredientCategories.find(ing => 
+    normalizeIngredientName(ing.name) === normalized
+  );
+  
+  if (found) {
+    return {
+      reactivityScore: found.avg_reactivity || 2,
+      ingredientClass: (found.classes && found.classes[0]) || 'unknown',
+      knownAllergen: found.is_allergen || false,
+      allergenGroup: found.allergen_group || null,
+      categoryType: found.category === 'HARMFUL' ? 'A' : 'B'
+    };
+  }
+  
+  // Try partial match for common names
+  found = topIngredientCategories.find(ing => 
+    normalized.includes(normalizeIngredientName(ing.name)) ||
+    normalizeIngredientName(ing.name).includes(normalized)
+  );
+  
+  if (found) {
+    return {
+      reactivityScore: found.avg_reactivity || 2,
+      ingredientClass: (found.classes && found.classes[0]) || 'unknown',
+      knownAllergen: found.is_allergen || false,
+      allergenGroup: found.allergen_group || null,
+      categoryType: found.category === 'HARMFUL' ? 'A' : 'B'
+    };
+  }
+  
+  return {
+    reactivityScore: 2,
+    ingredientClass: 'unknown',
+    knownAllergen: false,
+    allergenGroup: null,
+    categoryType: 'B'
+  };
+};
 
 const loadProductsFromJSON = async () => {
   try {
@@ -66,16 +130,19 @@ const loadProductsFromJSON = async () => {
             productUrl: product.productUrl || product.product_url,
             productType: product.productType || product.product_type,
             price: product.price,
-            ingredients: splitIngredients.map((name, idx) => ({
-              position: idx + 1,
-              name: name,
-              categoryType: ingredients[0].categoryType || ingredients[0].category_type,
-              reactivityScore: ingredients[0].reactivityScore || ingredients[0].reactivity_score,
-              potencyLevel: ingredients[0].potencyLevel || ingredients[0].potency_level,
-              ingredientClass: ingredients[0].ingredientClass || ingredients[0].ingredient_class,
-              knownAllergen: ingredients[0].knownAllergen || ingredients[0].known_allergen,
-              allergenGroup: ingredients[0].allergenGroup || ingredients[0].allergen_group
-            }))
+            ingredients: splitIngredients.map((name, idx) => {
+              const meta = findIngredientMetadata(name);
+              return {
+                position: idx + 1,
+                name: name,
+                categoryType: meta.categoryType,
+                reactivityScore: meta.reactivityScore,
+                potencyLevel: meta.categoryType === 'A' ? 'high' : 'moderate',
+                ingredientClass: meta.ingredientClass,
+                knownAllergen: meta.knownAllergen,
+                allergenGroup: meta.allergenGroup
+              };
+            })
           };
         }
       }

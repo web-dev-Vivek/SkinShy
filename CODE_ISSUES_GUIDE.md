@@ -5,7 +5,7 @@ Hey Vivek! Is file me maine saare issues ko simple aur easy language me explain 
 Let's break them down step-by-step!
 
 ---
-
+<!-- 
 ## 1. Broken Allergen Matching Logic (Allergen Group Mismatch)
 * **File Links**: 
   - [OnboardingPage.jsx](file:///home/vivek/Skinshy/Frontend/src/pages/OnboardingPage.jsx)
@@ -61,11 +61,11 @@ product.ingredients.forEach(ingredient => {
        // Apply allergen penalty
     }
   }
-});
+}); -->
 ```
 
 ---
-
+<!-- 
 ## 2. Dropdown Navigation 404 (MongoDB CastError)
 * **File Links**: 
   - [ProductDropdown.jsx](file:///home/vivek/Skinshy/Frontend/src/components/ProductDropdown.jsx)
@@ -111,9 +111,9 @@ const handleSearchChange = async (e) => {
       setLoading(false);
     }
   }
-};
+}; -->
 ```
-3. Update the click navigation inside dropdown to use the unique `_id`:
+<!-- 3. Update the click navigation inside dropdown to use the unique `_id`:
 ```javascript
 const handleProductClick = (product) => {
   navigate(`/search/${product._id}`); // Correct navigation using database ID
@@ -155,9 +155,9 @@ const handleProductClick = (product) => {
   // Change line 26:
   const response = await api.get('/products/types');
   ```
-
+ -->
 ---
-
+<!-- 
 ## 4. Flawed Ingredient Splitting in Data Loader
 * **File Link**: 
   - [dataLoader.js](file:///home/vivek/Skinshy/Backend/src/utils/dataLoader.js)
@@ -176,7 +176,7 @@ const handleProductClick = (product) => {
 
 ### How to Fix:
 During raw product ingestion, lookup each parsed ingredient name in the database lookup dictionary to extract correct properties instead of copying `ingredients[0]` properties.
-
+ -->
 ---
 
 <!-- ## 5. Unused and Buggy `UserContext.jsx`
