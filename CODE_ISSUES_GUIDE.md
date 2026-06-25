@@ -231,7 +231,7 @@ trap 'echo "Stopping Skinshy Servers..."; kill $BACKEND_PID $FRONTEND_PID 2>/dev
 ``` -->
 
 ---
-
+<!-- 
 ## 7. Absolute Paths in Python Transform Script
 * **File Link**: 
   - [transform_ingredients.py](file:///home/vivek/Skinshy/transform_ingredients.py)
@@ -259,10 +259,10 @@ with open(os.path.join(BASE_DIR, 'ingredient_database.json'), 'r') as f:
     ingredient_db = json.load(f)['ingredients']
     
 # Do the same for Products_ingrediant.json and output path
-```
+``` -->
 
 ---
-
+<!-- 
 ## 8. Misleading Variable Types & Minor Typo Formatting
 * **File Link**: 
   - [currencyConverter.js](file:///home/vivek/Skinshy/Frontend/src/utils/currencyConverter.js)
@@ -297,7 +297,7 @@ export function convertEURtoINRWithDecimals(priceStr) {
   // correct toLocaleString parameters formatting
   return `₹${inrPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
-```
+``` -->
 
 ---
 
@@ -311,7 +311,7 @@ Best of luck Vivek! In steps ko try karke verify kijiye, and jab ready ho to muj
 > Yeh section **security vulnerabilities** ke baare mein hai — ye functional bugs nahi hain, balki ye attack vectors hain jo real production systems mein exploit ho sakte hain. Har vulnerability ke saath **severity rating**, **Hinglish explanation**, **reproduction steps**, aur **fix** diya gaya hai.
 
 ---
-
+<!-- 
 ## 9. ReDoS — Regular Expression Denial of Service
 
 * **Severity**: 🟠 HIGH
@@ -369,11 +369,11 @@ if (search) {
     { productType: { $regex: escapedSearch, $options: 'i' } }
   ];
 }
-```
+``` -->
 
 ---
 
-## 10. SSTI — Server-Side Template Injection
+<!-- ## 10. SSTI — Server-Side Template Injection
 
 * **Severity**: 🟡 LOW-MEDIUM (Potential / Future Risk)
 * **File Links**:
@@ -450,10 +450,10 @@ router.get('/glossary/ingredient/:name', asyncHandler(async (req, res) => {
   }
   // ... rest of handler
 }));
-```
+``` -->
 
 ---
-
+<!-- 
 ## 11. LPDOs — Local Path Disclosure / Over-Disclosure
 
 * **Severity**: 🟠 HIGH
@@ -520,7 +520,7 @@ NODE_ENV=production
 # .gitignore mein backend.log add karo
 echo "backend.log" >> /home/vivek/Skinshy/.gitignore
 echo "*.log" >> /home/vivek/Skinshy/.gitignore
-```
+``` -->
 
 ---
 
