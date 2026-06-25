@@ -26,6 +26,18 @@ router.post('/calculate', authenticate, asyncHandler(async (req, res) => {
     return res.status(400).json({ error: 'Product ID is required' });
   }
 
+  const requestKey = `${req.userId}_${productId}`;
+
+  // Simple in-memory cache (use Redis in production)
+  if (global.recentRequests?.has(requestKey)) {
+    return res.status(429).json({ error: 'Duplicate request detected. Please wait.' });
+  }
+
+  // Track request for 5 seconds
+  if (!global.recentRequests) global.recentRequests = new Set();
+  global.recentRequests.add(requestKey);
+  setTimeout(() => global.recentRequests.delete(requestKey), 5000);
+
   // Get user profile by clerkId (not MongoDB ID)
   const user = await User.findOne({ clerkId: req.userId });
   if (!user || !user.profile.onboardingCompleted) {

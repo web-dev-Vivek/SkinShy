@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const connectDB = require('./config/database');
@@ -26,12 +27,7 @@ const corsOptions = {
       process.env.FRONTEND_URL
     ].filter(Boolean); // Remove undefined values
     
-    // In development, allow all origins
-    if (process.env.NODE_ENV === 'development') {
-      return callback(null, true);
-    }
-    
-    // In production, only allow specified origins
+    // Check if origin is allowed
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -45,7 +41,24 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 
+// Rate limiting setup
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Max 100 requests per IP per 15 min
+  message: { error: 'Too many requests, please try again later' }
+});
+
+const strictLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // Max 10 requests per IP per minute
+  message: { error: 'Rate limit exceeded' }
+});
+
 // Middleware
+app.use(globalLimiter);
+app.use('/api/safety/calculate', strictLimiter);
+app.use('/api/users/complete-onboarding', strictLimiter);
+
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cors(corsOptions));
