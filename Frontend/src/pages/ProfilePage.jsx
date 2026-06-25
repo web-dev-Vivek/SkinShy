@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import ProfileSkeleton from '../components/Skeletons/ProfileSkeleton';
 import { getUserProfile, getUserPreferences, updateUserProfile, updateUserPreferences } from '../services/users';
+import { ShaderGradient } from 'shadergradient';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -129,17 +130,49 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen relative pt-24 overflow-hidden">
-      {/* Dot Grid Background Pattern */}
-      <div className="fixed inset-0 bg-custom-charcoal -z-10">
-        {/* Animated dot pattern */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="dots" patternUnits="userSpaceOnUse" width="40" height="40">
-              <circle cx="20" cy="20" r="2" fill="white" opacity="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#dots)" />
-        </svg>
+      {/* ShaderGradient Background */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <ShaderGradient
+          animate="on"
+          axesHelper="off"
+          brightness={0.9}
+          cAzimuthAngle={180}
+          cDistance={3.6}
+          cPolarAngle={90}
+          cameraZoom={1}
+          color1="#000000"
+          color2="#504b4c"
+          color3="#fffaf2"
+          destination="onCanvas"
+          embedMode="off"
+          envPreset="city"
+          format="gif"
+          fov={45}
+          frameRate={10}
+          gizmoHelper="hide"
+          grain="on"
+          lightType="3d"
+          pixelDensity={1}
+          positionX={-1.4}
+          positionY={0}
+          positionZ={0}
+          range="disabled"
+          rangeEnd={40}
+          rangeStart={0}
+          reflection={0.1}
+          rotationX={0}
+          rotationY={10}
+          rotationZ={50}
+          shader="defaults"
+          type="plane"
+          uAmplitude={1}
+          uDensity={1.3}
+          uFrequency={5.5}
+          uSpeed={0.4}
+          uStrength={4}
+          uTime={0}
+          wireframe={false}
+        />
       </div>
 
       {/* Back Button - Top Left */}
