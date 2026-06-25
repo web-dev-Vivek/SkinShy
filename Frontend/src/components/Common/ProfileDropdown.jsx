@@ -6,7 +6,7 @@ import { getUserProfile, getUserPreferences, updateUserPreferences } from '../..
 function ProfileDropdown({ isMobile = false }) {
   const { signOut } = useAuth();
   const { user: clerkUser } = useUser();
-  const { complete_onboarding } = useOnboarding();
+  const { complete_onboarding, logout } = useOnboarding();
   
   const [isOpen, setIsOpen] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
@@ -125,6 +125,7 @@ function ProfileDropdown({ isMobile = false }) {
 
   const handleSignOut = (e) => {
     e.preventDefault();
+    logout();
     signOut(() => {
       window.location.href = '/';
     });

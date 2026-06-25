@@ -121,6 +121,24 @@ export const OnboardingProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    setOnboardingData({
+      skinType: '',
+      highSensitivity: false,
+      knownAllergies: [],
+      productChangeRate: ''
+    });
+    setCompleteOnboarding(0);
+    setCompleteSignup(null);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(ONBOARDING_FLAG_KEY);
+      localStorage.removeItem(SIGNUP_FLAG_KEY);
+    } catch (error) {
+      console.error('Error during logout cleanup:', error);
+    }
+  };
+
   return (
     <OnboardingContext.Provider value={{
       onboardingData,
@@ -130,7 +148,8 @@ export const OnboardingProvider = ({ children }) => {
       setSignupComplete,
       complete_onboarding,
       setOnboardingComplete,
-      clearSignupFlag
+      clearSignupFlag,
+      logout
     }}>
       {console.log('OnboardingContext Provider - complete_signup:', complete_signup, 'complete_onboarding:', complete_onboarding)}
       {children}

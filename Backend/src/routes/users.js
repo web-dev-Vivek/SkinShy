@@ -70,13 +70,21 @@ router.post('/', authenticate, asyncHandler(async (req, res) => {
  * Uses Clerk ID from token
  */
 router.get('/profile', authenticate, asyncHandler(async (req, res) => {
-  const user = await User.findOne({ clerkId: req.userId });
+  let user = await User.findOne({ clerkId: req.userId });
 
   if (!user) {
-    return res.status(404).json({
-      success: false,
-      error: 'User not found'
+    // Self-healing: create the user document dynamically if authenticated via Clerk
+    // Clerk decoded token claims: check decoded values
+    const email = req.clerkUser?.email || (req.clerkUser?.email_addresses && req.clerkUser.email_addresses[0]) || `user_${req.userId}@example.com`;
+    const name = req.clerkUser?.name || email.split('@')[0];
+    
+    user = new User({
+      clerkId: req.userId,
+      email,
+      name
     });
+    await user.save();
+    console.log(`✓ Self-healed: Dynamic profile created for Clerk user: ${req.userId}`);
   }
 
   res.json({

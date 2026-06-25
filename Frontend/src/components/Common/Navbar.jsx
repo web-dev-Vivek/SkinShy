@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import gsap from 'gsap';
 import useProtectedNavigate from '../../hooks/useProtectedNavigate';
+import { useOnboarding } from '../../context/OnboardingContext';
 
 function Navbar() {
   const protectedNavigate = useProtectedNavigate();
   const { isSignedIn, signOut } = useAuth();
+  const { logout } = useOnboarding();
   const { user: clerkUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef(null);
@@ -91,6 +93,7 @@ function Navbar() {
   };
 
   const handleSignOut = () => {
+    logout();
     signOut(() => {
       window.location.href = '/';
     });
