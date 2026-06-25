@@ -12,16 +12,28 @@ const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
+/**
+ * Escape all regex special characters in a user-supplied string.
+ * Prevents ReDoS — user input must NEVER be injected raw into $regex.
+ */
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // GET ALL PRODUCTS (with pagination and search)
 router.get('/', asyncHandler(async (req, res) => {
-  const { search, type, page, skip, limit = 100 } = req.query;
+  const { search, type, page, skip, limit = 20 } = req.query;
   let query = {};
 
   // Search by name or type
   if (search) {
+    // Guard 1: Reject excessively long queries outright
+    if (search.length > 100) {
+      return res.status(400).json({ error: 'Search query too long (max 100 characters)' });
+    }
+    // Guard 2: Escape all regex metacharacters — prevents ReDoS injection
+    const escapedSearch = escapeRegex(search.trim());
     query.$or = [
-      { productName: { $regex: search, $options: 'i' } },
-      { productType: { $regex: search, $options: 'i' } }
+      { productName: { $regex: escapedSearch, $options: 'i' } },
+      { productType: { $regex: escapedSearch, $options: 'i' } }
     ];
   }
 
@@ -32,14 +44,15 @@ router.get('/', asyncHandler(async (req, res) => {
 
   // Support both page-based and offset-based pagination
   let skipAmount = 0;
-  const limitNum = parseInt(limit);
+  // Hard cap: never return more than 50 products in one request
+  const limitNum = Math.min(Math.abs(parseInt(limit) || 20), 50);
 
   if (skip !== undefined) {
     // Offset-based pagination (skip parameter)
-    skipAmount = parseInt(skip);
+    skipAmount = Math.max(0, parseInt(skip) || 0);
   } else if (page !== undefined) {
     // Page-based pagination (page parameter)
-    const pageNum = parseInt(page);
+    const pageNum = Math.max(1, parseInt(page) || 1);
     skipAmount = (pageNum - 1) * limitNum;
   }
 
@@ -64,18 +77,21 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // SEARCH PRODUCTS
 router.get('/search', asyncHandler(async (req, res) => {
-  const { q, limit = 100 } = req.query;
+  const { q, limit = 20 } = req.query;
 
   if (!q) {
     return res.status(400).json({ error: 'Search query is required' });
   }
+
+  // Hard cap: max 50 results per search request
+  const limitNum = Math.min(Math.abs(parseInt(limit) || 20), 50);
 
   const products = await Product.find(
     { $text: { $search: q } },
     { score: { $meta: 'textScore' } }
   )
     .sort({ score: { $meta: 'textScore' } })
-    .limit(parseInt(limit))
+    .limit(limitNum)
     .select('_id productName productType price');
 
   const total = await Product.countDocuments(
@@ -87,7 +103,7 @@ router.get('/search', asyncHandler(async (req, res) => {
     data: products,
     pagination: {
       total,
-      limit: parseInt(limit)
+      limit: limitNum
     }
   });
 }));
