@@ -67,7 +67,7 @@ export default function ProductPage() {
       return (
         <>
           <OnboardingWarningBanner />
-          <div className="min-h-screen bg-custom-white mt-20">
+          <div className={`min-h-screen bg-custom-white ${complete_onboarding !== 1 ? 'mt-[156px]' : 'mt-20'} transition-all duration-300`}>
             <div className="max-w-7xl mx-auto px-4 py-12">
               <ProductDetailSkeleton />
             </div>
@@ -80,7 +80,7 @@ export default function ProductPage() {
       return (
         <>
           <OnboardingWarningBanner />
-          <div className="min-h-screen bg-custom-white">
+          <div className={`min-h-screen bg-custom-white ${complete_onboarding !== 1 ? 'mt-[156px]' : 'mt-20'} transition-all duration-300`}>
          <div className="sticky z-10">
           <div className="max-w-7xl mx-auto px-4 py-4">
             <button
@@ -126,7 +126,7 @@ export default function ProductPage() {
      return (
        <>
          <OnboardingWarningBanner />
-         <div className="min-h-screen bg-custom-white flex items-center justify-center">
+         <div className={`min-h-screen bg-custom-white ${complete_onboarding !== 1 ? 'mt-[156px]' : 'mt-20'} flex items-center justify-center transition-all duration-300`}>
            <div className="text-center">
              <p className="text-red-600 text-lg">Product not found</p>
              <button onClick={() => navigate('/search')} className="mt-4 text-custom-charcoal hover:text-custom-black">
@@ -150,7 +150,7 @@ export default function ProductPage() {
    return (
      <>
        <OnboardingWarningBanner />
-       <div className="min-h-screen bg-custom-white mt-20">
+       <div className={`min-h-screen bg-custom-white ${complete_onboarding !== 1 ? 'mt-[156px]' : 'mt-20'} transition-all duration-300`}>
        {/* Header */}
        <div className="bg-custom-off-white border-b border-custom-light-gray/20 sticky z-10">
         <div className="max-w-7xl mx-auto px-4 py-4">

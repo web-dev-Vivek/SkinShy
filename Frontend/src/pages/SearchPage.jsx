@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import OnboardingWarningBanner from '../components/Common/OnboardingWarningBanner';
+import { useOnboarding } from '../context/OnboardingContext';
 import CurrencySelector from '../components/Common/CurrencySelector';
 import { convertPrice } from '../utils/currencyConverter';
 import { useCurrency } from '../context/CurrencyContext';
@@ -10,6 +11,7 @@ import api from '../services/api';
 const PRODUCTS_PER_PAGE = 100;
 
 export default function SearchPage() {
+  const { complete_onboarding } = useOnboarding();
   const navigate = useNavigate();
   const { user } = useUser();
   const { selectedCurrency } = useCurrency();
@@ -159,7 +161,7 @@ export default function SearchPage() {
         <div className="flex flex-col h-screen relative z-0">
 
           {/* Fixed Search Bar Header */}
-          <div className="fixed top-20 left-0 right-0 z-30 px-4 py-6 ">
+          <div className={`fixed ${complete_onboarding !== 1 ? 'top-36 sm:top-40' : 'top-16 sm:top-20'} left-0 right-0 z-30 px-4 py-6 transition-all duration-300`}>
             <div className="max-w-7xl mx-auto">
               {/* Header Text */}
               <div className="mb-4">
@@ -190,7 +192,7 @@ export default function SearchPage() {
           </div>
 
           {/* Scrollable Products Container */}
-          <div className="flex-1 overflow-y-auto mt-52 md:mt-64 pb-20 scrollbar-custom">
+          <div className={`flex-1 overflow-y-auto ${complete_onboarding !== 1 ? 'mt-72 md:mt-[336px]' : 'mt-52 md:mt-64'} pb-20 scrollbar-custom transition-all duration-300`}>
             <div className="relative z-10 px-4">
               <div className="max-w-7xl mx-auto">
                 

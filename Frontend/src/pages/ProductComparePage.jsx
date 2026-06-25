@@ -205,7 +205,7 @@ export default function ProductComparePage() {
          
          {/* ============ MOBILE VIEW (Vertical Stack) ============ */}
          {isMobile && (
-           <div className="relative z-10 pt-24 pb-8 px-4 h-full overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10">
+           <div className={`relative z-10 ${complete_onboarding !== 1 ? 'pt-44 sm:pt-48' : 'pt-24'} pb-8 px-4 h-full overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-white/40 scrollbar-track-white/10 transition-all duration-300`}>
              {/* Header */}
              <div className="text-center mb-6 max-w-md mx-auto">
                <h1 className="text-3xl font-bold text-white mb-2">
@@ -477,7 +477,7 @@ export default function ProductComparePage() {
 
          {/* ============ DESKTOP VIEW (Two Panels) ============ */}
          {!isMobile && (
-           <div className="relative z-10 h-full pt-24 pb-8 px-4">
+           <div className={`relative z-10 h-full ${complete_onboarding !== 1 ? 'pt-44 sm:pt-48' : 'pt-24'} pb-8 px-4 transition-all duration-300`}>
              {/* Header */}
              <div className="text-center mb-6 max-w-2xl mx-auto">
                <h1 className="text-3xl font-bold text-white mb-2">
