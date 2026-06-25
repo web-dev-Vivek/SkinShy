@@ -766,7 +766,7 @@ res.json({
 
 ---
 
-## 15. Replay Attack — Token/Request Reuse Vulnerability
+<!-- ## 15. Replay Attack — Token/Request Reuse Vulnerability
 
 * **Severity**: 🟠 HIGH
 * **File Links**:
@@ -887,7 +887,7 @@ router.post('/calculate', authenticate, asyncHandler(async (req, res) => {
   setTimeout(() => global.recentRequests.delete(requestKey), 5000);
 
   // ... rest of handler
-}));
+})); -->
 ```
 
 ---
