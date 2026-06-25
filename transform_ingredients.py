@@ -1,8 +1,13 @@
 import json
+import os
 import re
 
+# Resolve paths relative to this script's location so the script
+# works from any directory or on any machine — not just /home/vivek.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Load the ingredient database
-with open('/home/vivek/Skinshy/ingredient_database.json', 'r') as f:
+with open(os.path.join(BASE_DIR, 'ingredient_database.json'), 'r') as f:
     ingredient_db = json.load(f)['ingredients']
 
 # Create a normalized lookup dictionary
@@ -51,7 +56,7 @@ def get_ingredient_data(ingredient_name):
     }
 
 # Load original products file
-with open('/home/vivek/Skinshy/Products_ingrediant.json', 'r') as f:
+with open(os.path.join(BASE_DIR, 'Products_ingrediant.json'), 'r') as f:
     content = f.read()
     # Wrap in brackets if not already
     content = content.strip()
@@ -101,7 +106,7 @@ for idx, product in enumerate(products):
         print(f"  Processing {idx + 1}/{len(products)}...", flush=True)
 
 # Save transformed file
-with open('/home/vivek/Skinshy/Products_ingrediant_transformed.json', 'w') as f:
+with open(os.path.join(BASE_DIR, 'Products_ingrediant_transformed.json'), 'w') as f:
     json.dump(transformed_products, f, indent=2)
 
 print(f"\n✓ Successfully transformed {len(transformed_products)} products")
