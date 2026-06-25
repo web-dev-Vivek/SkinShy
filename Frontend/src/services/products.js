@@ -23,6 +23,6 @@ export const getProductById = async (id) => {
 };
 
 export const getProductTypes = async () => {
-  const response = await api.get('/products/api/types');
+  const response = await api.get('/products/types');
   return response.data.data;
 };

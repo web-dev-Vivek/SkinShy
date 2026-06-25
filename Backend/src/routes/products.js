@@ -158,7 +158,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
 }));
 
 // GET PRODUCT TYPES (for filtering)
-router.get('/api/types', asyncHandler(async (req, res) => {
+router.get('/types', asyncHandler(async (req, res) => {
   const types = await Product.distinct('productType');
   res.json({
     success: true,
