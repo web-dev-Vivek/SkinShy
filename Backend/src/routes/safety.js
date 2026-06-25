@@ -194,10 +194,15 @@ router.get('/glossary/search', asyncHandler(async (req, res) => {
 
 // GET specific ingredient details
 router.get('/glossary/ingredient/:name', asyncHandler(async (req, res) => {
-  const { name } = req.params;
-  
+  const rawName = decodeURIComponent(req.params.name);
+
+  // Sanitize: only allow letters, numbers, spaces, hyphens
+  if (!/^[a-zA-Z0-9 \-(),.]+$/.test(rawName)) {
+    return res.status(400).json({ error: 'Invalid ingredient name format' });
+  }
+
   const ingredient = topIngredientCategories.find(
-    ing => ing.name.toLowerCase() === decodeURIComponent(name).toLowerCase()
+    ing => ing.name.toLowerCase() === rawName.toLowerCase()
   );
 
   if (!ingredient) {

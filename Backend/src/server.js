@@ -69,22 +69,14 @@ app.get('/health', (req, res) => {
 // Error handling middleware (MUST have exactly 4 parameters)
 app.use((err, req, res, next) => {
   const status = err.status || err.statusCode || 500;
-  const message = err.message || 'Internal Server Error';
-  
-  console.error('❌ ERROR HANDLER TRIGGERED:', {
-    name: err.name,
-    status,
-    message,
-    code: err.code,
-    stack: err.stack,
-    url: `${req.method} ${req.path}`,
-    body: req.body
-  });
-  
+
+  // Log internally — NEVER send stack traces to client
+  console.error('ERROR:', { status, message: err.message, url: req.path });
+
   res.status(status).json({
     success: false,
-    error: message,
-    ...(process.env.NODE_ENV === 'development' && { details: err.stack, name: err.name })
+    // Only send generic message to client — never err.stack
+    error: status === 500 ? 'Internal Server Error' : err.message
   });
 });
 
