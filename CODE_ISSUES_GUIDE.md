@@ -523,7 +523,7 @@ echo "*.log" >> /home/vivek/Skinshy/.gitignore
 ``` -->
 
 ---
-
+<!-- 
 ## 12. Secret Key Leak — Hardcoded / Exposed Credentials
 
 * **Severity**: 🔴 CRITICAL
@@ -586,11 +586,11 @@ FRONTEND_URL=http://localhost:3000
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>
 CLERK_SECRET_KEY=sk_test_<your_clerk_secret_key>
 NODE_ENV=development
-```
+``` -->
 
 ---
 
-## 13. Raw JSON Accept — Unvalidated / Unbounded JSON Body
+<!-- ## 13. Raw JSON Accept — Unvalidated / Unbounded JSON Body
 
 * **Severity**: 🟠 HIGH
 * **File Links**:
@@ -682,11 +682,11 @@ if (Array.isArray(knownAllergies)) {
     .slice(0, 20);
   user.profile.knownAllergies = validAllergies;
 }
-```
+``` -->
 
 ---
 
-## 14. Clipboard Attack — Sensitive Data Exposure via Clipboard
+<!-- ## 14. Clipboard Attack — Sensitive Data Exposure via Clipboard
 
 * **Severity**: 🟡 MEDIUM
 * **File Links**:
@@ -761,7 +761,7 @@ res.json({
     // ← clerkId kabhi mat bhejo — yeh internal identifier hai
     // ← profile.knownAllergies jaisi sensitive health data carefully handle karo
   }
-});
+}); -->
 ```
 
 ---

@@ -83,7 +83,6 @@ router.get('/profile', authenticate, asyncHandler(async (req, res) => {
     success: true,
     user: {
       id: user._id,
-      clerkId: user.clerkId,
       email: user.email,
       name: user.name,
       profileImage: user.profileImage,
@@ -131,7 +130,6 @@ router.put('/profile', authenticate, asyncHandler(async (req, res) => {
     message: 'Profile updated',
     user: {
       id: user._id,
-      clerkId: user.clerkId,
       email: user.email,
       name: user.name
     }
