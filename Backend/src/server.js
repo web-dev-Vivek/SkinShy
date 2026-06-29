@@ -15,10 +15,10 @@ const app = express();
 
 // CORS Configuration
 const corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
+
     const allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:3001',
@@ -27,9 +27,9 @@ const corsOptions = {
       'https://skinshy.vercel.app',
       process.env.FRONTEND_URL
     ].filter(Boolean).map(o => o.trim().replace(/\/$/, '')); // Strip trailing slashes
-    
+
     const normalizedOrigin = origin.trim().replace(/\/$/, '');
-    
+
     // Check if origin is allowed
     if (allowedOrigins.includes(normalizedOrigin)) {
       callback(null, true);
@@ -47,7 +47,7 @@ const corsOptions = {
 // Rate limiting setup
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Max 100 requests per IP per 15 min
+  max: 1000, // Max 1000 requests per IP per 15 min
   message: { error: 'Too many requests, please try again later' }
 });
 
@@ -58,13 +58,13 @@ const strictLimiter = rateLimit({
 });
 
 // Middleware
+app.use(cors(corsOptions));
 app.use(globalLimiter);
 app.use('/api/safety/calculate', strictLimiter);
 app.use('/api/users/complete-onboarding', strictLimiter);
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use(cors(corsOptions));
 
 // Connect to database
 connectDB().catch(err => console.error('Failed to connect to database:', err));

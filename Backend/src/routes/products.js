@@ -108,6 +108,15 @@ router.get('/search', asyncHandler(async (req, res) => {
   });
 }));
 
+// GET ALL UNIQUE PRODUCT TYPES
+router.get('/types', asyncHandler(async (req, res) => {
+  const types = await Product.distinct('productType');
+  res.json({
+    success: true,
+    data: types.filter(Boolean)
+  });
+}));
+
 // GET PRODUCT BY ID (with optional safety score for authenticated users)
 router.get('/:id', asyncHandler(async (req, res) => {
   let product;
