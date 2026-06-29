@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import ProfileSkeleton from '../components/Skeletons/ProfileSkeleton';
 import { getUserProfile, getUserPreferences, updateUserProfile, updateUserPreferences } from '../services/users';
+import { useOnboarding } from '../context/OnboardingContext';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const { setOnboardingComplete } = useOnboarding();
   const [profile, setProfile] = useState(null);
   const [preferences, setPreferences] = useState(null);
   const [editingProfile, setEditingProfile] = useState(false);
@@ -54,6 +56,11 @@ export default function ProfilePage() {
         knownAllergies: preferencesData?.knownAllergies || [],
         productChangeRate: preferencesData?.productChangeRate || ''
       });
+
+      // Check if user is old/existing (completed onboarding in DB)
+      if (profileData?.profile?.onboardingCompleted) {
+        setOnboardingComplete();
+      }
     } catch (error) {
       setError('Failed to load profile');
       console.error(error);
@@ -244,135 +251,169 @@ export default function ProfilePage() {
 
           {/* Skin Profile Card - Now Editable */}
           {preferences && (
-            <div className="bg-custom-white/10 backdrop-blur-xl border border-custom-white/20 rounded-2xl shadow-lg p-8 hover:shadow-2xl hover:bg-custom-white/15 transition-all duration-300">
+            <div className="bg-custom-white/10 backdrop-blur-xl border border-custom-white/20 rounded-2xl shadow-lg p-8 hover:shadow-2xl hover:bg-custom-white/15 transition-all duration-300 relative overflow-hidden">
               <h2 className="text-2xl font-bold text-custom-white font-playfair mb-8">Skin Profile</h2>
               
-              {editingSkin ? (
-                <form className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-medium text-custom-white/90 mb-2 font-lato">Skin Type</label>
-                    <select
-                      value={skinFormData.skinType}
-                      onChange={(e) => setSkinFormData(prev => ({ ...prev, skinType: e.target.value }))}
-                      className="w-full px-4 py-3 border border-custom-white/20 rounded-lg text-custom-charcoal focus:outline-none focus:ring-2 focus:ring-custom-white font-lato bg-custom-white/90"
-                    >
-                      <option value="">Select skin type</option>
-                      {skinTypeOptions.map(type => (
-                        <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="flex items-center gap-3 text-sm font-medium text-custom-white/90 cursor-pointer font-lato">
-                      <input
-                        type="checkbox"
-                        checked={skinFormData.highSensitivity}
-                        onChange={(e) => setSkinFormData(prev => ({ ...prev, highSensitivity: e.target.checked }))}
-                        className="w-5 h-5 rounded border-custom-white/30 focus:ring-2 focus:ring-custom-white cursor-pointer"
-                      />
-                      <span>High Sensitivity</span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-custom-white/90 mb-3 font-lato">Known Allergies</label>
-                    <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-                      {allergyOptions.map(allergy => (
-                        <label key={allergy} className="flex items-center gap-3 cursor-pointer font-lato">
-                          <input
-                            type="checkbox"
-                            checked={skinFormData.knownAllergies.includes(allergy)}
-                            onChange={() => handleAllergyChange(allergy)}
-                            className="w-5 h-5 rounded border-custom-white/30 focus:ring-2 focus:ring-custom-white cursor-pointer"
-                          />
-                          <span className="text-sm text-custom-white/80">{allergy}</span>
-                        </label>
-                      ))}
+              {!profile?.profile?.onboardingCompleted ? (
+                <div className="relative">
+                  {/* Blurred Content Placeholder */}
+                  <div className="filter blur-md select-none pointer-events-none space-y-6 opacity-30">
+                    <div>
+                      <p className="text-sm text-custom-white/70 font-lato mb-1">Skin Type</p>
+                      <p className="text-lg font-semibold text-custom-white capitalize font-lato">Combination</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-custom-white/70 font-lato mb-1">Sensitivity</p>
+                      <p className="text-lg font-semibold text-custom-white font-lato">Normal to Moderate</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-custom-white/70 font-lato mb-1">Change Frequency</p>
+                      <p className="text-lg font-semibold text-custom-white capitalize font-lato">Frequently</p>
                     </div>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-custom-white/90 mb-2 font-lato">Product Change Rate</label>
-                    <select
-                      value={skinFormData.productChangeRate}
-                      onChange={(e) => setSkinFormData(prev => ({ ...prev, productChangeRate: e.target.value }))}
-                      className="w-full px-4 py-3 border border-custom-white/20 rounded-lg text-custom-charcoal focus:outline-none focus:ring-2 focus:ring-custom-white font-lato bg-custom-white/90"
-                    >
-                      <option value="">Select rate</option>
-                      {productChangeRateOptions.map(rate => {
-                        const displayRate = rate.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                        return (
-                          <option key={rate} value={rate}>{displayRate}</option>
-                        );
-                      })}
-                    </select>
-                  </div>
-
-                  <div className="flex gap-3 pt-4">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEditingSkin(false);
-                        setSkinFormData({
-                          skinType: preferences.skinType || '',
-                          highSensitivity: preferences.highSensitivity || false,
-                          knownAllergies: preferences.knownAllergies || [],
-                          productChangeRate: preferences.productChangeRate || ''
-                        });
-                      }}
-                      className="flex-1 py-3 px-4 rounded-lg font-medium text-custom-white bg-custom-white/10 hover:bg-custom-white/20 transition-all duration-200 font-lato border border-custom-white/20 backdrop-blur-sm"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleSaveSkinProfile}
-                      disabled={loading}
-                      className="flex-1 py-3 px-4 rounded-lg font-medium text-custom-charcoal bg-custom-white hover:bg-custom-white/90 transition-all duration-200 disabled:opacity-50 font-lato"
-                    >
-                      {loading ? 'Saving...' : 'Save Profile'}
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <div className="space-y-6">
-                  <div>
-                    <p className="text-sm text-custom-white/70 font-lato mb-1">Skin Type</p>
-                    <p className="text-lg font-semibold text-custom-white capitalize font-lato">{preferences.skinType}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-custom-white/70 font-lato mb-1">Sensitivity</p>
-                    <p className="text-lg font-semibold text-custom-white font-lato">
-                      {preferences.highSensitivity ? 'Highly Sensitive' : 'Normal to Moderate'}
+                  
+                  {/* Overlay Banner */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                    <p className="text-custom-white font-semibold text-lg mb-2">Onboarding Required</p>
+                    <p className="text-custom-white/70 text-xs mb-6 max-w-xs leading-relaxed">
+                      Complete your skin profile onboarding to view and manage your personalized skincare safety settings.
                     </p>
+                    <button
+                      onClick={() => navigate('/onboarding')}
+                      className="px-6 py-2.5 bg-custom-white text-custom-charcoal font-semibold rounded-xl hover:bg-custom-off-white transition duration-200 font-lato text-sm shadow-lg hover:scale-105"
+                    >
+                      Start Onboarding
+                    </button>
                   </div>
-                  <div>
-                    <p className="text-sm text-custom-white/70 font-lato mb-1">Change Frequency</p>
-                    <p className="text-lg font-semibold text-custom-white capitalize font-lato">{getFormattedValue(preferences.productChangeRate)}</p>
-                  </div>
-                  {preferences.knownAllergies?.length > 0 && (
+                </div>
+              ) : (
+                editingSkin ? (
+                  <form className="space-y-5">
                     <div>
-                      <p className="text-sm text-custom-white/70 font-lato mb-3">Known Allergies</p>
-                      <div className="flex flex-wrap gap-2">
-                        {preferences.knownAllergies.map(allergy => (
-                          <span
-                            key={allergy}
-                            className="inline-block bg-custom-white/20 text-custom-white text-xs font-semibold px-3 py-1.5 rounded-full font-lato border border-custom-white/30 backdrop-blur-sm"
-                          >
-                            {allergy}
-                          </span>
+                      <label className="block text-sm font-medium text-custom-white/90 mb-2 font-lato">Skin Type</label>
+                      <select
+                        value={skinFormData.skinType}
+                        onChange={(e) => setSkinFormData(prev => ({ ...prev, skinType: e.target.value }))}
+                        className="w-full px-4 py-3 border border-custom-white/20 rounded-lg text-custom-charcoal focus:outline-none focus:ring-2 focus:ring-custom-white font-lato bg-custom-white/90"
+                      >
+                        <option value="">Select skin type</option>
+                        {skinTypeOptions.map(type => (
+                          <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="flex items-center gap-3 text-sm font-medium text-custom-white/90 cursor-pointer font-lato">
+                        <input
+                          type="checkbox"
+                          checked={skinFormData.highSensitivity}
+                          onChange={(e) => setSkinFormData(prev => ({ ...prev, highSensitivity: e.target.checked }))}
+                          className="w-5 h-5 rounded border-custom-white/30 focus:ring-2 focus:ring-custom-white cursor-pointer"
+                        />
+                        <span>High Sensitivity</span>
+                      </label>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-custom-white/90 mb-3 font-lato">Known Allergies</label>
+                      <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
+                        {allergyOptions.map(allergy => (
+                          <label key={allergy} className="flex items-center gap-3 cursor-pointer font-lato">
+                            <input
+                              type="checkbox"
+                              checked={skinFormData.knownAllergies.includes(allergy)}
+                              onChange={() => handleAllergyChange(allergy)}
+                              className="w-5 h-5 rounded border-custom-white/30 focus:ring-2 focus:ring-custom-white cursor-pointer"
+                            />
+                            <span className="text-sm text-custom-white/80">{allergy}</span>
+                          </label>
                         ))}
                       </div>
                     </div>
-                  )}
-                  <button
-                    onClick={() => setEditingSkin(true)}
-                    className="w-full mt-4 py-3 px-4 rounded-lg font-medium text-custom-charcoal bg-custom-white hover:bg-custom-white/90 transition-all duration-200 font-lato"
-                  >
-                    Edit Profile
-                  </button>
-                </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-custom-white/90 mb-2 font-lato">Product Change Rate</label>
+                      <select
+                        value={skinFormData.productChangeRate}
+                        onChange={(e) => setSkinFormData(prev => ({ ...prev, productChangeRate: e.target.value }))}
+                        className="w-full px-4 py-3 border border-custom-white/20 rounded-lg text-custom-charcoal focus:outline-none focus:ring-2 focus:ring-custom-white font-lato bg-custom-white/90"
+                      >
+                        <option value="">Select rate</option>
+                        {productChangeRateOptions.map(rate => {
+                          const displayRate = rate.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                          return (
+                            <option key={rate} value={rate}>{displayRate}</option>
+                          );
+                        })}
+                      </select>
+                    </div>
+
+                    <div className="flex gap-3 pt-4">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditingSkin(false);
+                          setSkinFormData({
+                            skinType: preferences.skinType || '',
+                            highSensitivity: preferences.highSensitivity || false,
+                            knownAllergies: preferences.knownAllergies || [],
+                            productChangeRate: preferences.productChangeRate || ''
+                          });
+                        }}
+                        className="flex-1 py-3 px-4 rounded-lg font-medium text-custom-white bg-custom-white/10 hover:bg-custom-white/20 transition-all duration-200 font-lato border border-custom-white/20 backdrop-blur-sm"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleSaveSkinProfile}
+                        disabled={loading}
+                        className="flex-1 py-3 px-4 rounded-lg font-medium text-custom-charcoal bg-custom-white hover:bg-custom-white/90 transition-all duration-200 disabled:opacity-50 font-lato"
+                      >
+                        {loading ? 'Saving...' : 'Save Profile'}
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="space-y-6">
+                    <div>
+                      <p className="text-sm text-custom-white/70 font-lato mb-1">Skin Type</p>
+                      <p className="text-lg font-semibold text-custom-white capitalize font-lato">{preferences.skinType}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-custom-white/70 font-lato mb-1">Sensitivity</p>
+                      <p className="text-lg font-semibold text-custom-white font-lato">
+                        {preferences.highSensitivity ? 'Highly Sensitive' : 'Normal to Moderate'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-custom-white/70 font-lato mb-1">Change Frequency</p>
+                      <p className="text-lg font-semibold text-custom-white capitalize font-lato">{getFormattedValue(preferences.productChangeRate)}</p>
+                    </div>
+                    {preferences.knownAllergies?.length > 0 && (
+                      <div>
+                        <p className="text-sm text-custom-white/70 font-lato mb-3">Known Allergies</p>
+                        <div className="flex flex-wrap gap-2">
+                          {preferences.knownAllergies.map(allergy => (
+                            <span
+                              key={allergy}
+                              className="inline-block bg-custom-white/20 text-custom-white text-xs font-semibold px-3 py-1.5 rounded-full font-lato border border-custom-white/30 backdrop-blur-sm"
+                            >
+                              {allergy}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setEditingSkin(true)}
+                      className="w-full mt-4 py-3 px-4 rounded-lg font-medium text-custom-charcoal bg-custom-white hover:bg-custom-white/90 transition-all duration-200 font-lato"
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
+                )
               )}
             </div>
           )}
