@@ -31,6 +31,7 @@ const authenticate = async (req, res, next) => {
 
       next();
     } catch (verifyError) {
+      console.error('❌ Clerk Token Verification Failed:', verifyError.message || verifyError);
       return res.status(401).json({
         success: false,
         error: 'Invalid or expired token'

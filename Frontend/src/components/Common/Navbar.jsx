@@ -169,22 +169,30 @@ function Navbar() {
                   </button>
                 </>
               ) : (
-                <button
-                  onClick={() => handleNavigation('/profile')}
-                  className="w-10 h-10 rounded-full overflow-hidden border-2 border-custom-light-gray hover:border-custom-charcoal transition-all duration-200"
-                >
-                  {clerkUser?.profileImageUrl ? (
-                    <img
-                      src={clerkUser.profileImageUrl}
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-custom-charcoal flex items-center justify-center text-custom-white text-sm font-semibold font-playfair">
-                      {clerkUser?.firstName?.charAt(0).toUpperCase() || 'U'}
-                    </div>
-                  )}
-                </button>
+                <>
+                  <button
+                    onClick={handleSignOut}
+                    className="px-6 py-2.5 border border-custom-light-gray text-custom-charcoal rounded-full hover:bg-custom-light-gray/20 transition-all duration-200 font-medium text-sm font-lato"
+                  >
+                    Sign Out
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('/profile')}
+                    className="w-10 h-10 rounded-full overflow-hidden border-2 border-custom-light-gray hover:border-custom-charcoal transition-all duration-200"
+                  >
+                    {clerkUser?.profileImageUrl ? (
+                      <img
+                        src={clerkUser.profileImageUrl}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-custom-charcoal flex items-center justify-center text-custom-white text-sm font-semibold font-playfair">
+                        {clerkUser?.firstName?.charAt(0).toUpperCase() || 'U'}
+                      </div>
+                    )}
+                  </button>
+                </>
               )}
             </div>
 
