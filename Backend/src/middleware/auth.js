@@ -7,6 +7,15 @@ const { verifyToken } = require('@clerk/backend');
  */
 const authenticate = async (req, res, next) => {
   try {
+    // Check if CLERK_SECRET_KEY is configured
+    if (!process.env.CLERK_SECRET_KEY) {
+      console.error('❌ Clerk Verification Error: CLERK_SECRET_KEY is missing in environment variables');
+      return res.status(500).json({
+        success: false,
+        error: 'Internal Server Error: CLERK_SECRET_KEY is missing on the server'
+      });
+    }
+
     // Get the token from Authorization header
     const authHeader = req.headers.authorization;
     
@@ -34,13 +43,16 @@ const authenticate = async (req, res, next) => {
       console.error('❌ Clerk Token Verification Failed:', verifyError.message || verifyError);
       return res.status(401).json({
         success: false,
-        error: 'Invalid or expired token'
+        error: 'Invalid or expired token',
+        message: verifyError.message || 'Token verification failed'
       });
     }
   } catch (error) {
+    console.error('❌ Authentication Middleware Exception:', error);
     return res.status(500).json({
       success: false,
-      error: 'Authentication failed'
+      error: 'Authentication failed',
+      message: error.message
     });
   }
 };
