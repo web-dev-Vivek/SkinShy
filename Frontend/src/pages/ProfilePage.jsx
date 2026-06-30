@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import ProfileSkeleton from '../components/Skeletons/ProfileSkeleton';
@@ -37,11 +37,7 @@ export default function ProfilePage() {
     'Essential Oils'
   ];
 
-  useEffect(() => {
-    loadUserData();
-  }, []);
-
-  const loadUserData = async () => {
+  const loadUserData = useCallback(async () => {
     try {
       const [profileData, preferencesData] = await Promise.all([
         getUserProfile(),
@@ -67,7 +63,11 @@ export default function ProfilePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [setOnboardingComplete]);
+
+  useEffect(() => {
+    loadUserData();
+  }, [loadUserData]);
 
   const handleSaveProfile = async () => {
     try {
