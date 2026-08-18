@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 
 export const OnboardingContext = createContext();
 
@@ -48,6 +49,36 @@ export const OnboardingProvider = ({ children }) => {
   const [onboardingData, setOnboardingData] = useState(getInitialData());
   const [complete_signup, setCompleteSignup] = useState(getInitialSignupFlag());
   const [complete_onboarding, setCompleteOnboarding] = useState(getInitialOnboardingFlag());
+  const { isSignedIn, getToken } = useAuth();
+
+  // Sync onboarding completed flag from DB on startup/login
+  useEffect(() => {
+    const syncOnboardingStatus = async () => {
+      if (isSignedIn) {
+        try {
+          const token = await getToken();
+          if (token) {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/users/profile`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            if (response.ok) {
+              const data = await response.json();
+              if (data?.user?.profile?.onboardingCompleted) {
+                console.log('Syncing onboardingCompleted = true from database');
+                setCompleteOnboarding(1);
+                localStorage.setItem(ONBOARDING_FLAG_KEY, '1');
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Failed to sync onboarding status:', error);
+        }
+      }
+    };
+    syncOnboardingStatus();
+  }, [isSignedIn, getToken]);
 
   // Persist onboarding data to localStorage whenever it changes
   useEffect(() => {

@@ -100,10 +100,67 @@ const calculateSafetyScore = (product, userProfile) => {
   // STAGE 2: Allergen Triggers
   product.ingredients.forEach(ingredient => {
     if (ingredient.knownAllergen && userProfile.knownAllergies) {
-      // Map user allergy input to database format before comparison
+      let matchedAllergy = null;
+      
       const userHasAllergy = userProfile.knownAllergies.some(userAllergy => {
-        const dbAllergenGroup = allergyMap[userAllergy.toLowerCase()] || userAllergy.toLowerCase();
-        return dbAllergenGroup === ingredient.allergenGroup;
+        const lowerAllergy = userAllergy.toLowerCase();
+        
+        // 1. Check exact match or mapped match against allergenGroup
+        const dbAllergenGroup = allergyMap[lowerAllergy] || lowerAllergy;
+        if (dbAllergenGroup && dbAllergenGroup === ingredient.allergenGroup) {
+          matchedAllergy = userAllergy;
+          return true;
+        }
+        
+        // 2. Perform name/class-based matching for specific allergies
+        const ingName = (ingredient.name || '').toLowerCase();
+        const ingClass = (ingredient.ingredientClass || '').toLowerCase();
+        
+        if (lowerAllergy === 'sulfates' || lowerAllergy === 'sulfate') {
+          if (ingName.includes('sulfate')) {
+            matchedAllergy = 'Sulfates';
+            return true;
+          }
+        }
+        
+        if (lowerAllergy === 'silicones' || lowerAllergy === 'silicone') {
+          if (ingName.includes('silicone') || ingName.endsWith('cone') || ingName.endsWith('xane')) {
+            matchedAllergy = 'Silicones';
+            return true;
+          }
+        }
+        
+        if (lowerAllergy === 'alcohol') {
+          const fattyAlcohols = ['cetyl alcohol', 'stearyl alcohol', 'cetearyl alcohol', 'behenyl alcohol', 'myristyl alcohol', 'lauryl alcohol', 'phenoxyethanol'];
+          if ((ingName.includes('alcohol') || ingName.includes('ethanol')) && 
+              !fattyAlcohols.some(fa => ingName.includes(fa))) {
+            matchedAllergy = 'Alcohol';
+            return true;
+          }
+        }
+        
+        if (lowerAllergy === 'mineral_oil' || lowerAllergy === 'mineral oil') {
+          if (ingName.includes('mineral oil') || ingName.includes('paraffinum liquidum') || ingName.includes('petrolatum') || ingName.includes('paraffin')) {
+            matchedAllergy = 'Mineral Oil';
+            return true;
+          }
+        }
+        
+        if (lowerAllergy === 'dyes' || lowerAllergy === 'dye') {
+          if (ingClass.includes('colorant') || ingName.includes('cl ') || ingName.includes('color') || ingName.includes('dye') || /ci \d{5}/.test(ingName)) {
+            matchedAllergy = 'Dyes';
+            return true;
+          }
+        }
+        
+        if (lowerAllergy === 'preservatives' || lowerAllergy === 'preservative') {
+          if (ingClass.includes('preservative')) {
+            matchedAllergy = 'Preservatives';
+            return true;
+          }
+        }
+        
+        return false;
       });
 
       if (userHasAllergy) {
@@ -127,11 +184,11 @@ const calculateSafetyScore = (product, userProfile) => {
           penalties += penalty;
           breakdown.allergens.push({
             ingredient: ingredient.name,
-            allergenGroup: ingredient.allergenGroup,
+            allergenGroup: ingredient.allergenGroup || matchedAllergy,
             position: ingredient.position,
             penalty
           });
-          warnings.push(`🛑 ALLERGEN: "${ingredient.name}" (${ingredient.allergenGroup}) found in product`);
+          warnings.push(`🛑 ALLERGEN: "${ingredient.name}" (${ingredient.allergenGroup || matchedAllergy}) found in product`);
         }
       }
     }

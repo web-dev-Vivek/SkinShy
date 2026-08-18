@@ -5,7 +5,7 @@ import { getUserProfile, getUserPreferences, updateUserPreferences } from '../..
 
 function ProfileDropdown({ isMobile = false }) {
   const { signOut } = useAuth();
-  const { user: clerkUser } = useUser();
+  const { user: clerkUser, isLoaded } = useUser();
   const { complete_onboarding, logout } = useOnboarding();
   
   const [isOpen, setIsOpen] = useState(false);
@@ -33,13 +33,17 @@ function ProfileDropdown({ isMobile = false }) {
     'Alcohol',
     'Dyes',
     'Preservatives',
-    'Essential Oils'
+    'Essential Oils',
+    'Mineral Oil',
+    'Lanolin'
   ];
 
   useEffect(() => {
-    fetchUserData();
+    if (isLoaded && clerkUser) {
+      fetchUserData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoaded, clerkUser]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
