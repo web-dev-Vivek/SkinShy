@@ -20,12 +20,48 @@ export default function SearchPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [productTypes, setProductTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('');
+  const [sortOrder, setSortOrder] = useState('default');
+  const [showSortDropdown, setShowSortDropdown] = useState(false);
+  const sortDropdownRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMoreProducts, setHasMoreProducts] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const observerTarget = useRef(null);
+
+  const SORT_OPTIONS = [
+    { value: 'default',    label: 'Default' },
+    { value: 'name-asc',   label: 'Name A → Z' },
+    { value: 'name-desc',  label: 'Name Z → A' },
+    { value: 'price-asc',  label: 'Price: Low → High' },
+    { value: 'price-desc', label: 'Price: High → Low' },
+  ];
+
+  // Close sort dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (sortDropdownRef.current && !sortDropdownRef.current.contains(e.target)) {
+        setShowSortDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Compute sorted products from filteredProducts
+  // Use parseFloat so string prices (e.g. "572") compare numerically, not lexicographically
+  const sortedProducts = React.useMemo(() => {
+    const arr = [...filteredProducts];
+    const toNum = (p) => parseFloat(String(p.price).replace(/[^0-9.]/g, '')) || 0;
+    switch (sortOrder) {
+      case 'name-asc':   return arr.sort((a, b) => a.productName.localeCompare(b.productName));
+      case 'name-desc':  return arr.sort((a, b) => b.productName.localeCompare(a.productName));
+      case 'price-asc':  return arr.sort((a, b) => toNum(a) - toNum(b));
+      case 'price-desc': return arr.sort((a, b) => toNum(b) - toNum(a));
+      default:           return arr;
+    }
+  }, [filteredProducts, sortOrder]);
 
   // Handle responsive background image
   useEffect(() => {
@@ -217,32 +253,90 @@ export default function SearchPage() {
               </div>
             </div>
 
-            {/* Product Type Filter Pills */}
-            <div
-              className="flex gap-2 overflow-x-auto pb-1"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              <button
-                onClick={() => setSelectedType('')}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap backdrop-blur-sm ${selectedType === ''
-                  ? 'bg-white text-custom-charcoal shadow-md font-semibold scale-105'
-                  : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:border-white/40'
-                  }`}
+            {/* Filter Pills + Sort Row */}
+            <div className="flex items-start gap-3">
+              {/* Product Type Filter Pills */}
+              <div
+                className="flex gap-2 overflow-x-auto pb-1 flex-1 min-w-0"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                All Products
-              </button>
-              {productTypes.map(type => (
                 <button
-                  key={type}
-                  onClick={() => setSelectedType(type)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap backdrop-blur-sm ${selectedType === type
+                  onClick={() => setSelectedType('')}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap backdrop-blur-sm ${selectedType === ''
                     ? 'bg-white text-custom-charcoal shadow-md font-semibold scale-105'
                     : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:border-white/40'
                     }`}
                 >
-                  {type}
+                  All Products
                 </button>
-              ))}
+                {productTypes.map(type => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap backdrop-blur-sm ${selectedType === type
+                      ? 'bg-white text-custom-charcoal shadow-md font-semibold scale-105'
+                      : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:border-white/40'
+                      }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+
+              {/* Sort Dropdown */}
+              <div className="relative flex-shrink-0" ref={sortDropdownRef}>
+                <button
+                  onClick={() => setShowSortDropdown(prev => !prev)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap backdrop-blur-sm border ${
+                    sortOrder !== 'default'
+                      ? 'bg-white text-custom-charcoal shadow-md font-semibold'
+                      : 'bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/40'
+                  }`}
+                >
+                  {/* Sort icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="15" y2="12" />
+                    <line x1="3" y1="18" x2="9" y2="18" />
+                  </svg>
+                  {SORT_OPTIONS.find(o => o.value === sortOrder)?.label || 'Sort'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 transition-transform duration-200 ${showSortDropdown ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+
+                {/* Dropdown Menu */}
+                {showSortDropdown && (
+                  <div
+                    className="absolute right-0 mt-2 min-w-[170px] rounded-xl overflow-hidden shadow-2xl z-50"
+                    style={{
+                      background: 'rgba(20,20,30,0.75)',
+                      backdropFilter: 'blur(20px)',
+                      WebkitBackdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                    }}
+                  >
+                    {SORT_OPTIONS.map(option => (
+                      <button
+                        key={option.value}
+                        onClick={() => { setSortOrder(option.value); setShowSortDropdown(false); }}
+                        className={`w-full text-left px-4 py-2.5 text-sm transition-all duration-150 flex items-center justify-between gap-2 ${
+                          sortOrder === option.value
+                            ? 'text-white font-semibold bg-white/20'
+                            : 'text-white/80 hover:bg-white/10 hover:text-white'
+                        }`}
+                      >
+                        {option.label}
+                        {sortOrder === option.value && (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -273,7 +367,7 @@ export default function SearchPage() {
               {!loading && filteredProducts.length > 0 && (
                 <>
                   <div className="grid grid-cols-1 md:mt-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-8">
-                    {filteredProducts.map(product => (
+                    {sortedProducts.map(product => (
                       <div
                         key={product._id}
                         onClick={() => handleProductClick(product._id, product.productName)}

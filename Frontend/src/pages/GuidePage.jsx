@@ -1,278 +1,229 @@
-import React from 'react';
-import { ChevronRight, Search, Zap, Shield, Eye } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronRight, ChevronDown, Search, Zap, Shield, Eye } from 'lucide-react';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Complete Your Profile',
+    desc: 'During onboarding, tell us about your skin type, concerns, and preferences. This helps us recommend products tailored to your needs.',
+    sub: 'Your profile information is kept private and secure.',
+  },
+  {
+    num: '02',
+    title: 'Browse Products',
+    desc: 'Head to the Browse section to explore skincare products matched to your profile. Filter by category, price, and brand.',
+    sub: 'Use search to find specific products or ingredients.',
+  },
+  {
+    num: '03',
+    title: 'Check Safety Ratings',
+    desc: 'Each product displays a safety rating based on ingredient analysis. Check the safety bar to understand potential concerns.',
+    sub: 'Read ingredient details to make informed choices.',
+  },
+  {
+    num: '04',
+    title: 'Compare Ingredients',
+    desc: 'Use the Compare section to view detailed information about skincare ingredients and their effects.',
+    sub: 'Learn about benefits, concerns, and which ingredients work best together.',
+  },
+];
+
+const features = [
+  {
+    Icon: Search,
+    title: 'Smart Product Search',
+    desc: 'Find skincare products that match your skin type and concerns. Filter by category, price range, and brand to narrow down options.',
+  },
+  {
+    Icon: Shield,
+    title: 'Safety Analysis',
+    desc: 'Our AI-powered safety bar analyzes product ingredients to identify potential irritants and concerns based on your skin profile.',
+  },
+  {
+    Icon: Eye,
+    title: 'Ingredient Glossary',
+    desc: 'Access a comprehensive database of skincare ingredients. Learn about their benefits, potential side effects, and compatibility with different skin types.',
+  },
+  {
+    Icon: Zap,
+    title: 'Personalized Recommendations',
+    desc: 'Get product suggestions tailored to your specific skin profile. Our algorithm considers your skin type, concerns, and preferences.',
+  },
+];
+
+const tips = [
+  { strong: 'Update Your Profile:', rest: 'Keep your skin information up-to-date for better recommendations as your skin changes.' },
+  { strong: 'Read Ingredient Lists:', rest: 'Always check ingredient details to avoid known irritants for your skin.' },
+  { strong: 'Patch Test:', rest: 'Test new products on a small area first to ensure compatibility with your skin.' },
+  { strong: 'Give Products Time:', rest: 'Most skincare products require 4–6 weeks of consistent use to show results.' },
+  { strong: 'Use Filters Wisely:', rest: 'Take advantage of our filtering system to find products that match your needs.' },
+];
+
+const faqs = [
+  {
+    q: 'How accurate is the safety rating?',
+    a: 'Our safety ratings are based on comprehensive ingredient analysis and scientific research. However, individual skin reactions can vary. Always patch test new products and consult a dermatologist if you have specific concerns.',
+  },
+  {
+    q: 'Can I edit my profile after onboarding?',
+    a: 'Yes! You can update your profile at any time from your Profile page. Changes will immediately reflect in your product recommendations.',
+  },
+  {
+    q: 'How do I find products within my budget?',
+    a: 'Use the price filter on the Browse page to show only products within your desired price range. This helps you find suitable options without exceeding your budget.',
+  },
+  {
+    q: 'What do the safety bar colors mean?',
+    a: 'Green indicates a safe product for your skin type, yellow indicates some caution-worthy ingredients, and red indicates potential concerns. Always read the details for more information.',
+  },
+  {
+    q: 'Is my personal data secure?',
+    a: 'Absolutely. Your personal data and skin profile are encrypted and protected with industry-standard security measures. We never share your information with third parties.',
+  },
+];
+
+function FAQItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-custom-charcoal/20 rounded-xl overflow-hidden bg-custom-white transition-all duration-300">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-6 py-5 text-left gap-4 group hover:bg-custom-off-white transition-colors duration-200"
+      >
+        <span className="text-base md:text-lg font-semibold text-custom-charcoal group-hover:text-custom-black transition-colors">
+          {q}
+        </span>
+        <ChevronDown
+          className={`w-5 h-5 flex-shrink-0 text-custom-charcoal transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+      {open && (
+        <div className="px-6 pb-5 text-custom-dark-gray border-t border-custom-light-gray pt-4 leading-relaxed text-sm">
+          {a}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function GuidePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-custom-white to-custom-light-gray/30 pt-24">
-      <div className="container-custom max-w-4xl">
-        {/* Page Header */}
-        <div className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-playfair font-bold text-custom-charcoal mb-4">
+    <div className="min-h-screen pt-24 pb-20 bg-gradient-to-b from-custom-off-white to-custom-light-gray">
+
+      {/* ── Hero Header ── */}
+      <div className="max-w-4xl mx-auto px-6 mb-20">
+        <div
+          className="rounded-2xl px-10 py-14 relative overflow-hidden"
+          style={{
+            background: 'linear-gradient(135deg, #333333 0%, #000000 100%)',
+            boxShadow: '0 24px 60px rgba(0,0,0,0.20)',
+          }}
+        >
+          {/* Decorative rings */}
+          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full border border-white/10 pointer-events-none" />
+          <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full border border-white/10 pointer-events-none" />
+
+          <p className="text-white/40 uppercase tracking-widest text-xs font-lato mb-4">User Guide</p>
+          <h1 className="text-4xl md:text-5xl font-playfair font-bold text-white mb-5 leading-tight">
             How to Use Skinshy
           </h1>
-          <p className="text-lg text-custom-dark-gray max-w-2xl">
+          <p className="text-white/70 text-base md:text-lg max-w-xl leading-relaxed">
             Welcome to Skinshy! Learn how to discover skincare products that work best for your skin type and concerns.
           </p>
         </div>
-
-        {/* Getting Started Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-8">
-            Getting Started
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Step 1 */}
-            <div className="bg-custom-white rounded-xl p-8 shadow-sm border border-custom-light-gray hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-custom-charcoal/10 text-custom-charcoal font-bold text-lg">
-                    1
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-custom-charcoal mb-2">
-                    Complete Your Profile
-                  </h3>
-                  <p className="text-custom-dark-gray mb-3">
-                    During onboarding, tell us about your skin type, concerns, and preferences. This helps us recommend products tailored to your needs.
-                  </p>
-                  <p className="text-sm text-custom-dark-gray/70">
-                    Your profile information is kept private and secure.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="bg-custom-white rounded-xl p-8 shadow-sm border border-custom-light-gray hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-custom-charcoal/10 text-custom-charcoal font-bold text-lg">
-                    2
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-custom-charcoal mb-2">
-                    Browse Products
-                  </h3>
-                  <p className="text-custom-dark-gray mb-3">
-                    Head to the Browse section to explore skincare products matched to your profile. Filter by category, price, and brand.
-                  </p>
-                  <p className="text-sm text-custom-dark-gray/70">
-                    Use search to find specific products or ingredients.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="bg-custom-white rounded-xl p-8 shadow-sm border border-custom-light-gray hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-custom-charcoal/10 text-custom-charcoal font-bold text-lg">
-                    3
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-custom-charcoal mb-2">
-                    Check Safety Ratings
-                  </h3>
-                  <p className="text-custom-dark-gray mb-3">
-                    Each product displays a safety rating based on ingredient analysis. Check the safety bar to understand potential concerns.
-                  </p>
-                  <p className="text-sm text-custom-dark-gray/70">
-                    Read ingredient details to make informed choices.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="bg-custom-white rounded-xl p-8 shadow-sm border border-custom-light-gray hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-custom-charcoal/10 text-custom-charcoal font-bold text-lg">
-                    4
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-custom-charcoal mb-2">
-                    Compare Ingredients
-                  </h3>
-                  <p className="text-custom-dark-gray mb-3">
-                    Use the Compare section to view detailed information about skincare ingredients and their effects.
-                  </p>
-                  <p className="text-sm text-custom-dark-gray/70">
-                    Learn about benefits, concerns, and which ingredients work best together.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Features Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-8">
-            Key Features
-          </h2>
-
-          <div className="space-y-4">
-            {/* Feature 1 */}
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray hover:border-custom-charcoal/30 transition-colors flex items-start gap-4">
-              <Search className="w-6 h-6 text-custom-charcoal flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                  Smart Product Search
-                </h3>
-                <p className="text-custom-dark-gray">
-                  Find skincare products that match your skin type and concerns. Filter by category, price range, and brand to narrow down options.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray hover:border-custom-charcoal/30 transition-colors flex items-start gap-4">
-              <Shield className="w-6 h-6 text-custom-charcoal flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                  Safety Analysis
-                </h3>
-                <p className="text-custom-dark-gray">
-                  Our AI-powered safety bar analyzes product ingredients to identify potential irritants and concerns based on your skin profile.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray hover:border-custom-charcoal/30 transition-colors flex items-start gap-4">
-              <Eye className="w-6 h-6 text-custom-charcoal flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                  Ingredient Glossary
-                </h3>
-                <p className="text-custom-dark-gray">
-                  Access a comprehensive database of skincare ingredients. Learn about their benefits, potential side effects, and compatibility with different skin types.
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray hover:border-custom-charcoal/30 transition-colors flex items-start gap-4">
-              <Zap className="w-6 h-6 text-custom-charcoal flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                  Personalized Recommendations
-                </h3>
-                <p className="text-custom-dark-gray">
-                  Get product suggestions tailored to your specific skin profile. Our algorithm considers your skin type, concerns, and preferences.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tips & Best Practices */}
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-8">
-            Tips & Best Practices
-          </h2>
-
-          <div className="bg-gradient-to-br from-custom-charcoal/5 to-custom-charcoal/10 rounded-xl p-8 border border-custom-charcoal/10">
-            <ul className="space-y-4">
-              <li className="flex gap-3">
-                <ChevronRight className="w-5 h-5 text-custom-charcoal flex-shrink-0 mt-0.5" />
-                <span className="text-custom-dark-gray">
-                  <strong>Update Your Profile:</strong> Keep your skin information up-to-date for better recommendations as your skin changes.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <ChevronRight className="w-5 h-5 text-custom-charcoal flex-shrink-0 mt-0.5" />
-                <span className="text-custom-dark-gray">
-                  <strong>Read Ingredient Lists:</strong> Always check ingredient details to avoid known irritants for your skin.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <ChevronRight className="w-5 h-5 text-custom-charcoal flex-shrink-0 mt-0.5" />
-                <span className="text-custom-dark-gray">
-                  <strong>Patch Test:</strong> Test new products on a small area first to ensure compatibility with your skin.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <ChevronRight className="w-5 h-5 text-custom-charcoal flex-shrink-0 mt-0.5" />
-                <span className="text-custom-dark-gray">
-                  <strong>Give Products Time:</strong> Most skincare products require 4-6 weeks of consistent use to show results.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <ChevronRight className="w-5 h-5 text-custom-charcoal flex-shrink-0 mt-0.5" />
-                <span className="text-custom-dark-gray">
-                  <strong>Use Filters Wisely:</strong> Take advantage of our filtering system to find products that match your needs.
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-8">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray">
-              <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                How accurate is the safety rating?
-              </h3>
-              <p className="text-custom-dark-gray">
-                Our safety ratings are based on comprehensive ingredient analysis and scientific research. However, individual skin reactions can vary. Always patch test new products and consult a dermatologist if you have specific concerns.
-              </p>
-            </div>
-
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray">
-              <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                Can I edit my profile after onboarding?
-              </h3>
-              <p className="text-custom-dark-gray">
-                Yes! You can update your profile at any time from your Profile page. Changes will immediately reflect in your product recommendations.
-              </p>
-            </div>
-
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray">
-              <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                How do I find products within my budget?
-              </h3>
-              <p className="text-custom-dark-gray">
-                Use the price filter on the Browse page to show only products within your desired price range. This helps you find suitable options without exceeding your budget.
-              </p>
-            </div>
-
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray">
-              <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                What do the safety bar colors mean?
-              </h3>
-              <p className="text-custom-dark-gray">
-                Green indicates a safe product for your skin type, yellow indicates some caution-worthy ingredients, and red indicates potential concerns. Always read the details for more information.
-              </p>
-            </div>
-
-            <div className="bg-custom-white rounded-lg p-6 border border-custom-light-gray">
-              <h3 className="text-lg font-semibold text-custom-charcoal mb-2">
-                Is my personal data secure?
-              </h3>
-              <p className="text-custom-dark-gray">
-                Absolutely. Your personal data and skin profile are encrypted and protected with industry-standard security measures. We never share your information with third parties.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        
       </div>
+
+      {/* ── Getting Started ── */}
+      <div className="max-w-4xl mx-auto px-6 mb-20">
+        <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-10 flex items-center gap-3">
+          <span className="block w-8 h-0.5 bg-custom-charcoal rounded-full" />
+          Getting Started
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {steps.map(({ num, title, desc, sub }) => (
+            <div
+              key={num}
+              className="rounded-xl p-7 bg-custom-white border border-custom-charcoal/10 hover:border-custom-charcoal/40 hover:shadow-xl transition-all duration-300 group"
+            >
+              <div
+                className="inline-flex items-center justify-center w-11 h-11 rounded-lg mb-5 bg-custom-charcoal text-white font-bold text-sm font-lato group-hover:scale-110 transition-transform duration-300"
+              >
+                {num}
+              </div>
+              <h3 className="text-lg font-semibold text-custom-charcoal mb-2">{title}</h3>
+              <p className="text-custom-dark-gray mb-4 leading-relaxed text-sm">{desc}</p>
+              <p className="text-xs text-custom-medium-gray border-t border-custom-light-gray pt-3">{sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Key Features ── */}
+      <div className="max-w-4xl mx-auto px-6 mb-20">
+        <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-10 flex items-center gap-3">
+          <span className="block w-8 h-0.5 bg-custom-charcoal rounded-full" />
+          Key Features
+        </h2>
+
+        <div className="space-y-4">
+          {features.map(({ Icon, title, desc }) => (
+            <div
+              key={title}
+              className="flex items-start gap-5 rounded-xl px-7 py-6 bg-custom-white border border-custom-charcoal/10 hover:border-custom-charcoal/40 hover:shadow-lg transition-all duration-300 group"
+            >
+              <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-custom-charcoal group-hover:scale-110 transition-transform duration-300">
+                <Icon className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-custom-charcoal mb-1">{title}</h3>
+                <p className="text-custom-dark-gray text-sm leading-relaxed">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Tips & Best Practices ── */}
+      <div className="max-w-4xl mx-auto px-6 mb-20">
+        <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-10 flex items-center gap-3">
+          <span className="block w-8 h-0.5 bg-custom-charcoal rounded-full" />
+          Tips &amp; Best Practices
+        </h2>
+
+        <div
+          className="rounded-2xl px-8 py-8 border border-custom-charcoal/20"
+          style={{ background: 'linear-gradient(135deg, #333333 0%, #000000 100%)' }}
+        >
+          <ul className="space-y-5">
+            {tips.map(({ strong, rest }) => (
+              <li key={strong} className="flex gap-4 items-start">
+                <ChevronRight className="w-4 h-4 text-white/40 flex-shrink-0 mt-1" />
+                <span className="text-white/75 text-sm leading-relaxed">
+                  <strong className="text-white font-semibold">{strong}</strong>{' '}{rest}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* ── FAQ ── */}
+      <div className="max-w-4xl mx-auto px-6">
+        <h2 className="text-2xl md:text-3xl font-playfair font-bold text-custom-charcoal mb-10 flex items-center gap-3">
+          <span className="block w-8 h-0.5 bg-custom-charcoal rounded-full" />
+          Frequently Asked Questions
+        </h2>
+
+        <div className="space-y-3">
+          {faqs.map(faq => <FAQItem key={faq.q} {...faq} />)}
+        </div>
+      </div>
+
     </div>
   );
 }
 
 export default GuidePage;
+
+

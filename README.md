@@ -453,8 +453,8 @@ curl http://localhost:5000/api/safety/test
   - Use production Clerk keys for production deployments
   - Add your domain to Clerk Allowed Origins in dashboard
   - Ensure proper domain configuration for cookies
-<<<<<<< HEAD
-=======
+  <<<<<<< HEAD
+  =======
 
 >>>>>>> 2ac3d256 (.)
 ### Network Error Fetching Products
@@ -463,7 +463,7 @@ curl http://localhost:5000/api/safety/test
   - Check API_URL is correctly configured
   - Verify backend is running and accessible
   - Check CORS headers in backend
-<<<<<<< HEAD
+  <<<<<<< HEAD
 ---
 ## 📱 User Flow
 =======

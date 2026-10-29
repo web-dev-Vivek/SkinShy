@@ -198,9 +198,6 @@ export default function InteractiveLoader({
       ? "fixed inset-0 w-screen h-screen z-50 flex flex-col items-center justify-center bg-[#070808] select-none cursor-crosshair overflow-hidden p-6 touch-none text-white font-mono"
       : "relative w-full min-h-[340px] flex flex-col bg-[#0b0c0c] border border-[#2c2d2d] p-5 sm:p-6 rounded-xl overflow-hidden select-none cursor-crosshair touch-none text-white font-mono";
 
-  // Visual layout configurations
-  const hudBorderColor = isAligned ? "border-white" : "border-white/10";
-  const hudTextColor = isAligned ? "text-white" : "text-white/60";
 
   return (
     <div
